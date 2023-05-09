@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_authorization_to_registration"
             app:destination="@id/registration" />
+        <action
+            android:id="@+id/action_authorization_to_homePage"
+            app:destination="@id/homePage" />
     </fragment>
     <fragment
         android:id="@+id/registration"
@@ -21,6 +24,17 @@
         tools:layout="@layout/fragment_registration" >
         <action
             android:id="@+id/action_registration_to_authorization"
+            app:destination="@id/authorization" />
+        <action
+            android:id="@+id/action_registration_to_homePage"
+            app:destination="@id/homePage" />
+    </fragment>
+    <fragment
+        android:id="@+id/homePage"
+        android:name="ru.spb.rollers.screens.HomePage"
+        android:label="HomePage" >
+        <action
+            android:id="@+id/action_homePage_to_authorization"
             app:destination="@id/authorization" />
     </fragment>
 </navigation>

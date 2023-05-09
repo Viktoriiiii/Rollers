@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <com.google.android.material.appbar.MaterialToolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
@@ -32,7 +32,7 @@
                         android:iconifiedByDefault="false"
                         android:queryHint="Поиск..."/>
                 </RelativeLayout>
-            </com.google.android.material.appbar.MaterialToolbar>
+            </androidx.appcompat.widget.Toolbar>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/messages_list"
                 android:layout_width="match_parent"

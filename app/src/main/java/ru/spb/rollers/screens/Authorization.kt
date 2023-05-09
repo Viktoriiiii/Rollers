@@ -27,5 +27,8 @@ class Authorization : Fragment() {
         binding.mbRegister.setOnClickListener{
             MAIN.navController.navigate(R.id.action_authorization_to_registration)
         }
+        binding.mbLogin.setOnClickListener {
+            MAIN.navController.navigate(R.id.action_authorization_to_homePage)
+        }
     }
 }
