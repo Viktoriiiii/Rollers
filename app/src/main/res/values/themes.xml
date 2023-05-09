@@ -1,0 +1,26 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Rollers" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="popupMenuStyle">@style/PopupMenu</item>    </style>
+    <style name="PopupMenu" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="android:popupBackground">@drawable/rounded_corners_popup_menu</item>
+    </style>
+    <style name="SwitchStatus">
+        <item name="colorControlActivated">@color/for_button</item>
+    </style>
+    <style name="SwitchGender">
+        <item name="colorControlActivated">@color/for_button</item>
+        <item name="colorSwitchThumbNormal">@color/for_toolbar</item>
+    </style>
+</resources>
