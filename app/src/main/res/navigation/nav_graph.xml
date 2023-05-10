@@ -36,5 +36,16 @@
         <action
             android:id="@+id/action_homePage_to_authorization"
             app:destination="@id/authorization" />
+        <action
+            android:id="@+id/action_homePage_to_messages"
+            app:destination="@id/messages" />
+    </fragment>
+    <fragment
+        android:id="@+id/messages"
+        android:name="ru.spb.rollers.screens.Messages"
+        android:label="Messages" >
+        <action
+            android:id="@+id/action_messages_to_homePage"
+            app:destination="@id/homePage" />
     </fragment>
 </navigation>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:theme="@style/PopupMenu"
+    >
+    <item android:id="@+id/pinDialog"
+        android:title="Закрепить диалог      "
+        android:icon="@drawable/ic_pin_foreground"
+        />
+    <item android:id="@+id/deleteMessages"
+        android:icon="@drawable/ic_clear_foreground"
+        android:title="Очистить историю      "
+        />
+    <item android:id="@+id/deleteDialog"
+        android:icon="@drawable/ic_delete_foreground"
+        android:title="Удалить диалог        "
+        />
+</menu>

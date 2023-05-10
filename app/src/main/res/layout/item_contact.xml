@@ -2,11 +2,11 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/dialogContainer"
+    android:id="@+id/friendsContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="10dp"
+    app:cardCornerRadius="25dp"
     android:layout_margin="3dp"
     android:padding="10dp"
     app:strokeWidth="1dp"
@@ -14,13 +14,14 @@
     app:cardElevation="10dp">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="125dp"
         android:padding="5dp"
-        android:background="@color/white">
+        android:background="@color/for_friends">
+
         <androidx.cardview.widget.CardView
-            android:id="@+id/cvPhoto"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:id="@+id/cardViewPhoto"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
             app:cardCornerRadius="100dp">
             <ImageView
                 android:id="@+id/imageViewPhoto"
@@ -28,8 +29,9 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/logo" />
         </androidx.cardview.widget.CardView>
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/mtvName"
+
+        <TextView
+            android:id="@+id/textViewName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
@@ -38,34 +40,30 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:text="Иван Иванов"
-            android:layout_toEndOf="@+id/cvPhoto"
-            android:padding="5dp"
+            android:layout_toEndOf="@+id/cardViewPhoto"
+            android:padding="15dp"
             />
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/mtvMessage"
+
+        <TextView
+            android:id="@+id/textViewStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Текст сообщения..."
+            android:text="На роликах"
             android:textColor="@color/for_text"
             android:textSize="16sp"
             android:textStyle="normal|italic"
-            android:layout_toEndOf="@+id/cvPhoto"
-            android:layout_below="@+id/mtvName"
-            android:padding="5dp"
+            android:layout_toEndOf="@+id/cardViewPhoto"
+            android:layout_below="@+id/textViewName"
+            android:padding="15dp"
             />
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/mtvDate"
-            android:layout_width="match_parent"
+
+        <ImageView
+            android:id="@+id/imageViewStatus"
+            android:layout_width="35dp"
             android:layout_height="wrap_content"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:maxLines="1"
-            android:scrollHorizontally="true"
-            android:text="6 марта 2023 21:05"
-            android:textAlignment="textEnd"
-            android:textColor="@color/for_text"
-            android:textSize="11sp"
-            android:textStyle="normal|italic"
-            android:padding="5dp"
+            android:src="@drawable/ic_rollers_foreground"
+            android:layout_toEndOf="@+id/textViewStatus"
+            android:paddingTop="45dp"
             />
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>
