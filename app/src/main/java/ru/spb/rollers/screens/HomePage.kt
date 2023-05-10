@@ -65,6 +65,9 @@ class HomePage : Fragment(), NavigationView.OnNavigationItemSelectedListener {
             R.id.exit -> {
                 MAIN.navController.navigate(R.id.action_homePage_to_authorization)
             }
+            R.id.profile -> {
+                MAIN.navController.navigate(R.id.action_homePage_to_profile2)
+            }
         }
         return true
     }

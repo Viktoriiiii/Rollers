@@ -53,6 +53,7 @@ class Messages : Fragment() {
                 recyclerView = view.findViewById(R.id.contactsList)
                 messageAdapter = MessageAdapter(messageList, 2)
                 recyclerView.adapter = messageAdapter
+                editTextSendMessage.text.clear()
             }
         }
     }
