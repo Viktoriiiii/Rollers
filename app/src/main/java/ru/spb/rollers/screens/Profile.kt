@@ -1,7 +1,6 @@
 package ru.spb.rollers.screens
 
 import android.annotation.SuppressLint
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -27,7 +26,7 @@ class Profile : Fragment(), PopupMenu.OnMenuItemClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -38,17 +37,17 @@ class Profile : Fragment(), PopupMenu.OnMenuItemClickListener {
             MAIN.navController.navigate(R.id.action_profile2_to_homePage)
         }
 
-        var switchGender: SwitchCompat = view.findViewById(R.id.switchGender)
+        val switchGender: SwitchCompat = view.findViewById(R.id.switchGender)
         switchGender.setOnCheckedChangeListener{buttonView, isChecked ->
             buttonView.text = if (isChecked) "Мужской" else "Женский"
         }
 
-        var switchStatus: SwitchCompat = view.findViewById(R.id.switchStatus)
+        val switchStatus: SwitchCompat = view.findViewById(R.id.switchStatus)
         switchStatus.setOnCheckedChangeListener {  buttonView, isChecked ->
             buttonView.text = if (isChecked) "На роликах" else "Не активен"
         }
 
-        var btnSaveChanges: MaterialButton = view.findViewById(R.id.btnSaveChanges)
+        val btnSaveChanges: MaterialButton = view.findViewById(R.id.btnSaveChanges)
         btnSaveChanges.setOnClickListener{
             Toast.makeText(MAIN, "Изменения сохранены", Toast.LENGTH_SHORT).show()
         }
@@ -57,7 +56,6 @@ class Profile : Fragment(), PopupMenu.OnMenuItemClickListener {
         imagePhoto.setOnClickListener{
             showPopup(imagePhoto)
         }
-
     }
 
     @SuppressLint("RestrictedApi")
@@ -76,11 +74,9 @@ class Profile : Fragment(), PopupMenu.OnMenuItemClickListener {
         when (menuItem?.itemId) {
             R.id.savePhoto -> {
                 Toast.makeText(MAIN, "Изображение сохранено", Toast.LENGTH_SHORT).show()
-                true
             }
             R.id.changePhoto -> {
                 Toast.makeText(MAIN, "Изображение изменено", Toast.LENGTH_SHORT).show()
-                true
             }
             R.id.deletePhoto -> {
                 val builderDeleteDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
@@ -95,10 +91,7 @@ class Profile : Fragment(), PopupMenu.OnMenuItemClickListener {
                     }
                 val alertDialogDeletePhoto: AlertDialog = builderDeleteDialog.create()
                 alertDialogDeletePhoto.show()
-                true
             }
-            // Добавьте обработку других пунктов меню по мере необходимости
-            else -> false
         }
         return false
     }

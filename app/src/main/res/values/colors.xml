@@ -12,6 +12,6 @@
     <color name="main_background">#6AA2A6</color>
     <color name="for_toolbar">#FF8C80C8</color>
     <color name="for_popup_menu">#FFA3C6C7</color>
-    <color name="for_friends">#7ABDBF</color>
+    <color name="for_contacts">#C4E1E1</color>
     <color name="transparent">#00FFFFFF</color>
 </resources>

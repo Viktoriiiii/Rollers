@@ -13,8 +13,8 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar" >
         <RelativeLayout
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:background="@color/for_toolbar"
             android:gravity="start">
 

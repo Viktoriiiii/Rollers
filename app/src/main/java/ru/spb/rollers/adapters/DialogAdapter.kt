@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.appcompat.view.menu.MenuPopupHelper
 import androidx.appcompat.widget.PopupMenu
@@ -20,7 +21,7 @@ class DialogAdapter(
 ): RecyclerView.Adapter<DialogAdapter.DialogViewHolder>() {
 
     override fun onCreateViewHolder (parent: ViewGroup, viewType: Int): DialogViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_list_messages, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_dialog, parent, false)
         return DialogViewHolder(view)
     }
 
@@ -66,18 +67,17 @@ class DialogAdapter(
             popupMenu.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.pinDialog -> {
-                        // Обработка выбора пункта меню 1
+                        Toast.makeText(MAIN, "Диалог закреплен", Toast.LENGTH_SHORT).show()
                         true
                     }
                     R.id.deleteMessages -> {
-                        // Обработка выбора пункта меню 2
+                        Toast.makeText(MAIN, "Сообщения удалены", Toast.LENGTH_SHORT).show()
                         true
                     }
                     R.id.deleteDialog -> {
-                        // Обработка выбора пункта меню 2
+                        Toast.makeText(MAIN, "Диалог удален", Toast.LENGTH_SHORT).show()
                         true
                     }
-                    // Добавьте обработку других пунктов меню по мере необходимости
                     else -> false
                 }
             }

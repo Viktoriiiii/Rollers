@@ -7,7 +7,7 @@
         android:icon="@drawable/ic_profile_foreground"
         />
     <item
-        android:id="@+id/friends"
+        android:id="@+id/contacts"
         android:title="Мои контакты"
         android:icon="@drawable/ic_contacts_foreground"
         />

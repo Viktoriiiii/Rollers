@@ -1,18 +1,12 @@
 package ru.spb.rollers.model
 
 class Contact {
-    var contactID: Int = 0
+    private var contactID: Int = 0
     var contactName: String? = ""
     var contactStatus: Boolean = false
     var contactDistrict: String? = ""
     var contactAge: String? = ""
     var isContact: Boolean = false
-
-    constructor(contactID: Int, contactName: String?, contactStatus: Boolean) {
-        this.contactID = contactID
-        this.contactName = contactName
-        this.contactStatus = contactStatus
-    }
 
     constructor(
         contactID: Int,

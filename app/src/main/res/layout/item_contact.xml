@@ -2,7 +2,7 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/friendsContainer"
+    android:id="@+id/contactContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/white"
@@ -14,22 +14,21 @@
     app:cardElevation="10dp">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="125dp"
+        android:layout_height="wrap_content"
         android:padding="5dp"
-        android:background="@color/for_friends">
-
+        android:background="@color/white">
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewPhoto"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            app:cardCornerRadius="100dp">
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            app:cardCornerRadius="70dp"
+            >
             <ImageView
                 android:id="@+id/imageViewPhoto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/logo" />
         </androidx.cardview.widget.CardView>
-
         <TextView
             android:id="@+id/textViewName"
             android:layout_width="wrap_content"
@@ -41,9 +40,34 @@
             android:textStyle="bold"
             android:text="Иван Иванов"
             android:layout_toEndOf="@+id/cardViewPhoto"
-            android:padding="15dp"
+            android:padding="6dp"
+            android:paddingStart="20dp"
             />
-
+        <TextView
+            android:id="@+id/txvDistrict"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Московский"
+            android:layout_below="@+id/textViewName"
+            android:layout_toEndOf="@id/cardViewPhoto"
+            android:textColor="@color/for_text"
+            android:textSize="16sp"
+            android:padding="6dp"
+            android:paddingStart="20dp"
+            />
+        <TextView
+            android:id="@+id/txvAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="28 лет"
+            android:layout_below="@+id/txvDistrict"
+            android:layout_toEndOf="@id/cardViewPhoto"
+            android:textColor="@color/for_text"
+            android:textSize="16sp"
+            android:padding="6dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="60dp"
+            />
         <TextView
             android:id="@+id/textViewStatus"
             android:layout_width="wrap_content"
@@ -53,17 +77,32 @@
             android:textSize="16sp"
             android:textStyle="normal|italic"
             android:layout_toEndOf="@+id/cardViewPhoto"
-            android:layout_below="@+id/textViewName"
-            android:padding="15dp"
+            android:layout_below="@+id/txvAge"
+            android:padding="6dp"
+            android:paddingStart="20dp"
             />
-
         <ImageView
             android:id="@+id/imageViewStatus"
             android:layout_width="35dp"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:src="@drawable/ic_rollers_foreground"
+            android:layout_below="@+id/txvAge"
             android:layout_toEndOf="@+id/textViewStatus"
-            android:paddingTop="45dp"
             />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txvDistrict"
+            android:layout_toEndOf="@+id/txvAge"
+            >
+            <ImageView
+                android:id="@+id/imageViewToContact"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/ic_done_foreground"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

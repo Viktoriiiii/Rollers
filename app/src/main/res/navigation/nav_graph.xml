@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_homePage_to_profile2"
             app:destination="@id/profile2" />
+        <action
+            android:id="@+id/action_homePage_to_contacts"
+            app:destination="@id/contacts" />
     </fragment>
     <fragment
         android:id="@+id/messages"
@@ -50,6 +53,12 @@
         <action
             android:id="@+id/action_messages_to_homePage"
             app:destination="@id/homePage" />
+        <action
+            android:id="@+id/action_messages_to_contacts"
+            app:destination="@id/contacts" />
+        <action
+            android:id="@+id/action_messages_to_contactSearch"
+            app:destination="@id/contactSearch" />
     </fragment>
     <fragment
         android:id="@+id/profile2"
@@ -58,5 +67,31 @@
         <action
             android:id="@+id/action_profile2_to_homePage"
             app:destination="@id/homePage" />
+    </fragment>
+    <fragment
+        android:id="@+id/contacts"
+        android:name="ru.spb.rollers.screens.Contacts"
+        android:label="Contacts" >
+        <action
+            android:id="@+id/action_contacts_to_homePage"
+            app:destination="@id/homePage" />
+        <action
+            android:id="@+id/action_contacts_to_messages"
+            app:destination="@id/messages" />
+        <action
+            android:id="@+id/action_contacts_to_contactSearch"
+            app:destination="@id/contactSearch" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactSearch"
+        android:name="ru.spb.rollers.screens.ContactSearch"
+        android:label="fragment_contact_search"
+        tools:layout="@layout/fragment_contact_search" >
+        <action
+            android:id="@+id/action_contactSearch_to_contacts"
+            app:destination="@id/contacts" />
+        <action
+            android:id="@+id/action_contactSearch_to_messages"
+            app:destination="@id/messages" />
     </fragment>
 </navigation>

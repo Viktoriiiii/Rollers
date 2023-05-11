@@ -68,6 +68,8 @@ class HomePage : Fragment(), NavigationView.OnNavigationItemSelectedListener {
             R.id.profile -> {
                 MAIN.navController.navigate(R.id.action_homePage_to_profile2)
             }
+            R.id.contacts ->
+                MAIN.navController.navigate(R.id.action_homePage_to_contacts)
         }
         return true
     }
