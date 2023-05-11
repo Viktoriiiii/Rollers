@@ -20,7 +20,7 @@ import ru.spb.rollers.model.Dialog
 
 class HomePage : Fragment(), NavigationView.OnNavigationItemSelectedListener {
 
-    lateinit var binding: FragmentHomePageBinding
+    private lateinit var binding: FragmentHomePageBinding
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var toolbar: Toolbar
@@ -32,7 +32,7 @@ class HomePage : Fragment(), NavigationView.OnNavigationItemSelectedListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHomePageBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -70,6 +70,8 @@ class HomePage : Fragment(), NavigationView.OnNavigationItemSelectedListener {
             }
             R.id.contacts ->
                 MAIN.navController.navigate(R.id.action_homePage_to_contacts)
+            R.id.events ->
+                MAIN.navController.navigate(R.id.action_homePage_to_events2)
         }
         return true
     }

@@ -45,6 +45,9 @@
         <action
             android:id="@+id/action_homePage_to_contacts"
             app:destination="@id/contacts" />
+        <action
+            android:id="@+id/action_homePage_to_events2"
+            app:destination="@id/events2" />
     </fragment>
     <fragment
         android:id="@+id/messages"
@@ -93,5 +96,26 @@
         <action
             android:id="@+id/action_contactSearch_to_messages"
             app:destination="@id/messages" />
+    </fragment>
+    <fragment
+        android:id="@+id/events2"
+        android:name="ru.spb.rollers.screens.Events"
+        android:label="fragment_events"
+        tools:layout="@layout/fragment_events" >
+        <action
+            android:id="@+id/action_events2_to_homePage"
+            app:destination="@id/homePage" />
+        <action
+            android:id="@+id/action_events2_to_eventSearch"
+            app:destination="@id/eventSearch" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventSearch"
+        android:name="ru.spb.rollers.screens.EventSearch"
+        android:label="fragment_event_search"
+        tools:layout="@layout/fragment_event_search" >
+        <action
+            android:id="@+id/action_eventSearch_to_events2"
+            app:destination="@id/events2" />
     </fragment>
 </navigation>

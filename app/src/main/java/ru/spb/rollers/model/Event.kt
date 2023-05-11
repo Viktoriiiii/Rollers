@@ -2,6 +2,7 @@ package ru.spb.rollers.model
 
 class Event {
     var eventID: Int = 0
+    var eventName: String? = ""
     var eventStartLocation: String? = ""
     var eventEndLocation: String? = ""
     var eventNameOrganizer: String? = ""
@@ -16,6 +17,7 @@ class Event {
 
     constructor(
         eventID: Int,
+        eventName: String?,
         eventStartLocation: String?,
         eventEndLocation: String?,
         eventNameOrganizer: String?,
@@ -28,6 +30,7 @@ class Event {
         isParticipate: Boolean
     ) {
         this.eventID = eventID
+        this.eventName = eventName
         this.eventStartLocation = eventStartLocation
         this.eventEndLocation = eventEndLocation
         this.eventNameOrganizer = eventNameOrganizer

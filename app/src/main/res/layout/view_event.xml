@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/friendsContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/for_popup_menu"
+    app:cardCornerRadius="25dp"
+    android:layout_margin="3dp"
+    android:padding="10dp"
+    app:strokeWidth="2dp"
+    android:focusable="false"
+    app:cardElevation="10dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:gravity="start"
+            android:orientation="vertical"
+            android:focusable="false"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                android:focusable="false"
+                >
+                <TextView
+                    android:id="@+id/textViewEventName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/for_text"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:text="Покатушка на роликах"
+                    android:padding="10dp"
+                    android:layout_weight="2"
+                    />
+                <ImageView
+                    android:id="@+id/imageViewClose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_close_foreground"
+                    android:layout_weight="3"
+                    android:focusable="true"
+                    android:scaleType="center"
+                    android:focusedByDefault="true"
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/txvEventDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Дата: 03.05.2023 15:30 Среда"
+                android:textColor="@color/for_text"
+                android:textSize="18sp"
+                android:padding="10dp"
+                />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="290dp"
+                app:cardCornerRadius="10dp"
+                >
+                <ImageView
+                    android:id="@+id/imageViewPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/route" />
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/txvOrganizer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Организатор: Клуб роллеров"
+                android:textColor="@color/for_text"
+                android:textSize="18sp"
+                android:padding="5dp"
+                />
+            <TextView
+                android:id="@+id/txvEventDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Описание: будет весело, приходите все!"
+                android:textColor="@color/for_text"
+                android:textSize="18sp"
+                android:padding="5dp"
+                />
+            <TextView
+                android:id="@+id/txvEventTimeMeeting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Время сбора: 15:00"
+                android:textColor="@color/for_text"
+                android:textSize="18sp"
+                android:padding="5dp"
+                />
+            <TextView
+                android:id="@+id/txvEventTimeStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Время старта: 15:30"
+                android:textColor="@color/for_text"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                android:padding="5dp"
+                />
+            <TextView
+                android:id="@+id/txvEventStartLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Старт: Васька"
+                android:textColor="@color/for_text"
+                android:textSize="18sp"
+                android:padding="5dp"
+                />
+            <TextView
+                android:id="@+id/txvEventEndLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Финиш: Петроградка"
+                android:textColor="@color/for_text"
+                android:textSize="18sp"
+                android:padding="5dp"
+                />
+            <TextView
+                android:id="@+id/txvSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Скорость: 15 км/ч"
+                android:textColor="@color/for_text"
+                android:textSize="18sp"
+                android:padding="5dp"
+                />
+            <TextView
+                android:id="@+id/txvEventDistance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Дистанция: 25 км"
+                android:textColor="@color/for_text"
+                android:textSize="18sp"
+                android:padding="5dp"
+                />
+            <TextView
+                android:id="@+id/txvEventPitStops"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Питсто1, Питстоп2"
+                android:textColor="@color/for_text"
+                android:textSize="18sp"
+                android:padding="5dp"
+                />
+        </LinearLayout>
+    </ScrollView>
+</com.google.android.material.card.MaterialCardView>
