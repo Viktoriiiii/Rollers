@@ -72,6 +72,8 @@ class HomePage : Fragment(), NavigationView.OnNavigationItemSelectedListener {
                 MAIN.navController.navigate(R.id.action_homePage_to_contacts)
             R.id.events ->
                 MAIN.navController.navigate(R.id.action_homePage_to_events2)
+            R.id.routes ->
+                MAIN.navController.navigate(R.id.action_homePage_to_routes2)
         }
         return true
     }

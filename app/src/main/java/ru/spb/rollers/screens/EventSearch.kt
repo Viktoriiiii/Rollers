@@ -14,7 +14,6 @@ import ru.spb.rollers.model.Event
 
 class EventSearch : Fragment() {
 
-
     private lateinit var binding: FragmentEventSearchBinding
     private var eventList: List<Event> = mutableListOf()
     private lateinit var recyclerView: RecyclerView

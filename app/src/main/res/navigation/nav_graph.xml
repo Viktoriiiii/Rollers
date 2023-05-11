@@ -48,6 +48,9 @@
         <action
             android:id="@+id/action_homePage_to_events2"
             app:destination="@id/events2" />
+        <action
+            android:id="@+id/action_homePage_to_routes2"
+            app:destination="@id/routes2" />
     </fragment>
     <fragment
         android:id="@+id/messages"
@@ -117,5 +120,14 @@
         <action
             android:id="@+id/action_eventSearch_to_events2"
             app:destination="@id/events2" />
+    </fragment>
+    <fragment
+        android:id="@+id/routes2"
+        android:name="ru.spb.rollers.screens.Routes"
+        android:label="fragment_routes"
+        tools:layout="@layout/fragment_routes" >
+        <action
+            android:id="@+id/action_routes2_to_homePage"
+            app:destination="@id/homePage" />
     </fragment>
 </navigation>
