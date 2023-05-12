@@ -24,6 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_back_foreground"
+                android:foreground="?android:attr/selectableItemBackground"
                 />
         </RelativeLayout>
         <RelativeLayout
@@ -37,13 +38,28 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/ic_search_foreground"
+                android:foreground="?android:attr/selectableItemBackground"
                 />
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/eventsList"
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        />
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/eventsList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            />
+        <ImageButton
+            android:id="@+id/imageButtonAddEvent"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="10dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:src="@drawable/ic_add_plus_foreground"
+            />
+    </FrameLayout>
 </LinearLayout>

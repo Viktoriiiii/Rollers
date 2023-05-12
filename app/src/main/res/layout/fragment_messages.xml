@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/for_toolbar"
                 android:src="@drawable/ic_back_foreground"
+                android:foreground="?android:attr/selectableItemBackground"
                 />
         </RelativeLayout>
         <RelativeLayout

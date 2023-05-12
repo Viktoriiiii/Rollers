@@ -49,8 +49,8 @@
             android:id="@+id/action_homePage_to_events2"
             app:destination="@id/events2" />
         <action
-            android:id="@+id/action_homePage_to_routes2"
-            app:destination="@id/routes2" />
+            android:id="@+id/action_homePage_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </fragment>
     <fragment
         android:id="@+id/messages"
@@ -111,6 +111,9 @@
         <action
             android:id="@+id/action_events2_to_eventSearch"
             app:destination="@id/eventSearch" />
+        <action
+            android:id="@+id/action_events2_to_eventAdding"
+            app:destination="@id/eventAdding" />
     </fragment>
     <fragment
         android:id="@+id/eventSearch"
@@ -122,12 +125,44 @@
             app:destination="@id/events2" />
     </fragment>
     <fragment
+        android:id="@+id/eventAdding"
+        android:name="ru.spb.rollers.screens.EventAdding"
+        android:label="fragment_event_adding"
+        tools:layout="@layout/fragment_event_adding" >
+        <action
+            android:id="@+id/action_eventAdding_to_events2"
+            app:destination="@id/events2" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="ru.spb.rollers.screens.MapFragment"
+        android:label="MapFragment" >
+        <action
+            android:id="@+id/action_mapFragment_to_homePage"
+            app:destination="@id/homePage" />
+        <action
+            android:id="@+id/action_mapFragment_to_routes2"
+            app:destination="@id/routes2" />
+    </fragment>
+    <fragment
         android:id="@+id/routes2"
         android:name="ru.spb.rollers.screens.Routes"
         android:label="fragment_routes"
         tools:layout="@layout/fragment_routes" >
         <action
-            android:id="@+id/action_routes2_to_homePage"
-            app:destination="@id/homePage" />
+            android:id="@+id/action_routes2_to_mapFragment"
+            app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_routes2_to_buildRoutes"
+            app:destination="@id/buildRoutes" />
+    </fragment>
+    <fragment
+        android:id="@+id/buildRoutes"
+        android:name="ru.spb.rollers.screens.BuildRoutes"
+        android:label="fragment_build_routes"
+        tools:layout="@layout/fragment_build_routes" >
+        <action
+            android:id="@+id/action_buildRoutes_to_routes2"
+            app:destination="@id/routes2" />
     </fragment>
 </navigation>

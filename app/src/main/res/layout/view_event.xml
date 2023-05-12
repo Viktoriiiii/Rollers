@@ -53,6 +53,7 @@
                     android:focusable="true"
                     android:scaleType="center"
                     android:focusedByDefault="true"
+                    android:foreground="?android:attr/selectableItemBackground"
                     />
             </LinearLayout>
             <TextView

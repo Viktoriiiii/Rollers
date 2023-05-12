@@ -37,6 +37,10 @@ class Events : Fragment() {
             MAIN.navController.navigate(R.id.action_events2_to_eventSearch)
         }
 
+        binding.imageButtonAddEvent.setOnClickListener{
+            MAIN.navController.navigate(R.id.action_events2_to_eventAdding)
+        }
+
         setInitialData()
         recyclerView = view.findViewById(R.id.eventsList)
         eventAdapter = EventAdapter(eventList)
