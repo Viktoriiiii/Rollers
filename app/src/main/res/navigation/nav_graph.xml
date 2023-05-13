@@ -143,6 +143,9 @@
         <action
             android:id="@+id/action_mapFragment_to_routes2"
             app:destination="@id/routes2" />
+        <action
+            android:id="@+id/action_mapFragment_self"
+            app:destination="@id/mapFragment" />
     </fragment>
     <fragment
         android:id="@+id/routes2"
@@ -155,6 +158,9 @@
         <action
             android:id="@+id/action_routes2_to_buildRoutes"
             app:destination="@id/buildRoutes" />
+        <action
+            android:id="@+id/action_routes2_to_viewRoute"
+            app:destination="@id/viewRoute" />
     </fragment>
     <fragment
         android:id="@+id/buildRoutes"
@@ -163,6 +169,18 @@
         tools:layout="@layout/fragment_build_routes" >
         <action
             android:id="@+id/action_buildRoutes_to_routes2"
+            app:destination="@id/routes2" />
+        <action
+            android:id="@+id/action_buildRoutes_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewRoute"
+        android:name="ru.spb.rollers.screens.ViewRoute"
+        android:label="fragment_view_route"
+        tools:layout="@layout/fragment_view_route" >
+        <action
+            android:id="@+id/action_viewRoute_to_routes2"
             app:destination="@id/routes2" />
     </fragment>
 </navigation>

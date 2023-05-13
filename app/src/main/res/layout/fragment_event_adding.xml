@@ -165,6 +165,7 @@
                 android:textColor="@color/for_text"
                 android:padding="15dp"
                 android:layout_below="@+id/etEventTimeStart"
+                android:visibility="gone"
                 />
             <EditText
                 android:id="@+id/etEventStartLocation"
@@ -176,6 +177,7 @@
                 android:layout_below="@+id/etEventTimeStart"
                 android:layout_toEndOf="@+id/tvEventStartLocation"
                 android:padding="15dp"
+                android:visibility="gone"
                 />
             <TextView
                 android:id="@+id/tvEventEndLocation"
@@ -186,6 +188,7 @@
                 android:textColor="@color/for_text"
                 android:padding="15dp"
                 android:layout_below="@+id/etEventStartLocation"
+                android:visibility="gone"
                 />
             <EditText
                 android:id="@+id/etEventEndLocation"
@@ -197,6 +200,7 @@
                 android:layout_below="@+id/etEventStartLocation"
                 android:layout_toEndOf="@+id/tvEventEndLocation"
                 android:padding="15dp"
+                android:visibility="gone"
                 />
             <TextView
                 android:id="@+id/tvEventSpeed"
@@ -228,6 +232,7 @@
                 android:textColor="@color/for_text"
                 android:padding="15dp"
                 android:layout_below="@+id/etEventSpeed"
+                android:visibility="gone"
                 />
             <EditText
                 android:id="@+id/etEventDistance"
@@ -239,6 +244,7 @@
                 android:layout_below="@+id/etEventSpeed"
                 android:layout_toEndOf="@+id/tvEventDistance"
                 android:padding="15dp"
+                android:visibility="gone"
                 />
             <LinearLayout
                 android:id="@+id/llRoute"
@@ -248,34 +254,28 @@
                 android:orientation="vertical"
                 android:gravity="center"
                 >
-                <TextView
-                    android:id="@+id/tvRoute"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAddRoute"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Маршрут"
-                    android:textSize="16sp"
-                    android:textColor="@color/for_text"
-                    android:padding="15dp"
-                    android:gravity="center"
+                    android:text="Добавить маршрут"
+                    app:cornerRadius="25dp"
+                    android:padding="10dp"
+                    android:layout_below="@+id/etEventDistance"
+                    android:layout_marginTop="25dp"
                     />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnAddRoute"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Добавить маршрут"
-                        app:cornerRadius="25dp"
-                        android:padding="10dp"
-                        android:layout_below="@+id/etEventDistance"
-                        />
-                </LinearLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSaveRoute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Сохранить мероприятие"
+                    app:cornerRadius="25dp"
+                    android:padding="10dp"
+                    android:layout_below="@+id/etEventDistance"
+                    android:layout_marginTop="15dp"
+                    />
 
             </LinearLayout>
-
-
         </RelativeLayout>
     </ScrollView>
 </LinearLayout>

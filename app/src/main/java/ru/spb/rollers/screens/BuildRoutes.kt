@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.yandex.mapkit.MapKit
@@ -33,6 +34,10 @@ class BuildRoutes : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.imageViewBack.setOnClickListener{
             MAIN.navController.navigate(R.id.action_buildRoutes_to_routes2)
+        }
+        binding.imageViewSaveRoute.setOnClickListener{
+            Toast.makeText(MAIN, "Маршрут сохранен", Toast.LENGTH_SHORT).show()
+            MAIN.navController.navigate(R.id.action_buildRoutes_to_mapFragment)
         }
 
         mapView = view.findViewById(R.id.mapView)

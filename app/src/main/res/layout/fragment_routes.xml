@@ -42,54 +42,58 @@
                 android:queryHint="Поиск..."/>
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="3dp"
-        android:background="@color/main_background"
-        >
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/pointsList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            />
+        android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            >
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnBuildRoute"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:text="Построить"
-                app:cornerRadius="20dp"
-                android:textSize="14sp"
-                android:layout_marginEnd="20dp"
-                />
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnAddPoint"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Добавить точку"
-                app:cornerRadius="20dp"
-                android:textSize="14sp"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="3dp"
             android:background="@color/main_background"
             >
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/routesList"
+                android:id="@+id/pointsList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                >
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnBuildRoute"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:text="Построить"
+                    app:cornerRadius="20dp"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="20dp"
+                    />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAddPoint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Добавить точку"
+                    app:cornerRadius="20dp"
+                    android:textSize="14sp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/main_background"
+                >
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/routesList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 </LinearLayout>
 
