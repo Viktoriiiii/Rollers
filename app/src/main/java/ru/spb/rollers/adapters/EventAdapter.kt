@@ -20,7 +20,7 @@ import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
 import ru.spb.rollers.model.Event
 
-class EventAdapter (private var itemListEvent: List<Event>
+class EventAdapter (private var itemListEvent: List<Event>, var userID: Int
 ): RecyclerView.Adapter<EventAdapter.EventViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
@@ -28,45 +28,40 @@ class EventAdapter (private var itemListEvent: List<Event>
         return EventViewHolder(view)
     }
 
+    @SuppressLint("RestrictedApi", "SetTextI18n")
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
         val item = itemListEvent[position]
         holder.eventsContainer
-        holder.imageViewRoute.setImageResource(R.drawable.route)
+        holder.imageViewManage.setImageResource(R.drawable.ic_manage_account_foreground)
         holder.textViewEventName.text = item.eventName
-        holder.txvEventDate.text = item.eventDate
-        holder.txvEventStartLocation.text = item.eventStartLocation
-        holder.txvEventEndLocation.text = item.eventEndLocation
+        holder.txvEventDate.text = "Дата: ${item.eventDate}"
+        holder.txvEventStartLocation.text = "Старт: ${item.eventStartLocation}"
+        holder.txvEventEndLocation.text = "Финиш: ${item.eventEndLocation}"
 
-        if (item.isParticipate) holder.imageViewEventStatus.setImageResource(R.drawable.ic_done_foreground)
-        else holder.imageViewEventStatus.setImageResource(R.drawable.ic_add_event_foreground)
-    }
-
-    override fun getItemCount(): Int {
-        return itemListEvent.size
-    }
-
-    inner class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
-        View.OnClickListener{
-        val eventsContainer: MaterialCardView = itemView.findViewById(R.id.eventsContainer)
-        val imageViewRoute: ImageView = itemView.findViewById(R.id.imageViewRoute)
-        val textViewEventName: TextView = itemView.findViewById(R.id.textViewEventName)
-        val txvEventDate: MaterialTextView = itemView.findViewById(R.id.txvEventDate)
-        val txvEventStartLocation: TextView = itemView.findViewById(R.id.txvEventStartLocation)
-        val txvEventEndLocation: TextView = itemView.findViewById(R.id.txvEventEndLocation)
-        val imageViewEventStatus: ImageView = itemView.findViewById(R.id.imageViewEventStatus)
-
-        init {
-            itemView.setOnClickListener(this)
+        if (item.isParticipate) {
+            holder.imageViewEventStatus.setImageResource(R.drawable.ic_done_foreground)
+        }
+        else {
+            holder.imageViewEventStatus.setImageResource(R.drawable.ic_add_event_foreground)
         }
 
-        override fun onClick(p0: View) {
-            showPopupMenu(p0)
+        if (userID == item.eventManager) {
+            holder.imageViewManage.setImageResource(R.drawable.ic_manage_account_foreground)
+        }
+        else {
+            holder.imageViewManage.visibility = View.GONE
         }
 
-        @SuppressLint("RestrictedApi", "MissingInflatedId")
-        private fun showPopupMenu(view: View) {
-            val popupMenu = PopupMenu(view.context, view)
-            popupMenu.inflate(R.menu.events_popup_menu)
+        holder.eventsContainer.setOnClickListener{
+            val popupMenu = PopupMenu(it.context, it)
+
+            if (userID == item.eventManager)
+                popupMenu.inflate(R.menu.event_pm_for_manager)
+            else if (item.isParticipate){
+                popupMenu.inflate(R.menu.event_pm_for_participant)
+            }
+            else
+                popupMenu.inflate(R.menu.event_pm_for_everybody)
             popupMenu.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.toViewEvent -> {
@@ -84,6 +79,15 @@ class EventAdapter (private var itemListEvent: List<Event>
                     }
                     R.id.toAddEvent -> {
                         Toast.makeText(MAIN, "Мероприятие добавлено", Toast.LENGTH_SHORT).show()
+                        true
+                    }
+                    R.id.toChangeEvent ->{
+                        try {
+                            MAIN.navController.navigate(R.id.action_eventSearch_to_eventAdding)
+                        }
+                        catch (ex: Exception) {
+                            MAIN.navController.navigate(R.id.action_events2_to_eventAdding)
+                        }
                         true
                     }
                     R.id.deleteEvent -> {
@@ -104,10 +108,24 @@ class EventAdapter (private var itemListEvent: List<Event>
                     else -> false
                 }
             }
-            val menuHelper = MenuPopupHelper(view.context,
-                popupMenu.menu as MenuBuilder, view)
+            val menuHelper = MenuPopupHelper(it.context,
+                popupMenu.menu as MenuBuilder, it)
             menuHelper.setForceShowIcon(true)
             menuHelper.show()
         }
+    }
+
+    override fun getItemCount(): Int {
+        return itemListEvent.size
+    }
+
+    inner class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+        val eventsContainer: MaterialCardView = itemView.findViewById(R.id.eventsContainer)
+        val textViewEventName: TextView = itemView.findViewById(R.id.textViewEventName)
+        val txvEventDate: MaterialTextView = itemView.findViewById(R.id.txvEventDate)
+        val txvEventStartLocation: TextView = itemView.findViewById(R.id.txvEventStartLocation)
+        val txvEventEndLocation: TextView = itemView.findViewById(R.id.txvEventEndLocation)
+        val imageViewEventStatus: ImageView = itemView.findViewById(R.id.imageViewEventStatus)
+        val imageViewManage: ImageView = itemView.findViewById(R.id.imageViewManage)
     }
 }

@@ -18,7 +18,6 @@ class EventAdding : Fragment() {
 
     private lateinit var binding: FragmentEventAddingBinding
     private var routeList: List<Route> = mutableListOf()
-    private lateinit var routeName: Array<String>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,12 +34,9 @@ class EventAdding : Fragment() {
         }
 
         setInitialData()
-//        routeName = routeList.map { route ->
-//            "${route.routeName} (${route.routeStartLocation} - ${route.routeEndLocation})"
-//        }.toTypedArray()
 
         val btnAddRoute: MaterialButton = view.findViewById(R.id.btnAddRoute)
-        btnAddRoute.setOnClickListener{ addRoute(view) }
+        btnAddRoute.setOnClickListener{ addRoute() }
 
         val btnSaveRoute: MaterialButton = view.findViewById(R.id.btnSaveRoute)
         btnSaveRoute.setOnClickListener{
@@ -50,7 +46,7 @@ class EventAdding : Fragment() {
         }
     }
 
-    private fun addRoute(view: View){
+    private fun addRoute(){
         val builder = AlertDialog.Builder(MAIN)
         builder.setTitle("Выберите машрут")
             .setSingleChoiceItems(routeList.map { route ->

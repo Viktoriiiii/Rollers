@@ -5,7 +5,7 @@ class Event {
     var eventName: String? = ""
     var eventStartLocation: String? = ""
     var eventEndLocation: String? = ""
-    var eventNameOrganizer: String? = ""
+    var eventManager: Int = 0
     var eventDate: String? = ""
     var eventTimeMeeting: String? = ""
     var eventTimeStart: String? = ""
@@ -20,7 +20,7 @@ class Event {
         eventName: String?,
         eventStartLocation: String?,
         eventEndLocation: String?,
-        eventNameOrganizer: String?,
+        eventManager: Int,
         eventDate: String?,
         eventTimeMeeting: String?,
         eventTimeStart: String?,
@@ -33,7 +33,7 @@ class Event {
         this.eventName = eventName
         this.eventStartLocation = eventStartLocation
         this.eventEndLocation = eventEndLocation
-        this.eventNameOrganizer = eventNameOrganizer
+        this.eventManager = eventManager
         this.eventDate = eventDate
         this.eventTimeMeeting = eventTimeMeeting
         this.eventTimeStart = eventTimeStart

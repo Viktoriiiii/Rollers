@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:theme="@style/PopupMenu"
+    >
+    <item android:id="@+id/toViewEvent"
+        android:title="Просмотреть"
+        android:icon="@drawable/ic_view_event_foreground"
+        />
+    <item android:id="@+id/toChangeEvent"
+        android:icon="@drawable/ic_change_foreground"
+        android:title="Редактировать"
+        />
+</menu>

@@ -123,6 +123,9 @@
         <action
             android:id="@+id/action_eventSearch_to_events2"
             app:destination="@id/events2" />
+        <action
+            android:id="@+id/action_eventSearch_to_eventAdding"
+            app:destination="@id/eventAdding" />
     </fragment>
     <fragment
         android:id="@+id/eventAdding"

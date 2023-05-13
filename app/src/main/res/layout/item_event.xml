@@ -19,7 +19,8 @@
         >
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
             <ImageView
                 android:id="@+id/imageViewEventStatus"
                 android:layout_width="50dp"
@@ -28,18 +29,16 @@
                 app:layout_constraintBaseline_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewRoute"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            >
             <ImageView
-                android:id="@+id/imageViewRoute"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/route" />
-        </androidx.cardview.widget.CardView>
+                android:id="@+id/imageViewManage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_manage_account_foreground"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewEventStatus"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
             android:id="@+id/textViewEventName"
             android:layout_width="wrap_content"
@@ -50,7 +49,6 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:text="Покатушка на роликах"
-            android:layout_toEndOf="@+id/cardViewRoute"
             android:padding="6dp"
             android:paddingStart="20dp"
             />
@@ -60,7 +58,6 @@
             android:layout_height="wrap_content"
             android:text="29.04.2023 14:00 Суббота"
             android:layout_below="@+id/textViewEventName"
-            android:layout_toEndOf="@id/cardViewRoute"
             android:textColor="@color/for_text"
             android:textSize="16sp"
             android:padding="6dp"
@@ -73,7 +70,6 @@
             android:text="Старт: Андреевский собор"
             android:textColor="@color/for_text"
             android:textSize="16sp"
-            android:layout_toEndOf="@+id/cardViewRoute"
             android:layout_below="@+id/txvEventDate"
             android:padding="6dp"
             android:paddingStart="20dp"
@@ -85,7 +81,6 @@
             android:text="Финиш: Черная речка"
             android:textColor="@color/for_text"
             android:textSize="16sp"
-            android:layout_toEndOf="@+id/cardViewRoute"
             android:layout_below="@+id/txvEventStartLocation"
             android:padding="6dp"
             android:paddingStart="20dp"
