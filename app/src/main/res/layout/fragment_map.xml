@@ -21,8 +21,8 @@
                 android:src="@drawable/ic_back_foreground"
                 android:foreground="?android:attr/selectableItemBackground"
                 />
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/searchView"
+            <EditText
+                android:id="@+id/editTextSearch"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_alignRight="@+id/imageViewToRoutes"
@@ -30,8 +30,11 @@
                 android:layout_marginRight="50dp"
                 android:layout_toEndOf="@+id/imageViewBack"
                 android:iconifiedByDefault="false"
-                android:layoutDirection="rtl"
-                android:queryHint="Поиск..." />
+                android:queryHint="Поиск..."
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                />
             <ImageView
                 android:id="@+id/imageViewToRoutes"
                 android:layout_width="50dp"
@@ -44,6 +47,12 @@
                 />
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/suggestList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        />
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -61,45 +70,6 @@
             android:orientation="vertical"
             android:padding="5dp"
             >
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardViewMyLocation"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:gravity="center"
-                app:cardCornerRadius="10dp"
-                android:layout_marginBottom="10dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/for_button"
-                >
-                <ImageView
-                    android:id="@+id/increaseScale"
-                    style="?android:borderlessButtonStyle"
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:src="@drawable/plus" />
-            </com.google.android.material.card.MaterialCardView>
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardViewIncrease"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:gravity="center"
-                app:cardCornerRadius="10dp"
-                android:layout_marginBottom="55dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/for_button"
-                >
-                <ImageView
-                    android:id="@+id/decreaseScale"
-                    style="?android:borderlessButtonStyle"
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:src="@drawable/minus"
-                    />
-            </com.google.android.material.card.MaterialCardView>
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardViewDecrease"
                 android:layout_width="40dp"
@@ -121,4 +91,3 @@
         </LinearLayout>
     </FrameLayout>
 </LinearLayout>
-
