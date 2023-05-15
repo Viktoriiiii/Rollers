@@ -44,6 +44,22 @@ class EventAdding : Fragment() {
                 Toast.LENGTH_SHORT).show()
             MAIN.navController.navigate(R.id.action_eventAdding_to_events2)
         }
+
+        binding.imageButtonDeleteEvent.setOnClickListener{
+            val builderDeleteDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
+            builderDeleteDialog
+                .setTitle("Вы уверены, что хотите удалить мероприятие?")
+                .setCancelable(false)
+                .setPositiveButton("Да") { _, _ ->
+                    MAIN.navController.navigate(R.id.action_eventAdding_to_events2)
+                    Toast.makeText(MAIN, "Мероприятие удалено", Toast.LENGTH_SHORT).show()
+                }
+                .setNegativeButton("Отмена"){dialog, _ ->
+                    dialog.cancel()
+                }
+            val alertDialogDeletePhoto: AlertDialog = builderDeleteDialog.create()
+            alertDialogDeletePhoto.show()
+        }
     }
 
     private fun addRoute(){

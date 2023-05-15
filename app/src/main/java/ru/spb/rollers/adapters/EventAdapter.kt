@@ -1,8 +1,6 @@
 package ru.spb.rollers.adapters
 
 import android.annotation.SuppressLint
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,16 +63,13 @@ class EventAdapter (private var itemListEvent: List<Event>, var userID: Int
             popupMenu.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.toViewEvent -> {
-                        val builderViewProfile: AlertDialog.Builder = AlertDialog.Builder(MAIN)
-                        val profileView: View = MAIN.layoutInflater.inflate(R.layout.view_event, null)
-                        val imageViewClose: ImageView = profileView.findViewById(R.id.imageViewClose)
-                        builderViewProfile.setView(profileView)
-                        val alertViewProfile: AlertDialog = builderViewProfile.create()
-                        alertViewProfile.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                        alertViewProfile.setOnShowListener {
-                            imageViewClose.setOnClickListener { alertViewProfile.cancel() }
+                        try {
+                            MAIN.navController.navigate(R.id.action_events2_to_eventView)
                         }
-                        alertViewProfile.show()
+                        catch (ex: Exception)
+                        {
+                            MAIN.navController.navigate(R.id.action_eventSearch_to_eventView)
+                        }
                         true
                     }
                     R.id.toAddEvent -> {

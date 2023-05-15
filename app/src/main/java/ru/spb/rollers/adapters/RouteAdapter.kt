@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -32,68 +33,84 @@ class RouteAdapter (private var itemListRoute: List<Route>
         holder.textViewRouteDistance.text = item.routeDistance
         holder.txvEventStartLocation.text = item.routeStartLocation
         holder.txvEventEndLocation.text = item.routeEndLocation
+
+        holder.routesContainer.setOnClickListener{
+            showPopupMenu(it, item)
+        }
+    }
+
+    @SuppressLint("RestrictedApi", "MissingInflatedId", "NotifyDataSetChanged")
+    private fun showPopupMenu(view: View, route: Route) {
+        val popupMenu = PopupMenu(view.context, view)
+        popupMenu.inflate(R.menu.route_popup_menu)
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.toPinRoute -> {
+                    Toast.makeText(MAIN, "Маршрут закреплен", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.toViewRoute -> {
+                    MAIN.navController.navigate(R.id.action_routes2_to_viewRoute)
+                    true
+                }
+                R.id.toChangeRouteName -> {
+                    val li = LayoutInflater.from(MAIN)
+                    val promptsView: View = li.inflate(R.layout.alert_dialog_change_name, null)
+                    val builderChangeRouteNameDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
+                    builderChangeRouteNameDialog.setView(promptsView)
+                    val userInput: EditText = promptsView.findViewById(R.id.input_text)
+                    var str = "vv"
+                    builderChangeRouteNameDialog
+                        .setTitle("Введите новое имя маршрута")
+                        .setCancelable(false)
+                        .setPositiveButton("Да") { dialog, _ ->
+                            val inputText = userInput.text.toString()
+                            route.routeName = inputText
+                            notifyDataSetChanged()
+                            dialog.dismiss()
+                            Toast.makeText(MAIN, "Название изменено", Toast.LENGTH_SHORT).show()
+                        }
+                        .setNegativeButton("Отмена"){dialog, _ ->
+                            dialog.cancel()
+                        }
+
+                    val alertDialogChangeRouteName: AlertDialog = builderChangeRouteNameDialog.create()
+                    alertDialogChangeRouteName.show()
+                    true
+                }
+                R.id.deleteRoute -> {
+                    val builderDeleteDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
+                    builderDeleteDialog
+                        .setTitle("Вы уверены, что хотите удалить маршрут?")
+                        .setCancelable(false)
+                        .setPositiveButton("Да") { _, _ ->
+                            Toast.makeText(MAIN, "Машрут удален", Toast.LENGTH_SHORT).show()
+                        }
+                        .setNegativeButton("Отмена"){dialog, _ ->
+                            dialog.cancel()
+                        }
+                    val alertDialogDeletePhoto: AlertDialog = builderDeleteDialog.create()
+                    alertDialogDeletePhoto.show()
+                    true
+                }
+                else -> false
+            }
+        }
+        val menuHelper = MenuPopupHelper(view.context,
+            popupMenu.menu as MenuBuilder, view)
+        menuHelper.setForceShowIcon(true)
+        menuHelper.show()
     }
 
     override fun getItemCount(): Int {
         return itemListRoute.size
     }
 
-    inner class RouteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
-        View.OnClickListener{
+    inner class RouteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val routesContainer: MaterialCardView = itemView.findViewById(R.id.routesContainer)
         val textViewRouteEventName: TextView = itemView.findViewById(R.id.textViewRouteEventName)
         val textViewRouteDistance: MaterialTextView = itemView.findViewById(R.id.textViewRouteDistance)
         val txvEventStartLocation: TextView = itemView.findViewById(R.id.txvEventStartLocation)
         val txvEventEndLocation: TextView = itemView.findViewById(R.id.txvEventEndLocation)
-
-        init {
-            itemView.setOnClickListener(this)
-        }
-
-        override fun onClick(p0: View) {
-            showPopupMenu(p0)
-        }
-
-        @SuppressLint("RestrictedApi", "MissingInflatedId")
-        private fun showPopupMenu(view: View) {
-            val popupMenu = PopupMenu(view.context, view)
-            popupMenu.inflate(R.menu.route_popup_menu)
-            popupMenu.setOnMenuItemClickListener { menuItem ->
-                when (menuItem.itemId) {
-                    R.id.toPinRoute -> {
-                        Toast.makeText(MAIN, "Маршрут закреплен", Toast.LENGTH_SHORT).show()
-                        true
-                    }
-                    R.id.toViewRoute -> {
-                        MAIN.navController.navigate(R.id.action_routes2_to_viewRoute)
-                        true
-                    }
-                    R.id.toChangeRouteName -> {
-                        Toast.makeText(MAIN, "Название изменено", Toast.LENGTH_SHORT).show()
-                        true
-                    }
-                    R.id.deleteRoute -> {
-                        val builderDeleteDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
-                        builderDeleteDialog
-                            .setTitle("Вы уверены, что хотите удалить маршрут?")
-                            .setCancelable(false)
-                            .setPositiveButton("Да") { _, _ ->
-                                Toast.makeText(MAIN, "Машрут удален", Toast.LENGTH_SHORT).show()
-                            }
-                            .setNegativeButton("Отмена"){dialog, _ ->
-                                dialog.cancel()
-                            }
-                        val alertDialogDeletePhoto: AlertDialog = builderDeleteDialog.create()
-                        alertDialogDeletePhoto.show()
-                        true
-                    }
-                    else -> false
-                }
-            }
-            val menuHelper = MenuPopupHelper(view.context,
-                popupMenu.menu as MenuBuilder, view)
-            menuHelper.setForceShowIcon(true)
-            menuHelper.show()
-        }
     }
 }

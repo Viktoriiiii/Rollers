@@ -114,6 +114,9 @@
         <action
             android:id="@+id/action_events2_to_eventAdding"
             app:destination="@id/eventAdding" />
+        <action
+            android:id="@+id/action_events2_to_eventView"
+            app:destination="@id/eventView" />
     </fragment>
     <fragment
         android:id="@+id/eventSearch"
@@ -126,6 +129,9 @@
         <action
             android:id="@+id/action_eventSearch_to_eventAdding"
             app:destination="@id/eventAdding" />
+        <action
+            android:id="@+id/action_eventSearch_to_eventView"
+            app:destination="@id/eventView" />
     </fragment>
     <fragment
         android:id="@+id/eventAdding"
@@ -185,5 +191,28 @@
         <action
             android:id="@+id/action_viewRoute_to_routes2"
             app:destination="@id/routes2" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventView"
+        android:name="ru.spb.rollers.screens.EventView"
+        android:label="EventView" >
+        <action
+            android:id="@+id/action_eventView_to_events2"
+            app:destination="@id/events2" />
+        <action
+            android:id="@+id/action_eventView_to_eventSearch"
+            app:destination="@id/eventSearch" />
+        <action
+            android:id="@+id/action_eventView_to_viewRouteOnEvent"
+            app:destination="@id/viewRouteOnEvent" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewRouteOnEvent"
+        android:name="ru.spb.rollers.screens.ViewRouteOnEvent"
+        android:label="fragment_view_route_on_event"
+        tools:layout="@layout/fragment_view_route_on_event" >
+        <action
+            android:id="@+id/action_viewRouteOnEvent_to_eventView"
+            app:destination="@id/eventView" />
     </fragment>
 </navigation>

@@ -78,11 +78,14 @@ class ContactAdapter (private var itemListContact: List<Contact>
                 when (menuItem.itemId) {
                     R.id.toViewProfile -> {
                         val builderViewProfile: AlertDialog.Builder = AlertDialog.Builder(MAIN)
-
                         val profileView: View = MAIN.layoutInflater.inflate(R.layout.view_profile, null)
+                        val imageViewClose: ImageView = profileView.findViewById(R.id.imageViewClose)
                         builderViewProfile.setView(profileView)
                         val alertViewProfile: AlertDialog = builderViewProfile.create()
                         alertViewProfile.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                        alertViewProfile.setOnShowListener {
+                            imageViewClose.setOnClickListener { alertViewProfile.cancel() }
+                        }
                         alertViewProfile.show()
                         true
                     }
