@@ -32,60 +32,54 @@ class DialogAdapter(
         holder.mtvMessage.text = item.dialogMessage
         holder.mtvDate.text = item.dialogDate
         holder.ivPhoto.setImageResource(R.drawable.logo)
+
+        holder.dialogContainer.setOnClickListener{
+            MAIN.navController.navigate(R.id.action_homePage_to_messages)
+        }
+
+        holder.dialogContainer.setOnLongClickListener{
+            showPopupMenu(it)
+            true
+        }
+    }
+
+    @SuppressLint("RestrictedApi")
+    private fun showPopupMenu(view: View) {
+        val popupMenu = PopupMenu(view.context, view)
+        popupMenu.inflate(R.menu.dialog_popup_menu)
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.pinDialog -> {
+                    Toast.makeText(MAIN, "Диалог закреплен", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.deleteMessages -> {
+                    Toast.makeText(MAIN, "Сообщения удалены", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.deleteDialog -> {
+                    Toast.makeText(MAIN, "Диалог удален", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        val menuHelper = MenuPopupHelper(view.context,
+            popupMenu.menu as MenuBuilder, view)
+        menuHelper.setForceShowIcon(true)
+        menuHelper.show()
     }
 
     override fun getItemCount(): Int {
         return itemListDialog.size
     }
 
-    inner class DialogViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
-        View.OnLongClickListener, View.OnClickListener{
+    inner class DialogViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val dialogContainer: MaterialCardView = itemView.findViewById(R.id.dialogContainer)
         val mtvName: MaterialTextView = itemView.findViewById(R.id.mtvName)
         val mtvMessage: MaterialTextView = itemView.findViewById(R.id.mtvMessage)
         val mtvDate: MaterialTextView = itemView.findViewById(R.id.mtvDate)
         val ivPhoto: ImageView = itemView.findViewById(R.id.imageViewPhoto)
-
-        init {
-            itemView.setOnClickListener(this)
-            itemView.setOnLongClickListener(this)
-        }
-
-        override fun onLongClick(p0: View): Boolean {
-            showPopupMenu(p0)
-            return true
-        }
-
-        override fun onClick(p0: View) {
-            MAIN.navController.navigate(R.id.action_homePage_to_messages)
-        }
-
-        @SuppressLint("RestrictedApi")
-        private fun showPopupMenu(view: View) {
-            val popupMenu = PopupMenu(view.context, view)
-            popupMenu.inflate(R.menu.dialog_popup_menu)
-            popupMenu.setOnMenuItemClickListener { menuItem ->
-                when (menuItem.itemId) {
-                    R.id.pinDialog -> {
-                        Toast.makeText(MAIN, "Диалог закреплен", Toast.LENGTH_SHORT).show()
-                        true
-                    }
-                    R.id.deleteMessages -> {
-                        Toast.makeText(MAIN, "Сообщения удалены", Toast.LENGTH_SHORT).show()
-                        true
-                    }
-                    R.id.deleteDialog -> {
-                        Toast.makeText(MAIN, "Диалог удален", Toast.LENGTH_SHORT).show()
-                        true
-                    }
-                    else -> false
-                }
-            }
-
-            val menuHelper = MenuPopupHelper(view.context,
-                popupMenu.menu as MenuBuilder, view)
-            menuHelper.setForceShowIcon(true)
-            menuHelper.show()
-        }
     }
 }

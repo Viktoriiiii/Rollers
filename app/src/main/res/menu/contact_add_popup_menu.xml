@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:theme="@style/PopupMenu">
+    <item android:id="@+id/toViewProfile"
+        android:title="Просмотр профиля"
+        android:icon="@drawable/ic_person_foreground"
+        />
+    <item android:id="@+id/toDialog"
+        android:icon="@drawable/ic_message_foreground"
+        android:title="Перейти к диалогу"
+        />
+    <item android:id="@+id/addContact"
+        android:icon="@drawable/ic_add_contact_foreground"
+        android:title="Добавить"
+        />
+</menu>

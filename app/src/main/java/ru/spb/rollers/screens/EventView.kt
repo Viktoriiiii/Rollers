@@ -49,5 +49,9 @@ class EventView : Fragment() {
         binding.imageButtonViewRoute.setOnClickListener{
             MAIN.navController.navigate(R.id.action_eventView_to_viewRouteOnEvent)
         }
+
+        binding.imageButtonViewParticipants.setOnClickListener{
+            MAIN.navController.navigate(R.id.action_eventView_to_viewParticipantsOnEvent)
+        }
     }
 }

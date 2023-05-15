@@ -51,63 +51,68 @@ class EventAdapter (private var itemListEvent: List<Event>, var userID: Int
         }
 
         holder.eventsContainer.setOnClickListener{
-            val popupMenu = PopupMenu(it.context, it)
-
-            if (userID == item.eventManager)
-                popupMenu.inflate(R.menu.event_pm_for_manager)
-            else if (item.isParticipate){
-                popupMenu.inflate(R.menu.event_pm_for_participant)
-            }
-            else
-                popupMenu.inflate(R.menu.event_pm_for_everybody)
-            popupMenu.setOnMenuItemClickListener { menuItem ->
-                when (menuItem.itemId) {
-                    R.id.toViewEvent -> {
-                        try {
-                            MAIN.navController.navigate(R.id.action_events2_to_eventView)
-                        }
-                        catch (ex: Exception)
-                        {
-                            MAIN.navController.navigate(R.id.action_eventSearch_to_eventView)
-                        }
-                        true
-                    }
-                    R.id.toAddEvent -> {
-                        Toast.makeText(MAIN, "Мероприятие добавлено", Toast.LENGTH_SHORT).show()
-                        true
-                    }
-                    R.id.toChangeEvent ->{
-                        try {
-                            MAIN.navController.navigate(R.id.action_eventSearch_to_eventAdding)
-                        }
-                        catch (ex: Exception) {
-                            MAIN.navController.navigate(R.id.action_events2_to_eventAdding)
-                        }
-                        true
-                    }
-                    R.id.deleteEvent -> {
-                        val builderDeleteDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
-                        builderDeleteDialog
-                            .setTitle("Вы уверены, что хотите удалить мероприятие?")
-                            .setCancelable(false)
-                            .setPositiveButton("Да") { _, _ ->
-                                Toast.makeText(MAIN, "Мероприятие удален", Toast.LENGTH_SHORT).show()
-                            }
-                            .setNegativeButton("Отмена"){dialog, _ ->
-                                dialog.cancel()
-                            }
-                        val alertDialogDeletePhoto: AlertDialog = builderDeleteDialog.create()
-                        alertDialogDeletePhoto.show()
-                        true
-                    }
-                    else -> false
-                }
-            }
-            val menuHelper = MenuPopupHelper(it.context,
-                popupMenu.menu as MenuBuilder, it)
-            menuHelper.setForceShowIcon(true)
-            menuHelper.show()
+            showPopupMenu(it, item)
         }
+    }
+
+    @SuppressLint("RestrictedApi")
+    private fun showPopupMenu(view: View, event:Event) {
+        val popupMenu = PopupMenu(view.context, view)
+
+        if (userID == event.eventManager)
+            popupMenu.inflate(R.menu.event_pm_for_manager)
+        else if (event.isParticipate){
+            popupMenu.inflate(R.menu.event_pm_for_participant)
+        }
+        else
+            popupMenu.inflate(R.menu.event_pm_for_everybody)
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.toViewEvent -> {
+                    try {
+                        MAIN.navController.navigate(R.id.action_events2_to_eventView)
+                    }
+                    catch (ex: Exception)
+                    {
+                        MAIN.navController.navigate(R.id.action_eventSearch_to_eventView)
+                    }
+                    true
+                }
+                R.id.toAddEvent -> {
+                    Toast.makeText(MAIN, "Мероприятие добавлено", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.toChangeEvent ->{
+                    try {
+                        MAIN.navController.navigate(R.id.action_eventSearch_to_eventAdding)
+                    }
+                    catch (ex: Exception) {
+                        MAIN.navController.navigate(R.id.action_events2_to_eventAdding)
+                    }
+                    true
+                }
+                R.id.deleteEvent -> {
+                    val builderDeleteDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
+                    builderDeleteDialog
+                        .setTitle("Вы уверены, что хотите удалить мероприятие?")
+                        .setCancelable(false)
+                        .setPositiveButton("Да") { _, _ ->
+                            Toast.makeText(MAIN, "Мероприятие удален", Toast.LENGTH_SHORT).show()
+                        }
+                        .setNegativeButton("Отмена"){dialog, _ ->
+                            dialog.cancel()
+                        }
+                    val alertDialogDeletePhoto: AlertDialog = builderDeleteDialog.create()
+                    alertDialogDeletePhoto.show()
+                    true
+                }
+                else -> false
+            }
+        }
+        val menuHelper = MenuPopupHelper(view.context,
+            popupMenu.menu as MenuBuilder, view)
+        menuHelper.setForceShowIcon(true)
+        menuHelper.show()
     }
 
     override fun getItemCount(): Int {

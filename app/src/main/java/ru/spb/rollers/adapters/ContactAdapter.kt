@@ -45,14 +45,81 @@ class ContactAdapter (private var itemListContact: List<Contact>
         }
         if (item.isContact) holder.imageViewToContact.setImageResource(R.drawable.ic_done_foreground)
         else holder.imageViewToContact.setImageResource(R.drawable.ic_add_contact_foreground)
+
+        holder.contactContainer.setOnClickListener{
+            showPopupMenu(it, item)
+        }
+    }
+
+    @SuppressLint("RestrictedApi")
+    private fun showPopupMenu(view: View, contact: Contact) {
+        val popupMenu = PopupMenu(view.context, view)
+        if (contact.isContact)
+            popupMenu.inflate(R.menu.contact_delete_popup_menu)
+        else
+            popupMenu.inflate(R.menu.contact_add_popup_menu)
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.toViewProfile -> {
+                    val builderViewProfile: AlertDialog.Builder = AlertDialog.Builder(MAIN)
+                    val profileView: View = MAIN.layoutInflater.inflate(R.layout.view_profile, null)
+                    val imageViewClose: ImageView = profileView.findViewById(R.id.imageViewClose)
+                    builderViewProfile.setView(profileView)
+                    val alertViewProfile: AlertDialog = builderViewProfile.create()
+                    alertViewProfile.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                    alertViewProfile.setOnShowListener {
+                        imageViewClose.setOnClickListener { alertViewProfile.cancel() }
+                    }
+                    alertViewProfile.show()
+                    true
+                }
+                R.id.toDialog -> {
+                    try {
+                        MAIN.navController.navigate(R.id.action_contacts_to_messages)
+                    }
+                    catch (ex: Exception){
+                        try {
+                            MAIN.navController.navigate(R.id.action_contactSearch_to_messages)
+                        }
+                        catch (ex: Exception){
+                            MAIN.navController.navigate(R.id.action_viewParticipantsOnEvent_to_messages)
+                        }
+                    }
+                    true
+                }
+                R.id.deleteContact -> {
+                    val builderDeleteDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
+                    builderDeleteDialog
+                        .setTitle("Вы уверены, что хотите удалить контакт?")
+                        .setCancelable(false)
+                        .setPositiveButton("Да") { _, _ ->
+                            Toast.makeText(MAIN, "Контакт удален", Toast.LENGTH_SHORT).show()
+                        }
+                        .setNegativeButton("Отмена"){dialog, _ ->
+                            dialog.cancel()
+                        }
+                    val alertDialogDeletePhoto: AlertDialog = builderDeleteDialog.create()
+                    alertDialogDeletePhoto.show()
+                    true
+                }
+                R.id.addContact -> {
+                    Toast.makeText(MAIN, "Контакт добвлен", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                else -> false
+            }
+        }
+        val menuHelper = MenuPopupHelper(view.context,
+            popupMenu.menu as MenuBuilder, view)
+        menuHelper.setForceShowIcon(true)
+        menuHelper.show()
     }
 
     override fun getItemCount(): Int {
         return itemListContact.size
     }
 
-    inner class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
-        View.OnClickListener{
+    inner class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val contactContainer: MaterialCardView = itemView.findViewById(R.id.contactContainer)
         val ivPhoto: ImageView = itemView.findViewById(R.id.imageViewPhoto)
         val textViewName: TextView = itemView.findViewById(R.id.textViewName)
@@ -61,65 +128,5 @@ class ContactAdapter (private var itemListContact: List<Contact>
         val textViewStatus: TextView = itemView.findViewById(R.id.textViewStatus)
         val imageViewStatus: ImageView = itemView.findViewById(R.id.imageViewStatus)
         val imageViewToContact: ImageView = itemView.findViewById(R.id.imageViewToContact)
-
-        init {
-            itemView.setOnClickListener(this)
-        }
-
-        override fun onClick(p0: View) {
-            showPopupMenu(p0)
-        }
-
-        @SuppressLint("RestrictedApi")
-        private fun showPopupMenu(view: View) {
-            val popupMenu = PopupMenu(view.context, view)
-            popupMenu.inflate(R.menu.contact_popup_menu)
-            popupMenu.setOnMenuItemClickListener { menuItem ->
-                when (menuItem.itemId) {
-                    R.id.toViewProfile -> {
-                        val builderViewProfile: AlertDialog.Builder = AlertDialog.Builder(MAIN)
-                        val profileView: View = MAIN.layoutInflater.inflate(R.layout.view_profile, null)
-                        val imageViewClose: ImageView = profileView.findViewById(R.id.imageViewClose)
-                        builderViewProfile.setView(profileView)
-                        val alertViewProfile: AlertDialog = builderViewProfile.create()
-                        alertViewProfile.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                        alertViewProfile.setOnShowListener {
-                            imageViewClose.setOnClickListener { alertViewProfile.cancel() }
-                        }
-                        alertViewProfile.show()
-                        true
-                    }
-                    R.id.toDialog -> {
-                        try {
-                            MAIN.navController.navigate(R.id.action_contacts_to_messages)
-                        }
-                        catch (ex: Exception){
-                            MAIN.navController.navigate(R.id.action_contactSearch_to_messages)
-                        }
-                        true
-                    }
-                    R.id.deleteContact -> {
-                        val builderDeleteDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
-                        builderDeleteDialog
-                            .setTitle("Вы уверены, что хотите удалить контакт?")
-                            .setCancelable(false)
-                            .setPositiveButton("Да") { _, _ ->
-                                Toast.makeText(MAIN, "Контакт удален", Toast.LENGTH_SHORT).show()
-                            }
-                            .setNegativeButton("Отмена"){dialog, _ ->
-                                dialog.cancel()
-                            }
-                        val alertDialogDeletePhoto: AlertDialog = builderDeleteDialog.create()
-                        alertDialogDeletePhoto.show()
-                        true
-                    }
-                    else -> false
-                }
-            }
-            val menuHelper = MenuPopupHelper(view.context,
-                popupMenu.menu as MenuBuilder, view)
-            menuHelper.setForceShowIcon(true)
-            menuHelper.show()
-        }
     }
 }

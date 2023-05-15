@@ -205,6 +205,9 @@
         <action
             android:id="@+id/action_eventView_to_viewRouteOnEvent"
             app:destination="@id/viewRouteOnEvent" />
+        <action
+            android:id="@+id/action_eventView_to_viewParticipantsOnEvent"
+            app:destination="@id/viewParticipantsOnEvent" />
     </fragment>
     <fragment
         android:id="@+id/viewRouteOnEvent"
@@ -214,5 +217,17 @@
         <action
             android:id="@+id/action_viewRouteOnEvent_to_eventView"
             app:destination="@id/eventView" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewParticipantsOnEvent"
+        android:name="ru.spb.rollers.screens.ViewParticipantsOnEvent"
+        android:label="fragment_view_participants_on_event"
+        tools:layout="@layout/fragment_view_participants_on_event" >
+        <action
+            android:id="@+id/action_viewParticipantsOnEvent_to_eventView2"
+            app:destination="@id/eventView" />
+        <action
+            android:id="@+id/action_viewParticipantsOnEvent_to_messages"
+            app:destination="@id/messages" />
     </fragment>
 </navigation>

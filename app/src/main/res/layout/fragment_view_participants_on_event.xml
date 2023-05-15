@@ -19,26 +19,13 @@
             android:gravity="start"
             android:layout_marginEnd="20dp"
             >
-            <ImageView
-                android:id="@+id/imageViewBack"
+            <ImageButton
+                android:id="@+id/imageButtonBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/for_toolbar"
-                android:src="@drawable/ic_back_foreground"
+                android:background="@drawable/ic_back_foreground"
                 android:foreground="?android:attr/selectableItemBackground"
                 />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            >
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/searchViewContacts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:iconifiedByDefault="false"
-                android:queryHint="Поиск..."/>
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
     <androidx.recyclerview.widget.RecyclerView
