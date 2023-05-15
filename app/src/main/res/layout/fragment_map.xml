@@ -21,8 +21,8 @@
                 android:src="@drawable/ic_back_foreground"
                 android:foreground="?android:attr/selectableItemBackground"
                 />
-            <EditText
-                android:id="@+id/editTextSearch"
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_alignRight="@+id/imageViewToRoutes"
@@ -30,11 +30,8 @@
                 android:layout_marginRight="50dp"
                 android:layout_toEndOf="@+id/imageViewBack"
                 android:iconifiedByDefault="false"
-                android:queryHint="Поиск..."
-                android:imeOptions="actionSearch"
-                android:inputType="text"
-                android:maxLines="1"
-                />
+                android:layoutDirection="rtl"
+                android:queryHint="Поиск..." />
             <ImageView
                 android:id="@+id/imageViewToRoutes"
                 android:layout_width="50dp"

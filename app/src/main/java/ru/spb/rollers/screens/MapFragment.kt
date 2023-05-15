@@ -4,13 +4,11 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.PointF
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -87,15 +85,17 @@ class MapFragment : Fragment(), UserLocationObjectListener, Session.SearchListen
         val suggestOptions = SuggestOptions().setSuggestTypes(SuggestType.GEO.value)
         val suggestSession = searchManager.createSuggestSession()
 
-        binding.editTextSearch.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                binding.suggestList.visibility = View.VISIBLE
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                // Выполняйте действия по обработке подтвержденного текста поиска
+                submitQuery(binding.searchView.query.toString())
+                binding.suggestList.visibility = View.GONE
+                return true
             }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                val query = s.toString()
+            override fun onQueryTextChange(query: String): Boolean {
+                // Выполняйте действия по обновлению результатов поиска при изменении текста
+                binding.suggestList.visibility = View.VISIBLE
                 val southWest = Point(59.681658, 29.369953) // Южно-западная граница города Санкт-Петербург
                 val northEast = Point(60.130912, 30.645520)
                 val boundingBox = BoundingBox(southWest, northEast)
@@ -105,9 +105,7 @@ class MapFragment : Fragment(), UserLocationObjectListener, Session.SearchListen
                         recyclerView.adapter = searchAdapter
                         searchAdapter.setOnItemClickListener(object : OnItemClickListener {
                             override fun onItemClick(item: SuggestItem) {
-                                binding.editTextSearch.text = Editable.Factory.getInstance().newEditable(
-                                    item.title.text)
-                                binding.suggestList.visibility = View.GONE
+                                binding.searchView.setQuery(item.title.text, false)
                                 mapView.map.move(
                                     CameraPosition(
                                         item.center!!,14.0f, 0.0f, 0.0f
@@ -115,28 +113,27 @@ class MapFragment : Fragment(), UserLocationObjectListener, Session.SearchListen
                                     Animation(Animation.Type.SMOOTH, 4.0f),
                                     null
                                 )
+                                binding.suggestList.visibility = View.GONE
                             }
                         })
                     }
-
                     override fun onError(error: Error) {
                         Toast.makeText(MAIN, "Диалог закреплен", Toast.LENGTH_SHORT).show()
                     }
                 })
+                return true
             }
         })
 
-        binding.editTextSearch.setOnEditorActionListener{ _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                submitQuery(binding.editTextSearch.text.toString())
-            }
-            false
+        binding.searchView.setOnCloseListener {
+            val mapObjects = mapView.map.mapObjects
+            mapObjects.clear()
+            true
         }
+
         mapView.map.move(
             CameraPosition(Point(59.945933, 30.320045), 14.0f, 0.0f, 0.0f)
         )
-
-        submitQuery(binding.editTextSearch.text.toString())
     }
 
     private fun requestLocationPermission() {
@@ -199,13 +196,15 @@ class MapFragment : Fragment(), UserLocationObjectListener, Session.SearchListen
         val mapObjects = mapView.map.mapObjects
         mapObjects.clear()
 
-        for (searchResult in response.collection.children) {
-            val resultLocation = searchResult.obj!!.geometry[0].point
-            if (resultLocation != null) {
-                mapObjects.addPlacemark(
-                    resultLocation,
-                    ImageProvider.fromResource(MAIN, R.drawable.search_result)
-                )
+        if (!binding.searchView.query.isNullOrEmpty()) {
+            for (searchResult in response.collection.children) {
+                val resultLocation = searchResult.obj!!.geometry[0].point
+                if (resultLocation != null) {
+                    mapObjects.addPlacemark(
+                        resultLocation,
+                        ImageProvider.fromResource(MAIN, R.drawable.search_result)
+                    )
+                }
             }
         }
     }
@@ -228,7 +227,7 @@ class MapFragment : Fragment(), UserLocationObjectListener, Session.SearchListen
         finished: Boolean
     ) {
         if (finished) {
-            submitQuery(binding.editTextSearch.text.toString())
+            submitQuery(binding.searchView.query.toString())
         }
     }
 
