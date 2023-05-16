@@ -28,11 +28,13 @@ class ContactAdapter (private var itemListContact: List<Contact>
         return ContactViewHolder(view)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
         val item = itemListContact[position]
         holder.contactContainer
+
         holder.ivPhoto.setImageResource(R.drawable.logo)
-        holder.textViewName.text = item.contactName
+        holder.textViewName.text = "${item.contactLastName} ${item.contactFirstName} (${item.contactPublicName})"
         holder.txvDistrict.text = item.contactDistrict
         holder.txvAge.text = item.contactAge
         holder.imageViewStatus.setImageResource(R.drawable.ic_rollers_foreground)
@@ -64,11 +66,33 @@ class ContactAdapter (private var itemListContact: List<Contact>
                     val builderViewProfile: AlertDialog.Builder = AlertDialog.Builder(MAIN)
                     val profileView: View = MAIN.layoutInflater.inflate(R.layout.view_profile, null)
                     val imageViewClose: ImageView = profileView.findViewById(R.id.imageViewClose)
+                    val imageViewToAdmin: ImageView = profileView.findViewById(R.id.imageViewToAdmin)
                     builderViewProfile.setView(profileView)
                     val alertViewProfile: AlertDialog = builderViewProfile.create()
                     alertViewProfile.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                     alertViewProfile.setOnShowListener {
                         imageViewClose.setOnClickListener { alertViewProfile.cancel() }
+
+                        if (contact.roleID == 1) imageViewToAdmin.setImageResource(R.drawable.ic_person_foreground)
+                        else imageViewToAdmin.setImageResource(R.drawable.ic_manage_account_foreground)
+
+                        imageViewToAdmin.setOnClickListener{
+                            val title: String = if (contact.roleID == 1)
+                                "Cделать пользователя администратором?" else
+                                    "Сделать администатора пользователем?"
+                            val builderToAdminDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
+                            builderToAdminDialog
+                                .setTitle(title)
+                                .setCancelable(false)
+                                .setPositiveButton("Да") { _, _ ->
+                                    Toast.makeText(MAIN, "Выполнено", Toast.LENGTH_SHORT).show()
+                                }
+                                .setNegativeButton("Отмена"){dialog, _ ->
+                                    dialog.cancel()
+                                }
+                            val alertDialogToAdmin: AlertDialog = builderToAdminDialog.create()
+                            alertDialogToAdmin.show()
+                        }
                     }
                     alertViewProfile.show()
                     true

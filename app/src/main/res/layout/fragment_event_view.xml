@@ -114,6 +114,15 @@
                     android:padding="5dp"
                     />
                 <TextView
+                    android:id="@+id/txvEventCost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Стоимость: Бесплатно"
+                    android:textColor="@color/for_text"
+                    android:textSize="18sp"
+                    android:padding="5dp"
+                    />
+                <TextView
                     android:id="@+id/txvEventTimeMeeting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

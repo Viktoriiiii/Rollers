@@ -52,16 +52,30 @@
                     android:foreground="?android:attr/selectableItemBackground"
                     />
             </FrameLayout>
-            <TextView
-                android:id="@+id/textViewName"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/for_text"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:text="Иван Иванов"
-                android:padding="15dp"
-                />
+                android:orientation="horizontal"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/textViewName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/for_text"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:text="Иван Иванов (nickname)"
+                    android:padding="15dp"
+                    />
+                <ImageView
+                    android:id="@+id/imageViewToAdmin"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_manage_account_foreground"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    />
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

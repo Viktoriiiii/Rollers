@@ -49,7 +49,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:text="Покатушка на роликах"
-            android:padding="6dp"
+            android:padding="2dp"
             android:paddingStart="20dp"
             />
         <TextView
@@ -60,7 +60,7 @@
             android:layout_below="@+id/textViewEventName"
             android:textColor="@color/for_text"
             android:textSize="16sp"
-            android:padding="6dp"
+            android:padding="2dp"
             android:paddingStart="20dp"
             />
         <TextView
@@ -71,7 +71,7 @@
             android:textColor="@color/for_text"
             android:textSize="16sp"
             android:layout_below="@+id/txvEventDate"
-            android:padding="6dp"
+            android:padding="2dp"
             android:paddingStart="20dp"
             />
         <TextView
@@ -82,7 +82,18 @@
             android:textColor="@color/for_text"
             android:textSize="16sp"
             android:layout_below="@+id/txvEventStartLocation"
-            android:padding="6dp"
+            android:padding="2dp"
+            android:paddingStart="20dp"
+            />
+        <TextView
+            android:id="@+id/txvEventCost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Стоимость: Бесплатно"
+            android:textColor="@color/for_text"
+            android:textSize="16sp"
+            android:layout_below="@+id/txvEventEndLocation"
+            android:padding="2dp"
             android:paddingStart="20dp"
             />
     </RelativeLayout>

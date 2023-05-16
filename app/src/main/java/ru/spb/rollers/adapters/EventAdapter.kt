@@ -35,6 +35,7 @@ class EventAdapter (private var itemListEvent: List<Event>, var userID: Int
         holder.txvEventDate.text = "Дата: ${item.eventDate}"
         holder.txvEventStartLocation.text = "Старт: ${item.eventStartLocation}"
         holder.txvEventEndLocation.text = "Финиш: ${item.eventEndLocation}"
+        holder.txvEventCost.text = "Стоимость: " + if (item.eventCost == 0.0) "Бесплатно" else item.eventCost.toString()
 
         if (item.isParticipate) {
             holder.imageViewEventStatus.setImageResource(R.drawable.ic_done_foreground)
@@ -125,6 +126,7 @@ class EventAdapter (private var itemListEvent: List<Event>, var userID: Int
         val txvEventDate: MaterialTextView = itemView.findViewById(R.id.txvEventDate)
         val txvEventStartLocation: TextView = itemView.findViewById(R.id.txvEventStartLocation)
         val txvEventEndLocation: TextView = itemView.findViewById(R.id.txvEventEndLocation)
+        val txvEventCost: TextView = itemView.findViewById(R.id.txvEventCost)
         val imageViewEventStatus: ImageView = itemView.findViewById(R.id.imageViewEventStatus)
         val imageViewManage: ImageView = itemView.findViewById(R.id.imageViewManage)
     }

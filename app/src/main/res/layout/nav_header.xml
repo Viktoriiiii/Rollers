@@ -26,16 +26,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:text="username"
+        android:text="Иванова Юлия"
         android:textColor="@color/for_text"
         android:paddingTop="15dp"
         />
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/navHeaderEmail"
+        android:id="@+id/navHeaderPublicName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:text="email"
+        android:text="Ivanova95"
         android:textColor="@color/for_text"
         android:paddingTop="15dp"
         />

@@ -38,7 +38,7 @@
             android:textColor="@color/for_text"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:text="Иван Иванов"
+            android:text="Иван Иванов (nickname)"
             android:layout_toEndOf="@+id/cardViewPhoto"
             android:padding="6dp"
             android:paddingStart="20dp"

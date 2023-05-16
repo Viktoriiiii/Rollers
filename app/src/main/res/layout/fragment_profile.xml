@@ -17,7 +17,6 @@
             android:layout_height="50dp"
             android:background="@color/for_toolbar"
             android:gravity="start">
-
             <ImageView
                 android:id="@+id/btnBack"
                 android:layout_width="wrap_content"
@@ -28,11 +27,9 @@
                 />
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,12 +46,11 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/avatar" />
             </androidx.cardview.widget.CardView>
-
             <TextView
-                android:id="@+id/txvFirstName"
+                android:id="@+id/txvNickName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Имя: "
+                android:text="Никнейм: "
                 android:textSize="16sp"
                 android:textColor="@color/for_text"
                 android:layout_toEndOf="@+id/cardViewPhoto"
@@ -62,18 +58,16 @@
                 android:paddingLeft="20dp"
                 android:paddingRight="10dp"
                 />
-
             <EditText
-                android:id="@+id/etFirstName"
+                android:id="@+id/etNickName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/for_text"
                 android:textSize="16sp"
-                android:hint="Имя"
-                android:layout_toEndOf="@+id/txvFirstName"
+                android:hint="nickname"
+                android:layout_toEndOf="@+id/txvNickName"
                 android:paddingTop="15dp"
                 />
-
             <TextView
                 android:id="@+id/txvStatus"
                 android:layout_width="wrap_content"
@@ -81,13 +75,12 @@
                 android:text="Статус: "
                 android:textColor="@color/for_text"
                 android:textSize="16sp"
-                android:layout_below="@+id/etFirstName"
+                android:layout_below="@+id/etNickName"
                 android:layout_toEndOf="@+id/cardViewPhoto"
                 android:paddingTop="12dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="8dp"
                 />
-
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/switchStatus"
                 android:layout_width="wrap_content"
@@ -96,15 +89,14 @@
                 android:textColor="@color/for_text"
                 android:theme="@style/SwitchStatus"
                 android:text="Не активен"
-                android:layout_below="@+id/etFirstName"
+                android:layout_below="@+id/etNickName"
                 android:layout_toEndOf="@+id/txvStatus"
                 />
-
             <TextView
-                android:id="@+id/txvLastName"
+                android:id="@+id/txvFirstName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Фамилия: "
+                android:text="Имя: "
                 android:textColor="@color/for_text"
                 android:textSize="16sp"
                 android:layout_below="@+id/switchStatus"
@@ -112,7 +104,29 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 />
-
+            <EditText
+                android:id="@+id/etFirstName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Юлия"
+                android:textColor="@color/for_text"
+                android:textSize="16sp"
+                android:layout_below="@+id/switchStatus"
+                android:layout_toEndOf="@+id/txvFirstName"
+                android:paddingTop="30dp"
+                />
+            <TextView
+                android:id="@+id/txvLastName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Фамилия: "
+                android:textColor="@color/for_text"
+                android:textSize="16sp"
+                android:layout_below="@+id/etFirstName"
+                android:paddingTop="30dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                />
             <EditText
                 android:id="@+id/etLastName"
                 android:layout_width="wrap_content"
@@ -120,7 +134,7 @@
                 android:hint="Иванова"
                 android:textColor="@color/for_text"
                 android:textSize="16sp"
-                android:layout_below="@+id/switchStatus"
+                android:layout_below="@+id/etFirstName"
                 android:layout_toEndOf="@+id/txvLastName"
                 android:paddingTop="30dp"
                 />
@@ -148,7 +162,6 @@
                 android:layout_toEndOf="@+id/txvDistrict"
                 android:paddingTop="22dp"
                 />
-
             <TextView
                 android:id="@+id/txvBirthday"
                 android:layout_width="wrap_content"
@@ -161,7 +174,6 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 />
-
             <EditText
                 android:id="@+id/etBirthday"
                 android:layout_width="wrap_content"
@@ -174,7 +186,6 @@
                 android:layout_toEndOf="@+id/txvBirthday"
                 android:paddingTop="22dp"
                 />
-
             <TextView
                 android:id="@+id/txvGender"
                 android:layout_width="wrap_content"
@@ -187,7 +198,6 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 />
-
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/switchGender"
                 android:layout_width="wrap_content"
@@ -200,7 +210,6 @@
                 android:layout_toEndOf="@+id/txvGender"
                 android:paddingTop="25dp"
                 />
-
             <TextView
                 android:id="@+id/txvPhone"
                 android:layout_width="wrap_content"
@@ -213,7 +222,6 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 />
-
             <EditText
                 android:id="@+id/etPhone"
                 android:layout_width="wrap_content"
@@ -226,7 +234,6 @@
                 android:layout_toEndOf="@+id/txvPhone"
                 android:paddingTop="30dp"
                 />
-
             <TextView
                 android:id="@+id/txvEmail"
                 android:layout_width="wrap_content"
@@ -239,7 +246,6 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 />
-
             <EditText
                 android:id="@+id/etEmail"
                 android:layout_width="wrap_content"
@@ -252,7 +258,6 @@
                 android:layout_toEndOf="@+id/txvEmail"
                 android:paddingTop="25dp"
                 />
-
             <TextView
                 android:id="@+id/txvLogin"
                 android:layout_width="wrap_content"
@@ -265,7 +270,6 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 />
-
             <EditText
                 android:id="@+id/etLogin"
                 android:layout_width="wrap_content"
@@ -277,7 +281,6 @@
                 android:layout_toEndOf="@+id/txvLogin"
                 android:paddingTop="26dp"
                 />
-
             <TextView
                 android:id="@+id/txvPassword"
                 android:layout_width="wrap_content"
@@ -290,7 +293,6 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 />
-
             <EditText
                 android:id="@+id/etPassword"
                 android:layout_width="wrap_content"
@@ -303,7 +305,6 @@
                 android:layout_toEndOf="@+id/txvPassword"
                 android:paddingTop="25dp"
                 />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -49,7 +49,6 @@ class MapFragment : Fragment(), UserLocationObjectListener, Session.SearchListen
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchAdapter: SearchAdapter
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -87,14 +86,12 @@ class MapFragment : Fragment(), UserLocationObjectListener, Session.SearchListen
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                // Выполняйте действия по обработке подтвержденного текста поиска
                 submitQuery(binding.searchView.query.toString())
                 binding.suggestList.visibility = View.GONE
                 return true
             }
 
             override fun onQueryTextChange(query: String): Boolean {
-                // Выполняйте действия по обновлению результатов поиска при изменении текста
                 binding.suggestList.visibility = View.VISIBLE
                 val southWest = Point(59.681658, 29.369953) // Южно-западная граница города Санкт-Петербург
                 val northEast = Point(60.130912, 30.645520)

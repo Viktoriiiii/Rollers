@@ -12,6 +12,7 @@ class Event {
     var eventSpeed: String? = ""
     var eventDistance: String? = ""
     var eventDescription: String? = ""
+    var eventCost: Double = 0.0
     var eventPitStops: String? = ""
     var isParticipate: Boolean = false
 
@@ -27,6 +28,7 @@ class Event {
         eventSpeed: String?,
         eventDistance: String?,
         eventDescription: String?,
+        eventCost: Double,
         isParticipate: Boolean
     ) {
         this.eventID = eventID
@@ -40,6 +42,7 @@ class Event {
         this.eventSpeed = eventSpeed
         this.eventDistance = eventDistance
         this.eventDescription = eventDescription
+        this.eventCost = eventCost
         this.isParticipate = isParticipate
     }
 }

@@ -122,6 +122,27 @@
                 android:padding="15dp"
                 />
             <TextView
+                android:id="@+id/tvEventCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Стоимость: "
+                android:textSize="16sp"
+                android:textColor="@color/for_text"
+                android:padding="15dp"
+                android:layout_below="@+id/etEventDescription"
+                />
+            <EditText
+                android:id="@+id/etEventCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/for_text"
+                android:textSize="16sp"
+                android:hint="Бесплатно"
+                android:layout_below="@+id/etEventDescription"
+                android:layout_toEndOf="@+id/tvEventCost"
+                android:padding="15dp"
+                />
+            <TextView
                 android:id="@+id/tvEventTimeMeeting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -129,7 +150,7 @@
                 android:textSize="16sp"
                 android:textColor="@color/for_text"
                 android:padding="15dp"
-                android:layout_below="@+id/etEventDescription"
+                android:layout_below="@+id/etEventCost"
                 />
             <EditText
                 android:id="@+id/etEventTimeMeeting"
@@ -139,7 +160,7 @@
                 android:textSize="16sp"
                 android:hint="15:00"
                 android:inputType="time"
-                android:layout_below="@+id/etEventDescription"
+                android:layout_below="@+id/etEventCost"
                 android:layout_toEndOf="@+id/tvEventTimeMeeting"
                 android:padding="15dp"
                 />
