@@ -289,6 +289,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Добавить маршрут"
+                    android:backgroundTint="@color/for_button"
                     app:cornerRadius="25dp"
                     android:padding="10dp"
                     android:layout_marginTop="25dp"
@@ -299,6 +300,7 @@
                     android:layout_height="wrap_content"
                     android:text="Сохранить мероприятие"
                     app:cornerRadius="25dp"
+                    android:backgroundTint="@color/for_button"
                     android:padding="10dp"
                     android:layout_marginTop="15dp"
                     />
