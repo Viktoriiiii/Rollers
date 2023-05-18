@@ -10,9 +10,9 @@
     <color name="for_text">#211C42</color>
     <color name="for_button">#FF584196</color>
     <color name="main_background">#6AA2A6</color>
-    <color name="for_toolbar">#FF8C80C8</color>
-    <color name="for_popup_menu">#FFA3C6C7</color>
-    <color name="for_contacts">#C4E1E1</color>
+    <color name="for_toolbar">#958ACC</color>
+    <color name="for_contacts">#FFA3C6C7</color>
+    <color name="for_popup_menu">#C4E1E1</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="transparent1">#26FFFFFF</color>
 </resources>

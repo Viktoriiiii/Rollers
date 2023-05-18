@@ -32,7 +32,7 @@
         android:id="@+id/friendsContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/for_popup_menu"
+        app:cardBackgroundColor="@color/for_contacts"
         app:cardCornerRadius="25dp"
         android:layout_margin="3dp"
         android:padding="10dp"
