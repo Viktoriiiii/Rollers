@@ -6,15 +6,12 @@
     android:layout_height="match_parent"
     android:background="@color/main_background"
     android:orientation="vertical"
-    android:gravity="center"
-    tools:context=".Launch">
-
+    android:gravity="center">
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="310dp"
         android:layout_height="346dp"
         app:srcCompat="@drawable/logo" />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
