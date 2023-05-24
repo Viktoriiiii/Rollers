@@ -34,7 +34,7 @@ class DialogAdapter(
         holder.ivPhoto.setImageResource(R.drawable.logo)
 
         holder.dialogContainer.setOnClickListener{
-            MAIN.navController.navigate(R.id.action_homePage_to_messages)
+            MAIN.navController.navigate(R.id.action_dialogs_to_messagesFragment)
         }
 
         holder.dialogContainer.setOnLongClickListener{

@@ -70,13 +70,7 @@ class EventAdapter (private var itemListEvent: List<Event>, var userID: Int
         popupMenu.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.toViewEvent -> {
-                    try {
-                        MAIN.navController.navigate(R.id.action_events2_to_eventView)
-                    }
-                    catch (ex: Exception)
-                    {
-                        MAIN.navController.navigate(R.id.action_eventSearch_to_eventView)
-                    }
+                    MAIN.navController.navigate(R.id.action_events_to_eventsViewFragment)
                     true
                 }
                 R.id.toAddEvent -> {
@@ -84,12 +78,7 @@ class EventAdapter (private var itemListEvent: List<Event>, var userID: Int
                     true
                 }
                 R.id.toChangeEvent ->{
-                    try {
-                        MAIN.navController.navigate(R.id.action_eventSearch_to_eventAdding)
-                    }
-                    catch (ex: Exception) {
-                        MAIN.navController.navigate(R.id.action_events2_to_eventAdding)
-                    }
+                    MAIN.navController.navigate(R.id.action_events_to_eventsCreateFragment)
                     true
                 }
                 R.id.deleteEvent -> {
@@ -98,7 +87,7 @@ class EventAdapter (private var itemListEvent: List<Event>, var userID: Int
                         .setTitle("Вы уверены, что хотите удалить мероприятие?")
                         .setCancelable(false)
                         .setPositiveButton("Да") { _, _ ->
-                            Toast.makeText(MAIN, "Мероприятие удален", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(MAIN, "Мероприятие удалено", Toast.LENGTH_SHORT).show()
                         }
                         .setNegativeButton("Отмена"){dialog, _ ->
                             dialog.cancel()

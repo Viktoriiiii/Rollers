@@ -9,10 +9,12 @@ import android.view.ViewGroup
 import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
 import ru.spb.rollers.databinding.AuthorizationFragmentBinding
+import ru.spb.rollers.databinding.ProfileFragmentBinding
 
 class AuthorizationFragment : Fragment() {
 
-    private lateinit var binding: AuthorizationFragmentBinding
+    private var _binding: AuthorizationFragmentBinding? = null
+    private val binding get() = _binding!!
 
     companion object {
         fun newInstance() = AuthorizationFragment()
@@ -24,7 +26,7 @@ class AuthorizationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = AuthorizationFragmentBinding.inflate(layoutInflater, container, false)
+        _binding = AuthorizationFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -44,5 +46,8 @@ class AuthorizationFragment : Fragment() {
         viewModel = ViewModelProvider(this)[AuthorizationViewModel::class.java]
         // TODO: Use the ViewModel
     }
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

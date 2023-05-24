@@ -1,4 +1,4 @@
-package ru.spb.rollers.screen.registration
+package ru.spb.rollers.screen.maps
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,43 +7,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ru.spb.rollers.MAIN
-import ru.spb.rollers.R
-import ru.spb.rollers.databinding.RegistrationFragmentBinding
+import ru.spb.rollers.databinding.MapsFragmentBinding
+import ru.spb.rollers.databinding.ProfileFragmentBinding
 
-class RegistrationFragment : Fragment() {
-
-    private var _binding: RegistrationFragmentBinding? = null
-    private val binding get() = _binding!!
+class MapsFragment : Fragment() {
 
     companion object {
-        fun newInstance() = RegistrationFragment()
+        fun newInstance() = MapsFragment()
     }
 
-    private lateinit var viewModel: RegistrationViewModel
+    private var _binding: MapsFragmentBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var viewModel: MapsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _binding = RegistrationFragmentBinding.inflate(layoutInflater, container, false)
+    ): View? {
+        _binding = MapsFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this)[RegistrationViewModel::class.java]
+        viewModel = ViewModelProvider(this).get(MapsViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.mbBack.setOnClickListener{
+        binding.imageButtonBack.setOnClickListener{
             MAIN.onSupportNavigateUp()
-        }
-
-        binding.mbRegister.setOnClickListener {
-            MAIN.navController.navigate(R.id.action_registrationFragment_to_events)
         }
     }
 

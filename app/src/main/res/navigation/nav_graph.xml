@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/launch">
-
     <fragment
         android:id="@+id/launch"
         android:name="ru.spb.rollers.screen.Launch"
@@ -39,35 +38,129 @@
         <action
             android:id="@+id/action_registrationFragment_to_events"
             app:destination="@id/events" />
+
     </fragment>
     <fragment
         android:id="@+id/events"
         android:name="ru.spb.rollers.screen.events.EventsFragment"
         android:label="events_fragment"
-        tools:layout="@layout/events_fragment" />
+        tools:layout="@layout/events_fragment" >
+        <action
+            android:id="@+id/action_events_to_eventsViewFragment"
+            app:destination="@id/eventsViewFragment" />
+        <action
+            android:id="@+id/action_events_to_eventsCreateFragment"
+            app:destination="@id/eventsCreateFragment" />
+    </fragment>
     <fragment
         android:id="@+id/contacts"
         android:name="ru.spb.rollers.screen.contacts.ContactsFragment"
         android:label="ContactsFragment"
         tools:layout="@layout/contacts_fragment"
-        />
+        >
+        <action
+            android:id="@+id/action_contacts_to_messagesFragment"
+            app:destination="@id/messagesFragment" />
+    </fragment>
     <fragment
         android:id="@+id/dialogs"
         android:name="ru.spb.rollers.screen.dialogs.DialogsFragment"
         android:label="DialogsFragment"
         tools:layout="@layout/dialogs_fragment"
-        />
+        >
+        <action
+            android:id="@+id/action_dialogs_to_messagesFragment"
+            app:destination="@id/messagesFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profile"
         android:name="ru.spb.rollers.screen.profile.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/profile_fragment"
-        />
+        >
+        <action
+            android:id="@+id/action_profile_to_authorizationFragment"
+            app:destination="@id/authorizationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/routes"
         android:name="ru.spb.rollers.screen.routes.RoutesFragment"
         android:label="RoutesFragment"
         tools:layout="@layout/routes_fragment"
-        />
+        >
+        <action
+            android:id="@+id/action_routes_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventsViewFragment"
+        android:name="ru.spb.rollers.screen.eventsview.EventsViewFragment"
+        android:label="events_view_fragment"
+        tools:layout="@layout/events_view_fragment" >
+        <action
+            android:id="@+id/action_eventsViewFragment_to_events"
+            app:destination="@id/events" />
+        <action
+            android:id="@+id/action_eventsViewFragment_to_eventParticipantFragment"
+            app:destination="@id/eventParticipantFragment" />
+        <action
+            android:id="@+id/action_eventsViewFragment_to_eventsViewRouteFragment"
+            app:destination="@id/eventsViewRouteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventsCreateFragment"
+        android:name="ru.spb.rollers.screen.eventscreate.EventsCreateFragment"
+        android:label="EventsCreateFragment"
+        tools:layout="@layout/events_create_fragment"
+        >
+        <action
+            android:id="@+id/action_eventsCreateFragment_to_events"
+            app:destination="@id/events" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventParticipantFragment"
+        android:name="ru.spb.rollers.screen.eventsparticipant.EventParticipantFragment"
+        android:label="EventParticipantFragment"
+        tools:layout="@layout/event_participant_fragment"
+        >
+        <action
+            android:id="@+id/action_eventParticipantFragment_to_eventsViewFragment"
+            app:destination="@id/eventsViewFragment" />
+        <action
+            android:id="@+id/action_eventParticipantFragment_to_messagesFragment"
+            app:destination="@id/messagesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventsViewRouteFragment"
+        android:name="ru.spb.rollers.screen.eventsviewroute.EventsViewRouteFragment"
+        android:label="events_view_route_fragment"
+        tools:layout="@layout/events_view_route_fragment" >
+        <action
+            android:id="@+id/action_eventsViewRouteFragment_to_eventsViewFragment"
+            app:destination="@id/eventsViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/messagesFragment"
+        android:name="ru.spb.rollers.screen.messages.MessagesFragment"
+        android:label="MessagesFragment"
+        tools:layout="@layout/messages_fragment"
+        >
+        <action
+            android:id="@+id/action_messagesFragment_to_dialogs"
+            app:destination="@id/dialogs" />
+        <action
+            android:id="@+id/action_messagesFragment_to_contacts"
+            app:destination="@id/contacts" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="ru.spb.rollers.screen.maps.MapsFragment"
+        android:label="MapsFragment"
+        tools:layout="@layout/maps_fragment"
+        >
+        <action
+            android:id="@+id/action_mapsFragment_to_routes"
+            app:destination="@id/routes" />
+    </fragment>
 
 </navigation>

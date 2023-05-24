@@ -99,15 +99,10 @@ class ContactAdapter (private var itemListContact: List<Contact>
                 }
                 R.id.toDialog -> {
                     try {
-                        MAIN.navController.navigate(R.id.action_contacts_to_messages)
+                        MAIN.navController.navigate(R.id.action_contacts_to_messagesFragment)
                     }
                     catch (ex: Exception){
-                        try {
-                            MAIN.navController.navigate(R.id.action_contactSearch_to_messages)
-                        }
-                        catch (ex: Exception){
-                            MAIN.navController.navigate(R.id.action_viewParticipantsOnEvent_to_messages)
-                        }
+                        MAIN.navController.navigate(R.id.action_eventParticipantFragment_to_messagesFragment)
                     }
                     true
                 }

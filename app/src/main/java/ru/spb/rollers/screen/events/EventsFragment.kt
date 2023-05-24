@@ -15,11 +15,14 @@ import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
 import ru.spb.rollers.adapters.EventAdapter
 import ru.spb.rollers.databinding.EventsFragmentBinding
+import ru.spb.rollers.databinding.ProfileFragmentBinding
 import ru.spb.rollers.model.Event
 
-class EventsFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener {
+class EventsFragment : Fragment()
+{
+    private var _binding: EventsFragmentBinding? = null
+    private val binding get() = _binding!!
 
-    private lateinit var binding: EventsFragmentBinding
     private var eventList: List<Event> = mutableListOf()
     private lateinit var recyclerView: RecyclerView
     private lateinit var eventAdapter: EventAdapter
@@ -34,8 +37,7 @@ class EventsFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        MAIN.setBottomNavigationVisible(true)
-        binding = EventsFragmentBinding.inflate(layoutInflater, container, false)
+        _binding = EventsFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -47,44 +49,18 @@ class EventsFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        MAIN.setBottomNavigationVisible(true)
 
-        val toolbar = binding.toolbar
-        MAIN.setSupportActionBar(toolbar)
-        val drawerLayout = binding.drawerLayout
-        val toggle = ActionBarDrawerToggle(activity, drawerLayout, toolbar, R.string.open, R.string.close)
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
-        binding.navigationView.setNavigationItemSelectedListener(this)
+        binding.imageButtonAddEvent.setOnClickListener{
+            MAIN.navController.navigate(R.id.action_events_to_eventsCreateFragment)
+        }
 
         setInitialData()
         recyclerView = view.findViewById(R.id.eventsList)
         eventAdapter = EventAdapter(eventList, 2)
         recyclerView.adapter = eventAdapter
-
-        val header: View = binding.navigationView.getHeaderView(0)
-        val switchStatus: SwitchCompat = header.findViewById(R.id.switchStatus)
-        switchStatus.setOnCheckedChangeListener {  buttonView, isChecked ->
-            buttonView.text = if (isChecked) "На роликах" else "Не активен"
-        }
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.exit -> {
-                MAIN.navController.navigate(R.id.action_homePage_to_authorization)
-            }
-            R.id.profile -> {
-                MAIN.navController.navigate(R.id.action_homePage_to_profile2)
-            }
-            R.id.contacts ->
-                MAIN.navController.navigate(R.id.action_homePage_to_contacts)
-            R.id.events ->
-                MAIN.navController.navigate(R.id.action_homePage_to_events2)
-            R.id.routes ->
-                MAIN.navController.navigate(R.id.action_homePage_to_mapFragment)
-        }
-        return true
-    }
     private fun setInitialData() {
         eventList += Event(
             1, "Покатушка на роликах","Васька",
@@ -116,6 +92,11 @@ class EventsFragment : Fragment(), NavigationView.OnNavigationItemSelectedListen
             "Петроградка", 6, "03.05.2023 13:00",
             "13:00", "13:30", "10 км/ч", "15 км",
             "Описание какое-нибудь", 0.0,true)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
 
