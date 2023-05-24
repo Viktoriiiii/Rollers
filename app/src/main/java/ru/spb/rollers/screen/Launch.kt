@@ -10,10 +10,11 @@ import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
 import ru.spb.rollers.databinding.FragmentLaunchBinding
 import ru.spb.rollers.databinding.ProfileFragmentBinding
+import ru.spb.rollers.delayMillis
 
 class Launch : Fragment() {
 
-    private val delayMillis = 2000L // 2 секунды
+//    private val delayMillis = 2000L // 2 секунды
     private var _binding: FragmentLaunchBinding? = null
     private val binding get() = _binding!!
     override fun onCreateView(

@@ -21,6 +21,7 @@ import ru.spb.rollers.AppActivity
 import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
 import ru.spb.rollers.databinding.ProfileFragmentBinding
+import ru.spb.rollers.delayMillis
 
 class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
 
@@ -75,6 +76,7 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
             MAIN.setBottomNavigationVisible(false)
             MAIN.finish()
             startActivity(Intent(MAIN, AppActivity::class.java)  )
+            delayMillis = 0
         }
     }
 
