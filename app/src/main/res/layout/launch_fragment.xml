@@ -6,17 +6,19 @@
     android:layout_height="match_parent"
     android:background="@color/main_background"
     android:orientation="vertical"
-    android:gravity="center">
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="310dp"
-        android:layout_height="346dp"
-        app:srcCompat="@drawable/logo" />
+    android:gravity="center"
+    >
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Роллеры СПб"
         android:textColor="@color/for_text"
+        android:padding="45dp"
         android:textSize="34sp"/>
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="310dp"
+        android:layout_height="346dp"
+        app:srcCompat="@drawable/logo" />
 </LinearLayout>

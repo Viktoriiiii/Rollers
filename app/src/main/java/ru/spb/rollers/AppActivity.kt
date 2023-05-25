@@ -38,6 +38,8 @@ class AppActivity : AppCompatActivity() {
         bottomNavigationView.setOnItemSelectedListener { item ->
             NavigationUI.onNavDestinationSelected(item, navController)
         }
+        val navBar  = binding.navView
+        navBar.getOrCreateBadge(R.id.dialogs).number = 2
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -18,6 +18,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:visibility="gone"
         app:backgroundTint="@color/for_toolbar"
+
         app:menu="@menu/bottom_nav_menu"/>
     <fragment
         android:id="@+id/fragmentContainer"

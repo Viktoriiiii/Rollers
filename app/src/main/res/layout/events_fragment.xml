@@ -22,6 +22,22 @@
                 android:elevation="4dp"
                 android:theme="@style/ThemeOverlay.AppCompat.ActionBar" >
                 <RelativeLayout
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@color/for_toolbar"
+                    android:gravity="start"
+                    android:layout_marginEnd="20dp"
+                    >
+                    <ImageView
+                        android:id="@+id/imageButtonAddEvent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/for_toolbar"
+                        android:src="@drawable/ic_add_event_foreground"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end">
@@ -42,24 +58,7 @@
                     android:layout_height="match_parent"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     />
-                <ImageButton
-                    android:id="@+id/imageButtonAddEvent"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="bottom|right"
-                    android:layout_margin="10dp"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/ic_add_plus_foreground"
-                    tools:ignore="SpeakableTextPresentCheck" />
             </FrameLayout>
         </LinearLayout>
-<!--        <com.google.android.material.navigation.NavigationView-->
-<!--            android:id="@+id/navigation_view"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_gravity="start"-->
-<!--            app:headerLayout="@layout/nav_header"-->
-<!--            android:background="@color/for_toolbar"-->
-<!--            app:menu="@menu/nav_menu" />-->
     </androidx.drawerlayout.widget.DrawerLayout>
 </LinearLayout>
