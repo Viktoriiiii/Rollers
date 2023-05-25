@@ -152,7 +152,7 @@
                     />
             </LinearLayout>
             <EditText
-                android:id="@+id/etNickName"
+                android:id="@+id/etPublicName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/for_text"

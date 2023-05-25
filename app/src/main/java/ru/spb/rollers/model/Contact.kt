@@ -14,6 +14,12 @@ class Contact {
     var contactGender: Boolean = false
     var isContact: Boolean = false
 
+    var contactSchoolName: String? = ""
+    var contactDescription: String? = ""
+    var contactAddress: String? = ""
+
+    var isManager: Boolean = false
+
     constructor(
         contactID: Int,
         roleID: Int,
@@ -24,7 +30,8 @@ class Contact {
         contactDistrict: String?,
         contactAge: String?,
         contactGender: Boolean,
-        isContact: Boolean
+        isContact: Boolean,
+        isManager: Boolean
     ) {
         this.contactID = contactID
         this.roleID = roleID
@@ -36,7 +43,30 @@ class Contact {
         this.contactAge = contactAge
         this.contactGender = contactGender
         this.isContact = isContact
+        this.isManager = isManager
     }
 
     constructor()
+
+    constructor(
+        contactID: Int,
+        roleID: Int,
+        contactSchoolName: String?,
+        contactPublicName: String?,
+        contactDistrict: String?,
+        isContact: Boolean,
+        isManager: Boolean,
+        contactDescription: String,
+        contactAddress: String,
+    ) {
+        this.contactID = contactID
+        this.roleID = roleID
+        this.contactSchoolName = contactSchoolName
+        this.contactPublicName = contactPublicName
+        this.contactDistrict = contactDistrict
+        this.isContact = isContact
+        this.isManager = isManager
+        this.contactDescription = contactDescription
+        this.contactAddress = contactAddress
+    }
 }

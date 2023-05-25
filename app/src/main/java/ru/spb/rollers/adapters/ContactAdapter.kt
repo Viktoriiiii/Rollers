@@ -34,17 +34,26 @@ class ContactAdapter (private var itemListContact: List<Contact>
         holder.contactContainer
 
         holder.ivPhoto.setImageResource(R.drawable.logo)
-        holder.textViewName.text = "${item.contactLastName} ${item.contactFirstName} (${item.contactPublicName})"
-        holder.txvDistrict.text = item.contactDistrict
-        holder.txvAge.text = item.contactAge
-        holder.imageViewStatus.setImageResource(R.drawable.ic_rollers_foreground)
-        if (item.contactStatus){
-            holder.textViewStatus.text = "На роликах"
-            holder.imageViewStatus.setImageResource(R.drawable.ic_rollers_foreground)
-        } else {
-            holder.textViewStatus.text = "Не активен"
-            holder.imageViewStatus.setImageResource(R.drawable.ic_inactive_foreground)
+
+        if (item.isManager){
+            holder.textViewName.text = item.contactSchoolName
+            holder.imageViewStatus.visibility = View.GONE
+            holder.textViewStatus.text = item.contactAddress
         }
+        else {
+            holder.textViewName.text = "${item.contactLastName} ${item.contactFirstName} (${item.contactPublicName})"
+            holder.imageViewStatus.setImageResource(R.drawable.ic_rollers_foreground)
+            if (item.contactStatus){
+                holder.textViewStatus.text = "На роликах"
+                holder.imageViewStatus.setImageResource(R.drawable.ic_rollers_foreground)
+            } else {
+                holder.textViewStatus.text = "Не активен"
+                holder.imageViewStatus.setImageResource(R.drawable.ic_inactive_foreground)
+            }
+        }
+
+        holder.txvDistrict.text = item.contactDistrict
+
         if (item.isContact) holder.imageViewToContact.setImageResource(R.drawable.ic_done_foreground)
         else holder.imageViewToContact.setImageResource(R.drawable.ic_add_contact_foreground)
 
@@ -64,7 +73,12 @@ class ContactAdapter (private var itemListContact: List<Contact>
             when (menuItem.itemId) {
                 R.id.toViewProfile -> {
                     val builderViewProfile: AlertDialog.Builder = AlertDialog.Builder(MAIN)
-                    val profileView: View = MAIN.layoutInflater.inflate(R.layout.view_profile, null)
+                    var profileView: View? = null
+                    profileView = if (contact.isManager){
+                        MAIN.layoutInflater.inflate(R.layout.view_profile_school, null)
+                    } else {
+                        MAIN.layoutInflater.inflate(R.layout.view_profile, null)
+                    }
                     val imageViewClose: ImageView = profileView.findViewById(R.id.imageViewClose)
                     val imageViewToAdmin: ImageView = profileView.findViewById(R.id.imageViewToAdmin)
                     builderViewProfile.setView(profileView)
@@ -143,7 +157,6 @@ class ContactAdapter (private var itemListContact: List<Contact>
         val ivPhoto: ImageView = itemView.findViewById(R.id.imageViewPhoto)
         val textViewName: TextView = itemView.findViewById(R.id.textViewName)
         val txvDistrict: MaterialTextView = itemView.findViewById(R.id.txvDistrict)
-        val txvAge: TextView = itemView.findViewById(R.id.txvAge)
         val textViewStatus: TextView = itemView.findViewById(R.id.textViewStatus)
         val imageViewStatus: ImageView = itemView.findViewById(R.id.imageViewStatus)
         val imageViewToContact: ImageView = itemView.findViewById(R.id.imageViewToContact)

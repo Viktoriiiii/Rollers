@@ -47,7 +47,7 @@
                     android:src="@drawable/avatar" />
             </androidx.cardview.widget.CardView>
             <TextView
-                android:id="@+id/txvNickName"
+                android:id="@+id/txvPublicName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Никнейм: "
@@ -59,13 +59,13 @@
                 android:paddingRight="10dp"
                 />
             <EditText
-                android:id="@+id/etNickName"
+                android:id="@+id/etPublicName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/for_text"
                 android:textSize="16sp"
                 android:hint="nickname"
-                android:layout_toEndOf="@+id/txvNickName"
+                android:layout_toEndOf="@+id/txvPublicName"
                 android:paddingTop="15dp"
                 />
             <TextView
@@ -75,7 +75,7 @@
                 android:text="Статус: "
                 android:textColor="@color/for_text"
                 android:textSize="16sp"
-                android:layout_below="@+id/etNickName"
+                android:layout_below="@+id/etPublicName"
                 android:layout_toEndOf="@+id/cardViewPhoto"
                 android:paddingTop="12dp"
                 android:paddingLeft="20dp"
@@ -89,7 +89,7 @@
                 android:textColor="@color/for_text"
                 android:theme="@style/SwitchStatus"
                 android:text="Не активен"
-                android:layout_below="@+id/etNickName"
+                android:layout_below="@+id/etPublicName"
                 android:layout_toEndOf="@+id/txvStatus"
                 />
             <TextView

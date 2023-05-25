@@ -33,6 +33,8 @@ class DialogAdapter(
         holder.mtvDate.text = item.dialogDate
         holder.ivPhoto.setImageResource(R.drawable.logo)
 
+        holder.txvContMessage.text = "1"
+
         holder.dialogContainer.setOnClickListener{
             MAIN.navController.navigate(R.id.action_dialogs_to_messagesFragment)
         }
@@ -80,6 +82,8 @@ class DialogAdapter(
         val mtvName: MaterialTextView = itemView.findViewById(R.id.mtvName)
         val mtvMessage: MaterialTextView = itemView.findViewById(R.id.mtvMessage)
         val mtvDate: MaterialTextView = itemView.findViewById(R.id.mtvDate)
+        val txvContMessage: MaterialTextView = itemView.findViewById(R.id.txvContMessage)
         val ivPhoto: ImageView = itemView.findViewById(R.id.imageViewPhoto)
+
     }
 }

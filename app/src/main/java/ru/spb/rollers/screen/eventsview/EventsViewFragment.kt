@@ -47,7 +47,7 @@ class EventsViewFragment : Fragment() {
 
         binding.imageButtonViewManager.setOnClickListener {
             val builderViewProfile: AlertDialog.Builder = AlertDialog.Builder(MAIN)
-            val profileView: View = MAIN.layoutInflater.inflate(R.layout.view_profile, null)
+            val profileView: View = MAIN.layoutInflater.inflate(R.layout.view_profile_school, null)
             val imageViewClose: ImageView = profileView.findViewById(R.id.imageViewClose)
             builderViewProfile.setView(profileView)
             val alertViewProfile: AlertDialog = builderViewProfile.create()

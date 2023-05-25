@@ -39,37 +39,40 @@ class ContactSearch : Fragment() {
     }
 
     private fun setInitialData() {
+        contactList += Contact(1,
+            1, "Иван","Иванов","ivanov200",true,
+            "Московский","38 лет", contactGender = true, isContact = true, false)
+        contactList += Contact(2,
+            2, "Варя", "Токсик","jinx",true,
+            "Васька","18 лет", contactGender = false, isContact = true, false)
         contactList += Contact(
-            1,1, "Иван","Иванов","ivanov200",true,
-            "Московский","38 лет", contactGender = true, isContact = false)
+            3, 1, "Ярик", "Сидоров","jaroslav",
+            true, "Мурино","68 лет", contactGender = true, isContact = true, false)
         contactList += Contact(
-            2,2, "Варя", "Токсик","jinx",true,
-            "Васька","18 лет", contactGender = false, isContact = true)
+            4,1, "Шуня", "Душный","shunya",true,
+            "Фрунзенский","15 лет", contactGender = true, isContact = true, false)
         contactList += Contact(
-            3, 2,"Ярик", "Сидоров","jaroslav",
-            true, "Мурино","68 лет", contactGender = true, isContact = false)
-        contactList += Contact(
-            4, 1,"Шуня", "Душный","shunya",true,
-            "Фрунзенский","15 лет", contactGender = true, isContact = true)
-        contactList += Contact(
-            5,1, "Петр", "Иванов","ivanov",
+            5,2,  "Петр", "Иванов","ivanov",
             true, "Фрунзенский","15 лет", contactGender = true,
-            isContact = true)
+            isContact = true, false)
         contactList += Contact(
-            6,1, "Иван", "Петров","ivanov",
-            true, "Фрунзенский","15 лет", contactGender = false,
-            isContact = true)
-        contactList += Contact(
-            7,1, "Иван", "Петров","ivanov",
+            6,2, "Иван", "Петров","ivanov",
             true, "Фрунзенский","15 лет", contactGender = true,
-            isContact = true)
+            isContact = true, false)
         contactList += Contact(
-            8, 1,"Иван", "Петров","ivanov",
-            true, "Фрунзенский","15 лет", contactGender = false,
-            isContact = true)
+            7, 2, "Иван", "Петров","ivanov",
+            true, "Фрунзенский","15 лет", contactGender = true,
+            isContact = true, false)
+        contactList += Contact(
+            8,1, "Иван", "Петров","ivanov",
+            true, "Фрунзенский","15 лет", contactGender = true,
+            isContact = true, false)
         contactList += Contact(
             9,1, "Иван", "Петров","ivanov",
             true, "Фрунзенский","15 лет", contactGender = true,
-            isContact = true)
+            isContact = true, false)
+        contactList += Contact(
+            9,2, "Имя школы", "ivanov", "Фрунзенский",
+            isContact = true, true, "Описание школа", "Адрес школы")
     }
 }

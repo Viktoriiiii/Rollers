@@ -94,7 +94,7 @@ class Registration : Fragment() {
                     binding.etBirthday.visibility = View.GONE
                     binding.txvStatus.visibility = View.GONE
                     binding.switchStatus.visibility = View.GONE
-                    binding.etNickName.visibility = View.VISIBLE
+                    binding.etPublicName.visibility = View.VISIBLE
                     step = 4
                 }else {
                     Toast.makeText(MAIN, "Поля заполнены неверно", Toast.LENGTH_SHORT).show()
@@ -102,7 +102,7 @@ class Registration : Fragment() {
                 }
             }
             4 -> {
-                contact.contactPublicName = binding.etNickName.text.toString()
+                contact.contactPublicName = binding.etPublicName.text.toString()
 
                 if (!contact.contactPublicName.isNullOrEmpty())
                     MAIN.navController.navigate(R.id.action_registration_to_homePage)

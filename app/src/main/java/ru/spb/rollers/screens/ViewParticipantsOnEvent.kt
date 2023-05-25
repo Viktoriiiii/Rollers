@@ -40,14 +40,14 @@ class ViewParticipantsOnEvent : Fragment() {
     }
 
     private fun setInitialData() {
+        contactList += Contact(1,
+            1, "Иван","Иванов","ivanov200",true,
+            "Московский","38 лет", contactGender = true, isContact = true, false)
+        contactList += Contact(2,
+            2, "Варя", "Токсик","jinx",true,
+            "Васька","18 лет", contactGender = false, isContact = true, false)
         contactList += Contact(
-            1,1, "Иван","Иванов","ivanov200",true,
-            "Московский","38 лет", contactGender = true, isContact = true)
-        contactList += Contact(
-            2,2, "Варя", "Токсик","jinx",true,
-            "Васька","18 лет", contactGender = false, isContact = true)
-        contactList += Contact(
-            3,1, "Ярик", "Сидоров","jaroslav",
-            true, "Мурино","68 лет", contactGender = true, isContact = true)
+            3, 1, "Ярик", "Сидоров","jaroslav",
+            true, "Мурино","68 лет", contactGender = true, isContact = true, false)
     }
 }
