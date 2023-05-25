@@ -13,7 +13,6 @@ import androidx.appcompat.view.menu.MenuPopupHelper
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
-import com.google.android.material.textview.MaterialTextView
 import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
 import ru.spb.rollers.model.Event
@@ -30,25 +29,29 @@ class EventAdapter (private var itemListEvent: List<Event>, var userID: Int
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
         val item = itemListEvent[position]
         holder.eventsContainer
-        holder.imageViewManage.setImageResource(R.drawable.ic_manage_account_foreground)
-        holder.textViewEventName.text = item.eventName
-        holder.txvEventDate.text = "Дата: ${item.eventDate}"
-        holder.txvEventStartLocation.text = "Старт: ${item.eventStartLocation}"
-        holder.txvEventEndLocation.text = "Финиш: ${item.eventEndLocation}"
-        holder.txvEventCost.text = "Стоимость: " + if (item.eventCost == 0.0) "Бесплатно" else item.eventCost.toString()
+        holder.ivManager.setImageResource(R.drawable.ic_manage_account_foreground)
+        holder.txvEventName.text = item.eventName
+        holder.txvEventDateDay.text = "29"
+        holder.txvEventDateMonth.text = "июня"
+        holder.txvEventDateTime.text = "15:30"
+        holder.txvEventStartLocation.text = "${item.eventStartLocation}"
+        holder.txvEventEndLocation.text = "${item.eventEndLocation}"
+        holder.txvEventCost.text = if (item.eventCost == 0.0) "Бесплатно" else item.eventCost.toString() + "р."
+
+        holder.ivEventPhoto.setImageResource(R.drawable.roliki)
 
         if (item.isParticipate) {
-            holder.imageViewEventStatus.setImageResource(R.drawable.ic_done_foreground)
+            holder.ivEventStatus.setImageResource(R.drawable.ic_done_foreground)
         }
         else {
-            holder.imageViewEventStatus.setImageResource(R.drawable.ic_add_event_foreground)
+            holder.ivEventStatus.setImageResource(R.drawable.ic_add_event_foreground)
         }
 
         if (userID == item.eventManager) {
-            holder.imageViewManage.setImageResource(R.drawable.ic_manage_account_foreground)
+            holder.ivManager.setImageResource(R.drawable.ic_manage_account_foreground)
         }
         else {
-            holder.imageViewManage.visibility = View.GONE
+            holder.ivManager.visibility = View.GONE
         }
 
         holder.eventsContainer.setOnClickListener{
@@ -111,12 +114,16 @@ class EventAdapter (private var itemListEvent: List<Event>, var userID: Int
 
     inner class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val eventsContainer: MaterialCardView = itemView.findViewById(R.id.eventsContainer)
-        val textViewEventName: TextView = itemView.findViewById(R.id.textViewEventName)
-        val txvEventDate: MaterialTextView = itemView.findViewById(R.id.txvEventDate)
+        val txvEventName: TextView = itemView.findViewById(R.id.txvEventName)
         val txvEventStartLocation: TextView = itemView.findViewById(R.id.txvEventStartLocation)
         val txvEventEndLocation: TextView = itemView.findViewById(R.id.txvEventEndLocation)
         val txvEventCost: TextView = itemView.findViewById(R.id.txvEventCost)
-        val imageViewEventStatus: ImageView = itemView.findViewById(R.id.imageViewEventStatus)
-        val imageViewManage: ImageView = itemView.findViewById(R.id.imageViewManage)
+        val txvEventDateDay: TextView = itemView.findViewById(R.id.txvEventDateDay)
+        val txvEventDateMonth: TextView = itemView.findViewById(R.id.txvEventDateMonth)
+        val txvEventDateTime: TextView = itemView.findViewById(R.id.txvEventDateTime)
+        val ivEventStatus: ImageView = itemView.findViewById(R.id.ivEventStatus)
+        val ivManager: ImageView = itemView.findViewById(R.id.ivManager)
+        val ivEventPhoto: ImageView = itemView.findViewById(R.id.ivEventPhoto)
+
     }
 }
