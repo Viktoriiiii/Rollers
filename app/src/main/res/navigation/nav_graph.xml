@@ -8,7 +8,7 @@
         android:id="@+id/launch"
         android:name="ru.spb.rollers.screen.Launch"
         android:label="Launch"
-        tools:layout="@layout/fragment_launch"
+        tools:layout="@layout/launch_fragment"
         >
         <action
             android:id="@+id/action_launch_to_authorizationFragment"

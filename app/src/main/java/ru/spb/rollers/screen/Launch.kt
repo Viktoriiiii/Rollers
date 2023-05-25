@@ -8,20 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
-import ru.spb.rollers.databinding.FragmentLaunchBinding
-import ru.spb.rollers.databinding.ProfileFragmentBinding
+import ru.spb.rollers.databinding.LaunchFragmentBinding
 import ru.spb.rollers.delayMillis
 
 class Launch : Fragment() {
 
-//    private val delayMillis = 2000L // 2 секунды
-    private var _binding: FragmentLaunchBinding? = null
+    private var _binding: LaunchFragmentBinding? = null
     private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentLaunchBinding.inflate(layoutInflater, container, false)
+        _binding = LaunchFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
