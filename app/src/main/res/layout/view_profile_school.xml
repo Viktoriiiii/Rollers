@@ -63,7 +63,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                >
                 <TextView
                     android:id="@+id/txvSchoolName"
                     android:layout_width="wrap_content"
@@ -74,58 +76,80 @@
                     android:text="Роллер-школа Фантаст (fantast)"
                     android:padding="10dp"
                     />
-
             </LinearLayout>
-            <TextView
-                android:id="@+id/txvDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Описание: Обучение катанию на роликах детей и взрослых: свой роллердром / скейт-парк, опытные инструкторы по роликам, доступные цены."
-                android:textColor="@color/for_text"
-                android:textSize="18sp"
-                android:textStyle="normal"
-                android:padding="15dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imageViewEventDescription"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_event_description_foreground"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    />
+                <TextView
+                    android:id="@+id/txvDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Обучение катанию на роликах детей и взрослых: свой роллердром / скейт-парк, опытные инструкторы по роликам, доступные цены."
+                    android:textColor="@color/for_text"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/for_icon"
+                android:layout_margin="10dp"
                 />
-            <TextView
-                android:id="@+id/txvDistrict"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Район: Московский"
-                android:textColor="@color/for_text"
-                android:textSize="18sp"
-                android:padding="15dp"
-                android:layout_gravity="left"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imageViewEventAddress"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_location_foreground"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    />
+                <TextView
+                    android:id="@+id/txvSchoolAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Адрес: просп. Юрия Гагарина, 32, корп. 6Б (этаж 4)"
+                    android:textColor="@color/for_text"
+                    android:textSize="16sp"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/for_icon"
+                android:layout_margin="10dp"
                 />
-            <TextView
-                android:id="@+id/txvSchoolAddress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Адрес: просп. Юрия Гагарина, 32, корп. 6Б (этаж 4)"
-                android:textColor="@color/for_text"
-                android:textSize="18sp"
-                android:padding="15dp"
-                android:layout_gravity="left"
-                />
-            <TextView
-                android:id="@+id/txvSchoolPhone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Телефон: +7 (812) 956-42-12"
-                android:textColor="@color/for_text"
-                android:textSize="18sp"
-                android:padding="15dp"
-                android:layout_gravity="left"
-                />
-            <TextView
-                android:id="@+id/txvSchoolHourWorks"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Часы работы: ежедневно, 10:00–22:00"
-                android:textColor="@color/for_text"
-                android:textSize="18sp"
-                android:padding="15dp"
-                android:layout_gravity="left"
-                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imageViewEventPhone"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_phone_foreground"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    />
+                <TextView
+                    android:id="@+id/txvSchoolPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+7 (812) 956-42-12"
+                    android:textColor="@color/for_text"
+                    android:textSize="16sp"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </com.google.android.material.card.MaterialCardView>

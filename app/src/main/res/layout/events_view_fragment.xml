@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_background"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <androidx.appcompat.widget.Toolbar
@@ -17,16 +17,25 @@
             android:layout_height="50dp"
             android:background="@color/for_toolbar"
             android:gravity="start"
-            android:layout_marginEnd="20dp"
             >
             <ImageButton
                 android:id="@+id/imageButtonBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_back_foreground"
+                android:background="@drawable/ic_back2_foreground"
                 android:foreground="?android:attr/selectableItemBackground"
                 />
         </RelativeLayout>
+        <TextView
+            android:id="@+id/txvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Просмотр события"
+            android:textColor="@color/for_icon"
+            android:textSize="20sp"
+            android:paddingLeft="10dp"
+            android:textStyle="bold"
+            />
     </androidx.appcompat.widget.Toolbar>
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/friendsContainer"
@@ -46,7 +55,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="16dp"
                 android:gravity="start"
                 android:orientation="vertical"
                 android:focusable="false"
@@ -76,10 +85,16 @@
                     android:id="@+id/txvEventDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Дата: 03.05.2023 15:30 Среда"
+                    android:text="Дата и время: 03.05.2023 15:30"
                     android:textColor="@color/for_text"
                     android:textSize="18sp"
                     android:padding="10dp"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/for_icon"
+                    android:layout_marginHorizontal="10dp"
                     />
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -94,6 +109,7 @@
                         android:textColor="@color/for_text"
                         android:textSize="18sp"
                         android:padding="5dp"
+                        android:layout_weight="1"
                         android:layout_gravity="center"
                         />
                     <ImageButton
@@ -104,6 +120,12 @@
                         android:foreground="?android:attr/selectableItemBackground"
                         />
                 </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/for_icon"
+                    android:layout_marginHorizontal="10dp"
+                    />
                 <TextView
                     android:id="@+id/txvEventDescription"
                     android:layout_width="wrap_content"
@@ -112,6 +134,12 @@
                     android:textColor="@color/for_text"
                     android:textSize="18sp"
                     android:padding="5dp"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/for_icon"
+                    android:layout_marginHorizontal="10dp"
                     />
                 <TextView
                     android:id="@+id/txvEventCost"
@@ -122,24 +150,11 @@
                     android:textSize="18sp"
                     android:padding="5dp"
                     />
-                <TextView
-                    android:id="@+id/txvEventTimeMeeting"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Время сбора: 15:00"
-                    android:textColor="@color/for_text"
-                    android:textSize="18sp"
-                    android:padding="5dp"
-                    />
-                <TextView
-                    android:id="@+id/txvEventTimeStart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Время старта: 15:30"
-                    android:textColor="@color/for_text"
-                    android:textSize="18sp"
-                    android:textStyle="normal"
-                    android:padding="5dp"
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/for_icon"
+                    android:layout_marginHorizontal="10dp"
                     />
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -155,6 +170,7 @@
                         android:textSize="18sp"
                         android:padding="5dp"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         />
                     <ImageButton
                         android:id="@+id/imageButtonViewRoute"
@@ -164,6 +180,12 @@
                         android:foreground="?android:attr/selectableItemBackground"
                         />
                 </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/for_icon"
+                    android:layout_marginHorizontal="10dp"
+                    />
                 <TextView
                     android:id="@+id/txvSpeed"
                     android:layout_width="wrap_content"
@@ -173,6 +195,12 @@
                     android:textSize="18sp"
                     android:padding="5dp"
                     />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/for_icon"
+                    android:layout_marginHorizontal="10dp"
+                    />
                 <TextView
                     android:id="@+id/txvEventDistance"
                     android:layout_width="wrap_content"
@@ -181,6 +209,12 @@
                     android:textColor="@color/for_text"
                     android:textSize="18sp"
                     android:padding="5dp"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/for_icon"
+                    android:layout_marginHorizontal="10dp"
                     />
                 <LinearLayout
                     android:layout_width="match_parent"
