@@ -72,9 +72,6 @@ class Profile : Fragment(), PopupMenu.OnMenuItemClickListener {
 
     override fun onMenuItemClick(menuItem: MenuItem?): Boolean {
         when (menuItem?.itemId) {
-            R.id.savePhoto -> {
-                Toast.makeText(MAIN, "Изображение сохранено", Toast.LENGTH_SHORT).show()
-            }
             R.id.changePhoto -> {
                 Toast.makeText(MAIN, "Изображение изменено", Toast.LENGTH_SHORT).show()
             }

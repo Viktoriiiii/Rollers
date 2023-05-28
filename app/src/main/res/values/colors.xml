@@ -16,4 +16,6 @@
     <color name="for_popup_menu">#C4E1E1</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="light_background">#6296A6</color>
+    <color name="for_icon">#2F346F</color>
+
 </resources>

@@ -3,16 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:theme="@style/PopupMenu"
     >
-    <item android:id="@+id/savePhoto"
-        android:title="Сохранить изображение      "
-        android:icon="@drawable/ic_save_foreground"
-        />
     <item android:id="@+id/changePhoto"
-        android:icon="@drawable/ic_add_photo_foreground"
-        android:title="Изменить изображение     "
+        android:icon="@mipmap/ic_add_photo"
+        android:title="Изменить"
         />
     <item android:id="@+id/deletePhoto"
-        android:icon="@drawable/ic_delete_foreground"
-        android:title="Удалить изображение        "
+        android:icon="@mipmap/ic_delete"
+        android:title="Удалить"
         />
 </menu>

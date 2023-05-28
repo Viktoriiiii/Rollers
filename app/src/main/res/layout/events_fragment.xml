@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_background"
+    android:background="@color/for_contacts"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="60dp"
     android:orientation="vertical">
@@ -21,12 +21,35 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/for_toolbar"
                 android:elevation="4dp"
+                app:titleTextColor="@color/for_icon"
                 android:theme="@style/ThemeOverlay.AppCompat.ActionBar" >
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardViewPhoto"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:cardCornerRadius="20dp"
+                    >
+                    <ImageView
+                        android:id="@+id/imageViewPhoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/logo" />
+                </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/txvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="События"
+                    android:textColor="@color/for_icon"
+                    android:textSize="20sp"
+                    android:paddingLeft="10dp"
+                    android:textStyle="bold"
+                    />
                 <RelativeLayout
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:background="@color/for_toolbar"
-                    android:gravity="start"
+                    android:layout_gravity="right"
                     android:layout_marginEnd="20dp"
                     >
                     <ImageView
@@ -39,9 +62,10 @@
                         />
                 </RelativeLayout>
                 <RelativeLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="end">
+                    android:layout_gravity="right"
+                    >
                     <androidx.appcompat.widget.SearchView
                         android:id="@+id/search_view"
                         android:layout_width="wrap_content"

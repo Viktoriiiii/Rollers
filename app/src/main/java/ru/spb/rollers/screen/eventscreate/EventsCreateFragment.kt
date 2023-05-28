@@ -1,21 +1,25 @@
 package ru.spb.rollers.screen.eventscreate
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.text.Editable
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.view.menu.MenuBuilder
+import androidx.appcompat.view.menu.MenuPopupHelper
+import androidx.appcompat.widget.PopupMenu
 import com.google.android.material.button.MaterialButton
 import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
 import ru.spb.rollers.databinding.EventsCreateFragmentBinding
 import ru.spb.rollers.model.Route
+import ru.spb.rollers.titleEvents
 
-class EventsCreateFragment : Fragment() {
+class EventsCreateFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
 
     companion object {
         fun newInstance() = EventsCreateFragment()
@@ -26,6 +30,8 @@ class EventsCreateFragment : Fragment() {
 
     private lateinit var viewModel: EventsCreateViewModel
     private var routeList: List<Route> = mutableListOf()
+
+    private var title: String = "Изменение события"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +52,8 @@ class EventsCreateFragment : Fragment() {
         binding.imageButtonBack.setOnClickListener{
             MAIN.onSupportNavigateUp()
         }
+
+        binding.txvTitle.text = titleEvents
 
         setInitialData()
 
@@ -74,6 +82,10 @@ class EventsCreateFragment : Fragment() {
             val alertDialogDeletePhoto: AlertDialog = builderDeleteDialog.create()
             alertDialogDeletePhoto.show()
         }
+
+        binding.ivEventPhoto.setOnClickListener{
+            showPopup(binding.imageViewChangePhoto)
+        }
     }
     private fun addRoute(){
         val builder = AlertDialog.Builder(MAIN)
@@ -86,18 +98,22 @@ class EventsCreateFragment : Fragment() {
                 binding.etEventStartLocation.visibility = View.VISIBLE
                 binding.etEventStartLocation.text =
                     Editable.Factory.getInstance().newEditable(routeList[item].routeStartLocation)
+                binding.vDividerEventStartLocation.visibility = View.VISIBLE
 
                 binding.tvEventEndLocation.visibility = View.VISIBLE
                 binding.etEventEndLocation.visibility = View.VISIBLE
                 binding.etEventEndLocation.text =
                     Editable.Factory.getInstance().newEditable(routeList[item].routeEndLocation)
+                binding.vDividerEventEndLocation.visibility = View.VISIBLE
 
                 binding.tvEventDistance.visibility = View.VISIBLE
                 binding.etEventDistance.visibility = View.VISIBLE
                 binding.etEventDistance.text =
                     Editable.Factory.getInstance().newEditable(routeList[item].routeDistance)
+                binding.vDividerEventDistance.visibility = View.VISIBLE
 
                 binding.btnAddRoute.text = "Изменить маршрут"
+                binding.btnSaveRoute.visibility = View.VISIBLE
             }
             .setPositiveButton("OK"
             ) { _, _ ->
@@ -106,6 +122,7 @@ class EventsCreateFragment : Fragment() {
             }
         builder.create()
         builder.show()
+
     }
 
     private fun setInitialData() {
@@ -133,6 +150,42 @@ class EventsCreateFragment : Fragment() {
         routeList += Route(
             8, "Маршрут № 8", "Васька",
             "Петроградка",  "15 км")
+    }
+
+    @SuppressLint("RestrictedApi")
+    private fun showPopup(imagePhoto: ImageView) {
+        val popupMenu = PopupMenu(MAIN, imagePhoto)
+        popupMenu.inflate(R.menu.profile_photo_popup_menu)
+        popupMenu.setOnMenuItemClickListener(this)
+
+
+        val menuHelper = MenuPopupHelper(MAIN,
+            popupMenu.menu as MenuBuilder, imagePhoto)
+        menuHelper.setForceShowIcon(true)
+        menuHelper.show()
+    }
+
+    override fun onMenuItemClick(menuItem: MenuItem?): Boolean {
+        when (menuItem?.itemId) {
+            R.id.changePhoto -> {
+                Toast.makeText(MAIN, "Изображение изменено", Toast.LENGTH_SHORT).show()
+            }
+            R.id.deletePhoto -> {
+                val builderDeleteDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
+                builderDeleteDialog
+                    .setTitle("Вы уверены, что хотите удалить изображение?")
+                    .setCancelable(false)
+                    .setPositiveButton("Да") { _, _ ->
+                        Toast.makeText(MAIN, "Изображение удалено", Toast.LENGTH_SHORT).show()
+                    }
+                    .setNegativeButton("Отмена"){dialog, _ ->
+                        dialog.cancel()
+                    }
+                val alertDialogDeletePhoto: AlertDialog = builderDeleteDialog.create()
+                alertDialogDeletePhoto.show()
+            }
+        }
+        return false
     }
 
     override fun onDestroyView() {

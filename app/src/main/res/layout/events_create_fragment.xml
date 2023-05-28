@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".screens.EventAdding"
-    android:background="@color/main_background"
-    android:orientation="vertical">
+    android:background="@color/for_contacts"
+    android:orientation="vertical"
+    >
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -18,8 +19,18 @@
             android:id="@+id/imageButtonBack"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/ic_back_foreground"
+            android:background="@drawable/ic_back2_foreground"
             android:foreground="?android:attr/selectableItemBackground"
+            />
+        <TextView
+            android:id="@+id/txvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Добавление события"
+            android:textColor="@color/for_icon"
+            android:textSize="20sp"
+            android:paddingLeft="10dp"
+            android:textStyle="bold"
             />
         <ImageButton
             android:id="@+id/imageButtonDeleteEvent"
@@ -35,276 +46,306 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            >
             <TextView
                 android:id="@+id/tvEventName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Название: "
                 android:textSize="16sp"
+                android:hint="Название"
                 android:textColor="@color/for_text"
-                android:padding="15dp"
+                android:paddingLeft="4dp"
                 />
             <EditText
-                android:id="@+id/etEventName"
-                android:layout_width="wrap_content"
+                android:id="@+id/txvEventName"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/for_text"
-                android:textSize="16sp"
                 android:hint="Прогулка на роликах"
-                android:layout_toEndOf="@+id/tvEventName"
-                android:padding="15dp"
+                android:textSize="14sp"
+                android:backgroundTint="@color/for_contacts"
                 />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/for_icon"/>
             <TextView
                 android:id="@+id/tvEventDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Дата: "
+                android:hint="Дата и время"
                 android:textSize="16sp"
                 android:textColor="@color/for_text"
-                android:padding="15dp"
-                android:layout_below="@+id/etEventName"
+                android:paddingTop="15dp"
+                android:paddingLeft="4dp"
                 />
             <EditText
                 android:id="@+id/etEventDate"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/for_text"
-                android:textSize="16sp"
-                android:hint="Дата"
+                android:textSize="14sp"
+                android:hint="13/06/2023 18:00"
                 android:inputType="datetime"
-                android:layout_below="@+id/etEventName"
-                android:layout_toEndOf="@+id/tvEventDate"
-                android:padding="15dp"
+                android:backgroundTint="@color/for_contacts"
                 />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/for_icon"/>
             <TextView
                 android:id="@+id/tvEventOrganizer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Организатор: "
+                android:hint="Организатор"
                 android:textSize="16sp"
                 android:textColor="@color/for_text"
-                android:padding="15dp"
-                android:layout_below="@+id/etEventDate"
+                android:paddingTop="15dp"
+                android:paddingLeft="4dp"
                 />
             <EditText
                 android:id="@+id/etEventOrganizer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/for_text"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:hint="Иван Иванов"
-                android:layout_below="@+id/etEventDate"
-                android:layout_toEndOf="@+id/tvEventOrganizer"
-                android:padding="15dp"
+                android:backgroundTint="@color/for_contacts"
                 />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/for_icon"/>
             <TextView
                 android:id="@+id/tvEventDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Описание: "
+                android:hint="Описание"
                 android:textSize="16sp"
                 android:textColor="@color/for_text"
-                android:padding="15dp"
-                android:layout_below="@+id/etEventOrganizer"
+                android:paddingTop="15dp"
+                android:paddingLeft="4dp"
                 />
             <EditText
                 android:id="@+id/etEventDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/for_text"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:hint="Будет весело!"
-                android:layout_below="@+id/etEventOrganizer"
-                android:layout_toEndOf="@+id/tvEventDescription"
-                android:padding="15dp"
+                android:backgroundTint="@color/for_contacts"
                 />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/for_icon"/>
             <TextView
                 android:id="@+id/tvEventCost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Стоимость: "
+                android:hint="Стоимость"
                 android:textSize="16sp"
                 android:textColor="@color/for_text"
-                android:padding="15dp"
-                android:layout_below="@+id/etEventDescription"
+                android:paddingTop="15dp"
+                android:paddingLeft="4dp"
                 />
             <EditText
                 android:id="@+id/etEventCost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/for_text"
-                android:textSize="16sp"
-                android:hint="Бесплатно"
-                android:layout_below="@+id/etEventDescription"
-                android:layout_toEndOf="@+id/tvEventCost"
-                android:padding="15dp"
+                android:textSize="14sp"
+                android:hint="0.0"
+                android:inputType="numberDecimal"
+                android:backgroundTint="@color/for_contacts"
                 />
-            <TextView
-                android:id="@+id/tvEventTimeMeeting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Время сбора: "
-                android:textSize="16sp"
-                android:textColor="@color/for_text"
-                android:padding="15dp"
-                android:layout_below="@+id/etEventCost"
-                />
-            <EditText
-                android:id="@+id/etEventTimeMeeting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/for_text"
-                android:textSize="16sp"
-                android:hint="15:00"
-                android:inputType="time"
-                android:layout_below="@+id/etEventCost"
-                android:layout_toEndOf="@+id/tvEventTimeMeeting"
-                android:padding="15dp"
-                />
-            <TextView
-                android:id="@+id/tvEventTimeStart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Время старта: "
-                android:textSize="16sp"
-                android:textColor="@color/for_text"
-                android:padding="15dp"
-                android:layout_below="@+id/etEventTimeMeeting"
-                />
-            <EditText
-                android:id="@+id/etEventTimeStart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/for_text"
-                android:textSize="16sp"
-                android:hint="15:30"
-                android:inputType="time"
-                android:layout_below="@+id/etEventTimeMeeting"
-                android:layout_toEndOf="@+id/tvEventTimeStart"
-                android:padding="15dp"
-                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/for_icon"/>
             <TextView
                 android:id="@+id/tvEventStartLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Старт: "
+                android:hint="Старт"
                 android:textSize="16sp"
                 android:textColor="@color/for_text"
-                android:padding="15dp"
-                android:layout_below="@+id/etEventTimeStart"
-                android:visibility="gone"
-                />
+                android:paddingTop="15dp"
+                android:paddingLeft="4dp"
+                android:visibility="gone"/>
             <EditText
                 android:id="@+id/etEventStartLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/for_text"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:hint="Васька"
-                android:layout_below="@+id/etEventTimeStart"
-                android:layout_toEndOf="@+id/tvEventStartLocation"
-                android:padding="15dp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:backgroundTint="@color/for_contacts"
+                android:visibility="gone"/>
+            <View
+                android:id="@+id/vDividerEventStartLocation"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/for_icon"
                 android:visibility="gone"
                 />
             <TextView
                 android:id="@+id/tvEventEndLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Финиш: "
+                android:hint="Финиш"
                 android:textSize="16sp"
                 android:textColor="@color/for_text"
-                android:padding="15dp"
-                android:layout_below="@+id/etEventStartLocation"
-                android:visibility="gone"
-                />
+                android:paddingTop="15dp"
+                android:paddingLeft="4dp"
+                android:visibility="gone"/>
             <EditText
                 android:id="@+id/etEventEndLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/for_text"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:hint="Петроградка"
-                android:layout_below="@+id/etEventStartLocation"
-                android:layout_toEndOf="@+id/tvEventEndLocation"
-                android:padding="15dp"
+                android:backgroundTint="@color/for_contacts"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:visibility="gone"/>
+            <View
+                android:id="@+id/vDividerEventEndLocation"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/for_icon"
                 android:visibility="gone"
                 />
             <TextView
                 android:id="@+id/tvEventSpeed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Скорость: "
+                android:hint="Скорость"
                 android:textSize="16sp"
                 android:textColor="@color/for_text"
-                android:padding="15dp"
-                android:layout_below="@+id/etEventEndLocation"
+                android:paddingTop="15dp"
+                android:paddingLeft="4dp"
                 />
             <EditText
                 android:id="@+id/etEventSpeed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/for_text"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:hint="15 км/ч"
-                android:layout_below="@+id/etEventEndLocation"
-                android:layout_toEndOf="@+id/tvEventSpeed"
-                android:padding="15dp"
+                android:backgroundTint="@color/for_contacts"
                 />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/for_icon"/>
             <TextView
                 android:id="@+id/tvEventDistance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Дистанция: "
+                android:hint="Дистанция"
                 android:textSize="16sp"
                 android:textColor="@color/for_text"
-                android:padding="15dp"
-                android:layout_below="@+id/etEventSpeed"
-                android:visibility="gone"
-                />
+                android:paddingTop="15dp"
+                android:paddingLeft="4dp"
+                android:visibility="gone"/>
             <EditText
                 android:id="@+id/etEventDistance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/for_text"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:hint="25 км"
-                android:layout_below="@+id/etEventSpeed"
-                android:layout_toEndOf="@+id/tvEventDistance"
-                android:padding="15dp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:backgroundTint="@color/for_contacts"
+                android:visibility="gone"/>
+            <View
+                android:id="@+id/vDividerEventDistance"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/for_icon"
                 android:visibility="gone"
                 />
+            <TextView
+                android:id="@+id/tvEventPhoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:hint="Фото"
+                android:paddingTop="15dp"
+                android:textColor="@color/for_text"
+                android:paddingLeft="4dp"
+                />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/ivEventPhoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/roliki"
+                    android:layout_marginVertical="5dp"
+                    />
+                <ImageView
+                    android:id="@+id/imageViewChangePhoto"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="right"
+                    android:background="@drawable/ic_photo_foreground"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    />
+            </FrameLayout>
             <LinearLayout
                 android:id="@+id/llRoute"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/etEventDistance"
                 android:orientation="vertical"
                 android:gravity="center"
+                android:layout_marginBottom="60dp"
                 >
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnAddRoute"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Добавить маршрут"
-                    android:backgroundTint="@color/for_button"
-                    app:cornerRadius="25dp"
-                    android:padding="10dp"
+                    android:backgroundTint="@color/white"
+                    app:cornerRadius="10dp"
+                    android:padding="16dp"
+                    android:textAllCaps="false"
+                    android:textSize="14sp"
+                    android:textColor="@color/for_button"
                     android:layout_marginTop="25dp"
                     />
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnSaveRoute"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Сохранить мероприятие"
-                    app:cornerRadius="25dp"
+                    app:cornerRadius="10dp"
+                    android:textAllCaps="false"
                     android:backgroundTint="@color/for_button"
-                    android:padding="10dp"
-                    android:layout_marginTop="15dp"
+                    android:padding="16dp"
+                    android:textSize="14sp"
+                    android:layout_marginTop="5dp"
+                    android:visibility="gone"
                     />
             </LinearLayout>
-        </RelativeLayout>
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>

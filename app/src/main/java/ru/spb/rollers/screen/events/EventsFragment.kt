@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +19,7 @@ import ru.spb.rollers.adapters.EventAdapter
 import ru.spb.rollers.databinding.EventsFragmentBinding
 import ru.spb.rollers.databinding.ProfileFragmentBinding
 import ru.spb.rollers.model.Event
+import ru.spb.rollers.titleEvents
 
 class EventsFragment : Fragment()
 {
@@ -54,12 +56,23 @@ class EventsFragment : Fragment()
 
         binding.imageButtonAddEvent.setOnClickListener{
             MAIN.navController.navigate(R.id.action_events_to_eventsCreateFragment)
+            titleEvents = "Создание события"
         }
 
         setInitialData()
         recyclerView = view.findViewById(R.id.eventsList)
         eventAdapter = EventAdapter(eventList, 2)
         recyclerView.adapter = eventAdapter
+
+        binding.searchView.setOnSearchClickListener{
+            binding.txvTitle.visibility = View.GONE
+        }
+
+        binding.searchView.setOnCloseListener {
+            binding.txvTitle.visibility = View.VISIBLE
+            binding.searchView.onActionViewCollapsed()
+            true
+        }
     }
 
     private fun setInitialData() {

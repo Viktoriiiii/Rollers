@@ -16,6 +16,7 @@ import com.google.android.material.card.MaterialCardView
 import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
 import ru.spb.rollers.model.Event
+import ru.spb.rollers.titleEvents
 
 class EventAdapter (private var itemListEvent: List<Event>, var userID: Int
 ): RecyclerView.Adapter<EventAdapter.EventViewHolder>(){
@@ -82,6 +83,7 @@ class EventAdapter (private var itemListEvent: List<Event>, var userID: Int
                 }
                 R.id.toChangeEvent ->{
                     MAIN.navController.navigate(R.id.action_events_to_eventsCreateFragment)
+                    titleEvents = "Изменение события"
                     true
                 }
                 R.id.deleteEvent -> {
