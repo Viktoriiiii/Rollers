@@ -48,6 +48,16 @@ class DialogsFragment : Fragment() {
         recyclerView = view.findViewById(R.id.messages_list)
         dialogAdapter = DialogAdapter(dialogList)
         recyclerView.adapter = dialogAdapter
+
+        binding.searchView.setOnSearchClickListener{
+            binding.txvTitle.visibility = View.GONE
+        }
+
+        binding.searchView.setOnCloseListener {
+            binding.txvTitle.visibility = View.VISIBLE
+            binding.searchView.onActionViewCollapsed()
+            true
+        }
     }
     private fun setInitialData() {
         dialogList += Dialog(

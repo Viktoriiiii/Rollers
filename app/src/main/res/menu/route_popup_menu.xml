@@ -3,19 +3,19 @@
     android:theme="@style/PopupMenu"
     >
     <item android:id="@+id/toPinRoute"
-        android:icon="@drawable/ic_pin_foreground"
+        android:icon="@mipmap/ic_pin"
         android:title="Закрепить маршрут"
         />
     <item android:id="@+id/toViewRoute"
         android:title="Просмотр на карте"
-        android:icon="@drawable/ic_view_event_foreground"
+        android:icon="@mipmap/ic_view_event"
         />
     <item android:id="@+id/toChangeRouteName"
-        android:icon="@drawable/ic_change_foreground"
+        android:icon="@mipmap/ic_change"
         android:title="Изменить название"
         />
     <item android:id="@+id/deleteRoute"
-        android:icon="@drawable/ic_delete_foreground"
+        android:icon="@mipmap/ic_delete"
         android:title="Удалить маршрут"
         />
 </menu>

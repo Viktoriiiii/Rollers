@@ -38,6 +38,7 @@
                         android:id="@+id/imageViewPhoto"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/avatar" />
                 </androidx.cardview.widget.CardView>
                 <ImageView
@@ -49,6 +50,13 @@
                     android:scaleType="center"
                     android:layout_gravity="end"
                     android:focusedByDefault="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    />
+                <ImageView
+                    android:id="@+id/imageViewToAdmin"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_person_foreground"
                     android:foreground="?android:attr/selectableItemBackground"
                     />
             </FrameLayout>
@@ -67,19 +75,13 @@
                     android:text="Иван Иванов (nickname)"
                     android:padding="15dp"
                     />
-                <ImageView
-                    android:id="@+id/imageViewToAdmin"
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_manage_account_foreground"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_gravity="left"
                 >
                 <TextView
                     android:id="@+id/textViewStatus"
@@ -98,24 +100,43 @@
                     android:src="@drawable/ic_rollers_foreground"
                     />
             </LinearLayout>
-            <TextView
-                android:id="@+id/txvBirthday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Возраст: 28 лет"
-                android:textColor="@color/for_text"
-                android:textSize="18sp"
-                android:padding="15dp"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/for_icon"
+                android:layout_margin="10dp"
                 />
-            <TextView
-                android:id="@+id/txvDistrict"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Район: Московский"
-                android:textColor="@color/for_text"
-                android:textSize="18sp"
-                android:padding="15dp"
-                />
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:id="@+id/txvBirthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Возраст: 28 лет"
+                    android:textColor="@color/for_text"
+                    android:textSize="18sp"
+                    android:padding="15dp"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/for_icon"
+                    android:layout_margin="10dp"
+                    />
+                <TextView
+                    android:id="@+id/txvDistrict"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Район: Московский"
+                    android:textColor="@color/for_text"
+                    android:textSize="18sp"
+                    android:padding="15dp"
+                    />
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </com.google.android.material.card.MaterialCardView>

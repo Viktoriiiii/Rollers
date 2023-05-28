@@ -48,6 +48,16 @@ class ContactsFragment : Fragment() {
         recyclerView = view.findViewById(R.id.contactsList)
         contactAdapter = ContactAdapter(contactList)
         recyclerView.adapter = contactAdapter
+
+        binding.searchView.setOnSearchClickListener{
+            binding.txvTitle.visibility = View.GONE
+        }
+
+        binding.searchView.setOnCloseListener {
+            binding.txvTitle.visibility = View.VISIBLE
+            binding.searchView.onActionViewCollapsed()
+            true
+        }
     }
 
     private fun setInitialData() {

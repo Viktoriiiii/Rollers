@@ -4,15 +4,15 @@
     android:theme="@style/PopupMenu"
     >
     <item android:id="@+id/pinDialog"
-        android:title="Закрепить диалог      "
-        android:icon="@drawable/ic_pin_foreground"
+        android:title="Закрепить диалог"
+        android:icon="@mipmap/ic_pin"
         />
     <item android:id="@+id/deleteMessages"
-        android:icon="@drawable/ic_clear_foreground"
-        android:title="Очистить историю      "
+        android:icon="@mipmap/ic_clear"
+        android:title="Очистить историю"
         />
     <item android:id="@+id/deleteDialog"
-        android:icon="@drawable/ic_delete_foreground"
-        android:title="Удалить диалог        "
+        android:icon="@mipmap/ic_delete"
+        android:title="Удалить диалог"
         />
 </menu>

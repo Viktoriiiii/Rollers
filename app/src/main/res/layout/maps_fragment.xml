@@ -16,16 +16,25 @@
             android:layout_height="50dp"
             android:background="@color/for_toolbar"
             android:gravity="start"
-            android:layout_marginEnd="20dp"
             >
             <ImageButton
                 android:id="@+id/imageButtonBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_back_foreground"
+                android:background="@drawable/ic_back2_foreground"
                 android:foreground="?android:attr/selectableItemBackground"
                 />
         </RelativeLayout>
+        <TextView
+            android:id="@+id/txvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Просмотр карты/маршрута"
+            android:textColor="@color/for_icon"
+            android:textSize="20sp"
+            android:paddingLeft="10dp"
+            android:textStyle="bold"
+            />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

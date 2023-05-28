@@ -17,6 +17,7 @@ import ru.spb.rollers.databinding.ProfileFragmentBinding
 import ru.spb.rollers.databinding.RoutesFragmentBinding
 import ru.spb.rollers.model.Route
 import ru.spb.rollers.model.Waypoint
+import ru.spb.rollers.titleRoutes
 
 class RoutesFragment : Fragment() {
 
@@ -55,6 +56,7 @@ class RoutesFragment : Fragment() {
 
         binding.imageViewMyLocation.setOnClickListener{
             MAIN.navController.navigate(R.id.action_routes_to_mapsFragment)
+            titleRoutes = "Поиск местоположения"
         }
 
         val btnAddPoint: MaterialButton = view.findViewById(R.id.btnAddPoint)
@@ -68,6 +70,21 @@ class RoutesFragment : Fragment() {
         recyclerViewForPoint = view.findViewById(R.id.pointsList)
         pointAdapter = PointAdapter(pointList)
         recyclerViewForPoint.adapter = pointAdapter
+
+        binding.searchView.setOnSearchClickListener{
+            binding.txvTitle.visibility = View.GONE
+        }
+
+        binding.searchView.setOnCloseListener {
+            binding.txvTitle.visibility = View.VISIBLE
+            binding.searchView.onActionViewCollapsed()
+            true
+        }
+
+        binding.btnBuildRoute.setOnClickListener{
+            MAIN.navController.navigate(R.id.action_routes_to_mapsFragment)
+            titleRoutes = "Просмотр маршрута"
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")

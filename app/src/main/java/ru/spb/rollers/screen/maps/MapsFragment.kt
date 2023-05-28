@@ -37,6 +37,7 @@ import ru.spb.rollers.adapters.OnItemClickListener
 import ru.spb.rollers.adapters.SearchAdapter
 import ru.spb.rollers.databinding.MapsFragmentBinding
 import ru.spb.rollers.databinding.ProfileFragmentBinding
+import ru.spb.rollers.titleRoutes
 
 class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListener,
     CameraListener {
@@ -78,6 +79,8 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
         binding.imageButtonBack.setOnClickListener{
             MAIN.onSupportNavigateUp()
         }
+        binding.txvTitle.text = titleRoutes
+
         recyclerView = view.findViewById(R.id.suggestList)
 
         mapView = view.findViewById(R.id.mapView)
@@ -144,6 +147,16 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
         mapView.map.move(
             CameraPosition(Point(59.945933, 30.320045), 14.0f, 0.0f, 0.0f)
         )
+
+        binding.searchView.setOnSearchClickListener{
+            binding.txvTitle.visibility = View.GONE
+        }
+
+        binding.searchView.setOnCloseListener {
+            binding.txvTitle.visibility = View.VISIBLE
+            binding.searchView.onActionViewCollapsed()
+            true
+        }
     }
 
     override fun onDestroyView() {

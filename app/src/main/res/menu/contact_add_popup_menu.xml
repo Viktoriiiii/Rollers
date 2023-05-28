@@ -3,14 +3,14 @@
     android:theme="@style/PopupMenu">
     <item android:id="@+id/toViewProfile"
         android:title="Просмотр профиля"
-        android:icon="@drawable/ic_person_foreground"
+        android:icon="@mipmap/ic_person"
         />
     <item android:id="@+id/toDialog"
-        android:icon="@drawable/ic_message_foreground"
+        android:icon="@mipmap/ic_message"
         android:title="Перейти к диалогу"
         />
     <item android:id="@+id/addContact"
-        android:icon="@drawable/ic_add_contact_foreground"
+        android:icon="@mipmap/ic_add_contact"
         android:title="Добавить"
         />
 </menu>
