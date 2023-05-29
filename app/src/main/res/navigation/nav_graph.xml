@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_authorizationFragment_to_events"
             app:destination="@id/events" />
+        <action
+            android:id="@+id/action_authorizationFragment_to_usersFragment"
+            app:destination="@id/usersFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -161,6 +164,16 @@
         <action
             android:id="@+id/action_mapsFragment_to_routes"
             app:destination="@id/routes" />
+    </fragment>
+    <fragment
+        android:id="@+id/usersFragment"
+        android:name="ru.spb.rollers.screen.users.UsersFragment"
+        android:label="UsersFragment"
+        tools:layout="@layout/users_fragment"
+        >
+        <action
+            android:id="@+id/action_usersFragment_to_authorizationFragment"
+            app:destination="@id/authorizationFragment" />
     </fragment>
 
 </navigation>

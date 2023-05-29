@@ -4,22 +4,16 @@ import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.SwitchCompat
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.navigation.NavigationView
 import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
 import ru.spb.rollers.adapters.EventAdapter
 import ru.spb.rollers.databinding.EventsFragmentBinding
-import ru.spb.rollers.databinding.ProfileFragmentBinding
 import ru.spb.rollers.model.Event
 import ru.spb.rollers.titleEvents
+import ru.spb.rollers.roleId
 
 class EventsFragment : Fragment()
 {
@@ -73,6 +67,9 @@ class EventsFragment : Fragment()
             binding.searchView.onActionViewCollapsed()
             true
         }
+
+        if (roleId == 3)
+            binding.rlAddEvent.visibility = View.GONE
     }
 
     private fun setInitialData() {

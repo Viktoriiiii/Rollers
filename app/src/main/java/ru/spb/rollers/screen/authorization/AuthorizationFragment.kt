@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
 import ru.spb.rollers.databinding.AuthorizationFragmentBinding
-import ru.spb.rollers.databinding.ProfileFragmentBinding
+import ru.spb.rollers.roleId
 
 class AuthorizationFragment : Fragment() {
 
@@ -37,7 +37,15 @@ class AuthorizationFragment : Fragment() {
         }
 
         binding.mbLogin.setOnClickListener {
-            MAIN.navController.navigate(R.id.action_authorizationFragment_to_events)
+            when (roleId) {
+                1 -> {
+                    MAIN.navController.navigate(R.id.action_authorizationFragment_to_usersFragment)
+                }
+                2, 3 -> {
+                    MAIN.navController.navigate(R.id.action_authorizationFragment_to_events)
+                }
+            }
+
         }
     }
 

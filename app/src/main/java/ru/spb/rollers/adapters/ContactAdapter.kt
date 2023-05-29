@@ -19,6 +19,7 @@ import com.google.android.material.textview.MaterialTextView
 import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
 import ru.spb.rollers.model.Contact
+import ru.spb.rollers.roleId
 
 class ContactAdapter (private var itemListContact: List<Contact>
 ): RecyclerView.Adapter<ContactAdapter.ContactViewHolder>(){
@@ -65,10 +66,18 @@ class ContactAdapter (private var itemListContact: List<Contact>
     @SuppressLint("RestrictedApi")
     private fun showPopupMenu(view: View, contact: Contact) {
         val popupMenu = PopupMenu(view.context, view)
-        if (contact.isContact)
-            popupMenu.inflate(R.menu.contact_delete_popup_menu)
-        else
-            popupMenu.inflate(R.menu.contact_add_popup_menu)
+
+        if (roleId == 1){
+            popupMenu.inflate(R.menu.contact_for_admin)
+        }
+        else {
+            if (contact.isContact)
+                popupMenu.inflate(R.menu.contact_delete_popup_menu)
+            else
+                popupMenu.inflate(R.menu.contact_add_popup_menu)
+        }
+
+
         popupMenu.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.toViewProfile -> {

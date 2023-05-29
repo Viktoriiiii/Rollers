@@ -46,6 +46,7 @@
                     android:textStyle="bold"
                     />
                 <RelativeLayout
+                    android:id="@+id/rlAddEvent"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:background="@color/for_toolbar"

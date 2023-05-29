@@ -69,4 +69,16 @@ class Contact {
         this.contactDescription = contactDescription
         this.contactAddress = contactAddress
     }
+    constructor(
+        contactID: Int,
+        roleID: Int,
+        contactLogin: String? = "",
+        contactPassword: String? = ""
+    ) {
+        this.contactID = contactID
+        this.roleID = roleID
+        this.contactLogin = contactLogin
+        this.contactPassword = contactPassword
+
+    }
 }

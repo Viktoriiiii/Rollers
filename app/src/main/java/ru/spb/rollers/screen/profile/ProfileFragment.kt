@@ -17,11 +17,8 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.button.MaterialButton
-import ru.spb.rollers.AppActivity
-import ru.spb.rollers.MAIN
-import ru.spb.rollers.R
+import ru.spb.rollers.*
 import ru.spb.rollers.databinding.ProfileFragmentBinding
-import ru.spb.rollers.delayMillis
 
 class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
 
@@ -78,6 +75,11 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
             startActivity(Intent(MAIN, AppActivity::class.java)  )
             delayMillis = 0
         }
+
+        if (roleId == 2)
+            binding.llUser.visibility = View.GONE
+        if (roleId == 3)
+            binding.llSchool.visibility = View.GONE
     }
 
     @SuppressLint("RestrictedApi")
