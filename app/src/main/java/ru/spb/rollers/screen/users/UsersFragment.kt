@@ -78,13 +78,13 @@ class UsersFragment : Fragment() {
             1, "Иван","Иванов","ivanov200",true,
             "Московский","38 лет", contactGender = true, isContact = false, false)
         contactList += Contact(2,
-            2, "Варя", "Токсик","jinx",true,
+            2, "Варя", "Федорова","jinx",true,
             "Васька","18 лет", contactGender = false, isContact = false, false)
         contactList += Contact(
             3, 1, "Ярик", "Сидоров","jaroslav",
             true, "Мурино","68 лет", contactGender = true, isContact = false, false)
         contactList += Contact(
-            4,1, "Шуня", "Душный","shunya",true,
+            4,1, "Шуня", "Веселый","shunya",true,
             "Фрунзенский","15 лет", contactGender = true, isContact = false, false)
         contactList += Contact(
             5,2,  "Петр", "Иванов","ivanov",

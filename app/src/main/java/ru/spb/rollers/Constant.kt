@@ -12,7 +12,7 @@ var titleEvents = ""
 
 var titleRoutes = ""
 
-var roleId = 2 // 1 - администратор, 2 - организатор, 3 - участник
+var roleId = 3 // 1 - администратор, 2 - организатор, 3 - участник
 
 var user = Contact(1,
     1, "login", "password")

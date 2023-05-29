@@ -101,8 +101,8 @@ class ContactAdapter (private var itemListContact: List<Contact>
 
                         imageViewToAdmin.setOnClickListener{
                             val title: String = if (contact.roleID == 1)
-                                "Cделать пользователя администратором?" else
-                                    "Сделать администатора пользователем?"
+                                "Изменить роль участника на организатора?" else
+                                    "Изменить роль организатора на участника?"
                             val builderToAdminDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
                             builderToAdminDialog
                                 .setTitle(title)
