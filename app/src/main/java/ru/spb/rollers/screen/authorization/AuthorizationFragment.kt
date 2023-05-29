@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
 import ru.spb.rollers.databinding.AuthorizationFragmentBinding
 import ru.spb.rollers.roleId
+import ru.spb.rollers.user
 
 class AuthorizationFragment : Fragment() {
 
@@ -37,15 +39,22 @@ class AuthorizationFragment : Fragment() {
         }
 
         binding.mbLogin.setOnClickListener {
-            when (roleId) {
-                1 -> {
-                    MAIN.navController.navigate(R.id.action_authorizationFragment_to_usersFragment)
-                }
-                2, 3 -> {
-                    MAIN.navController.navigate(R.id.action_authorizationFragment_to_events)
-                }
-            }
 
+            var login = binding.mavLogin.text
+            var password = binding.mavPassword.text
+
+            if (login.toString() == user.contactLogin && password.toString() == user.contactPassword) {
+                when (roleId) {
+                    1 -> {
+                        MAIN.navController.navigate(R.id.action_authorizationFragment_to_usersFragment)
+                    }
+                    2, 3 -> {
+                        MAIN.navController.navigate(R.id.action_authorizationFragment_to_events)
+                    }
+                }
+            } else {
+                Toast.makeText(MAIN, "Данные ведены не верно", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
