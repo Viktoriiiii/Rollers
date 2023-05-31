@@ -45,6 +45,29 @@
                     android:paddingLeft="10dp"
                     android:textStyle="bold"
                     />
+                <ImageView
+                    android:id="@+id/ivWeather"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@color/white"
+                    android:layout_gravity="start|center"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:layout_marginLeft="30dp"
+                    android:scaleType="centerCrop"
+                    />
+                <TextView
+                    android:id="@+id/txvWeatherTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
+                    android:text=""
+                    android:textSize="18sp"
+                    android:textColor="@color/for_icon"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:padding="5dp"
+                    />
                 <RelativeLayout
                     android:id="@+id/rlAddEvent"
                     android:layout_width="50dp"

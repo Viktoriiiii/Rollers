@@ -1,12 +1,19 @@
 package ru.spb.rollers.screen.events
 
+import android.graphics.drawable.PictureDrawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.caverock.androidsvg.SVG
+import com.caverock.androidsvg.SVGParseException
+import okhttp3.*
+import okio.IOException
+import org.json.JSONObject
 import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
 import ru.spb.rollers.adapters.EventAdapter
@@ -23,6 +30,11 @@ class EventsFragment : Fragment()
     private var eventList: List<Event> = mutableListOf()
     private lateinit var recyclerView: RecyclerView
     private lateinit var eventAdapter: EventAdapter
+
+    private val WEATHER_API_KEY = "43cf8001-588a-477e-b84f-0a140208c3de"
+    var temp: Int = 0
+    var condition: String = ""
+    var imageUrl: String = "https://yastatic.net/weather/i/icons/funky/dark/"
 
     companion object {
         fun newInstance() = EventsFragment()
@@ -60,16 +72,79 @@ class EventsFragment : Fragment()
 
         binding.searchView.setOnSearchClickListener{
             binding.txvTitle.visibility = View.GONE
+            binding.txvWeatherTemp.visibility = View.GONE
+            binding.ivWeather.visibility = View.GONE
         }
 
         binding.searchView.setOnCloseListener {
             binding.txvTitle.visibility = View.VISIBLE
+            binding.txvWeatherTemp.visibility = View.VISIBLE
+            binding.ivWeather.visibility = View.VISIBLE
             binding.searchView.onActionViewCollapsed()
             true
         }
 
         if (roleId == 3)
             binding.rlAddEvent.visibility = View.GONE
+
+        getWeather()
+
+    }
+
+    private fun getWeather() {
+        val url = "https://api.weather.yandex.ru/v2/forecast?lat=59.939427&lon=30.309217&extra=true"
+
+        val request: Request = Request.Builder()
+            .url(url)
+            .addHeader("X-Yandex-API-Key", WEATHER_API_KEY)
+            .build()
+
+        val client = OkHttpClient()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                e.printStackTrace()
+            }
+            override fun onResponse(call: Call, response: Response) {
+                val responseBody = response.body?.string()
+                val obj = JSONObject(responseBody)
+                val fact = obj.getJSONObject("fact")
+                temp = fact.optInt("temp")
+                condition = fact.optString("condition")
+                imageUrl = "$imageUrl${fact.optString("icon")}.svg"
+
+                activity?.runOnUiThread {
+                    binding.txvWeatherTemp.text = if (temp > 0) "+${temp} ℃" else "-${temp} ℃"
+                    loadSvgImage(imageUrl, binding.ivWeather)
+                }
+            }
+        })
+    }
+
+    fun loadSvgImage(svgUrl: String, imageView: ImageView) {
+        val request = Request.Builder().url(svgUrl).build()
+        val client = OkHttpClient()
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                e.printStackTrace()
+            }
+            override fun onResponse(call: Call, response: Response) {
+                val responseBody = response.body?.string()
+                responseBody?.let {
+                    try {
+                        val svg = SVG.getFromString(it)
+                        val picture = svg.renderToPicture()
+                        val drawable = PictureDrawable(picture)
+                        imageView.post {
+                            imageView.setImageDrawable(drawable)
+
+                        }
+                    } catch (e: SVGParseException) {
+                        e.printStackTrace()
+                    }
+                }
+            }
+        })
     }
 
     private fun setInitialData() {
