@@ -19,7 +19,7 @@
             android:id="@+id/mtvAuthorization"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Авторизация"
+            android:text="@string/authorization"
             android:textColor="@color/for_text"
             android:padding="16dp"
             android:textSize="34sp"/>
@@ -51,16 +51,18 @@
                 android:layout_marginHorizontal="5dp"
                 android:layout_marginTop="20dp"
                 >
-                <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                    android:id="@+id/mavLogin"
+                <EditText
+                    android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/for_text"
                     android:background="@color/light_background"
-                    android:hint="Логин"
+                    android:hint="@string/email"
                     android:textSize="14sp"
                     android:layout_margin="0dp"
-                    android:padding="14dp"/>
+                    android:padding="14dp"
+                    android:inputType="textEmailAddress"
+                    />
             </com.google.android.material.card.MaterialCardView>
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -73,8 +75,8 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="30dp"
                 >
-                <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                    android:id="@+id/mavPassword"
+                <EditText
+                    android:id="@+id/etPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/for_text"
@@ -82,7 +84,7 @@
                     android:layout_marginVertical="15dp"
                     android:layout_margin="0dp"
                     android:inputType="textPassword"
-                    android:hint="Пароль"
+                    android:hint="@string/pass"
                     android:textSize="14sp"
                     android:padding="14dp"/>
             </com.google.android.material.card.MaterialCardView>
@@ -91,7 +93,7 @@
                 app:cornerRadius="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Войти"
+                android:text="@string/signIn"
                 android:layout_marginHorizontal="5dp"
                 android:layout_marginVertical="1dp"
                 android:textAllCaps="false"
@@ -104,7 +106,7 @@
                 android:id="@+id/mbRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Регистрация"
+                android:text="@string/register"
                 android:textAllCaps="false"
                 android:textSize="14sp"
                 android:backgroundTint="@color/white"

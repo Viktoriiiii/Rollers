@@ -93,4 +93,13 @@
     </string>
     <string name="open">open</string>
     <string name="close">close</string>
+    <string name="pass">Пароль</string>
+    <string name="register">Регистрация</string>
+    <string name="signIn">Войти</string>
+    <string name="email">Электронная почта</string>
+    <string name="authorization">Авторизация</string>
+    <string name="confirmPass">Подтвердить пароль</string>
+    <string name="iOrganizer">Я организатор</string>
+    <string name="onward">Продолжить</string>
+    <string name="back">Назад</string>
 </resources>

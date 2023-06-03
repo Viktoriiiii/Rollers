@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "374349158130",
+    "project_id": "rollers-dd276",
+    "storage_bucket": "rollers-dd276.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:374349158130:android:ceb2fdfef1d1b872efe26b",
+        "android_client_info": {
+          "package_name": "ru.spb.rollers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "374349158130-euakbeenoj04s3j9l32m4ggcgaoe4e4n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAR_1drjew5B3Acyir432lNS_YAGwYxh98"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "374349158130-euakbeenoj04s3j9l32m4ggcgaoe4e4n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

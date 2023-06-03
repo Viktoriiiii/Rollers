@@ -6,7 +6,7 @@
     app:startDestination="@id/launch">
     <fragment
         android:id="@+id/launch"
-        android:name="ru.spb.rollers.screen.Launch"
+        android:name="ru.spb.rollers.ui.Launch"
         android:label="Launch"
         tools:layout="@layout/launch_fragment"
         >
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/authorizationFragment"
-        android:name="ru.spb.rollers.screen.authorization.AuthorizationFragment"
+        android:name="ru.spb.rollers.ui.authorization.AuthorizationFragment"
         android:label="AuthorizationFragment"
         tools:layout="@layout/authorization_fragment"
         >
@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="ru.spb.rollers.screen.registration.RegistrationFragment"
+        android:name="ru.spb.rollers.ui.registration.RegistrationFragment"
         android:label="registration_fragment"
         tools:layout="@layout/registration_fragment" >
         <action
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/events"
-        android:name="ru.spb.rollers.screen.events.EventsFragment"
+        android:name="ru.spb.rollers.ui.events.EventsFragment"
         android:label="events_fragment"
         tools:layout="@layout/events_fragment" >
         <action
@@ -57,7 +57,7 @@
     </fragment>
     <fragment
         android:id="@+id/contacts"
-        android:name="ru.spb.rollers.screen.contacts.ContactsFragment"
+        android:name="ru.spb.rollers.ui.contacts.ContactsFragment"
         android:label="ContactsFragment"
         tools:layout="@layout/contacts_fragment"
         >
@@ -67,7 +67,7 @@
     </fragment>
     <fragment
         android:id="@+id/dialogs"
-        android:name="ru.spb.rollers.screen.dialogs.DialogsFragment"
+        android:name="ru.spb.rollers.ui.dialogs.DialogsFragment"
         android:label="DialogsFragment"
         tools:layout="@layout/dialogs_fragment"
         >
@@ -77,7 +77,7 @@
     </fragment>
     <fragment
         android:id="@+id/profile"
-        android:name="ru.spb.rollers.screen.profile.ProfileFragment"
+        android:name="ru.spb.rollers.ui.profile.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/profile_fragment"
         >
@@ -87,7 +87,7 @@
     </fragment>
     <fragment
         android:id="@+id/routes"
-        android:name="ru.spb.rollers.screen.routes.RoutesFragment"
+        android:name="ru.spb.rollers.ui.routes.RoutesFragment"
         android:label="RoutesFragment"
         tools:layout="@layout/routes_fragment"
         >
@@ -97,7 +97,7 @@
     </fragment>
     <fragment
         android:id="@+id/eventsViewFragment"
-        android:name="ru.spb.rollers.screen.eventsview.EventsViewFragment"
+        android:name="ru.spb.rollers.ui.eventsview.EventsViewFragment"
         android:label="events_view_fragment"
         tools:layout="@layout/events_view_fragment" >
         <action
@@ -112,7 +112,7 @@
     </fragment>
     <fragment
         android:id="@+id/eventsCreateFragment"
-        android:name="ru.spb.rollers.screen.eventscreate.EventsCreateFragment"
+        android:name="ru.spb.rollers.ui.eventscreate.EventsCreateFragment"
         android:label="EventsCreateFragment"
         tools:layout="@layout/events_create_fragment"
         >
@@ -122,7 +122,7 @@
     </fragment>
     <fragment
         android:id="@+id/eventParticipantFragment"
-        android:name="ru.spb.rollers.screen.eventsparticipant.EventParticipantFragment"
+        android:name="ru.spb.rollers.ui.eventsparticipant.EventParticipantFragment"
         android:label="EventParticipantFragment"
         tools:layout="@layout/event_participant_fragment"
         >
@@ -135,7 +135,7 @@
     </fragment>
     <fragment
         android:id="@+id/eventsViewRouteFragment"
-        android:name="ru.spb.rollers.screen.eventsviewroute.EventsViewRouteFragment"
+        android:name="ru.spb.rollers.ui.eventsviewroute.EventsViewRouteFragment"
         android:label="events_view_route_fragment"
         tools:layout="@layout/events_view_route_fragment" >
         <action
@@ -144,7 +144,7 @@
     </fragment>
     <fragment
         android:id="@+id/messagesFragment"
-        android:name="ru.spb.rollers.screen.messages.MessagesFragment"
+        android:name="ru.spb.rollers.ui.messages.MessagesFragment"
         android:label="MessagesFragment"
         tools:layout="@layout/messages_fragment"
         >
@@ -157,7 +157,7 @@
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"
-        android:name="ru.spb.rollers.screen.maps.MapsFragment"
+        android:name="ru.spb.rollers.ui.maps.MapsFragment"
         android:label="MapsFragment"
         tools:layout="@layout/maps_fragment"
         >
@@ -167,7 +167,7 @@
     </fragment>
     <fragment
         android:id="@+id/usersFragment"
-        android:name="ru.spb.rollers.screen.users.UsersFragment"
+        android:name="ru.spb.rollers.ui.users.UsersFragment"
         android:label="UsersFragment"
         tools:layout="@layout/users_fragment"
         >
