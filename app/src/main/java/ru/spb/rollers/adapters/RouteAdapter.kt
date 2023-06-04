@@ -50,7 +50,6 @@ class RouteAdapter (private var itemListRoute: List<Route>
                     true
                 }
                 R.id.toViewRoute -> {
-                    MAIN.navController.navigate(R.id.action_routes2_to_viewRoute)
                     true
                 }
                 R.id.toChangeRouteName -> {

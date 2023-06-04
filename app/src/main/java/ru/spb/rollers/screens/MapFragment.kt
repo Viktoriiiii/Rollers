@@ -34,11 +34,9 @@ import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
 import ru.spb.rollers.adapters.OnItemClickListener
 import ru.spb.rollers.adapters.SearchAdapter
-import ru.spb.rollers.databinding.FragmentMapBinding
 
 class MapFragment : Fragment(), UserLocationObjectListener, Session.SearchListener, CameraListener{
 
-    private lateinit var binding: FragmentMapBinding
     private val PERMISSIONS_REQUEST_FINE_LOCATION = 1
     private lateinit var mapView: MapView
     var mapKit: MapKit? = null
@@ -52,19 +50,13 @@ class MapFragment : Fragment(), UserLocationObjectListener, Session.SearchListen
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentMapBinding.inflate(layoutInflater, container, false)
-        return binding.root
+    ): View? {
+        return null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.imageViewBack.setOnClickListener{
-            MAIN.navController.navigate(R.id.action_mapFragment_to_homePage)
-        }
-        binding.imageViewToRoutes.setOnClickListener{
-            MAIN.navController.navigate(R.id.action_mapFragment_to_routes2)
-        }
+
         recyclerView = view.findViewById(R.id.suggestList)
 
         mapView = view.findViewById(R.id.mapView)
@@ -75,58 +67,55 @@ class MapFragment : Fragment(), UserLocationObjectListener, Session.SearchListen
             null
         )
 
-        binding.searchMyLocation.setOnClickListener{
-            getMyLocation()
-        }
         searchManager = SearchFactory.getInstance().createSearchManager(SearchManagerType.COMBINED)
         mapView.map.addCameraListener(this)
 
         val suggestOptions = SuggestOptions().setSuggestTypes(SuggestType.GEO.value)
         val suggestSession = searchManager.createSuggestSession()
 
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                submitQuery(binding.searchView.query.toString())
-                binding.suggestList.visibility = View.GONE
-                return true
-            }
-
-            override fun onQueryTextChange(query: String): Boolean {
-                binding.suggestList.visibility = View.VISIBLE
-                val southWest = Point(59.681658, 29.369953) // Южно-западная граница города Санкт-Петербург
-                val northEast = Point(60.130912, 30.645520)
-                val boundingBox = BoundingBox(southWest, northEast)
-                suggestSession.suggest(query, boundingBox, suggestOptions, object : SuggestSession.SuggestListener {
-                    override fun onResponse(suggestItems: List<SuggestItem>) {
-                        searchAdapter = SearchAdapter(suggestItems)
-                        recyclerView.adapter = searchAdapter
-                        searchAdapter.setOnItemClickListener(object : OnItemClickListener {
-                            override fun onItemClick(item: SuggestItem) {
-                                binding.searchView.setQuery(item.title.text, false)
-                                mapView.map.move(
-                                    CameraPosition(
-                                        item.center!!,14.0f, 0.0f, 0.0f
-                                    ),
-                                    Animation(Animation.Type.SMOOTH, 4.0f),
-                                    null
-                                )
-                                binding.suggestList.visibility = View.GONE
-                            }
-                        })
-                    }
-                    override fun onError(error: Error) {
-                        Toast.makeText(MAIN, "Диалог закреплен", Toast.LENGTH_SHORT).show()
-                    }
-                })
-                return true
-            }
-        })
-
-        binding.searchView.setOnCloseListener {
-            val mapObjects = mapView.map.mapObjects
-            mapObjects.clear()
-            true
-        }
+//        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(query: String): Boolean {
+//                submitQuery(binding.searchView.query.toString())
+//                binding.suggestList.visibility = View.GONE
+//                return true
+//            }
+//
+//            override fun onQueryTextChange(query: String): Boolean {
+//                binding.suggestList.visibility = View.VISIBLE
+//                val southWest = Point(59.681658, 29.369953) // Южно-западная граница города Санкт-Петербург
+//                val northEast = Point(60.130912, 30.645520)
+//                val boundingBox = BoundingBox(southWest, northEast)
+//                suggestSession.suggest(query, boundingBox, suggestOptions, object : SuggestSession.SuggestListener {
+//                    override fun onResponse(suggestItems: List<SuggestItem>) {
+//                        searchAdapter = SearchAdapter(suggestItems)
+//                        recyclerView.adapter = searchAdapter
+//                        searchAdapter.setOnItemClickListener(object : OnItemClickListener {
+//                            override fun onItemClick(item: SuggestItem) {
+//                                binding.searchView.setQuery(item.title.text, false)
+//                                mapView.map.move(
+//                                    CameraPosition(
+//                                        item.center!!,14.0f, 0.0f, 0.0f
+//                                    ),
+//                                    Animation(Animation.Type.SMOOTH, 4.0f),
+//                                    null
+//                                )
+//                                binding.suggestList.visibility = View.GONE
+//                            }
+//                        })
+//                    }
+//                    override fun onError(error: Error) {
+//                        Toast.makeText(MAIN, "Диалог закреплен", Toast.LENGTH_SHORT).show()
+//                    }
+//                })
+//                return true
+//            }
+//        })
+//
+//        binding.searchView.setOnCloseListener {
+//            val mapObjects = mapView.map.mapObjects
+//            mapObjects.clear()
+//            true
+//        }
 
         mapView.map.move(
             CameraPosition(Point(59.945933, 30.320045), 14.0f, 0.0f, 0.0f)
@@ -193,17 +182,17 @@ class MapFragment : Fragment(), UserLocationObjectListener, Session.SearchListen
         val mapObjects = mapView.map.mapObjects
         mapObjects.clear()
 
-        if (!binding.searchView.query.isNullOrEmpty()) {
-            for (searchResult in response.collection.children) {
-                val resultLocation = searchResult.obj!!.geometry[0].point
-                if (resultLocation != null) {
-                    mapObjects.addPlacemark(
-                        resultLocation,
-                        ImageProvider.fromResource(MAIN, R.drawable.search_result)
-                    )
-                }
-            }
-        }
+//        if (!binding.searchView.query.isNullOrEmpty()) {
+//            for (searchResult in response.collection.children) {
+//                val resultLocation = searchResult.obj!!.geometry[0].point
+//                if (resultLocation != null) {
+//                    mapObjects.addPlacemark(
+//                        resultLocation,
+//                        ImageProvider.fromResource(MAIN, R.drawable.search_result)
+//                    )
+//                }
+//            }
+//        }
     }
 
     override fun onSearchError(error: Error) {
@@ -223,9 +212,9 @@ class MapFragment : Fragment(), UserLocationObjectListener, Session.SearchListen
         cameraUpdateReason: CameraUpdateReason,
         finished: Boolean
     ) {
-        if (finished) {
-            submitQuery(binding.searchView.query.toString())
-        }
+//        if (finished) {
+//            submitQuery(binding.searchView.query.toString())
+//        }
     }
 
     private fun submitQuery(query: String) {

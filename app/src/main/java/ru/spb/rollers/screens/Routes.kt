@@ -8,17 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
-import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
 import ru.spb.rollers.adapters.PointAdapter
 import ru.spb.rollers.adapters.RouteAdapter
-import ru.spb.rollers.databinding.FragmentRoutesBinding
 import ru.spb.rollers.model.Route
 import ru.spb.rollers.model.Waypoint
 
 class Routes : Fragment() {
 
-    private lateinit var binding: FragmentRoutesBinding
     private var routeList: List<Route> = mutableListOf()
     private lateinit var recyclerView: RecyclerView
     private lateinit var routeAdapter: RouteAdapter
@@ -31,19 +28,11 @@ class Routes : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentRoutesBinding.inflate(layoutInflater, container, false)
-        return binding.root
+        return null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.imageViewBack.setOnClickListener{
-            MAIN.navController.navigate(R.id.action_routes2_to_mapFragment)
-        }
-
-        binding.btnBuildRoute.setOnClickListener{
-            MAIN.navController.navigate(R.id.action_routes2_to_buildRoutes)
-        }
 
         val btnAddPoint: MaterialButton = view.findViewById(R.id.btnAddPoint)
         btnAddPoint.setOnClickListener{ addPoint() }
