@@ -62,39 +62,39 @@ class ContactsFragment : Fragment() {
 
     private fun setInitialData() {
         contactList += Contact(1,
-            1, "Иван","Иванов","ivanov200",true,
+            1, "Иван","Иванов",true,
             "Московский","38 лет", contactGender = true, isContact = true, false)
         contactList += Contact(2,
-            2, "Варя", "Федорова","jinx",true,
+            2, "Варя", "Федорова",true,
             "Васька","18 лет", contactGender = false, isContact = true, false)
         contactList += Contact(
-            3, 1, "Ярик", "Сидоров","jaroslav",
+            3, 1, "Ярик", "Сидоров",
             true, "Мурино","68 лет", contactGender = true, isContact = true, false)
         contactList += Contact(
-            4,1, "Шуня", "Шуняков","shunya",true,
+            4,1, "Шуня", "Шуняков",true,
             "Фрунзенский","15 лет", contactGender = true, isContact = true, false)
         contactList += Contact(
-            5,2,  "Петр", "Иванов","ivanov",
+            5,2,  "Петр", "Иванов",
             true, "Фрунзенский","15 лет", contactGender = true,
             isContact = true, false)
         contactList += Contact(
-            6,2, "Иван", "Петров","ivanov",
+            6,2, "Иван", "Петров",
             true, "Фрунзенский","15 лет", contactGender = true,
             isContact = true, false)
         contactList += Contact(
-            7, 2, "Иван", "Петров","ivanov",
+            7, 2, "Иван", "Петров",
             true, "Фрунзенский","15 лет", contactGender = true,
             isContact = true, false)
         contactList += Contact(
-            8,1, "Иван", "Петров","ivanov",
+            8,1, "Иван", "Петров",
             true, "Фрунзенский","15 лет", contactGender = true,
             isContact = true, false)
         contactList += Contact(
-            9,1, "Иван", "Петров","ivanov",
+            9,1, "Иван", "Петров",
             true, "Фрунзенский","15 лет", contactGender = true,
             isContact = true, false)
         contactList += Contact(
-            9,2, "Роллер-школа Фантаст", "ivanov", "Фрунзенский",
+            9,2, "Роллер-школа Фантаст", "Фрунзенский",
             isContact = true, true, "Обучение катанию на роликах детей и взрослых: свой роллердром / скейт-парк, опытные инструкторы по роликам, доступные цены.", "Адрес школы")
     }
 

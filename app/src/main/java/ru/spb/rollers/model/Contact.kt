@@ -7,7 +7,6 @@ class Contact {
     var contactPassword: String? = ""
     var contactFirstName: String? = ""
     var contactLastName: String? = ""
-    var contactPublicName: String? = ""
     var contactStatus: Boolean = false
     var contactDistrict: String? = ""
     var contactAge: String? = ""
@@ -25,7 +24,6 @@ class Contact {
         roleID: Int,
         contactFirstName: String?,
         contactLastName: String?,
-        contactPublicName: String?,
         contactStatus: Boolean,
         contactDistrict: String?,
         contactAge: String?,
@@ -37,7 +35,6 @@ class Contact {
         this.roleID = roleID
         this.contactFirstName = contactFirstName
         this.contactLastName = contactLastName
-        this.contactPublicName = contactPublicName
         this.contactStatus = contactStatus
         this.contactDistrict = contactDistrict
         this.contactAge = contactAge
@@ -52,7 +49,6 @@ class Contact {
         contactID: Int,
         roleID: Int,
         contactSchoolName: String?,
-        contactPublicName: String?,
         contactDistrict: String?,
         isContact: Boolean,
         isManager: Boolean,
@@ -62,7 +58,6 @@ class Contact {
         this.contactID = contactID
         this.roleID = roleID
         this.contactSchoolName = contactSchoolName
-        this.contactPublicName = contactPublicName
         this.contactDistrict = contactDistrict
         this.isContact = isContact
         this.isManager = isManager
@@ -79,6 +74,5 @@ class Contact {
         this.roleID = roleID
         this.contactLogin = contactLogin
         this.contactPassword = contactPassword
-
     }
 }

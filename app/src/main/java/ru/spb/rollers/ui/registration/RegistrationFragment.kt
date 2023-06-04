@@ -85,13 +85,13 @@ class RegistrationFragment : Fragment() {
         val user = User(role, email, password, false)
         user.userStatus = "Не активен"
 
-        AUTH.createUserWithEmailAndPassword(email, password)
+        MAIN.appViewModel.AUTH.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener{
                 if (it.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    user.userId = AUTH.currentUser?.uid.toString()
+                    user.userId = MAIN.appViewModel.AUTH.currentUser?.uid.toString()
                     MAIN.appViewModel.user = user
-                    REF_DATABASE_ROOT.child("User").child(user.userId).setValue(user)
+                    MAIN.appViewModel.REF_DATABASE_ROOT.child("User").child(user.userId).setValue(user)
                     Toast.makeText(MAIN,"Добро пожаловать!", Toast.LENGTH_SHORT).show()
                     MAIN.navController.navigate(R.id.action_registrationFragment_to_events)
                 } else {

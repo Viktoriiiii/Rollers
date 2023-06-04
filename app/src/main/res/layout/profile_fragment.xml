@@ -83,30 +83,6 @@
                         android:contentDescription="@string/user_photo" />
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
-            <TextView
-                android:id="@+id/txvPublicName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:hint="@string/public_name"
-                android:textColor="@color/for_text"
-                android:paddingHorizontal="4dp"
-                android:paddingTop="15dp"
-                />
-            <EditText
-                android:id="@+id/etPublicName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/for_text"
-                android:hint="@string/_public_name"
-                android:textSize="14sp"
-                android:inputType="text"
-                android:backgroundTint="@color/for_contacts"
-                android:autofillHints="public name" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/for_icon"/>
             <LinearLayout
                 android:id="@+id/llSchool"
                 android:layout_width="match_parent"

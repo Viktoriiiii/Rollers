@@ -1,5 +1,7 @@
 package ru.spb.rollers.models
 
+import com.google.firebase.database.Exclude
+
 class User {
     var userId: String = ""
     var role: String = ""
@@ -7,7 +9,6 @@ class User {
     var userPassword: String? = ""
     var userFirstName: String? = ""
     var userLastName: String? = ""
-    var userPublicName: String? = ""
     var userStatus: String? = ""
     var userDistrict: String? = ""
     var userBirthday: String? = ""
@@ -27,5 +28,27 @@ class User {
         this.userEmail = userEmail
         this.userPassword = userPassword
         this.isManager = isManager
+    }
+
+    @Exclude
+    fun  toMap() : Map<String, Any?> {
+        return mapOf(
+            "userId" to userId,
+            "role" to role,
+            "userEmail" to userEmail,
+            "userPassword" to userPassword,
+            "userFirstName" to userFirstName,
+            "userLastName" to userLastName,
+            "userStatus" to userStatus,
+            "userDistrict" to userDistrict,
+            "userBirthday" to userBirthday,
+            "userGender" to userGender,
+            "userPhone" to userPhone,
+            "userPhoto" to userPhoto,
+            "userSchoolName" to userSchoolName,
+            "userDescription" to userDescription,
+            "userAddress" to userAddress,
+            "isManager" to isManager
+        )
     }
 }

@@ -102,15 +102,9 @@ class Registration : Fragment() {
                 }
             }
             4 -> {
-                contact.contactPublicName = binding.etPublicName.text.toString()
-
-                if (!contact.contactPublicName.isNullOrEmpty())
                     MAIN.navController.navigate(R.id.action_registration_to_homePage)
-                else {
-                    Toast.makeText(MAIN, "Поля заполнены неверно", Toast.LENGTH_SHORT).show()
-                    step = 4
-                }
-            }
+             }
+
         }
     }
 }

@@ -42,7 +42,7 @@ class ContactAdapter (private var itemListContact: List<Contact>
             holder.textViewStatus.text = item.contactAddress
         }
         else {
-            holder.textViewName.text = "${item.contactLastName} ${item.contactFirstName} (${item.contactPublicName})"
+            holder.textViewName.text = "${item.contactLastName} ${item.contactFirstName}"
             holder.imageViewStatus.setImageResource(R.drawable.ic_rollers_foreground)
             if (item.contactStatus){
                 holder.textViewStatus.text = "На роликах"

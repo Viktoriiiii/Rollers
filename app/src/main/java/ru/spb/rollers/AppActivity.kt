@@ -72,9 +72,9 @@ class AppActivity : AppCompatActivity() {
     }
 
     private fun initFirebase() {
-        AUTH = FirebaseAuth.getInstance()
-        REF_DATABASE_ROOT = FirebaseDatabase.getInstance().reference
-        REF_DATABASE_USER = FirebaseDatabase.getInstance().getReference("User")
+        appViewModel.AUTH = FirebaseAuth.getInstance()
+        appViewModel.REF_DATABASE_ROOT = FirebaseDatabase.getInstance().reference
+        appViewModel.REF_DATABASE_USER = FirebaseDatabase.getInstance().getReference("User")
     }
 
 
@@ -123,6 +123,5 @@ class AppActivity : AppCompatActivity() {
         super.onDestroy()
         println(object : Any() {}.javaClass.enclosingMethod?.name)
         println(appViewModel.liveData.value)
-
     }
 }
