@@ -21,12 +21,10 @@ import okhttp3.*
 import ru.spb.rollers.*
 import ru.spb.rollers.databinding.ProfileFragmentBinding
 
-
 class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
 
     private var _binding: ProfileFragmentBinding? = null
     private val binding get() = _binding!!
-    private val WEATHER_API_KEY = "43cf8001-588a-477e-b84f-0a140208c3de"
 
 //    val weatherConditions = mapOf(
 //        "clear" to "Ясно",
@@ -64,14 +62,10 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
-        // TODO: Use the ViewModel
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
+        showInfoInProfile()
 
         val switchGender: SwitchCompat = view.findViewById(R.id.switchGender)
         switchGender.setOnCheckedChangeListener{buttonView, isChecked ->
@@ -85,7 +79,7 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
 
         val btnSaveChanges: MaterialButton = view.findViewById(R.id.btnSaveChanges)
         btnSaveChanges.setOnClickListener{
-            Toast.makeText(MAIN, "Изменения сохранены", Toast.LENGTH_SHORT).show()
+            saveChangesInProfile()
         }
 
         val imagePhoto: ImageView = view.findViewById(R.id.imageViewPhoto)
@@ -104,6 +98,71 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
             binding.llUser.visibility = View.GONE
         if (roleId == 3)
             binding.llSchool.visibility = View.GONE
+    }
+
+    private fun showInfoInProfile(){
+        binding.etPublicName.setText(MAIN.appViewModel.user.userPublicName)
+        binding.etFirstName.setText(MAIN.appViewModel.user.userFirstName)
+        binding.etLastName.setText(MAIN.appViewModel.user.userLastName)
+
+        binding.switchStatus.text = MAIN.appViewModel.user.userStatus // !!! Переделать
+
+        binding.etDistrict.setText(MAIN.appViewModel.user.userDistrict)
+        binding.etBirthday.setText(MAIN.appViewModel.user.userBirthday)
+
+        binding.etGender.setText(MAIN.appViewModel.user.userGender) // !!! Переделать
+
+        binding.etPhone.setText(MAIN.appViewModel.user.userPhone)
+        binding.etEmail.setText(MAIN.appViewModel.user.userEmail)
+        binding.etPassword.setText(MAIN.appViewModel.user.userPassword)
+
+
+
+    }
+
+    private fun saveChangesInProfile(){
+
+        // Проверки поле логина, пароля и публичного имени
+
+
+
+        MAIN.appViewModel.user.userId = AUTH.currentUser!!.uid
+        MAIN.appViewModel.user.userPublicName = binding.etPublicName.text.toString()
+        MAIN.appViewModel.user.userFirstName = binding.etFirstName.text.toString()
+        MAIN.appViewModel.user.userLastName = binding.etLastName.text.toString()
+        MAIN.appViewModel.user.userStatus = binding.switchStatus.text.toString()
+        MAIN.appViewModel.user.userDistrict = binding.etDistrict.text.toString()
+        MAIN.appViewModel.user.userBirthday = binding.etBirthday.text.toString()
+        MAIN.appViewModel.user.userGender = binding.etGender.text.toString()
+        MAIN.appViewModel.user.userPhone = binding.etPhone.text.toString()
+        MAIN.appViewModel.user.userEmail = binding.etEmail.text.toString()
+        MAIN.appViewModel.user.userPassword = binding.etPassword.text.toString()
+       // MAIN.appViewModel.user.role = REF_DATABASE_ROOT.child("User").child(user.userId).child("role").key.toString()
+
+        AUTH.currentUser?.let {
+            REF_DATABASE_ROOT
+                .child("User")
+                .child(MAIN.appViewModel.user.userId)
+                .setValue(MAIN.appViewModel.user)
+       //     AUTH.updateCurrentUser(it)
+        }
+
+//        AUTH.createUserWithEmailAndPassword(email, password)
+//            .addOnCompleteListener{
+//                if (it.isSuccessful) {
+//                    // Sign in success, update UI with the signed-in user's information
+//                    user.userId = AUTH.currentUser?.uid.toString()
+//                    MAIN.appViewModel.user = user
+//                    REF_DATABASE_ROOT.child("User").child(user.userId).setValue(user)
+//                    Toast.makeText(MAIN,"Добро пожаловать!", Toast.LENGTH_SHORT).show()
+//                    MAIN.navController.navigate(R.id.action_registrationFragment_to_events)
+//                } else {
+//                    // If sign in fails, display a message to the user.
+//                    Toast.makeText(MAIN, it.exception?.message, Toast.LENGTH_SHORT).show()
+//                }
+//            }
+
+        Toast.makeText(MAIN, "Изменения сохранены", Toast.LENGTH_SHORT).show()
     }
 
     @SuppressLint("RestrictedApi")

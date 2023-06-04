@@ -35,6 +35,10 @@ class RegistrationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[RegistrationViewModel::class.java]
 
+        binding.etEmail.setText(R.string.user_mail_ru)
+        binding.etPassword.setText(R.string.input_pass)
+        binding.etPasswordAdmit.setText(R.string.input_pass)
+
         binding.mbBack.setOnClickListener{
             MAIN.onSupportNavigateUp()
         }
@@ -79,6 +83,7 @@ class RegistrationFragment : Fragment() {
 
         val role = if (binding.checkBoxManager.isChecked) "Организатор" else "Участник"
         val user = User(role, email, password, false)
+        user.userStatus = "Не активен"
 
         AUTH.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener{

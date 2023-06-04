@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -24,16 +25,17 @@
                 android:id="@+id/imageViewPhotoToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/logo" />
+                android:src="@drawable/logo"
+                android:contentDescription="@string/logo" />
         </androidx.cardview.widget.CardView>
         <TextView
             android:id="@+id/txvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Профиль"
+            android:text="@string/profile"
             android:textColor="@color/for_icon"
             android:textSize="20sp"
-            android:paddingLeft="10dp"
+            android:paddingHorizontal="10dp"
             android:textStyle="bold"
             />
         <RelativeLayout
@@ -50,7 +52,8 @@
                 android:background="@color/for_toolbar"
                 android:src="@drawable/ic_exit_foreground"
                 android:foreground="?android:attr/selectableItemBackground"
-                />
+                android:contentDescription="@string/exit"
+                tools:ignore="UnusedAttribute" />
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
     <ScrollView
@@ -76,105 +79,18 @@
                         android:id="@+id/imageViewPhoto"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/avatar" />
+                        android:src="@drawable/avatar"
+                        android:contentDescription="@string/user_photo" />
                 </androidx.cardview.widget.CardView>
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:gravity="end"-->
-<!--                    >-->
-<!--                    <androidx.cardview.widget.CardView-->
-<!--                        android:id="@+id/cv"-->
-<!--                        android:layout_width="140dp"-->
-<!--                        android:layout_height="95dp"-->
-<!--                        app:cardCornerRadius="15dp"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        app:cardBackgroundColor="@color/for_contacts"-->
-<!--                        android:outlineSpotShadowColor="@color/for_contacts"-->
-<!--                        android:backgroundTint="@color/for_contacts"-->
-<!--                        android:background="@color/for_chat_my_message"-->
-<!--                        >-->
-<!--                        <LinearLayout-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:orientation="vertical"-->
-<!--                            android:padding="5dp"-->
-<!--                            >-->
-<!--                            <TextView-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:text="Санкт-Петербург"-->
-<!--                                android:textAlignment="textStart"-->
-<!--                                android:textColor="@color/for_icon"-->
-<!--                                android:textStyle="bold"-->
-<!--                                android:textSize="14sp"-->
-<!--                                android:padding="3dp"-->
-<!--                                android:layout_marginLeft="7dp"-->
-<!--                                />-->
-<!--                            <LinearLayout-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="40dp"-->
-<!--                                android:orientation="horizontal">-->
-<!--                                <ImageView-->
-<!--                                    android:id="@+id/ivWeather"-->
-<!--                                    android:layout_width="40dp"-->
-<!--                                    android:layout_height="40dp"-->
-<!--                                    android:src="@color/for_contacts"-->
-<!--                                    android:layout_gravity="start|center"-->
-<!--                                    android:foreground="?android:attr/selectableItemBackground"-->
-<!--                                    android:layout_marginLeft="9dp"-->
-<!--                                    android:scaleType="centerCrop"-->
-<!--                                    />-->
-<!--                                <TextView-->
-<!--                                    android:id="@+id/txvWeatherTemp"-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:singleLine="true"-->
-<!--                                    android:ellipsize="marquee"-->
-<!--                                    android:text=""-->
-<!--                                    android:textSize="18sp"-->
-<!--                                    android:textColor="@color/for_icon"-->
-<!--                                    android:textStyle="bold"-->
-<!--                                    android:layout_gravity="center"-->
-<!--                                    android:padding="5dp"-->
-<!--                                    />-->
-<!--                            </LinearLayout>-->
-<!--                            <TextView-->
-<!--                                android:id="@+id/txvWeatherCondition"-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:hint="Облачно с прояснениями"-->
-<!--                                android:textAlignment="textStart"-->
-<!--                                android:paddingLeft="10dp"-->
-<!--                                android:textColor="@color/for_icon"-->
-<!--                                android:textStyle="bold"-->
-<!--                                android:textSize="10sp"-->
-<!--                                />-->
-<!--                            <ImageView-->
-<!--                                android:id="@+id/ivLogoWeatherYandex"-->
-<!--                                android:layout_width="100dp"-->
-<!--                                android:layout_height="20dp"-->
-<!--                                android:background="@color/for_toolbar"-->
-<!--                                android:src="@drawable/logo_weather_ru_indoor"-->
-<!--                                android:layout_weight="1"-->
-<!--                                android:layout_gravity="start|center"-->
-<!--                                android:foreground="?android:attr/selectableItemBackground"-->
-<!--                                android:padding="3dp"-->
-<!--                                android:layout_marginTop="2dp"-->
-<!--                                android:layout_marginLeft="7dp"-->
-<!--                                />-->
-<!--                        </LinearLayout>-->
-<!--                    </androidx.cardview.widget.CardView>-->
-<!--                </LinearLayout>-->
             </LinearLayout>
             <TextView
                 android:id="@+id/txvPublicName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:hint="Public name"
+                android:hint="@string/public_name"
                 android:textColor="@color/for_text"
-                android:paddingLeft="4dp"
+                android:paddingHorizontal="4dp"
                 android:paddingTop="15dp"
                 />
             <EditText
@@ -182,10 +98,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/for_text"
-                android:hint="fantast"
+                android:hint="@string/_public_name"
                 android:textSize="14sp"
+                android:inputType="text"
                 android:backgroundTint="@color/for_contacts"
-                />
+                android:autofillHints="public name" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -200,21 +117,22 @@
                     android:id="@+id/txvSchoolName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Название школы"
+                    android:hint="@string/name_school"
                     android:textColor="@color/for_text"
                     android:textSize="16sp"
-                    android:paddingLeft="4dp"
+                    android:paddingHorizontal="4dp"
                     android:paddingTop="10dp"
                     />
                 <EditText
                     android:id="@+id/etSchoolName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Роллер-школа Фантаст"
+                    android:hint="@string/_name_school"
                     android:textColor="@color/for_text"
                     android:textSize="14sp"
                     android:backgroundTint="@color/for_contacts"
-                    />
+                    android:autofillHints="name school"
+                    android:inputType="textMultiLine" />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -223,21 +141,22 @@
                     android:id="@+id/txvSchoolDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Описание"
+                    android:hint="@string/description"
                     android:textColor="@color/for_text"
                     android:textSize="16sp"
-                    android:paddingLeft="4dp"
+                    android:paddingHorizontal="4dp"
                     android:paddingTop="10dp"
                     />
                 <EditText
                     android:id="@+id/etSchoolDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Обучение катанию на роликах детей и взрослых: свой роллердром / скейт-парк, опытные инструкторы по роликам, доступные цены."
+                    android:hint="@string/_description"
                     android:textColor="@color/for_text"
                     android:textSize="14sp"
                     android:backgroundTint="@color/for_contacts"
-                    />
+                    android:autofillHints="school description"
+                    android:inputType="textMultiLine" />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -246,29 +165,27 @@
                     android:id="@+id/txvSchoolAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Адрес"
+                    android:hint="@string/address"
                     android:textColor="@color/for_text"
                     android:textSize="16sp"
-                    android:paddingLeft="4dp"
+                    android:paddingHorizontal="4dp"
                     android:paddingTop="10dp"
                     />
                 <EditText
                     android:id="@+id/etSchoolAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Адрес: просп. Юрия Гагарина, 32, корп. 6Б (этаж 4)"
+                    android:hint="@string/_address"
                     android:textColor="@color/for_text"
                     android:textSize="14sp"
                     android:backgroundTint="@color/for_contacts"
-                    />
+                    android:autofillHints="school address"
+                    android:inputType="textMultiLine" />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/for_icon"/>
             </LinearLayout>
-
-
-
             <LinearLayout
                 android:id="@+id/llUser"
                 android:layout_width="match_parent"
@@ -279,21 +196,22 @@
                     android:id="@+id/txvFirstName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Имя"
+                    android:hint="@string/name"
                     android:textColor="@color/for_text"
                     android:textSize="16sp"
-                    android:paddingLeft="4dp"
+                    android:paddingHorizontal="4dp"
                     android:paddingTop="10dp"
                     />
                 <EditText
                     android:id="@+id/etFirstName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Юлия"
+                    android:hint="@string/_name"
                     android:textColor="@color/for_text"
                     android:textSize="14sp"
                     android:backgroundTint="@color/for_contacts"
-                    />
+                    android:autofillHints="first name"
+                    android:inputType="textPersonName" />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -302,21 +220,22 @@
                     android:id="@+id/txvLastName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Фамилия"
+                    android:hint="@string/last_name"
                     android:textColor="@color/for_text"
                     android:textSize="16sp"
-                    android:paddingLeft="4dp"
+                    android:paddingHorizontal="4dp"
                     android:paddingTop="10dp"
                     />
                 <EditText
                     android:id="@+id/etLastName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Иванова"
+                    android:hint="@string/_last_name"
                     android:textColor="@color/for_text"
                     android:textSize="14sp"
                     android:backgroundTint="@color/for_contacts"
-                    />
+                    android:autofillHints="last name"
+                    android:inputType="textPersonName" />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -325,10 +244,10 @@
                     android:id="@+id/txvStatus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Статус"
+                    android:hint="@string/status"
                     android:textColor="@color/for_text"
                     android:textSize="16sp"
-                    android:paddingLeft="4dp"
+                    android:paddingHorizontal="4dp"
                     android:paddingTop="10dp"
                     />
                 <androidx.appcompat.widget.SwitchCompat
@@ -338,8 +257,8 @@
                     android:textSize="16sp"
                     android:textColor="@color/for_text"
                     android:theme="@style/SwitchStatus"
-                    android:hint="Не активен"
-                    android:paddingLeft="4dp"
+                    android:hint="@string/inactive"
+                    android:paddingHorizontal="4dp"
                     />
                 <View
                     android:layout_width="match_parent"
@@ -349,10 +268,10 @@
                     android:id="@+id/txvDistrict"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Район"
+                    android:hint="@string/district"
                     android:textColor="@color/for_text"
                     android:textSize="16sp"
-                    android:paddingLeft="4dp"
+                    android:paddingHorizontal="4dp"
                     android:paddingTop="10dp"
                     />
                 <EditText
@@ -361,9 +280,10 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/for_text"
                     android:textSize="14sp"
-                    android:hint="Московский"
+                    android:hint="@string/_district"
                     android:backgroundTint="@color/for_contacts"
-                    />
+                    android:autofillHints="district"
+                    android:inputType="textMultiLine" />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -372,10 +292,10 @@
                     android:id="@+id/txvBirthday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Дата рождения"
+                    android:hint="@string/birthday"
                     android:textColor="@color/for_text"
                     android:textSize="16sp"
-                    android:paddingLeft="4dp"
+                    android:paddingHorizontal="4dp"
                     android:paddingTop="10dp"
                     />
                 <EditText
@@ -384,10 +304,10 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/for_text"
                     android:textSize="14sp"
-                    android:hint="28/05/2023"
+                    android:hint="@string/_birthday"
                     android:inputType="date"
                     android:backgroundTint="@color/for_contacts"
-                    />
+                    android:autofillHints="birthday" />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -396,22 +316,22 @@
                     android:id="@+id/txvGender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Пол"
+                    android:hint="@string/gender"
                     android:textColor="@color/for_text"
                     android:textSize="16sp"
-                    android:paddingLeft="4dp"
+                    android:paddingHorizontal="4dp"
                     android:paddingTop="10dp"
                     />
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/switchGender"
+                <EditText
+                    android:id="@+id/etGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
                     android:textColor="@color/for_text"
-                    android:theme="@style/SwitchGender"
-                    android:hint="Женский"
-                    android:paddingLeft="4dp"
-                    />
+                    android:textSize="14sp"
+                    android:hint="@string/gender_female"
+                    android:inputType="textMultiLine"
+                    android:backgroundTint="@color/for_contacts"
+                    android:autofillHints="birthday" />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -421,10 +341,10 @@
                 android:id="@+id/txvPhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Телефон"
+                android:hint="@string/phone"
                 android:textColor="@color/for_text"
                 android:textSize="16sp"
-                android:paddingLeft="4dp"
+                android:paddingHorizontal="4dp"
                 android:paddingTop="10dp"
                 />
             <EditText
@@ -433,10 +353,10 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/for_text"
                 android:textSize="14sp"
-                android:hint="+7 911 999 99 99"
+                android:hint="@string/_phone"
                 android:inputType="phone"
                 android:backgroundTint="@color/for_contacts"
-                />
+                android:autofillHints="phone" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -445,45 +365,22 @@
                 android:id="@+id/txvEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Почта"
+                android:hint="@string/email"
                 android:textColor="@color/for_text"
                 android:textSize="16sp"
-                android:paddingLeft="4dp"
+                android:paddingHorizontal="4dp"
                 android:paddingTop="10dp"
                 />
             <EditText
                 android:id="@+id/etEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Электронная почта"
+                android:hint="@string/user_mail_ru"
                 android:textColor="@color/for_text"
                 android:textSize="14sp"
                 android:inputType="textEmailAddress"
                 android:backgroundTint="@color/for_contacts"
-                />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/for_icon"/>
-            <TextView
-                android:id="@+id/txvLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Логин"
-                android:textColor="@color/for_text"
-                android:textSize="16sp"
-                android:paddingLeft="4dp"
-                android:paddingTop="10dp"
-                />
-            <EditText
-                android:id="@+id/etLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="login"
-                android:textColor="@color/for_text"
-                android:textSize="14sp"
-                android:backgroundTint="@color/for_contacts"
-                />
+                android:autofillHints="emailAddress" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -492,10 +389,10 @@
                 android:id="@+id/txvPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Пароль"
+                android:hint="@string/pass"
                 android:textSize="16sp"
                 android:textColor="@color/for_text"
-                android:paddingLeft="4dp"
+                android:paddingHorizontal="4dp"
                 android:paddingTop="10dp"
                 />
             <EditText
@@ -504,10 +401,10 @@
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:textColor="@color/for_text"
-                android:hint="password"
+                android:hint="@string/input_pass"
                 android:inputType="textPassword"
                 android:backgroundTint="@color/for_contacts"
-                />
+                android:autofillHints="password" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -515,7 +412,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/etPassword"
                 android:gravity="center"
                 android:paddingTop="30dp"
                 >
@@ -524,7 +420,7 @@
                     app:cornerRadius="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Сохранить изменения"
+                    android:text="@string/saveChanges"
                     android:textAllCaps="false"
                     android:backgroundTint="@color/for_button"
                     android:padding="16dp"

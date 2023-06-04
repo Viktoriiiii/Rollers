@@ -37,8 +37,8 @@ class AuthorizationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[AuthorizationViewModel::class.java]
 
-        binding.etEmail.setText("user@mail.ru")
-        binding.etPassword.setText("123456")
+        binding.etEmail.setText(R.string.user_mail_ru)
+        binding.etPassword.setText(R.string.input_pass)
 
         binding.mbRegister.setOnClickListener{
             MAIN.navController.navigate(R.id.action_authorizationFragment_to_registrationFragment)
