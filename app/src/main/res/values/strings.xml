@@ -35,9 +35,9 @@
     <string name="name_school">Название школы</string>
     <string name="_name_school">Роллер-школа Фантаст</string>
     <string name="public_name">Public name</string>
-    <string name="_public_name">fantast</string>
     <string name="logo">logo</string>
     <string name="profile">Профиль</string>
     <string name="exit">exit</string>
     <string name="user_photo">user_photo</string>
+    <string name="russian_name_app">Роллеры СПб</string>
 </resources>
