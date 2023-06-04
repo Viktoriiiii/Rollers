@@ -1,6 +1,7 @@
 package ru.spb.rollers.ui.profile
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,6 +18,9 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.EmailAuthProvider
+import com.squareup.picasso.Picasso
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import okhttp3.*
 import ru.spb.rollers.*
 import ru.spb.rollers.databinding.ProfileFragmentBinding
@@ -110,15 +114,24 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
         binding.etPhone.setText(MAIN.appViewModel.user.userPhone)
         binding.etEmail.setText(MAIN.appViewModel.user.userEmail)
         binding.etPassword.setText(MAIN.appViewModel.user.userPassword)
+        if (!MAIN.appViewModel.user.userPhoto.isNullOrEmpty()) {
+            Picasso.get()
+                .load(MAIN.appViewModel.user.userPhoto)
+                .placeholder(R.drawable.avatar)
+                .into(binding.imageViewPhoto)
+        }
     }
 
     private fun saveChangesInProfile(){
 
-        // Проверки смены пароля
-
+        if (binding.etPassword.text.length < 6){
+            Toast.makeText(MAIN, "Пароль должен быть более  символов", Toast.LENGTH_SHORT)
+                .show()
+            return
+        }
 
         MAIN.appViewModel.user.userEmail = binding.etEmail.text.toString()
-        MAIN.appViewModel.user.userId = MAIN.appViewModel.AUTH.currentUser!!.uid
+        MAIN.appViewModel.user.userId = AUTH.currentUser!!.uid
         MAIN.appViewModel.user.userFirstName = binding.etFirstName.text.toString()
         MAIN.appViewModel.user.userLastName = binding.etLastName.text.toString()
         MAIN.appViewModel.user.userStatus = binding.switchStatus.text.toString()
@@ -133,7 +146,7 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
         MAIN.appViewModel.user.userDescription = binding.etSchoolDescription.text.toString()
         MAIN.appViewModel.user.userAddress = binding.etSchoolAddress.text.toString()
 
-        changeEmailAndApssword()
+        changeEmailAndPassword()
 
         val userValues = MAIN.appViewModel.user.toMap()
         val childUpdates = hashMapOf<String, Any>(
@@ -141,22 +154,21 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
         )
 
         Toast.makeText(MAIN, "Данные обновлены", Toast.LENGTH_SHORT).show()
-        MAIN.appViewModel.REF_DATABASE_ROOT.updateChildren(childUpdates)
+        REF_DATABASE_ROOT.updateChildren(childUpdates)
     }
 
-    private fun changeEmailAndApssword(){
+    private fun changeEmailAndPassword(){
         val credential =
             EmailAuthProvider.getCredential(MAIN.appViewModel.user.userEmail!!,
                 MAIN.appViewModel.user.userPassword!!
             )
-
-        MAIN.appViewModel.AUTH.currentUser?.updateEmail(binding.etEmail.text.toString())
+        AUTH.currentUser?.updateEmail(binding.etEmail.text.toString())
             ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    MAIN.appViewModel.AUTH.currentUser?.updatePassword(binding.etPassword.text.toString())
+                    AUTH.currentUser?.updatePassword(binding.etPassword.text.toString())
                         ?.addOnCompleteListener { task3 ->
                             if (task3.isSuccessful) {
-                                MAIN.appViewModel.AUTH.currentUser?.reauthenticate(credential)
+                                AUTH.currentUser?.reauthenticate(credential)
                                     ?.addOnCompleteListener { task2 ->
                                         if (!task2.isSuccessful) {
                                             Toast.makeText(MAIN, task2.exception?.message, Toast.LENGTH_SHORT)
@@ -180,7 +192,6 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
         val popupMenu = PopupMenu(MAIN, imagePhoto)
         popupMenu.inflate(R.menu.profile_photo_popup_menu)
         popupMenu.setOnMenuItemClickListener(this)
-
         val menuHelper = MenuPopupHelper(MAIN,
             popupMenu.menu as MenuBuilder, imagePhoto)
         menuHelper.setForceShowIcon(true)
@@ -190,7 +201,7 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
     override fun onMenuItemClick(menuItem: MenuItem?): Boolean {
         when (menuItem?.itemId) {
             R.id.changePhoto -> {
-                Toast.makeText(MAIN, "Изображение изменено", Toast.LENGTH_SHORT).show()
+                changeImage()
             }
             R.id.deletePhoto -> {
                 val builderDeleteDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
@@ -198,7 +209,17 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
                     .setTitle("Вы уверены, что хотите удалить изображение?")
                     .setCancelable(false)
                     .setPositiveButton("Да") { _, _ ->
-                        Toast.makeText(MAIN, "Изображение удалено", Toast.LENGTH_SHORT).show()
+                        val path = REF_STORAGE_ROOT.child(FOLDER_PROFILE_IMAGE)
+                            .child(CURRENT_UID)
+                        path.delete().addOnSuccessListener {
+                            MAIN.appViewModel.user.userPhoto = ""
+                            REF_DATABASE_ROOT.child("User").child(CURRENT_UID)
+                                .child(CHILD_PHOTO_URL).setValue(MAIN.appViewModel.user.userPhoto)
+                            Toast.makeText(MAIN, "Изображение удалено", Toast.LENGTH_SHORT).show()
+                            binding.imageViewPhoto.setImageResource(R.drawable.avatar)
+                        }.addOnFailureListener {
+                            Toast.makeText(MAIN, it.message, Toast.LENGTH_SHORT).show()
+                        }
                     }
                     .setNegativeButton("Отмена"){dialog, _ ->
                         dialog.cancel()
@@ -208,6 +229,45 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
             }
         }
         return false
+    }
+
+    private fun changeImage(){
+        CropImage.activity()
+            .setAspectRatio(1, 1)
+            .setRequestedSize(600, 600)
+            .setCropShape(CropImageView.CropShape.OVAL)
+            .start(MAIN, this)
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE
+            && resultCode == Activity.RESULT_OK && data != null){
+            val uri = CropImage.getActivityResult(data).uri
+            val path = REF_STORAGE_ROOT.child(FOLDER_PROFILE_IMAGE)
+                .child(CURRENT_UID)
+            path.putFile(uri).addOnCompleteListener { task1 ->
+                if (task1.isSuccessful) {
+                    path.downloadUrl.addOnCompleteListener { task2 ->
+                        if (task2.isSuccessful) {
+                            val photoUrl = task2.result.toString()
+                            REF_DATABASE_ROOT.child("User").child(CURRENT_UID)
+                                .child(CHILD_PHOTO_URL).setValue(photoUrl)
+                                .addOnCompleteListener {
+                                    if (it.isSuccessful) {
+                                        Picasso.get()
+                                            .load(photoUrl)
+                                            .placeholder(R.drawable.avatar)
+                                            .into(binding.imageViewPhoto)
+                                        MAIN.appViewModel.user.userPhoto = photoUrl
+                                    }
+                                }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {

@@ -48,17 +48,17 @@ class AuthorizationFragment : Fragment() {
             val email  = binding.etEmail.text.toString()
             val password  = binding.etPassword.text.toString()
 
-            MAIN.appViewModel.AUTH.signInWithEmailAndPassword(email, password)
+            AUTH.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener{
                     if (it.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
-                        val user = MAIN.appViewModel.AUTH.currentUser
+                        val user = AUTH.currentUser
                         user?.let {
                             val uid = user.uid
                             val userListener = object : ValueEventListener {
                                 override fun onDataChange(snapshot: DataSnapshot) {
                                     MAIN.appViewModel.user = snapshot.getValue<User>()!!
-                                    MAIN.appViewModel.REF_DATABASE_USER.child(uid).removeEventListener(this)
+                                    REF_DATABASE_USER.child(uid).removeEventListener(this)
 
                                     Toast.makeText(MAIN,"Добро пожаловать!", Toast.LENGTH_SHORT).show()
                                     when (MAIN.appViewModel.user.role) {
@@ -74,7 +74,7 @@ class AuthorizationFragment : Fragment() {
                                     Toast.makeText( MAIN, error.toException().message, Toast.LENGTH_SHORT).show()
                                 }
                             }
-                            MAIN.appViewModel.REF_DATABASE_USER.child(uid).addValueEventListener(userListener)
+                            REF_DATABASE_USER.child(uid).addValueEventListener(userListener)
                         }
 
                     } else {

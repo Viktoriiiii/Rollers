@@ -10,8 +10,6 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
 import com.yandex.mapkit.MapKitFactory
 import ru.spb.rollers.databinding.ActivityAppBinding
 
@@ -26,8 +24,11 @@ class AppActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initFirebase()
         binding = ActivityAppBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
+
         navController = Navigation.findNavController(this,
             R.id.fragmentContainer)
 
@@ -50,8 +51,6 @@ class AppActivity : AppCompatActivity() {
 
         setBottomNavigationVisible(false)
 
-        initFirebase()
-
         println(object : Any() {}.javaClass.enclosingMethod?.name)
         println(appViewModel.liveData.value)
 
@@ -70,13 +69,6 @@ class AppActivity : AppCompatActivity() {
             bottomNavigationView.visibility = View.GONE
         }
     }
-
-    private fun initFirebase() {
-        appViewModel.AUTH = FirebaseAuth.getInstance()
-        appViewModel.REF_DATABASE_ROOT = FirebaseDatabase.getInstance().reference
-        appViewModel.REF_DATABASE_USER = FirebaseDatabase.getInstance().getReference("User")
-    }
-
 
     override fun onStart() {
         super.onStart()

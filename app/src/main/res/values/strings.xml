@@ -29,9 +29,9 @@
     <string name="name">Имя</string>
     <string name="_name">Юлия</string>
     <string name="address">Адрес</string>
-    <string name="_address">Адрес: просп. Юрия Гагарина, 32, корп. 6Б (этаж 4)</string>
+    <string name="_address">Просп. Юрия Гагарина, 32</string>
     <string name="description">Описание</string>
-    <string name="_description">Обучение катанию на роликах детей и взрослых: свой роллердром / скейт-парк, опытные инструкторы по роликам, доступные цены.</string>
+    <string name="_description">Обучение катанию на роликах.</string>
     <string name="name_school">Название школы</string>
     <string name="_name_school">Роллер-школа Фантаст</string>
     <string name="public_name">Public name</string>
