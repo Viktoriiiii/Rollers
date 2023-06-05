@@ -46,7 +46,7 @@ class UsersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setInitialData()
         recyclerView = view.findViewById(R.id.contactsList)
-        contactAdapter = ContactAdapter(contactList)
+   //     contactAdapter = ContactAdapter(contactList)
         recyclerView.adapter = contactAdapter
 
         MAIN.setBottomNavigationVisible(false)

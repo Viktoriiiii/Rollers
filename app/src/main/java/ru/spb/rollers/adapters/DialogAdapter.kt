@@ -83,7 +83,7 @@ class DialogAdapter(
         val mtvMessage: MaterialTextView = itemView.findViewById(R.id.mtvMessage)
         val mtvDate: MaterialTextView = itemView.findViewById(R.id.mtvDate)
         val txvContMessage: MaterialTextView = itemView.findViewById(R.id.txvContMessage)
-        val ivPhoto: ImageView = itemView.findViewById(R.id.imageViewPhoto)
+        val ivPhoto: ImageView = itemView.findViewById(R.id.ivPhoto)
 
     }
 }

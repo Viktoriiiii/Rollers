@@ -82,7 +82,7 @@ class EventsFragment : Fragment()
             true
         }
 
-        if (roleId == 3)
+        if (MAIN.appViewModel.user.role == "Участник")
             binding.rlAddEvent.visibility = View.GONE
 
         getWeather()

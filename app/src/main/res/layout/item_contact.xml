@@ -2,6 +2,7 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/contactContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -23,13 +24,14 @@
             app:cardCornerRadius="40dp"
             >
             <ImageView
-                android:id="@+id/imageViewPhoto"
+                android:id="@+id/ivPhoto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/logo" />
+                android:src="@drawable/logo"
+                android:contentDescription="@string/user_photo" />
         </androidx.cardview.widget.CardView>
         <TextView
-            android:id="@+id/textViewName"
+            android:id="@+id/txvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
@@ -37,28 +39,28 @@
             android:textColor="@color/for_text"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:text="Иван Иванов (nickname)"
+            android:text="@string/full_name"
             android:layout_toEndOf="@+id/cardViewPhoto"
             android:padding="2dp"
             android:paddingStart="20dp"
-            />
+            tools:ignore="RtlSymmetry" />
         <TextView
             android:id="@+id/txvDistrict"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Московский"
-            android:layout_below="@+id/textViewName"
+            android:text="@string/_district"
+            android:layout_below="@+id/txvName"
             android:layout_toEndOf="@id/cardViewPhoto"
             android:textColor="@color/for_text"
             android:textSize="14sp"
             android:padding="2dp"
             android:paddingStart="20dp"
-            />
+            tools:ignore="RtlSymmetry" />
         <TextView
-            android:id="@+id/textViewStatus"
+            android:id="@+id/txvStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="На роликах"
+            android:text="@string/_status"
             android:textColor="@color/for_text"
             android:textSize="14sp"
             android:textStyle="normal|italic"
@@ -66,22 +68,22 @@
             android:layout_toEndOf="@id/cardViewPhoto"
             android:padding="2dp"
             android:paddingStart="20dp"
-            />
+            tools:ignore="RtlSymmetry" />
         <ImageView
-            android:id="@+id/imageViewStatus"
+            android:id="@+id/ivStatus"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/ic_rollers_foreground"
             android:layout_below="@+id/txvDistrict"
-            android:layout_toEndOf="@+id/textViewStatus"
-            />
+            android:layout_toEndOf="@+id/txvStatus"
+            android:contentDescription="@string/status" />
         <ImageView
-            android:id="@+id/imageViewToContact"
+            android:id="@+id/ivToContact"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_below="@+id/textViewName"
+            android:layout_below="@+id/txvName"
             android:src="@drawable/ic_done_foreground"
-            android:layout_alignParentRight="true"
-            />
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/is_contact" />
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

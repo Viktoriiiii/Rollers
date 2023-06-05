@@ -80,7 +80,7 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
             saveChangesInProfile()
         }
 
-        val imagePhoto: ImageView = view.findViewById(R.id.imageViewPhoto)
+        val imagePhoto: ImageView = view.findViewById(R.id.ivPhoto)
         imagePhoto.setOnClickListener{
             showPopup(imagePhoto)
         }
@@ -96,61 +96,61 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
     private fun showInfoInProfile(){
         if (MAIN.appViewModel.user.role == "Организатор") {
             binding.llUser.visibility = View.GONE
-            binding.etSchoolName.setText(MAIN.appViewModel.user.userSchoolName)
-            binding.etSchoolDescription.setText(MAIN.appViewModel.user.userDescription)
-            binding.etSchoolAddress.setText(MAIN.appViewModel.user.userAddress)
+            binding.etSchoolName.setText(MAIN.appViewModel.user.schoolName)
+            binding.etSchoolDescription.setText(MAIN.appViewModel.user.description)
+            binding.etSchoolAddress.setText(MAIN.appViewModel.user.address)
         }
         if (MAIN.appViewModel.user.role == "Участник") {
             binding.llSchool.visibility = View.GONE
-            binding.etFirstName.setText(MAIN.appViewModel.user.userFirstName)
-            binding.etLastName.setText(MAIN.appViewModel.user.userLastName)
-            binding.switchStatus.isChecked = MAIN.appViewModel.user.userStatus != "Не активен"
-            binding.switchStatus.text = MAIN.appViewModel.user.userStatus
-            binding.etDistrict.setText(MAIN.appViewModel.user.userDistrict)
-            binding.etBirthday.setText(MAIN.appViewModel.user.userBirthday)
-            binding.etGender.setText(MAIN.appViewModel.user.userGender)
+            binding.etFirstName.setText(MAIN.appViewModel.user.firstName)
+            binding.etLastName.setText(MAIN.appViewModel.user.lastName)
+            binding.switchStatus.isChecked = MAIN.appViewModel.user.status != "Не активен"
+            binding.switchStatus.text = MAIN.appViewModel.user.status
+            binding.etDistrict.setText(MAIN.appViewModel.user.district)
+            binding.etBirthday.setText(MAIN.appViewModel.user.birthday)
+            binding.etGender.setText(MAIN.appViewModel.user.gender)
         }
 
-        binding.etPhone.setText(MAIN.appViewModel.user.userPhone)
-        binding.etEmail.setText(MAIN.appViewModel.user.userEmail)
-        binding.etPassword.setText(MAIN.appViewModel.user.userPassword)
-        if (!MAIN.appViewModel.user.userPhoto.isNullOrEmpty()) {
+        binding.etPhone.setText(MAIN.appViewModel.user.phone)
+        binding.etEmail.setText(MAIN.appViewModel.user.email)
+        binding.etPassword.setText(MAIN.appViewModel.user.password)
+        if (!MAIN.appViewModel.user.photo.isNullOrEmpty()) {
             Picasso.get()
-                .load(MAIN.appViewModel.user.userPhoto)
+                .load(MAIN.appViewModel.user.photo)
                 .placeholder(R.drawable.avatar)
-                .into(binding.imageViewPhoto)
+                .into(binding.ivPhoto)
         }
     }
 
     private fun saveChangesInProfile(){
 
         if (binding.etPassword.text.length < 6){
-            Toast.makeText(MAIN, "Пароль должен быть более  символов", Toast.LENGTH_SHORT)
+            Toast.makeText(MAIN, "Пароль должен быть более 6 символов", Toast.LENGTH_SHORT)
                 .show()
             return
         }
 
-        MAIN.appViewModel.user.userEmail = binding.etEmail.text.toString()
-        MAIN.appViewModel.user.userId = AUTH.currentUser!!.uid
-        MAIN.appViewModel.user.userFirstName = binding.etFirstName.text.toString()
-        MAIN.appViewModel.user.userLastName = binding.etLastName.text.toString()
-        MAIN.appViewModel.user.userStatus = binding.switchStatus.text.toString()
-        MAIN.appViewModel.user.userDistrict = binding.etDistrict.text.toString()
-        MAIN.appViewModel.user.userBirthday = binding.etBirthday.text.toString()
-        MAIN.appViewModel.user.userGender = binding.etGender.text.toString()
+        MAIN.appViewModel.user.email = binding.etEmail.text.toString()
+        MAIN.appViewModel.user.id = AUTH.currentUser!!.uid
+        MAIN.appViewModel.user.firstName = binding.etFirstName.text.toString()
+        MAIN.appViewModel.user.lastName = binding.etLastName.text.toString()
+        MAIN.appViewModel.user.status = binding.switchStatus.text.toString()
+        MAIN.appViewModel.user.district = binding.etDistrict.text.toString()
+        MAIN.appViewModel.user.birthday = binding.etBirthday.text.toString()
+        MAIN.appViewModel.user.gender = binding.etGender.text.toString()
 
-        MAIN.appViewModel.user.userPhone = binding.etPhone.text.toString()
-        MAIN.appViewModel.user.userPassword = binding.etPassword.text.toString()
+        MAIN.appViewModel.user.phone = binding.etPhone.text.toString()
+        MAIN.appViewModel.user.password = binding.etPassword.text.toString()
 
-        MAIN.appViewModel.user.userSchoolName = binding.etSchoolName.text.toString()
-        MAIN.appViewModel.user.userDescription = binding.etSchoolDescription.text.toString()
-        MAIN.appViewModel.user.userAddress = binding.etSchoolAddress.text.toString()
+        MAIN.appViewModel.user.schoolName = binding.etSchoolName.text.toString()
+        MAIN.appViewModel.user.description = binding.etSchoolDescription.text.toString()
+        MAIN.appViewModel.user.address = binding.etSchoolAddress.text.toString()
 
         changeEmailAndPassword()
 
         val userValues = MAIN.appViewModel.user.toMap()
         val childUpdates = hashMapOf<String, Any>(
-            "/User/${MAIN.appViewModel.user.userId}" to userValues
+            "/User/${MAIN.appViewModel.user.id}" to userValues
         )
 
         Toast.makeText(MAIN, "Данные обновлены", Toast.LENGTH_SHORT).show()
@@ -159,8 +159,8 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
 
     private fun changeEmailAndPassword(){
         val credential =
-            EmailAuthProvider.getCredential(MAIN.appViewModel.user.userEmail!!,
-                MAIN.appViewModel.user.userPassword!!
+            EmailAuthProvider.getCredential(MAIN.appViewModel.user.email!!,
+                MAIN.appViewModel.user.password!!
             )
         AUTH.currentUser?.updateEmail(binding.etEmail.text.toString())
             ?.addOnCompleteListener { task ->
@@ -212,11 +212,11 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
                         val path = REF_STORAGE_ROOT.child(FOLDER_PROFILE_IMAGE)
                             .child(CURRENT_UID)
                         path.delete().addOnSuccessListener {
-                            MAIN.appViewModel.user.userPhoto = ""
+                            MAIN.appViewModel.user.photo = ""
                             REF_DATABASE_ROOT.child("User").child(CURRENT_UID)
-                                .child(CHILD_PHOTO_URL).setValue(MAIN.appViewModel.user.userPhoto)
+                                .child(CHILD_PHOTO_URL).setValue(MAIN.appViewModel.user.photo)
                             Toast.makeText(MAIN, "Изображение удалено", Toast.LENGTH_SHORT).show()
-                            binding.imageViewPhoto.setImageResource(R.drawable.avatar)
+                            binding.ivPhoto.setImageResource(R.drawable.avatar)
                         }.addOnFailureListener {
                             Toast.makeText(MAIN, it.message, Toast.LENGTH_SHORT).show()
                         }
@@ -259,8 +259,8 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
                                         Picasso.get()
                                             .load(photoUrl)
                                             .placeholder(R.drawable.avatar)
-                                            .into(binding.imageViewPhoto)
-                                        MAIN.appViewModel.user.userPhoto = photoUrl
+                                            .into(binding.ivPhoto)
+                                        MAIN.appViewModel.user.photo = photoUrl
                                     }
                                 }
                         }

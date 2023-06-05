@@ -16,13 +16,12 @@ var titleEvents = ""
 
 var titleRoutes = ""
 
-var roleId = 3 // 1 - администратор, 2 - организатор, 3 - участник
-
-
 lateinit var AUTH: FirebaseAuth
 lateinit var REF_DATABASE_ROOT: DatabaseReference
 lateinit var REF_STORAGE_ROOT: StorageReference
 lateinit var REF_DATABASE_USER: DatabaseReference
+lateinit var REF_DATABASE_CONTACT: DatabaseReference
+
 const val FOLDER_PROFILE_IMAGE = "profile_image"
 lateinit var CURRENT_UID:String
 
@@ -32,6 +31,7 @@ fun initFirebase() {
     AUTH = FirebaseAuth.getInstance()
     REF_DATABASE_ROOT = FirebaseDatabase.getInstance().reference
     REF_DATABASE_USER = FirebaseDatabase.getInstance().getReference("User")
+    REF_DATABASE_CONTACT = FirebaseDatabase.getInstance().getReference("Contact")
     CURRENT_UID =  AUTH.currentUser?.uid.toString()
     REF_STORAGE_ROOT = FirebaseStorage.getInstance().reference
 }

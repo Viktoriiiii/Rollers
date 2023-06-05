@@ -19,7 +19,6 @@ import com.google.android.material.textview.MaterialTextView
 import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
 import ru.spb.rollers.model.Contact
-import ru.spb.rollers.roleId
 
 class ContactAdapter (private var itemListContact: List<Contact>
 ): RecyclerView.Adapter<ContactAdapter.ContactViewHolder>(){
@@ -37,26 +36,26 @@ class ContactAdapter (private var itemListContact: List<Contact>
         holder.ivPhoto.setImageResource(R.drawable.logo)
 
         if (item.isManager){
-            holder.textViewName.text = item.contactSchoolName
-            holder.imageViewStatus.visibility = View.GONE
-            holder.textViewStatus.text = item.contactAddress
+            holder.txvName.text = item.contactSchoolName
+            holder.ivStatus.visibility = View.GONE
+            holder.txvStatus.text = item.contactAddress
         }
         else {
-            holder.textViewName.text = "${item.contactLastName} ${item.contactFirstName}"
-            holder.imageViewStatus.setImageResource(R.drawable.ic_rollers_foreground)
+            holder.txvName.text = "${item.contactLastName} ${item.contactFirstName}"
+            holder.ivStatus.setImageResource(R.drawable.ic_rollers_foreground)
             if (item.contactStatus){
-                holder.textViewStatus.text = "На роликах"
-                holder.imageViewStatus.setImageResource(R.drawable.ic_rollers_foreground)
+                holder.txvStatus.text = "На роликах"
+                holder.ivStatus.setImageResource(R.drawable.ic_rollers_foreground)
             } else {
-                holder.textViewStatus.text = "Не активен"
-                holder.imageViewStatus.setImageResource(R.drawable.ic_inactive_foreground)
+                holder.txvStatus.text = "Не активен"
+                holder.ivStatus.setImageResource(R.drawable.ic_inactive_foreground)
             }
         }
 
         holder.txvDistrict.text = item.contactDistrict
 
-        if (item.isContact) holder.imageViewToContact.setImageResource(R.drawable.ic_done_foreground)
-        else holder.imageViewToContact.setImageResource(R.drawable.ic_add_contact_foreground)
+        if (item.isContact) holder.ivToContact.setImageResource(R.drawable.ic_done_foreground)
+        else holder.ivToContact.setImageResource(R.drawable.ic_add_contact_foreground)
 
         holder.contactContainer.setOnClickListener{
             showPopupMenu(it, item)
@@ -67,7 +66,7 @@ class ContactAdapter (private var itemListContact: List<Contact>
     private fun showPopupMenu(view: View, contact: Contact) {
         val popupMenu = PopupMenu(view.context, view)
 
-        if (roleId == 1){
+        if (contact.roleID == 1){
             popupMenu.inflate(R.menu.contact_for_admin)
         }
         else {
@@ -76,7 +75,6 @@ class ContactAdapter (private var itemListContact: List<Contact>
             else
                 popupMenu.inflate(R.menu.contact_add_popup_menu)
         }
-
 
         popupMenu.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
@@ -163,11 +161,11 @@ class ContactAdapter (private var itemListContact: List<Contact>
 
     inner class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val contactContainer: MaterialCardView = itemView.findViewById(R.id.contactContainer)
-        val ivPhoto: ImageView = itemView.findViewById(R.id.imageViewPhoto)
-        val textViewName: TextView = itemView.findViewById(R.id.textViewName)
+        val ivPhoto: ImageView = itemView.findViewById(R.id.ivPhoto)
+        val txvName: TextView = itemView.findViewById(R.id.txvName)
         val txvDistrict: MaterialTextView = itemView.findViewById(R.id.txvDistrict)
-        val textViewStatus: TextView = itemView.findViewById(R.id.textViewStatus)
-        val imageViewStatus: ImageView = itemView.findViewById(R.id.imageViewStatus)
-        val imageViewToContact: ImageView = itemView.findViewById(R.id.imageViewToContact)
+        val txvStatus: TextView = itemView.findViewById(R.id.txvStatus)
+        val ivStatus: ImageView = itemView.findViewById(R.id.ivStatus)
+        val ivToContact: ImageView = itemView.findViewById(R.id.ivToContact)
     }
 }

@@ -50,7 +50,7 @@ class EventParticipantFragment : Fragment() {
 
         setInitialData()
         recyclerView = view.findViewById(R.id.peopleList)
-        contactAdapter = ContactAdapter(contactList)
+      //  contactAdapter = ContactAdapter(contactList)
         recyclerView.adapter = contactAdapter
     }
 
