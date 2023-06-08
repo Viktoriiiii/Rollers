@@ -1,23 +1,27 @@
 package ru.spb.rollers.ui.contacts
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.firebase.ui.database.FirebaseRecyclerOptions
 import ru.spb.rollers.*
+import ru.spb.rollers.adapters.ContactsAdapter
 import ru.spb.rollers.adapters.UserAdapter
 import ru.spb.rollers.databinding.ContactsFragmentBinding
+import ru.spb.rollers.holders.UserViewHolder
 import ru.spb.rollers.models.User
+
 
 class ContactsFragment : Fragment() {
 
     private var _binding: ContactsFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var adapter: FirebaseRecyclerAdapter<User, UserAdapter.ContactViewHolder>
+    private lateinit var adapterContacts: FirebaseRecyclerAdapter<User, UserViewHolder>
 
     companion object {
         fun newInstance() = ContactsFragment()
@@ -36,37 +40,30 @@ class ContactsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.searchView.setOnSearchClickListener {
-            binding.txvTitle.visibility = View.GONE
+        binding.ivSearch.setOnClickListener{
+            MAIN.navController.navigate(R.id.action_contacts_to_contactsSearchFragment)
         }
 
-        binding.searchView.setOnCloseListener {
-            binding.txvTitle.visibility = View.VISIBLE
-            binding.searchView.onActionViewCollapsed()
-            true
-        }
-
-        showAllUsers()
-    }
-
-    private fun showAllUsers() {
-        adapter = UserAdapter(REF_DATABASE_USER)
-        binding.contactsList.adapter = adapter
+        showMyContacts()
     }
 
     private fun showMyContacts(){
-
+        val options =
+            FirebaseRecyclerOptions.Builder<User>()
+                .setQuery(REF_DATABASE_CONTACT.child(CURRENT_UID), User::class.java)
+                .build()
+        adapterContacts = ContactsAdapter(options)
+        binding.contactsList.adapter = adapterContacts
     }
 
     override fun onStart() {
         super.onStart()
-        adapter.startListening()
+        adapterContacts.startListening()
     }
 
     override fun onStop() {
         super.onStop()
-        adapter.stopListening()
+        adapterContacts.stopListening()
     }
 }
 

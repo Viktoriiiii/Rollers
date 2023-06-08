@@ -44,4 +44,5 @@
     <string name="_status">На роликах</string>
     <string name="is_contact">isContact</string>
     <string name="contacts">Контакты</string>
+    <string name="search_contacts">Поиск контактов</string>
 </resources>
