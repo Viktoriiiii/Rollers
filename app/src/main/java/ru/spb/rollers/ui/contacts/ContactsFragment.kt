@@ -10,7 +10,6 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import ru.spb.rollers.*
 import ru.spb.rollers.adapters.ContactsAdapter
-import ru.spb.rollers.adapters.UserAdapter
 import ru.spb.rollers.databinding.ContactsFragmentBinding
 import ru.spb.rollers.holders.UserViewHolder
 import ru.spb.rollers.models.User
@@ -50,7 +49,7 @@ class ContactsFragment : Fragment() {
     private fun showMyContacts(){
         val options =
             FirebaseRecyclerOptions.Builder<User>()
-                .setQuery(REF_DATABASE_CONTACT.child(CURRENT_UID), User::class.java)
+                .setQuery(REF_DATABASE_CONTACT.child(MAIN.appViewModel.user.id), User::class.java)
                 .build()
         adapterContacts = ContactsAdapter(options)
         binding.contactsList.adapter = adapterContacts

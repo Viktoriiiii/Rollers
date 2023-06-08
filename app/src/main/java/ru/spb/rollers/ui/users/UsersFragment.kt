@@ -7,20 +7,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.firebase.ui.database.FirebaseRecyclerOptions
 import ru.spb.rollers.*
-import ru.spb.rollers.adapters.ContactAdapter
+import ru.spb.rollers.adapters.UserAdapter
 import ru.spb.rollers.databinding.UsersFragmentBinding
-import ru.spb.rollers.model.Contact
+import ru.spb.rollers.holders.UserViewHolder
+import ru.spb.rollers.models.User
 
 class UsersFragment : Fragment() {
 
     private var _binding: UsersFragmentBinding? = null
     private val binding get() = _binding!!
-
-    private var contactList: List<Contact> = mutableListOf()
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var contactAdapter: ContactAdapter
+    private lateinit var adapterUsers: FirebaseRecyclerAdapter<User, UserViewHolder>
 
     companion object {
         fun newInstance() = UsersFragment()
@@ -32,23 +31,15 @@ class UsersFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        viewModel = ViewModelProvider(this).get(UsersViewModel::class.java)
         _binding = UsersFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(UsersViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setInitialData()
-        recyclerView = view.findViewById(R.id.contactsList)
-   //     contactAdapter = ContactAdapter(contactList)
-        recyclerView.adapter = contactAdapter
-
+        showAllUsers()
         MAIN.setBottomNavigationVisible(false)
 
         binding.searchView.setOnSearchClickListener{
@@ -68,45 +59,24 @@ class UsersFragment : Fragment() {
             delayMillis = 0
         }
     }
-
-    private fun setInitialData() {
-        contactList += Contact(1,
-            1, "Иван","Иванов",true,
-            "Московский","38 лет", contactGender = true, isContact = false, false)
-        contactList += Contact(2,
-            2, "Варя", "Федорова",true,
-            "Васька","18 лет", contactGender = false, isContact = false, false)
-        contactList += Contact(
-            3, 1, "Ярик", "Сидоров",
-            true, "Мурино","68 лет", contactGender = true, isContact = false, false)
-        contactList += Contact(
-            4,1, "Шуня", "Веселый",true,
-            "Фрунзенский","15 лет", contactGender = true, isContact = false, false)
-        contactList += Contact(
-            5,2,  "Петр", "Иванов",
-            true, "Фрунзенский","15 лет", contactGender = true,
-            isContact = false, false)
-        contactList += Contact(
-            6,2, "Иван", "Петров",
-            true, "Фрунзенский","15 лет", contactGender = true,
-            isContact = false, false)
-        contactList += Contact(
-            7, 2, "Иван", "Петров",
-            true, "Фрунзенский","15 лет", contactGender = true,
-            isContact = false, false)
-        contactList += Contact(
-            8,1, "Иван", "Петров",
-            true, "Фрунзенский","15 лет", contactGender = true,
-            isContact = false, false)
-        contactList += Contact(
-            9,1, "Иван", "Петров",
-            true, "Фрунзенский","15 лет", contactGender = true,
-            isContact = false, false)
-        contactList += Contact(
-            9,2, "Роллер-школа Фантаст", "Фрунзенский",
-            isContact = false, true, "Обучение катанию на роликах детей и взрослых: свой роллердром / скейт-парк, опытные инструкторы по роликам, доступные цены.", "Адрес школы")
+    private fun showAllUsers() {
+        val options =
+            FirebaseRecyclerOptions.Builder<User>()
+                .setQuery(REF_DATABASE_USER, User::class.java)
+                .build()
+        adapterUsers = UserAdapter(options)
+        binding.contactsList.adapter = adapterUsers
     }
 
+    override fun onStart() {
+        super.onStart()
+        adapterUsers.startListening()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        adapterUsers.stopListening()
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

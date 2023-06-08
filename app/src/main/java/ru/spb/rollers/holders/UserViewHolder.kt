@@ -36,7 +36,7 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         showInfoAboutUser(user)
 
         // проверка на то, есть ли указанный пользователь в контактах
-            REF_DATABASE_CONTACT.child(CURRENT_UID).child(user.id).addListenerForSingleValueEvent(object :
+            REF_DATABASE_CONTACT.child(MAIN.appViewModel.user.id).child(user.id).addListenerForSingleValueEvent(object :
                 ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
@@ -270,12 +270,12 @@ private fun showPopupMenu(view: View, contact: User) {
                 true
             }
             R.id.addContact -> {
-                var c = Contact()
+                val c = Contact()
                 c.id = contact.id
                 REF_DATABASE_ROOT.child("Contact").child(CURRENT_UID)
                     .child(contact.id)
                     .setValue(c)
-                Toast.makeText(MAIN, "Контакт добвлен", Toast.LENGTH_SHORT).show()
+                Toast.makeText(MAIN, "Контакт добавлен", Toast.LENGTH_SHORT).show()
 //                notifyDataSetChanged()
                 true
             }

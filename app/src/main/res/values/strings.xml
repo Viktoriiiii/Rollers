@@ -45,4 +45,6 @@
     <string name="is_contact">isContact</string>
     <string name="contacts">Контакты</string>
     <string name="search_contacts">Поиск контактов</string>
+    <string name="users">Пользователи</string>
+    <string name="last_first_name">%d %d</string>
 </resources>
