@@ -187,6 +187,9 @@
         <action
             android:id="@+id/action_contactsSearchFragment_to_contacts"
             app:destination="@id/contacts" />
+        <action
+            android:id="@+id/action_contactsSearchFragment_to_messagesFragment"
+            app:destination="@id/messagesFragment" />
     </fragment>
 
 </navigation>

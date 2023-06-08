@@ -82,7 +82,7 @@ class RegistrationFragment : Fragment() {
         }
 
         val role = if (binding.checkBoxManager.isChecked) "Организатор" else "Участник"
-        val user = User(role, email, password, false)
+        val user = User(role = role, email = email, password= password, isManager = false)
         user.status = "Не активен"
 
         AUTH.createUserWithEmailAndPassword(email, password)

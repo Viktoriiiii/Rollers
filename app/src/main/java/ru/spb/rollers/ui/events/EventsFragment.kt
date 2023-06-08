@@ -43,14 +43,9 @@ class EventsFragment : Fragment()
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        viewModel = ViewModelProvider(this)[EventsViewModel::class.java]
         _binding = EventsFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this)[EventsViewModel::class.java]
-        // TODO: Use the ViewModel
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -82,7 +77,7 @@ class EventsFragment : Fragment()
             true
         }
 
-        if (MAIN.appViewModel.user.role == "Участник")
+        if (!MAIN.appViewModel.user.isManager)
             binding.rlAddEvent.visibility = View.GONE
 
         getWeather()

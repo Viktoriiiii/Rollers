@@ -41,7 +41,7 @@ data class User(
             "schoolName" to schoolName,
             "description" to description,
             "address" to address,
-            "isManager" to isManager
+            "manager" to isManager
         )
     }
 }

@@ -7,7 +7,7 @@ import ru.spb.rollers.models.User
 
 class AppViewModel : ViewModel() {
     val liveData = MutableLiveData<Boolean>()
-    var user: User = User("", "","", false)
+    var user: User = User(role = String(), email = String(), password = String(), isManager = false)
     var contact: Contact = Contact()
 
     init {

@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     android:theme="@style/PopupMenu">
-    <item android:id="@+id/toViewProfile"
-        android:title="Просмотр профиля"
-        android:icon="@mipmap/ic_person"
-        />
-    <item android:id="@+id/toDialog"
-        android:icon="@mipmap/ic_message"
-        android:title="Перейти к диалогу"
-        />
     <item android:id="@+id/deleteContact"
         android:icon="@mipmap/ic_delete"
-        android:title="Удалить"
+        android:title="@string/delete"
         />
 </menu>
