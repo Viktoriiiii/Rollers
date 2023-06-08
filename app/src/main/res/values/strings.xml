@@ -47,4 +47,8 @@
     <string name="search_contacts">Поиск контактов</string>
     <string name="users">Пользователи</string>
     <string name="last_first_name">%d %d</string>
+    <string name="view_profile">Просмотр профиля</string>
+    <string name="to_dialog">Перейти к диалогу</string>
+    <string name="delete">Удалить</string>
+    <string name="add">Добавить</string>
 </resources>
