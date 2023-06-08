@@ -156,8 +156,10 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             txvSchoolAddress = profileView?.findViewById(R.id.txvSchoolAddress)
             txvSchoolPhone = profileView?.findViewById(R.id.txvSchoolPhone)
 
-            txvSchoolName?.text = if (contact.schoolName.isNullOrEmpty()) "Неизвестный организатор" else contact.schoolName
-            txvDescription?.text = if (contact.description.isNullOrEmpty()) "Описание не добалено" else contact.description
+            txvSchoolName?.text = if (contact.schoolName.isNullOrEmpty()) "Неизвестный организатор"
+                else contact.schoolName
+            txvDescription?.text = if (contact.description.isNullOrEmpty()) "Описание не добалено"
+                else contact.description
 
             if (contact.address.isNullOrEmpty())
                 txvSchoolAddress?.text = "Адрес не известен"
@@ -222,27 +224,29 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             imageViewToAdmin.setOnClickListener{
                 val title = "Смена роли"
                 val message: String = if (contact.isManager)
-                    "Изменить пользователю роль с участника на организатора?" else
-                    "Изменить пользователю роль с организатора на участника?"
-                val builderToAdminDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
-                builderToAdminDialog
-                    .setTitle(title)
-                    .setMessage(message)
-                    .setCancelable(false)
-                    .setPositiveButton("Да") { _, _ ->
-                        contact.isManager = !contact.isManager
-                        if (contact.isManager)
-                            imageViewToAdmin.setImageResource(R.drawable.ic_manage_account_foreground)
-                        else
-                            imageViewToAdmin.setImageResource(R.drawable.ic_person_foreground)
-                        REF_DATABASE_ROOT.child("User").child(contact.id).setValue(contact)
-                        Toast.makeText(MAIN, "Выполнено", Toast.LENGTH_SHORT).show()
-                    }
-                    .setNegativeButton("Отмена"){dialog, _ ->
-                        dialog.cancel()
-                    }
-                val alertDialogToAdmin: AlertDialog = builderToAdminDialog.create()
-                alertDialogToAdmin.show()
+                    "Изменить пользователю роль с организатора на участника?" else
+                    "Изменить пользователю роль с участника на организатора?"
+                if (MAIN.appViewModel.user.role == "Администратор") {
+                    val builderToAdminDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
+                    builderToAdminDialog
+                        .setTitle(title)
+                        .setMessage(message)
+                        .setCancelable(false)
+                        .setPositiveButton("Да") { _, _ ->
+                            contact.isManager = !contact.isManager
+                            if (contact.isManager)
+                                imageViewToAdmin.setImageResource(R.drawable.ic_manage_account_foreground)
+                            else
+                                imageViewToAdmin.setImageResource(R.drawable.ic_person_foreground)
+                            REF_DATABASE_ROOT.child("User").child(contact.id).setValue(contact)
+                            Toast.makeText(MAIN, "Выполнено", Toast.LENGTH_SHORT).show()
+                        }
+                        .setNegativeButton("Отмена"){dialog, _ ->
+                            dialog.cancel()
+                        }
+                    val alertDialogToAdmin: AlertDialog = builderToAdminDialog.create()
+                    alertDialogToAdmin.show()
+                }
             }
         }
         alertViewProfile.show()
@@ -268,7 +272,7 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             .setTitle("Вы уверены, что хотите удалить контакт?")
             .setCancelable(false)
             .setPositiveButton("Да") { _, _ ->
-                REF_DATABASE_CONTACT.child(CURRENT_UID).child(contact.id).removeValue()
+                REF_DATABASE_CONTACT.child(MAIN.appViewModel.user.id).child(contact.id).removeValue()
                     .addOnSuccessListener {
                         val v = view.findViewById<ImageView>(R.id.ivToContact)
                         v.setImageResource(R.drawable.ic_add_contact_foreground)
@@ -288,7 +292,7 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private fun addContact(view: View, contact: User){
         val c = Contact()
         c.id = contact.id
-        REF_DATABASE_ROOT.child("Contact").child(CURRENT_UID)
+        REF_DATABASE_ROOT.child("Contact").child(MAIN.appViewModel.user.id)
             .child(contact.id)
             .setValue(c)
             .addOnSuccessListener {

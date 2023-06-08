@@ -1,5 +1,6 @@
 package ru.spb.rollers.ui.users
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,19 +8,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.firebase.ui.database.FirebaseRecyclerAdapter
-import com.firebase.ui.database.FirebaseRecyclerOptions
+import androidx.appcompat.widget.SearchView
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.getValue
 import ru.spb.rollers.*
-import ru.spb.rollers.adapters.UserAdapter
+import ru.spb.rollers.adapter.UserAdapter
 import ru.spb.rollers.databinding.UsersFragmentBinding
-import ru.spb.rollers.holders.UserViewHolder
 import ru.spb.rollers.models.User
+import java.util.*
 
 class UsersFragment : Fragment() {
 
     private var _binding: UsersFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var adapterUsers: FirebaseRecyclerAdapter<User, UserViewHolder>
+    var eventListener: ValueEventListener? = null
+    private var listUsers: List<User> = ArrayList()
+    private lateinit var adapter: UserAdapter
 
     companion object {
         fun newInstance() = UsersFragment()
@@ -36,10 +43,8 @@ class UsersFragment : Fragment() {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showAllUsers()
         MAIN.setBottomNavigationVisible(false)
 
         binding.searchView.setOnSearchClickListener{
@@ -58,28 +63,57 @@ class UsersFragment : Fragment() {
             startActivity(Intent(MAIN, AppActivity::class.java)  )
             delayMillis = 0
         }
-    }
-    private fun showAllUsers() {
-        val options =
-            FirebaseRecyclerOptions.Builder<User>()
-                .setQuery(REF_DATABASE_USER, User::class.java)
-                .build()
-        adapterUsers = UserAdapter(options)
-        binding.contactsList.adapter = adapterUsers
-    }
 
-    override fun onStart() {
-        super.onStart()
-        adapterUsers.startListening()
-    }
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    searchList(newText)
+                }
+                return true
+            }
+        })
 
-    override fun onStop() {
-        super.onStop()
-        adapterUsers.stopListening()
+        binding.contactsList.layoutManager = LinearLayoutManager(MAIN)
+        adapter = UserAdapter(listUsers)
+        binding.contactsList.adapter = adapter
+        eventListener = REF_DATABASE_USER.addValueEventListener(object : ValueEventListener {
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (itemSnapshot in snapshot.children) {
+                    val user: User = itemSnapshot.getValue<User>()!!
+                    listUsers += user
+                }
+                binding.contactsList.post {
+                    adapter = UserAdapter(listUsers)
+                    binding.contactsList.adapter = adapter
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun searchList(text: String) {
+        val searchList: ArrayList<User> = ArrayList()
+        for (user in listUsers) {
+            if (user.lastName?.toLowerCase()?.contains(text.lowercase(Locale.getDefault())) == true ||
+                user.firstName?.toLowerCase()?.contains(text.lowercase(Locale.getDefault())) == true ||
+                user.schoolName?.toLowerCase()?.contains(text.lowercase(Locale.getDefault())) == true ||
+                user.description?.toLowerCase()?.contains(text.lowercase(Locale.getDefault())) == true ||
+                user.district?.toLowerCase()?.contains(text.lowercase(Locale.getDefault())) == true ||
+                user.address?.toLowerCase()?.contains(text.lowercase(Locale.getDefault())) == true ||
+                user.email?.toLowerCase()?.contains(text.lowercase(Locale.getDefault())) == true) {
+                searchList.add(user)
+            }
+        }
+        adapter.searchDataList(searchList)
     }
 }

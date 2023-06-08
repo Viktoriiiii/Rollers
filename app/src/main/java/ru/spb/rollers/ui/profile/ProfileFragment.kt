@@ -210,10 +210,10 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
                     .setCancelable(false)
                     .setPositiveButton("Да") { _, _ ->
                         val path = REF_STORAGE_ROOT.child(FOLDER_PROFILE_IMAGE)
-                            .child(CURRENT_UID)
+                            .child(MAIN.appViewModel.user.id)
                         path.delete().addOnSuccessListener {
                             MAIN.appViewModel.user.photo = ""
-                            REF_DATABASE_ROOT.child("User").child(CURRENT_UID)
+                            REF_DATABASE_ROOT.child("User").child(MAIN.appViewModel.user.id)
                                 .child(CHILD_PHOTO_URL).setValue(MAIN.appViewModel.user.photo)
                             Toast.makeText(MAIN, "Изображение удалено", Toast.LENGTH_SHORT).show()
                             binding.ivPhoto.setImageResource(R.drawable.avatar)
@@ -246,13 +246,13 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
             && resultCode == Activity.RESULT_OK && data != null){
             val uri = CropImage.getActivityResult(data).uri
             val path = REF_STORAGE_ROOT.child(FOLDER_PROFILE_IMAGE)
-                .child(CURRENT_UID)
+                .child(MAIN.appViewModel.user.id)
             path.putFile(uri).addOnCompleteListener { task1 ->
                 if (task1.isSuccessful) {
                     path.downloadUrl.addOnCompleteListener { task2 ->
                         if (task2.isSuccessful) {
                             val photoUrl = task2.result.toString()
-                            REF_DATABASE_ROOT.child("User").child(CURRENT_UID)
+                            REF_DATABASE_ROOT.child("User").child(MAIN.appViewModel.user.id)
                                 .child(CHILD_PHOTO_URL).setValue(photoUrl)
                                 .addOnCompleteListener {
                                     if (it.isSuccessful) {

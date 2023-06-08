@@ -23,7 +23,6 @@ lateinit var REF_DATABASE_USER: DatabaseReference
 lateinit var REF_DATABASE_CONTACT: DatabaseReference
 
 const val FOLDER_PROFILE_IMAGE = "profile_image"
-lateinit var CURRENT_UID:String
 
 const val CHILD_PHOTO_URL = "userPhoto"
 
@@ -32,6 +31,5 @@ fun initFirebase() {
     REF_DATABASE_ROOT = FirebaseDatabase.getInstance().reference
     REF_DATABASE_USER = FirebaseDatabase.getInstance().getReference("User")
     REF_DATABASE_CONTACT = FirebaseDatabase.getInstance().getReference("Contact")
-    CURRENT_UID =  AUTH.currentUser?.uid.toString()
     REF_STORAGE_ROOT = FirebaseStorage.getInstance().reference
 }
