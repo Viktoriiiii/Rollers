@@ -1,29 +1,22 @@
-package ru.spb.rollers.adapters
+package ru.spb.rollers.oldadapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.firebase.ui.database.FirebaseRecyclerAdapter
-import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.android.material.card.MaterialCardView
-import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
-import ru.spb.rollers.models.Dialog
-import ru.spb.rollers.models.User
 import ru.spb.rollers.oldmodel.Message
 
-class MessageAdapter (options: FirebaseRecyclerOptions<Dialog>):
-    FirebaseRecyclerAdapter<Dialog, MessageAdapter.MessageViewHolder>(options)
-{
+class MessageAdapter (private var itemListMessage: List<Message>, var userID: Int):
+RecyclerView.Adapter<MessageAdapter.MessageViewHolder>(){
 
-    private var self: Int = 786
-    private lateinit var model: Dialog
+    private val self: Int = 786
 
     override fun getItemViewType(position: Int): Int {
-        val message = model.message[position]
-        if (message.from == MAIN.appViewModel.user.id) {
+        val message: Message = itemListMessage[position];
+        if (message.userID == userID) {
             return self;
         }
         return position
@@ -34,16 +27,18 @@ class MessageAdapter (options: FirebaseRecyclerOptions<Dialog>):
             LayoutInflater.from(parent.context).inflate(R.layout.chat_my_message, parent, false)
         else
             LayoutInflater.from(parent.context).inflate(R.layout.chat_others_message, parent, false)
-        return MessageViewHolder(itemView)
+        return MessageViewHolder(itemView)    }
+
+    override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
+        val item = itemListMessage[position]
+        holder.messageContainer
+        holder.textViewSender.text = item.messageSender
+        holder.textViewMessage.text = item.messageText
+        holder.textViewDate.text = item.messageDate
     }
 
-    override fun onBindViewHolder(holder: MessageViewHolder, position: Int, model: Dialog) {
-        this.model = model
-
-//        holder.messageContainer
-//        holder.textViewSender.text = item.messageSender
-//        holder.textViewMessage.text = item.messageText
-//        holder.textViewDate.text = item.messageDate
+    override fun getItemCount(): Int {
+        return itemListMessage.size
     }
 
     inner class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

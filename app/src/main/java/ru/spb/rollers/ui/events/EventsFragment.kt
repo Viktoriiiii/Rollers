@@ -15,9 +15,9 @@ import okhttp3.*
 import okio.IOException
 import org.json.JSONObject
 import ru.spb.rollers.*
-import ru.spb.rollers.adapters.EventAdapter
+import ru.spb.rollers.oldadapters.EventAdapter
 import ru.spb.rollers.databinding.EventsFragmentBinding
-import ru.spb.rollers.model.Event
+import ru.spb.rollers.oldmodel.Event
 
 class EventsFragment : Fragment()
 {

@@ -9,6 +9,7 @@ class AppViewModel : ViewModel() {
     val liveData = MutableLiveData<Boolean>()
     var user: User = User(role = String(), email = String(), password = String(), isManager = false)
     var contact: Contact = Contact()
+    var contactForMessages = User()
 
     init {
         liveData.value = false

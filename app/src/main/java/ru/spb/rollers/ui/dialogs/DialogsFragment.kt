@@ -8,9 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.spb.rollers.R
-import ru.spb.rollers.adapters.DialogAdapter
+import ru.spb.rollers.oldadapters.DialogAdapter
 import ru.spb.rollers.databinding.DialogsFragmentBinding
-import ru.spb.rollers.model.Dialog
+import ru.spb.rollers.oldmodel.Dialog
 
 class DialogsFragment : Fragment() {
 

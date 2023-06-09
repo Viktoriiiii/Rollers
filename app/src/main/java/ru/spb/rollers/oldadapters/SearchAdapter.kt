@@ -1,4 +1,4 @@
-package ru.spb.rollers.adapters
+package ru.spb.rollers.oldadapters
 
 import android.view.LayoutInflater
 import android.view.View

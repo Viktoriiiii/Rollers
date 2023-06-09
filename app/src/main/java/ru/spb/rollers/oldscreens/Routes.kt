@@ -1,6 +1,5 @@
-package ru.spb.rollers.screens
+package ru.spb.rollers.oldscreens
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,10 +8,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import ru.spb.rollers.R
-import ru.spb.rollers.adapters.PointAdapter
-import ru.spb.rollers.adapters.RouteAdapter
-import ru.spb.rollers.model.Route
-import ru.spb.rollers.model.Waypoint
+import ru.spb.rollers.oldadapters.PointAdapter
+import ru.spb.rollers.oldadapters.RouteAdapter
+import ru.spb.rollers.oldmodel.Route
+import ru.spb.rollers.oldmodel.Waypoint
 
 class Routes : Fragment() {
 
@@ -48,7 +47,6 @@ class Routes : Fragment() {
     }
 
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun addPoint(){
         pointAdapter.addPoint(Waypoint(
             3, "Электросила"))

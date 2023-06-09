@@ -33,8 +33,8 @@ import com.yandex.runtime.network.NetworkError
 import com.yandex.runtime.network.RemoteError
 import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
-import ru.spb.rollers.adapters.OnItemClickListener
-import ru.spb.rollers.adapters.SearchAdapter
+import ru.spb.rollers.oldadapters.OnItemClickListener
+import ru.spb.rollers.oldadapters.SearchAdapter
 import ru.spb.rollers.databinding.MapsFragmentBinding
 import ru.spb.rollers.titleRoutes
 

@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
-import ru.spb.rollers.adapters.ContactAdapter
+import ru.spb.rollers.oldadapters.ContactAdapter
 import ru.spb.rollers.databinding.EventParticipantFragmentBinding
-import ru.spb.rollers.model.Contact
+import ru.spb.rollers.oldmodel.Contact
 
 class EventParticipantFragment : Fragment() {
 

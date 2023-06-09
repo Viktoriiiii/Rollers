@@ -1,6 +1,5 @@
 package ru.spb.rollers.ui.users
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -15,7 +14,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 import ru.spb.rollers.*
-import ru.spb.rollers.adapter.UserAdapter
+import ru.spb.rollers.adapters.UserAdapter
 import ru.spb.rollers.databinding.UsersFragmentBinding
 import ru.spb.rollers.models.User
 import java.util.*
@@ -80,7 +79,6 @@ class UsersFragment : Fragment() {
         adapter = UserAdapter(listUsers)
         binding.contactsList.adapter = adapter
         eventListener = REF_DATABASE_USER.addValueEventListener(object : ValueEventListener {
-            @SuppressLint("NotifyDataSetChanged")
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (itemSnapshot in snapshot.children) {
                     val user: User = itemSnapshot.getValue<User>()!!

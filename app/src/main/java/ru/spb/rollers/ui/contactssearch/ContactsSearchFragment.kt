@@ -1,6 +1,5 @@
 package ru.spb.rollers.ui.contactssearch
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,7 @@ import com.google.firebase.database.ktx.getValue
 import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
 import ru.spb.rollers.REF_DATABASE_USER
-import ru.spb.rollers.adapter.UserAdapter
+import ru.spb.rollers.adapters.UserAdapter
 import ru.spb.rollers.databinding.ContactsSearchFragmentBinding
 import ru.spb.rollers.models.User
 import java.util.*
@@ -26,7 +25,7 @@ class ContactsSearchFragment : Fragment() {
 
     private lateinit var binding: ContactsSearchFragmentBinding
     var eventListener: ValueEventListener? = null
-    private var listUsers: List<User> = ArrayList()
+    private var listUsers: MutableList<User> = mutableListOf()
     private lateinit var adapter: UserAdapter
 
     companion object {
@@ -76,8 +75,8 @@ class ContactsSearchFragment : Fragment() {
         adapter = UserAdapter(listUsers)
         binding.contactsList.adapter = adapter
         eventListener = REF_DATABASE_USER.addValueEventListener(object : ValueEventListener {
-            @SuppressLint("NotifyDataSetChanged")
             override fun onDataChange(snapshot: DataSnapshot) {
+                listUsers.clear()
                 for (itemSnapshot in snapshot.children) {
                     val user: User = itemSnapshot.getValue<User>()!!
                     listUsers += user

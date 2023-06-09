@@ -1,4 +1,4 @@
-package ru.spb.rollers.adapters
+package ru.spb.rollers.oldadapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -16,7 +16,7 @@ import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textview.MaterialTextView
 import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
-import ru.spb.rollers.model.Route
+import ru.spb.rollers.oldmodel.Route
 
 class RouteAdapter (private var itemListRoute: List<Route>
 ): RecyclerView.Adapter<RouteAdapter.RouteViewHolder>(){

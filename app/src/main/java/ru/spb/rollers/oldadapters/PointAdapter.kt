@@ -1,4 +1,4 @@
-package ru.spb.rollers.adapters
+package ru.spb.rollers.oldadapters
 
 import android.annotation.SuppressLint
 import android.text.Editable
@@ -10,7 +10,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import ru.spb.rollers.R
-import ru.spb.rollers.model.Waypoint
+import ru.spb.rollers.oldmodel.Waypoint
 
 class PointAdapter (private var itemListPoint: List<Waypoint>
 ): RecyclerView.Adapter<PointAdapter.PointViewHolder>(){
@@ -20,7 +20,6 @@ class PointAdapter (private var itemListPoint: List<Waypoint>
         return PointViewHolder(view)
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: PointViewHolder, position: Int) {
         val item = itemListPoint[position]
         holder.pointsContainer

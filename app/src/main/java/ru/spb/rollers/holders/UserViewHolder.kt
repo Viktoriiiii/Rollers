@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener
 import ru.spb.rollers.*
 import ru.spb.rollers.models.Contact
 import ru.spb.rollers.models.User
+import ru.spb.rollers.ui.messages.MessagesFragment
 
 class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val contactContainer: MaterialCardView = itemView.findViewById(R.id.contactContainer)
@@ -93,7 +94,7 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
     }
 
-    @SuppressLint("RestrictedApi", "NotifyDataSetChanged", "SetTextI18n")
+    @SuppressLint("RestrictedApi", "SetTextI18n")
     private fun showPopupMenu(view: View, contact: User) {
         val popupMenu = PopupMenu(view.context, view)
         if (MAIN.appViewModel.user.role == "Администратор"){
@@ -111,7 +112,7 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                     true
                 }
                 R.id.toDialog -> {
-                    toDialog()
+                    toDialog(contact)
                     true
                 }
                 R.id.deleteContact -> {
@@ -252,7 +253,8 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         alertViewProfile.show()
     }
 
-    private fun toDialog(){
+    private fun toDialog(user: User){
+        MAIN.appViewModel.contactForMessages = user
         try {
             MAIN.navController.navigate(R.id.action_contacts_to_messagesFragment)
         }
@@ -264,6 +266,22 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 MAIN.navController.navigate(R.id.action_eventParticipantFragment_to_messagesFragment)
             }
         }
+    }
+
+    private fun addContact(view: View, contact: User){
+        val c = Contact()
+        c.id = contact.id
+        REF_DATABASE_ROOT.child("Contact").child(MAIN.appViewModel.user.id)
+            .child(contact.id)
+            .setValue(c)
+            .addOnSuccessListener {
+                val v = view.findViewById<ImageView>(R.id.ivToContact)
+                v.setImageResource(R.drawable.ic_done_foreground)
+                Toast.makeText(MAIN, "Контакт добавлен", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                // Произошла ошибка при удалении контакта
+            }
     }
 
     private fun deleteContact(view:View, contact: User){
@@ -287,22 +305,6 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             }
         val alertDialogDeletePhoto: AlertDialog = builderDeleteDialog.create()
         alertDialogDeletePhoto.show()
-    }
-
-    private fun addContact(view: View, contact: User){
-        val c = Contact()
-        c.id = contact.id
-        REF_DATABASE_ROOT.child("Contact").child(MAIN.appViewModel.user.id)
-            .child(contact.id)
-            .setValue(c)
-            .addOnSuccessListener {
-                val v = view.findViewById<ImageView>(R.id.ivToContact)
-                v.setImageResource(R.drawable.ic_done_foreground)
-                Toast.makeText(MAIN, "Контакт добавлен", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener {
-                // Произошла ошибка при удалении контакта
-            }
     }
 
     private fun checkIcon(contact: User, popupMenu: PopupMenu){

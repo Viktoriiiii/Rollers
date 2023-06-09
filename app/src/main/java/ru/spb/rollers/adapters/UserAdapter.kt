@@ -1,4 +1,4 @@
-package ru.spb.rollers.adapter
+package ru.spb.rollers.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -16,7 +16,6 @@ class UserAdapter(private var listUsers: List<User>
         return UserViewHolder(view)
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val user = listUsers[position]
         holder.bind(user)

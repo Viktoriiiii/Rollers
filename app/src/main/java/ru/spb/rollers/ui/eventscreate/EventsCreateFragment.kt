@@ -16,7 +16,7 @@ import com.google.android.material.button.MaterialButton
 import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
 import ru.spb.rollers.databinding.EventsCreateFragmentBinding
-import ru.spb.rollers.model.Route
+import ru.spb.rollers.oldmodel.Route
 import ru.spb.rollers.titleEvents
 
 class EventsCreateFragment : Fragment(), PopupMenu.OnMenuItemClickListener {

@@ -1,4 +1,4 @@
-package ru.spb.rollers.model
+package ru.spb.rollers.oldmodel
 
 class Dialog {
     var dialogID: Int = 0

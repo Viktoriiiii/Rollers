@@ -1,4 +1,4 @@
-package ru.spb.rollers.screens
+package ru.spb.rollers.oldscreens
 
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -16,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKit
 import com.yandex.mapkit.MapKitFactory
-import com.yandex.mapkit.geometry.BoundingBox
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.layers.ObjectEvent
 import com.yandex.mapkit.map.*
@@ -27,13 +25,11 @@ import com.yandex.mapkit.user_location.UserLocationLayer
 import com.yandex.mapkit.user_location.UserLocationObjectListener
 import com.yandex.mapkit.user_location.UserLocationView
 import com.yandex.runtime.Error
-import com.yandex.runtime.image.ImageProvider
 import com.yandex.runtime.network.NetworkError
 import com.yandex.runtime.network.RemoteError
 import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
-import ru.spb.rollers.adapters.OnItemClickListener
-import ru.spb.rollers.adapters.SearchAdapter
+import ru.spb.rollers.oldadapters.SearchAdapter
 
 class MapFragment : Fragment(), UserLocationObjectListener, Session.SearchListener, CameraListener{
 

@@ -1,4 +1,4 @@
-package ru.spb.rollers.screens
+package ru.spb.rollers.oldscreens
 
 import android.content.pm.PackageManager
 import android.os.Bundle

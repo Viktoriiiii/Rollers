@@ -91,7 +91,7 @@ class RegistrationFragment : Fragment() {
                     // Sign in success, update UI with the signed-in user's information
                     user.id = AUTH.currentUser?.uid.toString()
                     MAIN.appViewModel.user = user
-                    REF_DATABASE_ROOT.child("User").child(user.id).setValue(user)
+                    REF_DATABASE_USER.child(user.id).setValue(user)
                     Toast.makeText(MAIN,"Добро пожаловать!", Toast.LENGTH_SHORT).show()
                     MAIN.navController.navigate(R.id.action_registrationFragment_to_events)
                 } else {

@@ -1,4 +1,4 @@
-package ru.spb.rollers.adapters
+package ru.spb.rollers.oldadapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
-import ru.spb.rollers.model.Event
+import ru.spb.rollers.oldmodel.Event
 import ru.spb.rollers.titleEvents
 
 class EventAdapter (private var itemListEvent: List<Event>, var userID: Int

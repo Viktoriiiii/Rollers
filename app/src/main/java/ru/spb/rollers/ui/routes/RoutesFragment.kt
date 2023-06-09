@@ -1,6 +1,5 @@
 package ru.spb.rollers.ui.routes
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,11 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
-import ru.spb.rollers.adapters.PointAdapter
-import ru.spb.rollers.adapters.RouteAdapter
+import ru.spb.rollers.oldadapters.PointAdapter
+import ru.spb.rollers.oldadapters.RouteAdapter
 import ru.spb.rollers.databinding.RoutesFragmentBinding
-import ru.spb.rollers.model.Route
-import ru.spb.rollers.model.Waypoint
+import ru.spb.rollers.oldmodel.Route
+import ru.spb.rollers.oldmodel.Waypoint
 import ru.spb.rollers.titleRoutes
 
 class RoutesFragment : Fragment() {
@@ -86,7 +85,6 @@ class RoutesFragment : Fragment() {
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun addPoint(){
         pointAdapter.addPoint(Waypoint(
             3, "Электросила"))
