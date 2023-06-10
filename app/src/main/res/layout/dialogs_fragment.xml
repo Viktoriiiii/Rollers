@@ -33,22 +33,23 @@
                         android:id="@+id/ivPhoto"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/logo" />
+                        android:src="@drawable/logo"
+                        android:contentDescription="@string/user_photo" />
                 </androidx.cardview.widget.CardView>
                 <TextView
                     android:id="@+id/txvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Диалоги"
+                    android:text="@string/dialogs"
                     android:textColor="@color/for_icon"
                     android:textSize="20sp"
-                    android:paddingLeft="10dp"
+                    android:paddingHorizontal="10dp"
                     android:textStyle="bold"
                     />
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="end"
                     >
                     <androidx.appcompat.widget.SearchView
                         android:id="@+id/search_view"
@@ -59,7 +60,7 @@
                 </RelativeLayout>
             </androidx.appcompat.widget.Toolbar>
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/messages_list"
+                android:id="@+id/dialogList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

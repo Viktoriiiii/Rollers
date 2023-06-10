@@ -27,7 +27,6 @@ class MessagesFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var viewModel: MessagesViewModel
-
     private var messageList = emptyList<Message>()
     private lateinit var messageAdapter: MessageAdapter
 
@@ -41,7 +40,7 @@ class MessagesFragment : Fragment() {
         println(object : Any() {}.javaClass.enclosingMethod?.name+ "Fragment")
         println(MAIN.appViewModel.liveData.value)
 
-        _binding = MessagesFragmentBinding.inflate(layoutInflater, container, false)
+        _binding = MessagesFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -56,30 +55,12 @@ class MessagesFragment : Fragment() {
         binding.imageViewBack.setOnClickListener{
             MAIN.onSupportNavigateUp()
             MAIN.setBottomNavigationVisible(true)
+
+            // установить viewedDialog в "non"
+            // записать в поле бд viewedDialog какой чат открывается
+            REF_DATABASE_USER.child(MAIN.appViewModel.user.id).child("viewedDialog")
+                .setValue("non")
         }
-
-        // Загрузка инфо получателя в toolbar
-        REF_DATABASE_USER.child(MAIN.appViewModel.contactForMessages.id).addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val user = snapshot.getValue<User>()!!
-                MAIN.appViewModel.contactForMessages = user
-                Glide.with(MAIN)
-                    .load(user.photo)
-                    .placeholder(R.drawable.avatar)
-                    .into(binding.ivPhoto)
-
-                if (user.role == "Организатор") {
-                    binding.txvName.text = if (user.schoolName.isNullOrEmpty()) "Неизвестный организатор"
-                        else user.schoolName
-                }
-                else {
-                    binding.txvName.text = if (user.lastName.isNullOrEmpty() &&
-                        user.firstName.isNullOrEmpty()) "Неизвестный пользователь" else user.lastName + " " + user.firstName
-                }
-            }
-            override fun onCancelled(error: DatabaseError) {
-            }
-        })
 
         binding.btnSend.setOnClickListener {
             if (binding.etMessage.text.toString().isNotEmpty()){
@@ -108,14 +89,27 @@ class MessagesFragment : Fragment() {
         mapMessageC["from"] = curUser
         mapMessageC["text"] = binding.etMessage.text.toString()
         mapMessageC["timeStamp"] = ServerValue.TIMESTAMP
-        mapMessageC["read"] = false
         mapMessageC["id"] = messageKey.toString()
 
         val mapDialog = hashMapOf<String,Any>()
-
         mapDialog["$refDialogUser/id"] = contUser
         mapDialog["$refDialogUser/pinned"] = false
         mapDialog["$refDialogUser/Messages/$messageKey"] = mapMessageI
+
+        // получить просмотриваемый пользователем диалог
+        REF_DATABASE_USER.child(contUser).child("viewedDialog")
+            .addListenerForSingleValueEvent(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val id = snapshot.getValue<String>()!!
+                    mapMessageC["read"] = id == MAIN.appViewModel.user.id
+                    mapDialog["$refDialogReceivingUser/Messages/$messageKey"] = mapMessageC
+                    REF_DATABASE_ROOT.updateChildren(mapDialog)
+                        .addOnSuccessListener {  }
+                        .addOnFailureListener {  }
+                }
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })
 
         mapDialog["$refDialogReceivingUser/id"] = curUser
         mapDialog["$refDialogReceivingUser/pinned"] = false
@@ -149,6 +143,8 @@ class MessagesFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
+        REF_DATABASE_USER.child(MAIN.appViewModel.user.id).child("viewedDialog")
+            .setValue("non")
         println(object : Any() {}.javaClass.enclosingMethod?.name+ "Fragment")
         println(MAIN.appViewModel.liveData.value)
     }
@@ -183,9 +179,60 @@ class MessagesFragment : Fragment() {
         println(MAIN.appViewModel.liveData.value)
         MAIN.setBottomNavigationVisible(false)
         initRecyclerView()
+
+        // Загрузка инфо получателя в toolbar
+        REF_DATABASE_USER.child(MAIN.appViewModel.contactForMessages.id).addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val user = snapshot.getValue<User>()!!
+
+                if (user.id.isNotEmpty()) {
+                        MAIN.appViewModel.contactForMessages = user
+
+                try {
+                    Glide.with(MAIN)
+                        .load(user.photo)
+                        .placeholder(R.drawable.avatar)
+                        .into(binding.ivPhoto)
+                    if (user.role == "Организатор") {
+                        binding.txvName.text = if (user.schoolName.isNullOrEmpty()) "Неизвестный организатор"
+                        else user.schoolName
+                    }
+                    else {
+                        binding.txvName.text = if (user.lastName.isNullOrEmpty() &&
+                            user.firstName.isNullOrEmpty()) "Неизвестный пользователь" else user.lastName + " " + user.firstName
+                    }
+                }
+                catch (_: Exception){ }
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
     }
 
     private fun initRecyclerView() {
+
+        // прочитать все непрочитанные сообщения в диалоге
+
+        // Получение ссылки на диалог
+        val dialogRef = REF_DATABASE_DIALOG.child(MAIN.appViewModel.user.id)
+            .child(MAIN.appViewModel.contactForMessages.id)
+        // Обновление поля "read" во всех сообщениях диалога
+        dialogRef.child("Messages").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (messageSnapshot in dataSnapshot.children) {
+                    val messageKey = messageSnapshot.key
+                    val messageRef = dialogRef.child("Messages").child(messageKey!!)
+                    messageRef.child("read").setValue(true)
+                }
+            }
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
+
+        // записать в поле бд viewedDialog какой чат открывается
+        REF_DATABASE_USER.child(MAIN.appViewModel.user.id).child("viewedDialog")
+            .setValue(MAIN.appViewModel.contactForMessages.id)
+
         messageAdapter = MessageAdapter(messageList)
 
         val ref = REF_DATABASE_DIALOG
@@ -199,7 +246,10 @@ class MessagesFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 messageList = snapshot.children.map { it.getMessageModel() }
                 messageAdapter.setList(messageList)
-                binding.contactsList.smoothScrollToPosition(messageAdapter.itemCount)
+                try {
+                    binding.contactsList.smoothScrollToPosition(messageAdapter.itemCount)
+                }
+                catch (_:Exception){}
             }
             override fun onCancelled(error: DatabaseError) {
             }

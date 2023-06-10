@@ -18,10 +18,13 @@ data class User(
     var schoolName: String? = "",
     var description: String? = "",
     var address: String? = "",
-    var isManager: Boolean = false
+    var isManager: Boolean = false,
+    var viewedDialog: String? = ""
 ) {
     constructor(role: String, userEmail: String?, userPassword: String?, isManager: Boolean) :
-            this("", role, userEmail, userPassword, "", "", "", "", "", "", "", "", "", "", "", isManager)
+            this("", role, userEmail, userPassword, "", "", "", "",
+                "", "", "", "", "", "", "",
+                isManager, "")
 
     @Exclude
     fun toMap(): Map<String, Any?> {
@@ -41,7 +44,8 @@ data class User(
             "schoolName" to schoolName,
             "description" to description,
             "address" to address,
-            "manager" to isManager
+            "manager" to isManager,
+            "viewedDialog" to viewedDialog
         )
     }
 }

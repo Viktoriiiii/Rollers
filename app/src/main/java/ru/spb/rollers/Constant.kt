@@ -6,6 +6,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import ru.spb.rollers.models.Dialog
 import ru.spb.rollers.models.Message
 import java.text.SimpleDateFormat
 import java.util.*
@@ -49,3 +50,6 @@ fun String.asTime(): String {
 
 fun DataSnapshot.getMessageModel(): Message =
     this.getValue(Message::class.java) ?: Message()
+
+fun DataSnapshot.getDialogModel(): Dialog =
+    this.getValue(Dialog::class.java) ?: Dialog()

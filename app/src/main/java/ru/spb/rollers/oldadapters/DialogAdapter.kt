@@ -30,7 +30,6 @@ class DialogAdapter(
         holder.dialogContainer
         holder.mtvName.text = item.dialogName
         holder.mtvMessage.text = item.dialogMessage
-        holder.mtvDate.text = item.dialogDate
         holder.ivPhoto.setImageResource(R.drawable.logo)
 
         holder.txvContMessage.text = "1"
@@ -81,7 +80,6 @@ class DialogAdapter(
         val dialogContainer: MaterialCardView = itemView.findViewById(R.id.dialogContainer)
         val mtvName: MaterialTextView = itemView.findViewById(R.id.mtvName)
         val mtvMessage: MaterialTextView = itemView.findViewById(R.id.mtvMessage)
-        val mtvDate: MaterialTextView = itemView.findViewById(R.id.mtvDate)
         val txvContMessage: MaterialTextView = itemView.findViewById(R.id.txvContMessage)
         val ivPhoto: ImageView = itemView.findViewById(R.id.ivPhoto)
 
