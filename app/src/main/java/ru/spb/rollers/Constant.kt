@@ -1,10 +1,14 @@
 package ru.spb.rollers
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import ru.spb.rollers.models.Message
+import java.text.SimpleDateFormat
+import java.util.*
 
 lateinit var MAIN: AppActivity
 
@@ -36,3 +40,12 @@ fun initFirebase() {
     REF_DATABASE_DIALOG = FirebaseDatabase.getInstance().getReference("Dialog")
     REF_STORAGE_ROOT = FirebaseStorage.getInstance().reference
 }
+
+fun String.asTime(): String {
+    val time = Date(this.toLong())
+    val timeFormat = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault())
+    return timeFormat.format(time)
+}
+
+fun DataSnapshot.getMessageModel(): Message =
+    this.getValue(Message::class.java) ?: Message()

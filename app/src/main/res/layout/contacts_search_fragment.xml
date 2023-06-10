@@ -27,7 +27,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_back2_foreground"
                 android:foreground="?android:attr/selectableItemBackground"
-                />
+                android:contentDescription="@string/back"
+                tools:ignore="UnusedAttribute" />
         </RelativeLayout>
 
         <TextView

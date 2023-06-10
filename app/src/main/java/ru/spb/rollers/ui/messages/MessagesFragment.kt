@@ -16,19 +16,20 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 import ru.spb.rollers.*
 import ru.spb.rollers.databinding.MessagesFragmentBinding
+import ru.spb.rollers.models.Message
 import ru.spb.rollers.models.User
+import ru.spb.rollers.adapters.MessageAdapter
 import java.util.*
 
 class MessagesFragment : Fragment() {
 
-    private var _binding: MessagesFragmentBinding? = null
+    private var  _binding: MessagesFragmentBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var viewModel: MessagesViewModel
 
-//    private var messageList: List<Message> = mutableListOf()
-//    private lateinit var recyclerView: RecyclerView
-//    private lateinit var messageAdapter: MessageAdapter
+    private var messageList = emptyList<Message>()
+    private lateinit var messageAdapter: MessageAdapter
 
 
     override fun onCreateView(
@@ -80,11 +81,6 @@ class MessagesFragment : Fragment() {
             }
         })
 
-//        setInitialData()
-//        recyclerView = view.findViewById(R.id.contactsList)
-//        messageAdapter = MessageAdapter(messageList, 2)
-//        recyclerView.adapter = messageAdapter
-
         binding.btnSend.setOnClickListener {
             if (binding.etMessage.text.toString().isNotEmpty()){
                 sendMessage()
@@ -106,22 +102,24 @@ class MessagesFragment : Fragment() {
         mapMessageI["text"] = binding.etMessage.text.toString()
         mapMessageI["timeStamp"] = ServerValue.TIMESTAMP
         mapMessageI["read"] = true
+        mapMessageI["id"] = messageKey.toString()
 
         val mapMessageC = hashMapOf<String, Any>()
         mapMessageC["from"] = curUser
         mapMessageC["text"] = binding.etMessage.text.toString()
         mapMessageC["timeStamp"] = ServerValue.TIMESTAMP
         mapMessageC["read"] = false
+        mapMessageC["id"] = messageKey.toString()
 
         val mapDialog = hashMapOf<String,Any>()
 
         mapDialog["$refDialogUser/id"] = contUser
         mapDialog["$refDialogUser/pinned"] = false
-        mapDialog["$refDialogUser/$messageKey"] = mapMessageI
+        mapDialog["$refDialogUser/Messages/$messageKey"] = mapMessageI
 
         mapDialog["$refDialogReceivingUser/id"] = curUser
         mapDialog["$refDialogReceivingUser/pinned"] = false
-        mapDialog["$refDialogReceivingUser/$messageKey"] = mapMessageC
+        mapDialog["$refDialogReceivingUser/Messages/$messageKey"] = mapMessageC
 
         REF_DATABASE_ROOT.updateChildren(mapDialog)
             .addOnSuccessListener {  }
@@ -184,5 +182,28 @@ class MessagesFragment : Fragment() {
         println(object : Any() {}.javaClass.enclosingMethod?.name + "Fragment")
         println(MAIN.appViewModel.liveData.value)
         MAIN.setBottomNavigationVisible(false)
+        initRecyclerView()
+    }
+
+    private fun initRecyclerView() {
+        messageAdapter = MessageAdapter(messageList)
+
+        val ref = REF_DATABASE_DIALOG
+            .child(MAIN.appViewModel.user.id)
+            .child(MAIN.appViewModel.contactForMessages.id)
+            .child("Messages")
+
+        binding.contactsList.adapter = messageAdapter
+
+        ref.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                messageList = snapshot.children.map { it.getMessageModel() }
+                messageAdapter.setList(messageList)
+                binding.contactsList.smoothScrollToPosition(messageAdapter.itemCount)
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
     }
 }
+

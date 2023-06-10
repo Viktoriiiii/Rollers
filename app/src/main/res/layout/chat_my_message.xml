@@ -4,9 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="right"
+    android:gravity="end"
     >
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/messagesContainer"
         android:layout_width="wrap_content"
@@ -16,7 +15,6 @@
         android:padding="10dp"
         android:layout_margin="5dp"
         app:cardElevation="10dp">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,7 +24,6 @@
                 android:id="@+id/textViewSender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Я"
                 android:textColor="@color/for_text"
                 android:textSize="14sp"
                 android:textStyle="normal|bold"
@@ -39,7 +36,6 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:maxLines="1"
                 android:scrollHorizontally="true"
-                android:text="29.04.2023 21:05"
                 android:textAlignment="textEnd"
                 android:layout_below="@+id/textViewMessage"
                 android:textColor="@color/for_text"
@@ -51,7 +47,6 @@
                 android:id="@+id/textViewMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Текст сообщения..."
                 android:textColor="@color/for_text"
                 android:textSize="16sp"
                 android:textStyle="normal"
@@ -59,7 +54,6 @@
                 android:maxWidth="270dp"
                 android:layout_below="@+id/textViewSender"
                 />
-
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

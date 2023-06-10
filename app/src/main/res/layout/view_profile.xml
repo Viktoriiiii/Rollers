@@ -2,6 +2,7 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/friendsContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -39,7 +40,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/avatar" />
+                        android:src="@drawable/avatar"
+                        android:contentDescription="@string/user_photo" />
                 </androidx.cardview.widget.CardView>
                 <ImageView
                     android:id="@+id/imageViewClose"
@@ -51,14 +53,16 @@
                     android:layout_gravity="end"
                     android:focusedByDefault="true"
                     android:foreground="?android:attr/selectableItemBackground"
-                    />
+                    android:contentDescription="@string/close"
+                    tools:ignore="UnusedAttribute" />
                 <ImageView
                     android:id="@+id/imageViewToAdmin"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/ic_person_foreground"
                     android:foreground="?android:attr/selectableItemBackground"
-                    />
+                    android:contentDescription="@string/user_photo"
+                    tools:ignore="UnusedAttribute" />
             </FrameLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -72,33 +76,32 @@
                     android:textColor="@color/for_text"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:text="Иван Иванов (nickname)"
+                    android:text="@string/full_name"
                     android:padding="15dp"
                     />
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_gravity="left"
-                >
+                android:layout_gravity="start"
+                tools:ignore="UseCompoundDrawables">
                 <TextView
                     android:id="@+id/textViewStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Статус: На роликах"
+                    android:text="@string/_status"
                     android:textColor="@color/for_text"
                     android:textSize="18sp"
                     android:textStyle="normal"
                     android:padding="15dp"
                     />
-
                 <ImageView
                     android:id="@+id/ivStatus"
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_rollers_foreground" />
+                    android:src="@drawable/ic_rollers_foreground"
+                    android:contentDescription="@string/status" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -115,7 +118,7 @@
                     android:id="@+id/txvBirthday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Возраст: 28 лет"
+                    android:text="@string/_birthday"
                     android:textColor="@color/for_text"
                     android:textSize="18sp"
                     android:padding="15dp"
@@ -130,13 +133,12 @@
                     android:id="@+id/txvDistrict"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Район: Московский"
+                    android:text="@string/_district"
                     android:textColor="@color/for_text"
                     android:textSize="18sp"
                     android:padding="15dp"
                     />
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 </com.google.android.material.card.MaterialCardView>

@@ -2,6 +2,7 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/friendsContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -38,7 +39,8 @@
                         android:id="@+id/ivPhoto"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/freestyle" />
+                        android:src="@drawable/freestyle"
+                        android:contentDescription="@string/user_photo" />
                 </androidx.cardview.widget.CardView>
                 <ImageView
                     android:id="@+id/imageViewClose"
@@ -50,14 +52,16 @@
                     android:layout_gravity="end"
                     android:focusedByDefault="true"
                     android:foreground="?android:attr/selectableItemBackground"
-                    />
+                    android:contentDescription="@string/close"
+                    tools:ignore="UnusedAttribute" />
                 <ImageView
                     android:id="@+id/imageViewToAdmin"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/ic_manage_account_foreground"
                     android:foreground="?android:attr/selectableItemBackground"
-                    />
+                    android:contentDescription="@string/user_photo"
+                    tools:ignore="UnusedAttribute" />
             </FrameLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -73,25 +77,27 @@
                     android:textColor="@color/for_text"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:text="Роллер-школа Фантаст (fantast)"
+                    android:text="@string/_name_school"
                     android:padding="10dp"
                     />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                tools:ignore="UseCompoundDrawables">
                 <ImageView
                     android:id="@+id/imageViewEventDescription"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/ic_event_description_foreground"
                     android:foreground="?android:attr/selectableItemBackground"
-                    />
+                    android:contentDescription="@string/description"
+                    tools:ignore="UnusedAttribute" />
                 <TextView
                     android:id="@+id/txvDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Обучение катанию на роликах детей и взрослых: свой роллердром / скейт-парк, опытные инструкторы по роликам, доступные цены."
+                    android:text="@string/_description"
                     android:textColor="@color/for_text"
                     android:textSize="16sp"
                     android:textStyle="normal"
@@ -106,19 +112,21 @@
                 />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                tools:ignore="UseCompoundDrawables">
                 <ImageView
                     android:id="@+id/imageViewEventAddress"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/ic_location_foreground"
                     android:foreground="?android:attr/selectableItemBackground"
-                    />
+                    android:contentDescription="@string/location"
+                    tools:ignore="UnusedAttribute" />
                 <TextView
                     android:id="@+id/txvSchoolAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Адрес: просп. Юрия Гагарина, 32, корп. 6Б (этаж 4)"
+                    android:text="@string/_address"
                     android:textColor="@color/for_text"
                     android:textSize="16sp"
                     android:layout_gravity="center"
@@ -132,19 +140,21 @@
                 />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                tools:ignore="UseCompoundDrawables">
                 <ImageView
                     android:id="@+id/imageViewEventPhone"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/ic_phone_foreground"
                     android:foreground="?android:attr/selectableItemBackground"
-                    />
+                    android:contentDescription="@string/phone"
+                    tools:ignore="UnusedAttribute" />
                 <TextView
                     android:id="@+id/txvSchoolPhone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+7 (812) 956-42-12"
+                    android:text="@string/_phone"
                     android:textColor="@color/for_text"
                     android:textSize="16sp"
                     android:layout_gravity="center"
