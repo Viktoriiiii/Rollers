@@ -11,6 +11,9 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGParseException
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import okhttp3.*
 import okio.IOException
 import org.json.JSONObject
@@ -82,7 +85,42 @@ class EventsFragment : Fragment()
 
         getWeather()
 
+        getCountUnreadMessageDialogs()
     }
+
+    private fun getCountUnreadMessageDialogs() {
+
+        REF_DATABASE_DIALOG.child(MAIN.appViewModel.user.id).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var unreadDialogsCount = 0
+                for (dialogSnapshot in snapshot.children) {
+                    val dialogId = dialogSnapshot.key
+                    // Получение списка сообщений для текущего диалога
+                    val messagesRef = REF_DATABASE_DIALOG.child(MAIN.appViewModel.user.id)
+                        .child(dialogId!!).child("Messages")
+                    messagesRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(messagesSnapshot: DataSnapshot) {
+                            var count = 0
+                            val messages = messagesSnapshot.children.map { it.getMessageModel() }
+                            count = messages.count{ !it.read  && it.from != MAIN.appViewModel.user.id}
+
+                            if (count > 0)
+                                unreadDialogsCount++
+
+                            if (unreadDialogsCount == 0){
+                                MAIN.bottomNavigationView.removeBadge(R.id.dialogs)
+                            }
+                            else
+                                MAIN.bottomNavigationView.getOrCreateBadge(R.id.dialogs).number = unreadDialogsCount
+                        }
+                        override fun onCancelled(error: DatabaseError) {}
+                    })
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {}
+        })
+    }
+
 
     private fun getWeather() {
         val url = "https://api.weather.yandex.ru/v2/forecast?lat=59.939427&lon=30.309217&extra=true"

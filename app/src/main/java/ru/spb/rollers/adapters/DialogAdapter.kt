@@ -23,7 +23,6 @@ import ru.spb.rollers.*
 import ru.spb.rollers.models.Dialog
 import ru.spb.rollers.models.User
 
-
 class DialogAdapter(
     private var itemListDialog: List<Dialog>,
 ): RecyclerView.Adapter<DialogAdapter.DialogViewHolder>() {
