@@ -8,6 +8,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import ru.spb.rollers.models.Dialog
 import ru.spb.rollers.models.Message
+import ru.spb.rollers.models.User
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -47,6 +48,9 @@ fun String.asTime(): String {
     val timeFormat = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault())
     return timeFormat.format(time)
 }
+
+fun DataSnapshot.getUserModel(): User =
+    this.getValue(User::class.java) ?: User()
 
 fun DataSnapshot.getMessageModel(): Message =
     this.getValue(Message::class.java) ?: Message()

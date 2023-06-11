@@ -6,13 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.getValue
 import ru.spb.rollers.*
 import ru.spb.rollers.adapters.DialogAdapter
 import ru.spb.rollers.databinding.DialogsFragmentBinding
 import ru.spb.rollers.models.Dialog
+import ru.spb.rollers.models.User
+import java.util.*
 
 class DialogsFragment : Fragment() {
 
@@ -54,6 +58,18 @@ class DialogsFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         initRecyclerView()
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null && listDialogs.isNotEmpty()) {
+                    searchList(newText)
+                }
+                return true
+            }
+        })
     }
 
     private fun initRecyclerView() {
@@ -68,9 +84,43 @@ class DialogsFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val dialogList = snapshot.children.map { it.getDialogModel() }
                 dialogAdapter.setList(dialogList)
+                listDialogs = dialogList.toMutableList()
             }
             override fun onCancelled(error: DatabaseError) {
             }
+        })
+    }
+
+    fun searchList(text: String) {
+        var searchList: List<Dialog> = mutableListOf()
+        val idList = listDialogs.map { it.id }
+
+        val userQuery = REF_DATABASE_USER.orderByKey().startAt(idList.first()).endAt(idList.last())
+
+        userQuery.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var userList: List<User> = mutableListOf()
+                for (userSnapshot in snapshot.children) {
+                    val user = userSnapshot.getValue<User>()!!
+                    if (idList.contains(user.id))
+                        userList += user
+                }
+
+                for (user in userList){
+                    if (user.lastName?.lowercase(Locale.getDefault())
+                            ?.contains(text.lowercase(Locale.getDefault())) == true ||
+                        user.firstName?.lowercase(Locale.getDefault())
+                            ?.contains(text.lowercase(Locale.getDefault())) == true ||
+                        user.schoolName?.lowercase(Locale.getDefault())
+                            ?.contains(text.lowercase(Locale.getDefault())) == true){
+                        val foundElement = listDialogs.firstOrNull { it.id in user.id }
+                        if (foundElement != null)
+                            searchList += foundElement
+                    }
+                }
+                dialogAdapter.setList(searchList)
+            }
+            override fun onCancelled(error: DatabaseError) {}
         })
     }
 }

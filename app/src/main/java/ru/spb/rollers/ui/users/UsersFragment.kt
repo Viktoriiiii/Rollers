@@ -102,13 +102,20 @@ class UsersFragment : Fragment() {
     fun searchList(text: String) {
         val searchList: ArrayList<User> = ArrayList()
         for (user in listUsers) {
-            if (user.lastName?.toLowerCase()?.contains(text.lowercase(Locale.getDefault())) == true ||
-                user.firstName?.toLowerCase()?.contains(text.lowercase(Locale.getDefault())) == true ||
-                user.schoolName?.toLowerCase()?.contains(text.lowercase(Locale.getDefault())) == true ||
-                user.description?.toLowerCase()?.contains(text.lowercase(Locale.getDefault())) == true ||
-                user.district?.toLowerCase()?.contains(text.lowercase(Locale.getDefault())) == true ||
-                user.address?.toLowerCase()?.contains(text.lowercase(Locale.getDefault())) == true ||
-                user.email?.toLowerCase()?.contains(text.lowercase(Locale.getDefault())) == true) {
+            if (user.lastName?.lowercase(Locale.getDefault())
+                    ?.contains(text.lowercase(Locale.getDefault())) == true ||
+                user.firstName?.lowercase(Locale.getDefault())
+                    ?.contains(text.lowercase(Locale.getDefault())) == true ||
+                user.schoolName?.lowercase(Locale.getDefault())
+                    ?.contains(text.lowercase(Locale.getDefault())) == true ||
+                user.description?.lowercase(Locale.getDefault())
+                    ?.contains(text.lowercase(Locale.getDefault())) == true ||
+                user.district?.lowercase(Locale.getDefault())
+                    ?.contains(text.lowercase(Locale.getDefault())) == true ||
+                user.address?.lowercase(Locale.getDefault())
+                    ?.contains(text.lowercase(Locale.getDefault())) == true ||
+                user.email?.lowercase(Locale.getDefault())
+                    ?.contains(text.lowercase(Locale.getDefault())) == true) {
                 searchList.add(user)
             }
         }
