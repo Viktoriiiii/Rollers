@@ -58,4 +58,7 @@
     <string name="build">Построить</string>
     <string name="routes">Маршруты</string>
     <string name="to_map">toMap</string>
+    <string name="view_routes_maps">Просмотр карты/маршрута</string>
+    <string name="where">Куда</string>
+    <string name="from">Откуда</string>
 </resources>

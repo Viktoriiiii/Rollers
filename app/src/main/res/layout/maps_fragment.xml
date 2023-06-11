@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -23,16 +24,17 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_back2_foreground"
                 android:foreground="?android:attr/selectableItemBackground"
-                />
+                android:contentDescription="@string/back"
+                tools:ignore="UnusedAttribute" />
         </RelativeLayout>
         <TextView
             android:id="@+id/txvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Просмотр карты/маршрута"
+            android:text="@string/view_routes_maps"
             android:textColor="@color/for_icon"
             android:textSize="20sp"
-            android:paddingLeft="10dp"
+            android:paddingHorizontal="10dp"
             android:textStyle="bold"
             />
         <RelativeLayout
@@ -66,7 +68,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center|right"
+            android:layout_gravity="center|end"
             android:orientation="vertical"
             android:padding="5dp"
             >
@@ -86,7 +88,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:clickable="true"
-                    android:src="@drawable/ic_my_location_foreground" />
+                    android:src="@drawable/ic_my_location_foreground"
+                    android:focusable="true"
+                    android:contentDescription="@string/location" />
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -101,6 +105,7 @@
             app:fabSize="normal"
             android:translationY="-60dp"
             app:maxImageSize="50dp"
+            android:visibility="gone"
             android:contentDescription="@string/add_point" />
     </FrameLayout>
 </LinearLayout>

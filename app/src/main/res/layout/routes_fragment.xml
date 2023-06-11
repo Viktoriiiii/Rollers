@@ -77,13 +77,102 @@
             android:layout_margin="3dp"
             android:background="@color/for_contacts"
             >
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/pointsList"
+        <LinearLayout
+            android:id="@+id/llContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/for_contacts"
+            >
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/pointsContainer1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/item_point"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                />
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10dp"
+                android:padding="10dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/for_popup_menu"
+                app:cardElevation="10dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    >
+                    <ImageView
+                        android:id="@+id/ivLocation1"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_location_foreground"
+                        android:contentDescription="@string/location" />
+                    <EditText
+                        android:id="@+id/etLocation1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/for_text"
+                        android:textSize="16sp"
+                        android:hint="@string/from"
+                        android:autofillHints="where"
+                        android:inputType="text"
+                        android:focusable="false" />
+                    <ImageView
+                        android:id="@+id/ivDelete1"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_close_foreground"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        tools:ignore="UnusedAttribute"
+                        android:contentDescription="@string/close" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/pointsContainer2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10dp"
+                android:padding="10dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/for_popup_menu"
+                app:cardElevation="10dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    >
+                    <ImageView
+                        android:id="@+id/ivLocation2"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_location_foreground"
+                        android:contentDescription="@string/location" />
+                    <EditText
+                        android:id="@+id/etLocation2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/for_text"
+                        android:textSize="16sp"
+                        android:hint="@string/where"
+                        android:inputType="textNoSuggestions"
+                        android:autofillHints="from"
+                        android:focusable="false" />
+                    <ImageView
+                        android:id="@+id/ivDelete2"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_close_foreground"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        tools:ignore="UnusedAttribute"
+                        android:contentDescription="@string/close" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

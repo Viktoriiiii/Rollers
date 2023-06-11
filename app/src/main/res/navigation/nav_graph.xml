@@ -95,6 +95,10 @@
         tools:layout="@layout/routes_fragment"
         >
         <argument
+            android:name="name"
+            app:argType="string"
+            />
+        <argument
             android:name="latitude"
             app:argType="string"
             />

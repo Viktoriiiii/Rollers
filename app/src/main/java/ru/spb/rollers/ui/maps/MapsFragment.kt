@@ -51,6 +51,8 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
     private lateinit var searchManager: SearchManager
     private lateinit var searchSession: Session
 
+    private var point = ru.spb.rollers.models.Point()
+
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchAdapter: SearchAdapter
 
@@ -73,7 +75,7 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
 
         if (MAIN.appViewModel.addingPoint){
             binding.cardViewDecrease.visibility = View.GONE
-
+            binding.floatingActionButton.visibility = View.VISIBLE
         }
 
         recyclerView = view.findViewById(R.id.suggestList)
@@ -115,10 +117,8 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
                             override fun onItemClick(item: SuggestItem) {
                                 binding.searchView.setQuery(item.title.text, false)
                                 mapView.map.move(
-                                    CameraPosition(
-                                        item.center!!,14.0f, 0.0f, 0.0f
-                                    ),
-                                    Animation(Animation.Type.SMOOTH, 4.0f),
+                                    CameraPosition(item.center!!,14.0f, 0.0f, 0.0f),
+                                    Animation(Animation.Type.SMOOTH, 1.0f),
                                     null
                                 )
                                 binding.suggestList.visibility = View.GONE
@@ -151,6 +151,19 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
             binding.txvTitle.visibility = View.VISIBLE
             binding.searchView.onActionViewCollapsed()
             true
+        }
+
+        binding.floatingActionButton.setOnClickListener{
+            val query = binding.searchView.query.toString()
+            if (query.isNotEmpty()){
+                point.displayName = binding.searchView.query.toString()
+            }
+            if (!point.displayName.isNullOrEmpty() && !point.latitude.isNullOrEmpty() && !point.longitude.isNullOrEmpty()){
+                MAIN.appViewModel.listPoint += point
+//                MAIN.appViewModel.listPoint.last().latitude = point.latitude
+//                MAIN.appViewModel.listPoint.last().longitude = point.longitude
+                MAIN.navController.navigate(R.id.action_mapsFragment_to_routes)
+            }
         }
     }
 
@@ -209,11 +222,9 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
         userLocationView.accuracyCircle.fillColor = Color.WHITE
     }
 
-    override fun onObjectRemoved(view: UserLocationView) {
-    }
+    override fun onObjectRemoved(view: UserLocationView) {}
 
-    override fun onObjectUpdated(view: UserLocationView, event: ObjectEvent) {
-    }
+    override fun onObjectUpdated(view: UserLocationView, event: ObjectEvent) {}
 
     override fun onSearchResponse(response: Response) {
         val mapObjects = mapView.map.mapObjects
@@ -223,6 +234,8 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
             for (searchResult in response.collection.children) {
                 val resultLocation = searchResult.obj!!.geometry[0].point
                 if (resultLocation != null) {
+                    point.latitude = resultLocation.latitude.toString()
+                    point.longitude = resultLocation.longitude.toString()
                     mapObjects.addPlacemark(
                         resultLocation,
                         ImageProvider.fromResource(MAIN, R.drawable.search_result)
