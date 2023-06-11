@@ -58,10 +58,6 @@ class DialogAdapter(
                     Toast.makeText(MAIN, "Сообщения удалены", Toast.LENGTH_SHORT).show()
                     true
                 }
-                R.id.deleteDialog -> {
-                    Toast.makeText(MAIN, "Диалог удален", Toast.LENGTH_SHORT).show()
-                    true
-                }
                 else -> false
             }
         }

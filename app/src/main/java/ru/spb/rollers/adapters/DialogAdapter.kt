@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.appcompat.view.menu.MenuPopupHelper
 import androidx.appcompat.widget.PopupMenu
@@ -62,20 +63,22 @@ class DialogAdapter(
             .child("Messages")
         refMessages.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                val messages = snapshot.children.map { it.getMessageModel() }
-                val lastMessage = messages.last()
-                holder.mtvMessage.text = if (MAIN.appViewModel.user.id == lastMessage.from)
-                    "Вы: " + lastMessage.text else lastMessage.text
-                val count = messages.count{ !it.read }
+                if (snapshot.exists())
+                {
+                    val messages = snapshot.children.map { it.getMessageModel() }
+                    val lastMessage = messages.last()
+                    holder.mtvMessage.text = if (MAIN.appViewModel.user.id == lastMessage.from)
+                        "Вы: " + lastMessage.text else lastMessage.text
+                    val count = messages.count{ !it.read }
 
-                holder.mtvMessage.typeface = if (!lastMessage.read) Typeface.defaultFromStyle(Typeface.BOLD)
+                    holder.mtvMessage.typeface = if (!lastMessage.read) Typeface.defaultFromStyle(Typeface.BOLD)
                     else Typeface.defaultFromStyle(Typeface.ITALIC)
 
-                holder.txvContMessage.text = count.toString()
-                holder.cvCountMessages.visibility = if (count == 0) View.GONE else View.VISIBLE
+                    holder.txvContMessage.text = count.toString()
+                    holder.cvCountMessages.visibility = if (count == 0) View.GONE else View.VISIBLE
+                }
             }
-            override fun onCancelled(error: DatabaseError) {
-            }
+            override fun onCancelled(error: DatabaseError) {}
         })
 
         holder.dialogContainer.setOnClickListener{
@@ -90,13 +93,13 @@ class DialogAdapter(
         }
 
         holder.dialogContainer.setOnLongClickListener{
-            showPopupMenu(it)
+            showPopupMenu(it, item)
             true
         }
     }
 
     @SuppressLint("RestrictedApi")
-    private fun showPopupMenu(view: View) {
+    private fun showPopupMenu(view: View, dialog: Dialog) {
         val popupMenu = PopupMenu(view.context, view)
         popupMenu.inflate(R.menu.dialog_popup_menu)
         popupMenu.setOnMenuItemClickListener { menuItem ->
@@ -106,17 +109,29 @@ class DialogAdapter(
                     true
                 }
                 R.id.deleteMessages -> {
-                    Toast.makeText(MAIN, "Сообщения удалены", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                R.id.deleteDialog -> {
-                    Toast.makeText(MAIN, "Диалог удален", Toast.LENGTH_SHORT).show()
+                    val builderDeleteDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
+                    builderDeleteDialog
+                        .setTitle("Удаление диалога")
+                        .setMessage("Вы уверены, что хотите удалить историю сообщений? Отменить это действие будет нельзя")
+                        .setCancelable(false)
+                        .setPositiveButton("Да") { _, _ ->
+                            val path = REF_DATABASE_DIALOG
+                                .child(MAIN.appViewModel.user.id)
+                                .child(dialog.id)
+                            path.removeValue().addOnSuccessListener {
+                                Toast.makeText(MAIN, "Удалено", Toast.LENGTH_SHORT).show()
+                            }.addOnFailureListener {}
+                        }
+                        .setNegativeButton("Отмена"){dialog, _ ->
+                            dialog.cancel()
+                        }
+                    val alertDialogDeletePhoto: AlertDialog = builderDeleteDialog.create()
+                    alertDialogDeletePhoto.show()
                     true
                 }
                 else -> false
             }
         }
-
         val menuHelper = MenuPopupHelper(view.context,
             popupMenu.menu as MenuBuilder, view)
         menuHelper.setForceShowIcon(true)

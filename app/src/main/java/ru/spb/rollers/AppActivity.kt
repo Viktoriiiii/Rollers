@@ -47,7 +47,6 @@ class AppActivity : AppCompatActivity() {
         bottomNavigationView.setOnItemSelectedListener { item ->
             NavigationUI.onNavDestinationSelected(item, navController)
         }
-        bottomNavigationView.getOrCreateBadge(R.id.dialogs).number = 2
 
         setBottomNavigationVisible(false)
 

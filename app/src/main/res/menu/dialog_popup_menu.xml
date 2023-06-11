@@ -11,8 +11,4 @@
         android:icon="@mipmap/ic_clear"
         android:title="Очистить историю"
         />
-    <item android:id="@+id/deleteDialog"
-        android:icon="@mipmap/ic_delete"
-        android:title="Удалить диалог"
-        />
 </menu>
