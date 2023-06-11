@@ -41,10 +41,6 @@ import ru.spb.rollers.titleRoutes
 class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListener,
     CameraListener {
 
-    companion object {
-        fun newInstance() = MapsFragment()
-    }
-
     private var _binding: MapsFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: MapsViewModel
@@ -62,14 +58,9 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        viewModel = ViewModelProvider(this)[MapsViewModel::class.java]
         _binding = MapsFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this)[MapsViewModel::class.java]
-        // TODO: Use the ViewModel
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -79,6 +70,11 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
             MAIN.onSupportNavigateUp()
         }
         binding.txvTitle.text = titleRoutes
+
+        if (MAIN.appViewModel.addingPoint){
+            binding.cardViewDecrease.visibility = View.GONE
+
+        }
 
         recyclerView = view.findViewById(R.id.suggestList)
 
@@ -108,7 +104,7 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
 
             override fun onQueryTextChange(query: String): Boolean {
                 binding.suggestList.visibility = View.VISIBLE
-                val southWest = Point(59.681658, 29.369953) // Южно-западная граница города Санкт-Петербург
+                val southWest = Point(59.681658, 29.369953) // Юго-западная граница города Санкт-Петербург
                 val northEast = Point(60.130912, 30.645520)
                 val boundingBox = BoundingBox(southWest, northEast)
                 suggestSession.suggest(query, boundingBox, suggestOptions, object : SuggestSession.SuggestListener {

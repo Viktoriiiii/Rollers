@@ -54,4 +54,8 @@
     <string name="input_message">Введите сообщение</string>
     <string name="location">location</string>
     <string name="dialogs">Диалоги</string>
+    <string name="add_point">Добавить точку</string>
+    <string name="build">Построить</string>
+    <string name="routes">Маршруты</string>
+    <string name="to_map">toMap</string>
 </resources>

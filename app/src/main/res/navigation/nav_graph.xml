@@ -94,6 +94,14 @@
         android:label="RoutesFragment"
         tools:layout="@layout/routes_fragment"
         >
+        <argument
+            android:name="latitude"
+            app:argType="string"
+            />
+        <argument
+            android:name="longitude"
+            app:argType="string"
+            />
         <action
             android:id="@+id/action_routes_to_mapsFragment"
             app:destination="@id/mapsFragment" />

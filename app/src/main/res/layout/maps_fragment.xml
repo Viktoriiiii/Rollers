@@ -89,5 +89,18 @@
                     android:src="@drawable/ic_my_location_foreground" />
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_add_location_foreground"
+            app:backgroundTint="@color/for_icon"
+            app:tint="@color/white"
+            app:fabSize="normal"
+            android:translationY="-60dp"
+            app:maxImageSize="50dp"
+            android:contentDescription="@string/add_point" />
     </FrameLayout>
 </LinearLayout>

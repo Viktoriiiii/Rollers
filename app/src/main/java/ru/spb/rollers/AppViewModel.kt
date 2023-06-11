@@ -11,6 +11,8 @@ class AppViewModel : ViewModel() {
     var contact: Contact = Contact()
     var contactForMessages = User()
 
+    var addingPoint = false
+
     init {
         liveData.value = false
     }
