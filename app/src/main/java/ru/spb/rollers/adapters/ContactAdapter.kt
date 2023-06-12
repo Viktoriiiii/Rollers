@@ -15,7 +15,6 @@ import ru.spb.rollers.models.User
 class ContactAdapter(options: FirebaseRecyclerOptions<User>) :
     FirebaseRecyclerAdapter<User,UserViewHolder>(options)
 {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_contact, parent, false)
         return UserViewHolder(view)

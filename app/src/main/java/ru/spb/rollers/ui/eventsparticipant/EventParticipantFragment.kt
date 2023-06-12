@@ -30,15 +30,10 @@ class EventParticipantFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        viewModel = ViewModelProvider(this)[EventParticipantViewModel::class.java]
         _binding = EventParticipantFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this)[EventParticipantViewModel::class.java]
-        // TODO: Use the ViewModel
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,7 +45,7 @@ class EventParticipantFragment : Fragment() {
 
         setInitialData()
         recyclerView = view.findViewById(R.id.peopleList)
-      //  contactAdapter = ContactAdapter(contactList)
+        contactAdapter = ContactAdapter(contactList)
         recyclerView.adapter = contactAdapter
     }
 
