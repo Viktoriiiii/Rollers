@@ -3,21 +3,21 @@
     <item
         android:id="@+id/events"
         android:icon="@drawable/ic_rollers_foreground"
-        android:title="События" />
+        android:title="@string/events" />
     <item
         android:id="@+id/profile"
         android:icon="@drawable/ic_profile_foreground"
-        android:title="Профиль" />
+        android:title="@string/profile" />
     <item
         android:id="@+id/contacts"
         android:icon="@drawable/ic_contacts_foreground"
-        android:title="Контакты" />
+        android:title="@string/contacts" />
     <item
         android:id="@+id/dialogs"
         android:icon="@drawable/ic_message_foreground"
-        android:title="Сообщения" />
+        android:title="@string/messages" />
     <item
         android:id="@+id/routes"
         android:icon="@drawable/ic_route_foreground"
-        android:title="Маршруты" />
+        android:title="@string/routes" />
 </menu>

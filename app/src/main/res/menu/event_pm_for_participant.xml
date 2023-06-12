@@ -3,11 +3,11 @@
     android:theme="@style/PopupMenu"
     >
     <item android:id="@+id/toViewEvent"
-        android:title="Просмотреть"
+        android:title="@string/view_events"
         android:icon="@mipmap/ic_view_event"
         />
     <item android:id="@+id/deleteEvent"
         android:icon="@mipmap/ic_delete"
-        android:title="Удалить"
+        android:title="@string/delete"
         />
 </menu>

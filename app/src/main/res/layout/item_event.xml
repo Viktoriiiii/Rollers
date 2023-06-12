@@ -2,6 +2,7 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/eventsContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -27,12 +28,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/roliki" />
+                android:src="@drawable/rollers"
+                android:contentDescription="@string/event_photo" />
             <androidx.cardview.widget.CardView
                 android:layout_width="50dp"
                 android:layout_height="25dp"
                 app:cardCornerRadius="25dp"
-                android:layout_gravity="top|right"
+                android:layout_gravity="top|end"
                 android:backgroundTint="@color/for_chat_my_message"
                 android:background="@color/for_chat_my_message"
                 android:layout_margin="5dp"
@@ -44,11 +46,12 @@
                     android:singleLine="true"
                     android:ellipsize="marquee"
                     android:layout_gravity="center"
-                    android:text="Бесплатно"
+                    android:text="@string/_free"
                     android:textSize="8sp"
                     android:textColor="@color/for_button"
                     android:textAlignment="center"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:ignore="SmallSp" />
             </androidx.cardview.widget.CardView>
         </FrameLayout>
         <LinearLayout
@@ -57,11 +60,11 @@
             >
             <ImageView
                 android:id="@+id/ivManager"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:src="@drawable/ic_manage_account_foreground"
                 android:layout_weight="1"
-                />
+                android:contentDescription="@string/manager" />
             <TextView
                 android:id="@+id/txvEventName"
                 android:layout_width="wrap_content"
@@ -71,21 +74,21 @@
                 android:textColor="@color/for_button"
                 android:textSize="10sp"
                 android:textStyle="bold"
-                android:text="Покатушка на роликах"
+                android:text="@string/_name_event"
                 android:padding="2dp"
-                android:paddingStart="20dp"
+                android:paddingHorizontal="20dp"
                 android:layout_weight="10"
-                android:gravity="left"
+                android:gravity="center"
                 android:layout_gravity="center"
-                />
+                tools:ignore="SmallSp" />
             <ImageView
                 android:id="@+id/ivEventStatus"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:src="@drawable/ic_add_event_foreground"
                 android:gravity="end"
                 android:layout_weight="1"
-                />
+                android:contentDescription="@string/add" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -102,23 +105,21 @@
                     android:id="@+id/txvEventDateDay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="29"
+                    android:text="@string/_date_day"
                     android:textColor="@color/for_text"
-                    android:textSize="24sp"
-                    android:padding="2dp"
+                    android:textSize="18sp"
                     android:textAlignment="center"
-                    android:paddingStart="10dp"
+                    android:paddingHorizontal="5dp"
                     />
                 <TextView
                     android:id="@+id/txvEventDateMonth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="апреля"
+                    android:text="@string/_day_month"
                     android:textColor="@color/for_text"
-                    android:textSize="16sp"
-                    android:padding="2dp"
+                    android:textSize="12sp"
                     android:textAlignment="center"
-                    android:paddingStart="10dp"
+                    android:paddingHorizontal="5dp"
                     />
             </LinearLayout>
             <LinearLayout
@@ -130,73 +131,73 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    >
+                    tools:ignore="UseCompoundDrawables">
                     <ImageView
                         android:id="@+id/ivEventStartLocation"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/ic_location_foreground"
                         android:layout_gravity="center"
-                        />
+                        android:contentDescription="@string/location" />
                     <TextView
                         android:id="@+id/txvEventStartLocation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="г. Санкт-Петербург, Дворцовая площадь"
+                        android:text="@string/_location_start"
                         android:textColor="@color/for_text"
                         android:textSize="10sp"
                         android:padding="2dp"
                         android:layout_gravity="center"
-                        android:paddingStart="5dp"
-                        />
+                        android:paddingHorizontal="5dp"
+                        tools:ignore="SmallSp" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    >
+                    tools:ignore="UseCompoundDrawables">
                     <ImageView
                         android:id="@+id/ivEventEndLocation"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/ic_location_foreground"
                         android:layout_gravity="center"
-                        />
+                        android:contentDescription="@string/location" />
                     <TextView
                         android:id="@+id/txvEventEndLocation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="г. Санкт-Петербург, ст.м. Крестовский остров"
+                        android:text="@string/_location_end"
                         android:textColor="@color/for_text"
                         android:textSize="10sp"
                         android:padding="2dp"
-                        android:paddingStart="5dp"
+                        android:paddingHorizontal="5dp"
                         android:layout_gravity="center"
-                        />
+                        tools:ignore="SmallSp" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    >
+                    tools:ignore="UseCompoundDrawables">
                     <ImageView
                         android:id="@+id/ivEventTime"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_time_foreground"
-                        />
+                        android:contentDescription="@string/location" />
                     <TextView
                         android:id="@+id/txvEventDateTime"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="06:30"
+                        android:text="@string/_date_time"
                         android:layout_gravity="center"
                         android:textColor="@color/for_text"
                         android:textSize="10sp"
                         android:padding="2dp"
-                        android:paddingStart="5dp"
-                        />
+                        android:paddingHorizontal="5dp"
+                        tools:ignore="SmallSp" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

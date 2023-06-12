@@ -4,18 +4,18 @@
     >
     <item android:id="@+id/toPinRoute"
         android:icon="@mipmap/ic_pin"
-        android:title="Закрепить маршрут"
+        android:title="@string/pin_route"
         />
     <item android:id="@+id/toViewRoute"
-        android:title="Просмотр на карте"
+        android:title="@string/view_on_map"
         android:icon="@mipmap/ic_view_event"
         />
     <item android:id="@+id/toChangeRouteName"
         android:icon="@mipmap/ic_change"
-        android:title="Изменить название"
+        android:title="@string/change_name"
         />
     <item android:id="@+id/deleteRoute"
         android:icon="@mipmap/ic_delete"
-        android:title="Удалить маршрут"
+        android:title="@string/delete_route"
         />
 </menu>

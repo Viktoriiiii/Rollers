@@ -39,7 +39,7 @@ class EventAdapter (private var itemListEvent: List<Event>, var userID: Int
         holder.txvEventEndLocation.text = "${item.eventEndLocation}"
         holder.txvEventCost.text = if (item.eventCost == 0.0) "Бесплатно" else item.eventCost.toString() + "р."
 
-        holder.ivEventPhoto.setImageResource(R.drawable.roliki)
+        holder.ivEventPhoto.setImageResource(R.drawable.rollers)
 
         if (item.isParticipate) {
             holder.ivEventStatus.setImageResource(R.drawable.ic_done_foreground)

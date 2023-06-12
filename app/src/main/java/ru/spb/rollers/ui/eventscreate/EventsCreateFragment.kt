@@ -21,10 +21,6 @@ import ru.spb.rollers.titleEvents
 
 class EventsCreateFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
 
-    companion object {
-        fun newInstance() = EventsCreateFragment()
-    }
-
     private var _binding: EventsCreateFragmentBinding? = null
     private val binding get() = _binding!!
 
@@ -37,14 +33,9 @@ class EventsCreateFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        viewModel = ViewModelProvider(this)[EventsCreateViewModel::class.java]
         _binding = EventsCreateFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this)[EventsCreateViewModel::class.java]
-        // TODO: Use the ViewModel
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

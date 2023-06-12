@@ -33,16 +33,17 @@
                         android:id="@+id/ivPhoto"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/logo" />
+                        android:src="@drawable/logo"
+                        android:contentDescription="@string/user_photo" />
                 </androidx.cardview.widget.CardView>
                 <TextView
                     android:id="@+id/txvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="События"
+                    android:text="@string/events"
                     android:textColor="@color/for_icon"
                     android:textSize="20sp"
-                    android:paddingLeft="10dp"
+                    android:paddingHorizontal="10dp"
                     android:textStyle="bold"
                     />
                 <ImageView
@@ -52,9 +53,10 @@
                     android:src="@color/white"
                     android:layout_gravity="start|center"
                     android:foreground="?android:attr/selectableItemBackground"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="5dp"
                     android:scaleType="centerCrop"
-                    />
+                    android:contentDescription="@string/weather"
+                    tools:ignore="UnusedAttribute" />
                 <TextView
                     android:id="@+id/txvWeatherTemp"
                     android:layout_width="wrap_content"
@@ -73,7 +75,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:background="@color/for_toolbar"
-                    android:layout_gravity="right"
+                    android:layout_gravity="end"
                     android:layout_marginEnd="20dp"
                     >
                     <ImageView
@@ -83,12 +85,13 @@
                         android:background="@color/for_toolbar"
                         android:src="@drawable/ic_add_event_foreground"
                         android:foreground="?android:attr/selectableItemBackground"
-                        />
+                        tools:ignore="UnusedAttribute"
+                        android:contentDescription="@string/new_event" />
                 </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="end"
                     >
                     <androidx.appcompat.widget.SearchView
                         android:id="@+id/search_view"

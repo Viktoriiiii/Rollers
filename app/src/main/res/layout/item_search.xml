@@ -26,14 +26,14 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_weight="1"
-            android:text="Маршрут № 1"
+            android:text="@string/saint_petersburg"
             android:paddingHorizontal="10dp"
             />
         <TextView
             android:id="@+id/txvSearchText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Андреевский собор"
+            android:text="@string/cathedral"
             android:textColor="@color/for_text"
             android:textSize="14sp"
             android:paddingHorizontal="10dp"

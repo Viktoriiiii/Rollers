@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:theme="@style/PopupMenu"
     >
     <item android:id="@+id/changePhoto"
         android:icon="@mipmap/ic_add_photo"
-        android:title="Изменить"
+        android:title="@string/change"
         />
     <item android:id="@+id/deletePhoto"
         android:icon="@mipmap/ic_delete"
-        android:title="Удалить"
+        android:title="@string/delete"
         />
 </menu>
