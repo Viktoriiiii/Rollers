@@ -1,4 +1,4 @@
-package ru.spb.rollers.oldadapters
+package ru.spb.rollers.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -13,30 +13,63 @@ import androidx.appcompat.view.menu.MenuPopupHelper
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
-import com.google.android.material.textview.MaterialTextView
-import ru.spb.rollers.MAIN
-import ru.spb.rollers.R
-import ru.spb.rollers.oldmodel.Route
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import ru.spb.rollers.*
+import ru.spb.rollers.models.Route
 
-class RouteAdapter (private var itemListRoute: List<Route>
-): RecyclerView.Adapter<RouteAdapter.RouteViewHolder>(){
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RouteViewHolder {
+class RouteAdapter(
+    private var itemListRoute: MutableList<Route>,
+): RecyclerView.Adapter<RouteAdapter.RouteViewHolder>() {
+
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): RouteAdapter.RouteViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_route, parent, false)
         return RouteViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: RouteViewHolder, position: Int) {
+    @SuppressLint("SetTextI18n")
+    override fun onBindViewHolder(holder: RouteAdapter.RouteViewHolder, position: Int) {
         val item = itemListRoute[position]
-        holder.routesContainer
-        holder.textViewRouteEventName.text = item.routeName
-        holder.textViewRouteDistance.text = item.routeDistance
-        holder.txvEventStartLocation.text = item.routeStartLocation
-        holder.txvEventEndLocation.text = item.routeEndLocation
+
+        val refMessages = REF_DATABASE_ROUTE
+            .child(MAIN.appViewModel.user.id)
+            .child(item.id!!)
+            .child("Points")
+        refMessages.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists())
+                {
+                    val points = snapshot.children.map { it.getPointModel() }
+                    val firstPoint = points.first()
+                    val lastPoint = points.last()
+                    holder.tvRouteStartLocation.text = firstPoint.displayName
+                    holder.tvRouteEndLocation.text = lastPoint.displayName
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {}
+        })
+
+        holder.tvRouteName.text = item.name
+        holder.tvRouteDistance.text = "${item.distance} км"
 
         holder.routesContainer.setOnClickListener{
             showPopupMenu(it, item)
         }
+    }
+
+    override fun getItemCount(): Int {
+        return itemListRoute.size
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setList(list: MutableList<Route>) {
+        itemListRoute = list
+        notifyDataSetChanged()
     }
 
     @SuppressLint("RestrictedApi", "MissingInflatedId", "NotifyDataSetChanged")
@@ -58,15 +91,14 @@ class RouteAdapter (private var itemListRoute: List<Route>
                     val builderChangeRouteNameDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
                     builderChangeRouteNameDialog.setView(promptsView)
                     val userInput: EditText = promptsView.findViewById(R.id.input_text)
-                    var str = "vv"
                     builderChangeRouteNameDialog
                         .setTitle("Введите новое имя маршрута")
                         .setCancelable(false)
-                        .setPositiveButton("Да") { dialog, _ ->
-                            val inputText = userInput.text.toString()
-                            route.routeName = inputText
-                            notifyDataSetChanged()
-                            dialog.dismiss()
+                        .setPositiveButton("Да") { _, _ ->
+                            route.name = userInput.text.toString()
+                            REF_DATABASE_ROUTE.child(MAIN.appViewModel.user.id)
+                                .child(route.id!!).child("name")
+                                .setValue(route.name)
                             Toast.makeText(MAIN, "Название изменено", Toast.LENGTH_SHORT).show()
                         }
                         .setNegativeButton("Отмена"){dialog, _ ->
@@ -80,10 +112,16 @@ class RouteAdapter (private var itemListRoute: List<Route>
                 R.id.deleteRoute -> {
                     val builderDeleteDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
                     builderDeleteDialog
-                        .setTitle("Вы уверены, что хотите удалить маршрут?")
+                        .setTitle("Удаление маршрута")
+                        .setMessage("Вы уверены, что хотите удалить маршрут? Отменить это действие будет нельзя")
                         .setCancelable(false)
                         .setPositiveButton("Да") { _, _ ->
-                            Toast.makeText(MAIN, "Машрут удален", Toast.LENGTH_SHORT).show()
+                            val path = REF_DATABASE_ROUTE
+                                .child(MAIN.appViewModel.user.id)
+                                .child(route.id!!)
+                            path.removeValue().addOnSuccessListener {
+                                Toast.makeText(MAIN, "Удалено", Toast.LENGTH_SHORT).show()
+                            }.addOnFailureListener {}
                         }
                         .setNegativeButton("Отмена"){dialog, _ ->
                             dialog.cancel()
@@ -101,15 +139,12 @@ class RouteAdapter (private var itemListRoute: List<Route>
         menuHelper.show()
     }
 
-    override fun getItemCount(): Int {
-        return itemListRoute.size
-    }
-
     inner class RouteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val routesContainer: MaterialCardView = itemView.findViewById(R.id.routesContainer)
-        val textViewRouteEventName: TextView = itemView.findViewById(R.id.textViewRouteEventName)
-        val textViewRouteDistance: MaterialTextView = itemView.findViewById(R.id.textViewRouteDistance)
-        val txvEventStartLocation: TextView = itemView.findViewById(R.id.txvEventStartLocation)
-        val txvEventEndLocation: TextView = itemView.findViewById(R.id.txvEventEndLocation)
+        val tvRouteName: TextView = itemView.findViewById(R.id.tvRouteName)
+        val tvRouteDistance: TextView = itemView.findViewById(R.id.tvRouteDistance)
+        val tvRouteStartLocation: TextView = itemView.findViewById(R.id.tvRouteStartLocation)
+        val tvRouteEndLocation: TextView = itemView.findViewById(R.id.tvRouteEndLocation)
+
     }
 }

@@ -6,9 +6,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import ru.spb.rollers.models.Dialog
-import ru.spb.rollers.models.Message
-import ru.spb.rollers.models.User
+import ru.spb.rollers.models.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,6 +26,7 @@ lateinit var REF_STORAGE_ROOT: StorageReference
 lateinit var REF_DATABASE_USER: DatabaseReference
 lateinit var REF_DATABASE_CONTACT: DatabaseReference
 lateinit var REF_DATABASE_DIALOG: DatabaseReference
+lateinit var REF_DATABASE_ROUTE: DatabaseReference
 
 
 const val FOLDER_PROFILE_IMAGE = "profile_image"
@@ -40,6 +39,7 @@ fun initFirebase() {
     REF_DATABASE_USER = FirebaseDatabase.getInstance().getReference("User")
     REF_DATABASE_CONTACT = FirebaseDatabase.getInstance().getReference("Contact")
     REF_DATABASE_DIALOG = FirebaseDatabase.getInstance().getReference("Dialog")
+    REF_DATABASE_ROUTE = FirebaseDatabase.getInstance().getReference("Route")
     REF_STORAGE_ROOT = FirebaseStorage.getInstance().reference
 }
 
@@ -57,3 +57,9 @@ fun DataSnapshot.getMessageModel(): Message =
 
 fun DataSnapshot.getDialogModel(): Dialog =
     this.getValue(Dialog::class.java) ?: Dialog()
+
+fun DataSnapshot.getRouteModel(): Route =
+    this.getValue(Route::class.java) ?: Route()
+
+fun DataSnapshot.getPointModel(): Point =
+    this.getValue(Point::class.java) ?: Point()

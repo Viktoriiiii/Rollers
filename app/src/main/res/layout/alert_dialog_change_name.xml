@@ -5,15 +5,16 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:padding="10dp" >
+    android:padding="20dp" >
     <EditText
         android:id="@+id/input_text"
         android:layout_width="match_parent"
         android:textColor="@color/for_text"
         android:textColorHint="@color/for_text"
         android:layout_height="wrap_content"
-        android:hint="Навание маршрута"
-        >
+        android:hint="@string/input_name"
+        android:autofillHints="text"
+        android:inputType="text">
         <requestFocus />
     </EditText>
 </LinearLayout>

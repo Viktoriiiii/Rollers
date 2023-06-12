@@ -1,6 +1,7 @@
 package ru.spb.rollers.ui.routes
 
 import android.annotation.SuppressLint
+import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,15 +12,17 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.google.android.material.card.MaterialCardView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.yandex.mapkit.map.*
 import com.yandex.mapkit.search.*
-import ru.spb.rollers.MAIN
-import ru.spb.rollers.R
-import ru.spb.rollers.oldadapters.RouteAdapter
+import ru.spb.rollers.*
+import ru.spb.rollers.adapters.RouteAdapter
 import ru.spb.rollers.databinding.RoutesFragmentBinding
-import ru.spb.rollers.oldmodel.Route
-import ru.spb.rollers.titleRoutes
+import ru.spb.rollers.models.Route
 
 class RoutesFragment : Fragment() {
     private var _binding: RoutesFragmentBinding? = null
@@ -28,7 +31,7 @@ class RoutesFragment : Fragment() {
 
     private lateinit var viewModel: RoutesViewModel
 
-    private var routeList: List<Route> = mutableListOf()
+    private var routeList: MutableList<Route> = mutableListOf()
     private lateinit var routeAdapter: RouteAdapter
 
     override fun onCreateView(
@@ -40,23 +43,20 @@ class RoutesFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.ivMyLocation.setOnClickListener{
-            // Записать все точки списка
-
-
             MAIN.navController.navigate(R.id.action_routes_to_mapsFragment)
+            MAIN.appViewModel.buildRoute = false
+            MAIN.appViewModel.addingPoint = false
             titleRoutes = "Поиск местоположения"
         }
 
         binding.btnAddPoint.setOnClickListener{
-            MAIN.appViewModel.addingPoint = true
             addPoint()
         }
-        routeAdapter = RouteAdapter(routeList)
-        binding.routesList.adapter = routeAdapter
 
         binding.searchView.setOnSearchClickListener{
             binding.txvTitle.visibility = View.GONE
@@ -70,6 +70,7 @@ class RoutesFragment : Fragment() {
             if (MAIN.appViewModel.listPoint.size > 1){
                 MAIN.navController.navigate(R.id.action_routes_to_mapsFragment)
                 MAIN.appViewModel.addingPoint = false
+                MAIN.appViewModel.buildRoute = true
                 titleRoutes = "Просмотр маршрута"
             }
             else {
@@ -79,20 +80,51 @@ class RoutesFragment : Fragment() {
         }
 
         binding.ivDelete1.setOnClickListener {
+            MAIN.appViewModel.listPoint.removeIf { it.displayName == binding.etLocation1.text.toString() }
             binding.etLocation1.text.clear()
         }
 
-        binding.ivDelete2.setOnClickListener { binding.etLocation2.text.clear() }
+        binding.ivDelete2.setOnClickListener {
+            MAIN.appViewModel.listPoint.removeIf { it.displayName == binding.etLocation2.text.toString() }
+            binding.etLocation2.text.clear()
+        }
 
         binding.etLocation1.setOnClickListener {
             MAIN.navController.navigate(R.id.action_routes_to_mapsFragment)
+            MAIN.appViewModel.buildRoute = false
             MAIN.appViewModel.addingPoint = true
         }
         binding.etLocation2.setOnClickListener {
             MAIN.navController.navigate(R.id.action_routes_to_mapsFragment)
+            MAIN.appViewModel.buildRoute = false
             MAIN.appViewModel.addingPoint = true
         }
+
+        if (MAIN.appViewModel.clearList){
+            !MAIN.appViewModel.clearList
+            MAIN.appViewModel.listPoint.clear()
+            binding.etLocation1.text.clear()
+            binding.etLocation2.text.clear()
+        }
         setPoints()
+    }
+
+    private fun initRoutesRecyclerView() {
+        routeAdapter = RouteAdapter(routeList)
+
+        val ref = REF_DATABASE_ROUTE
+            .child(MAIN.appViewModel.user.id)
+
+        binding.routesList.adapter = routeAdapter
+
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val listRoute = snapshot.children.map { it.getRouteModel() }
+                routeAdapter.setList(listRoute as MutableList<Route>)
+                routeList = listRoute.toMutableList()
+            }
+            override fun onCancelled(error: DatabaseError) {}
+        })
     }
 
     private fun traverseViewHierarchy(view: View) {
@@ -111,6 +143,7 @@ class RoutesFragment : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     private fun setPoints(){
         if (MAIN.appViewModel.listPoint.isNotEmpty()){
             val container: LinearLayout = binding.llContainer
@@ -121,23 +154,33 @@ class RoutesFragment : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("InflateParams")
     private fun addPoint(){
         val inflater = LayoutInflater.from(MAIN)
         val cardView = inflater.inflate(R.layout.item_point, null) as MaterialCardView
         binding.llContainer.addView(cardView)
-        val delete: ImageView = cardView.findViewById(R.id.imageViewDelete)
-        delete.setOnClickListener{
-            binding.llContainer.removeView(cardView)
-        }
         val etLocation: EditText = cardView.findViewById(R.id.editTextLocation)
         etLocation.setOnClickListener {
             MAIN.navController.navigate(R.id.action_routes_to_mapsFragment)
+            MAIN.appViewModel.buildRoute = false
+            MAIN.appViewModel.addingPoint = true
+        }
+        val delete: ImageView = cardView.findViewById(R.id.imageViewDelete)
+        delete.setOnClickListener{
+            MAIN.appViewModel.listPoint.removeIf { it.displayName == etLocation.text.toString() }
+
+            binding.llContainer.removeView(cardView)
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onResume() {
+        initRoutesRecyclerView()
+        super.onResume()
     }
 }

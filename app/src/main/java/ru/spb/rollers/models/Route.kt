@@ -1,7 +1,7 @@
 package ru.spb.rollers.models
 
-class Route (
-    var id: Int = 0,
+data class Route(
+    var id: String? = "",
     var name: String? = "",
     var distance: String? = ""
 )
