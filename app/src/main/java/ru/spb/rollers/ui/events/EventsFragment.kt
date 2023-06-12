@@ -36,10 +36,6 @@ class EventsFragment : Fragment()
     var condition: String = ""
     var imageUrl: String = "https://yastatic.net/weather/i/icons/funky/dark/"
 
-    companion object {
-        fun newInstance() = EventsFragment()
-    }
-
     private lateinit var viewModel: EventsViewModel
 
     override fun onCreateView(
@@ -180,8 +176,8 @@ class EventsFragment : Fragment()
 
     private fun setInitialData() {
         eventList += Event(
-            1, "Покатушка на роликах","Васька",
-            "Петроградка", 1, "03.05.2023 13:00",
+            1, "Покатушка на роликах","Дворцовая площадь",
+            "ст.м. Крестовский остров", 1, "03.05.2023 13:00",
             "13:00", "13:30", "10 км/ч", "15 км",
             "Описание какое-нибудь", 0.0, true)
         eventList += Event(
