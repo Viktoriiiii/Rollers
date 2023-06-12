@@ -37,15 +37,14 @@ import com.yandex.runtime.network.NetworkError
 import com.yandex.runtime.network.RemoteError
 import ru.spb.rollers.*
 import ru.spb.rollers.databinding.MapsFragmentBinding
-import ru.spb.rollers.oldadapters.OnItemClickListener
-import ru.spb.rollers.oldadapters.SearchAdapter
+import ru.spb.rollers.adapters.OnItemClickListener
+import ru.spb.rollers.adapters.SearchAdapter
 import java.math.BigDecimal
 import java.math.RoundingMode
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.math.sqrt
-
 
 class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListener,
     CameraListener,
@@ -55,7 +54,7 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
     private val binding get() = _binding!!
     private lateinit var viewModel: MapsViewModel
     private val PERMISSIONS_REQUEST_FINE_LOCATION = 1
-    var mapKit: MapKit? = null
+    private var mapKit: MapKit? = null
     private var userLocationLayer: UserLocationLayer? = null
     private lateinit var searchManager: SearchManager
     private lateinit var searchSession: Session
@@ -68,13 +67,6 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
     private lateinit var mapObjects: MapObjectCollection
     private lateinit var drivingRouter: PedestrianRouter
     private lateinit var drivingSession: com.yandex.mapkit.transport.masstransit.Session
-
-    private val ROUTE_START_LOCATION = Point(59.959194, 30.407094)
-    private val ROUTE_END_LOCATION = Point(55.733330, 37.587649)
-    private var SCREEN_CENTER = Point(
-        (ROUTE_START_LOCATION.latitude + ROUTE_END_LOCATION.latitude) / 2,
-        (ROUTE_START_LOCATION.longitude + ROUTE_END_LOCATION.longitude) / 2
-    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -316,12 +308,6 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
         binding.mapView.onStart()
     }
 
-    override fun onDestroy() {
-//        binding.mapView.onStop()
-//        MapKitFactory.getInstance().onStop()
-        super.onDestroy()
-    }
-
     override fun onObjectAdded(userLocationView: UserLocationView) {
         userLocationLayer!!.setAnchor(
             PointF((binding.mapView.width * 0.5).toFloat(), (binding.mapView.height * 0.5).toFloat()),
@@ -396,19 +382,19 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
                 null
             ))
         }
-        SCREEN_CENTER =  Point(
+        val center =  Point(
             (requestPoints.first().point.latitude + requestPoints.last().point.latitude) / 2,
             (requestPoints.first().point.longitude + requestPoints.last().point.longitude) / 2)
         drivingSession =
             drivingRouter.requestRoutes(requestPoints, TimeOptions(), this)
         binding.mapView.map.move(
             CameraPosition(
-                SCREEN_CENTER, 13F, 0F, 0F
+                center, 13F, 0F, 0F
             )
         )
     }
 
-    fun calculateDistance(p1: ru.spb.rollers.models.Point, p2: ru.spb.rollers.models.Point): Double {
+    private fun calculateDistance(p1: ru.spb.rollers.models.Point, p2: ru.spb.rollers.models.Point): Double {
         val earthRadius = 6371.0
         val lat1 = p1.latitude!!.toDouble()
         val lat2 = p2.latitude!!.toDouble()

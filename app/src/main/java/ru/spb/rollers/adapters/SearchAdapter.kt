@@ -1,4 +1,4 @@
-package ru.spb.rollers.oldadapters
+package ru.spb.rollers.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -33,8 +33,6 @@ class SearchAdapter(
         holder.searchContainer
         holder.txvSearchTitle.text = item.title.text
         holder.txvSearchText.text = item.displayText
-
-
         holder.searchContainer.setOnClickListener {
             onItemClickListener?.onItemClick(item)
         }
