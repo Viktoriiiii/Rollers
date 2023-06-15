@@ -2,9 +2,7 @@ package ru.spb.rollers
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.spb.rollers.models.Contact
-import ru.spb.rollers.models.Point
-import ru.spb.rollers.models.User
+import ru.spb.rollers.models.*
 
 class AppViewModel : ViewModel() {
     val liveData = MutableLiveData<Boolean>()
@@ -17,6 +15,10 @@ class AppViewModel : ViewModel() {
     var clearList = false
 
     var listPoint: MutableList<Point> = mutableListOf()
+
+    var route: Route = Route()
+    var points: MutableList<Point> = mutableListOf()
+    var event: Event = Event()
 
     init {
         liveData.value = false

@@ -63,14 +63,14 @@
                 android:paddingHorizontal="4dp"
                 />
             <EditText
-                android:id="@+id/txvEventName"
+                android:id="@+id/etEventName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/for_text"
                 android:hint="@string/_name_event"
                 android:textSize="14sp"
                 android:backgroundTint="@color/for_contacts"
-                android:autofillHints="event name"
+                android:autofillHints="event"
                 android:inputType="text" />
             <View
                 android:layout_width="match_parent"
@@ -80,7 +80,7 @@
                 android:id="@+id/tvEventDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/date_and_time"
+                android:hint="@string/date"
                 android:textSize="16sp"
                 android:textColor="@color/for_text"
                 android:paddingTop="15dp"
@@ -92,10 +92,38 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/for_text"
                 android:textSize="14sp"
-                android:hint="@string/_date_and_time"
-                android:inputType="datetime"
+                android:hint="@string/_date"
                 android:backgroundTint="@color/for_contacts"
-                android:autofillHints="date" />
+                android:autofillHints="date"
+                android:inputType="date"
+                android:focusable="false"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/for_icon"/>
+            <TextView
+                android:id="@+id/tvEventTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/time"
+                android:textSize="16sp"
+                android:textColor="@color/for_text"
+                android:paddingTop="15dp"
+                android:paddingHorizontal="4dp"
+                />
+            <EditText
+                android:id="@+id/etEventTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/for_text"
+                android:textSize="14sp"
+                android:hint="@string/_time"
+                android:backgroundTint="@color/for_contacts"
+                android:autofillHints="date"
+                android:inputType="time"
+                android:focusable="false"
+                />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -116,10 +144,11 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/for_text"
                 android:textSize="14sp"
+                android:focusable="false"
                 android:hint="@string/_name_school"
                 android:backgroundTint="@color/for_contacts"
                 android:autofillHints="manager"
-                android:inputType="text" />
+                android:inputType="none" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -255,7 +284,7 @@
                 android:hint="@string/_speed"
                 android:backgroundTint="@color/for_contacts"
                 android:autofillHints="speed"
-                android:inputType="text" />
+                android:inputType="number" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -308,13 +337,13 @@
                 <ImageView
                     android:id="@+id/ivEventPhoto"
                     android:layout_width="wrap_content"
-                    android:layout_height="120dp"
+                    android:layout_height="200dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/rollers"
                     android:layout_marginVertical="5dp"
                     android:contentDescription="@string/event_photo" />
                 <ImageView
-                    android:id="@+id/imageViewChangePhoto"
+                    android:id="@+id/ivChangePhoto"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="end"

@@ -27,9 +27,10 @@ lateinit var REF_DATABASE_USER: DatabaseReference
 lateinit var REF_DATABASE_CONTACT: DatabaseReference
 lateinit var REF_DATABASE_DIALOG: DatabaseReference
 lateinit var REF_DATABASE_ROUTE: DatabaseReference
-
+lateinit var REF_DATABASE_EVENT: DatabaseReference
 
 const val FOLDER_PROFILE_IMAGE = "profile_image"
+const val FOLDER_EVENT_IMAGE = "event_image"
 
 const val CHILD_PHOTO_URL = "userPhoto"
 
@@ -40,6 +41,7 @@ fun initFirebase() {
     REF_DATABASE_CONTACT = FirebaseDatabase.getInstance().getReference("Contact")
     REF_DATABASE_DIALOG = FirebaseDatabase.getInstance().getReference("Dialog")
     REF_DATABASE_ROUTE = FirebaseDatabase.getInstance().getReference("Route")
+    REF_DATABASE_EVENT = FirebaseDatabase.getInstance().getReference("Event")
     REF_STORAGE_ROOT = FirebaseStorage.getInstance().reference
 }
 
