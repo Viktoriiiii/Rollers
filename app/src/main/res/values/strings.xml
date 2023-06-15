@@ -120,4 +120,5 @@
     <string name="_location_start">Дворцовая площадь</string>
     <string name="_location_end">ст.м. Крестовский остров</string>
     <string name="_date_time">06:30</string>
+    <string name="my_events">Мои события</string>
 </resources>

@@ -2,10 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     android:theme="@style/PopupMenu"
     >
-    <item android:id="@+id/toViewEvent"
-        android:title="@string/view_events"
-        android:icon="@mipmap/ic_view_event"
-        />
     <item android:id="@+id/toChangeEvent"
         android:icon="@mipmap/ic_change"
         android:title="@string/update"

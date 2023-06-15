@@ -28,6 +28,8 @@ lateinit var REF_DATABASE_CONTACT: DatabaseReference
 lateinit var REF_DATABASE_DIALOG: DatabaseReference
 lateinit var REF_DATABASE_ROUTE: DatabaseReference
 lateinit var REF_DATABASE_EVENT: DatabaseReference
+lateinit var REF_DATABASE_EVENT_USER: DatabaseReference
+lateinit var REF_DATABASE_EVENT_PARTICIPANT: DatabaseReference
 
 const val FOLDER_PROFILE_IMAGE = "profile_image"
 const val FOLDER_EVENT_IMAGE = "event_image"
@@ -42,6 +44,8 @@ fun initFirebase() {
     REF_DATABASE_DIALOG = FirebaseDatabase.getInstance().getReference("Dialog")
     REF_DATABASE_ROUTE = FirebaseDatabase.getInstance().getReference("Route")
     REF_DATABASE_EVENT = FirebaseDatabase.getInstance().getReference("Event")
+    REF_DATABASE_EVENT_USER = FirebaseDatabase.getInstance().getReference("Event_User")
+    REF_DATABASE_EVENT_PARTICIPANT = FirebaseDatabase.getInstance().getReference("Event_Participant")
     REF_STORAGE_ROOT = FirebaseStorage.getInstance().reference
 }
 
@@ -65,3 +69,9 @@ fun DataSnapshot.getRouteModel(): Route =
 
 fun DataSnapshot.getPointModel(): Point =
     this.getValue(Point::class.java) ?: Point()
+
+fun DataSnapshot.getEventModel(): Event =
+    this.getValue(Event::class.java) ?: Event()
+
+fun DataSnapshot.getEventUserModel(): EventUser =
+    this.getValue(EventUser::class.java) ?: EventUser()

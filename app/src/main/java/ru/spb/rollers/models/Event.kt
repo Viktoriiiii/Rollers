@@ -6,8 +6,9 @@ data class Event (
     var name: String = "",
     var date: String = "",
     var time: String = "",
+    var dateTime: Any = "",
     var description: String = "",
     var speed: String = "",
-    var cost: String = "",
+    var cost: Double = 0.0,
     var photo: String = ""
 )

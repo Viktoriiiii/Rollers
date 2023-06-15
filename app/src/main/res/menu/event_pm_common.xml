@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     android:theme="@style/PopupMenu"
     >
-    <item android:id="@+id/toAddEvent"
-        android:icon="@mipmap/ic_add_event"
-        android:title="@string/participate"
+    <item android:id="@+id/toViewEvent"
+        android:title="@string/view_events"
+        android:icon="@mipmap/ic_view_event"
         />
 </menu>

@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ServerValue
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
@@ -85,8 +86,9 @@ class EventsCreateFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
             MAIN.appViewModel.event.date = binding.etEventDate.text.toString()
             MAIN.appViewModel.event.time = binding.etEventTime.text.toString()
             MAIN.appViewModel.event.description = binding.etEventDescription.text.toString()
-            MAIN.appViewModel.event.cost = binding.etEventCost.text.toString()
+            MAIN.appViewModel.event.cost = binding.etEventCost.text.toString().toDouble()
             MAIN.appViewModel.event.speed = binding.etEventSpeed.text.toString()
+            MAIN.appViewModel.event.dateTime = ServerValue.TIMESTAMP
 
             REF_DATABASE_EVENT.child(MAIN.appViewModel.event.id).setValue(MAIN.appViewModel.event)
 
@@ -99,6 +101,9 @@ class EventsCreateFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
                     .child("Points")
                     .child(p.id).setValue(p)
             }
+
+            REF_DATABASE_EVENT_USER.child(MAIN.appViewModel.user.id).child(MAIN.appViewModel.event.id)
+                .child("id").setValue(MAIN.appViewModel.event.id)
 
             MAIN.appViewModel.route = Route()
             MAIN.appViewModel.points.clear()
@@ -158,18 +163,16 @@ class EventsCreateFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE
             && resultCode == Activity.RESULT_OK && data != null){
             val uri = CropImage.getActivityResult(data).uri
-            val path = REF_STORAGE_ROOT.child(FOLDER_EVENT_IMAGE)
+            if (MAIN.appViewModel.event.id == ""){
+                val eventKey = REF_DATABASE_EVENT.push().key
+                MAIN.appViewModel.event.id = eventKey.toString()
+            }
+            val path = REF_STORAGE_ROOT.child(FOLDER_EVENT_IMAGE).child(MAIN.appViewModel.event.id)
             path.putFile(uri).addOnCompleteListener { task1 ->
                 if (task1.isSuccessful) {
                     path.downloadUrl.addOnCompleteListener { task2 ->
                         if (task2.isSuccessful) {
                             val photoUrl = task2.result.toString()
-
-                            if (MAIN.appViewModel.event.id == ""){
-                                val eventKey = REF_DATABASE_EVENT.push().key
-                                MAIN.appViewModel.event.id = eventKey.toString()
-                            }
-
                             REF_DATABASE_EVENT.child(MAIN.appViewModel.event.id)
                                 .child("photo").setValue(photoUrl)
                                 .addOnCompleteListener {
@@ -197,7 +200,7 @@ class EventsCreateFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
         val datePickerDialog = DatePickerDialog(
             MAIN,
             { _, year, monthOfYear, dayOfMonth ->
-                val formattedDate = String.format("%02d.%02d.%04d", dayOfMonth, monthOfYear, year)
+                val formattedDate = String.format("%02d.%02d.%04d", dayOfMonth, monthOfYear + 1, year)
                 binding.etEventDate.setText(formattedDate) },
             mYear,
             mMonth,

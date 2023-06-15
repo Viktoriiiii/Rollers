@@ -54,6 +54,9 @@
         <action
             android:id="@+id/action_events_to_eventsCreateFragment"
             app:destination="@id/eventsCreateFragment" />
+        <action
+            android:id="@+id/action_events_to_eventsMyFragment"
+            app:destination="@id/eventsMyFragment" />
     </fragment>
     <fragment
         android:id="@+id/contacts"
@@ -124,6 +127,9 @@
         <action
             android:id="@+id/action_eventsViewFragment_to_eventsViewRouteFragment"
             app:destination="@id/eventsViewRouteFragment" />
+        <action
+            android:id="@+id/action_eventsViewFragment_to_eventsMyFragment"
+            app:destination="@id/eventsMyFragment" />
     </fragment>
     <fragment
         android:id="@+id/eventsCreateFragment"
@@ -202,6 +208,18 @@
         <action
             android:id="@+id/action_contactsSearchFragment_to_messagesFragment"
             app:destination="@id/messagesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventsMyFragment"
+        android:name="ru.spb.rollers.ui.eventsmy.EventsMyFragment"
+        android:label="events_my_fragment"
+        tools:layout="@layout/events_my_fragment" >
+        <action
+            android:id="@+id/action_eventsMyFragment_to_events"
+            app:destination="@id/events" />
+        <action
+            android:id="@+id/action_eventsMyFragment_to_eventsViewFragment"
+            app:destination="@id/eventsViewFragment" />
     </fragment>
 
 </navigation>

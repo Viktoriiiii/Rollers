@@ -19,24 +19,15 @@ class EventsViewFragment : Fragment() {
     private var _binding: EventsViewFragmentBinding? = null
     private val binding get() = _binding!!
 
-    companion object {
-        fun newInstance() = EventsViewFragment()
-    }
-
     private lateinit var viewModel: EventsViewViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        viewModel = ViewModelProvider(this)[EventsViewViewModel::class.java]
         _binding = EventsViewFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(EventsViewViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

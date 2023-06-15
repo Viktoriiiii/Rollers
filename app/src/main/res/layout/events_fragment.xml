@@ -106,11 +106,24 @@
                 android:layout_height="match_parent">
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/eventsList"
+                    tools:listitem="@layout/item_event"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:spanCount="2"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     />
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabMyEvents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_margin="16dp"
+                    android:src="@drawable/ic_list_foreground"
+                    app:backgroundTint="@color/for_button"
+                    app:tint="@color/white"
+                    app:fabSize="normal"
+                    app:maxImageSize="50dp"
+                    android:contentDescription="@string/add_point" />
             </FrameLayout>
         </LinearLayout>
     </androidx.drawerlayout.widget.DrawerLayout>

@@ -100,7 +100,7 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             android:src="@drawable/ic_add_location_foreground"
-            app:backgroundTint="@color/for_icon"
+            app:backgroundTint="@color/for_button"
             app:tint="@color/white"
             app:fabSize="normal"
             android:translationY="-60dp"

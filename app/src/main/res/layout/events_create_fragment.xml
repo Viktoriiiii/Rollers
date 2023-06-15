@@ -346,7 +346,7 @@
                     android:id="@+id/ivChangePhoto"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_gravity="end"
+                    android:layout_gravity="start"
                     android:background="@drawable/ic_photo_foreground"
                     android:foreground="?android:attr/selectableItemBackground"
                     tools:ignore="UnusedAttribute"

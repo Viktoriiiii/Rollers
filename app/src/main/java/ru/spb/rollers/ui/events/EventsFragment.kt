@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.recyclerview.widget.RecyclerView
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGParseException
 import com.google.firebase.database.DataSnapshot
@@ -18,17 +17,16 @@ import okhttp3.*
 import okio.IOException
 import org.json.JSONObject
 import ru.spb.rollers.*
-import ru.spb.rollers.oldadapters.EventAdapter
+import ru.spb.rollers.adapters.EventAdapter
 import ru.spb.rollers.databinding.EventsFragmentBinding
-import ru.spb.rollers.oldmodel.Event
+import ru.spb.rollers.models.Event
 
 class EventsFragment : Fragment()
 {
     private var _binding: EventsFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private var eventList: List<Event> = mutableListOf()
-    private lateinit var recyclerView: RecyclerView
+    private var eventList: MutableList<Event> = mutableListOf()
     private lateinit var eventAdapter: EventAdapter
 
     private val WEATHER_API_KEY = "43cf8001-588a-477e-b84f-0a140208c3de"
@@ -49,6 +47,7 @@ class EventsFragment : Fragment()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        eventList.clear()
 
         MAIN.setBottomNavigationVisible(true)
 
@@ -57,10 +56,8 @@ class EventsFragment : Fragment()
             titleEvents = "Создание события"
         }
 
-        setInitialData()
-        recyclerView = view.findViewById(R.id.eventsList)
-        eventAdapter = EventAdapter(eventList, 2)
-        recyclerView.adapter = eventAdapter
+        eventAdapter = EventAdapter(eventList)
+        binding.eventsList.adapter = eventAdapter
 
         binding.searchView.setOnSearchClickListener{
             binding.txvTitle.visibility = View.GONE
@@ -80,8 +77,22 @@ class EventsFragment : Fragment()
             binding.rlAddEvent.visibility = View.GONE
 
         getWeather()
-
         getCountUnreadMessageDialogs()
+        initEvents()
+
+        binding.fabMyEvents.setOnClickListener {
+            MAIN.navController.navigate(R.id.action_events_to_eventsMyFragment)
+        }
+    }
+
+    private fun initEvents() {
+        REF_DATABASE_EVENT.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val events = snapshot.children.map { it.getEventModel() } as MutableList<Event>
+                eventAdapter.setList(events)
+            }
+            override fun onCancelled(error: DatabaseError) {}
+        })
     }
 
     private fun getCountUnreadMessageDialogs() {
@@ -134,7 +145,7 @@ class EventsFragment : Fragment()
             }
             override fun onResponse(call: Call, response: Response) {
                 val responseBody = response.body?.string()
-                val obj = JSONObject(responseBody)
+                val obj = JSONObject(responseBody!!)
                 val fact = obj.getJSONObject("fact")
                 temp = fact.optInt("temp")
                 condition = fact.optString("condition")
@@ -172,39 +183,6 @@ class EventsFragment : Fragment()
                 }
             }
         })
-    }
-
-    private fun setInitialData() {
-        eventList += Event(
-            1, "Покатушка на роликах","Дворцовая площадь",
-            "ст.м. Крестовский остров", 1, "03.05.2023 13:00",
-            "13:00", "13:30", "10 км/ч", "15 км",
-            "Описание какое-нибудь", 0.0, true)
-        eventList += Event(
-            2, "Покатушка на роликах","Васька",
-            "Петроградка", 2, "03.05.2023 13:00",
-            "13:00", "13:30", "10 км/ч", "15 км",
-            "Описание какое-нибудь", 550.0,true)
-        eventList += Event(
-            3, "Покатушка на роликах","Васька",
-            "Петроградка", 3, "03.05.2023 13:00",
-            "13:00", "13:30", "10 км/ч", "15 км",
-            "Описание какое-нибудь", 0.0, true)
-        eventList += Event(
-            4, "Покатушка на роликах","Васька",
-            "Петроградка", 4, "03.05.2023 13:00",
-            "13:00", "13:30", "10 км/ч", "15 км",
-            "Описание какое-нибудь", 1000.0,true)
-        eventList += Event(
-            5, "Покатушка на роликах","Васька",
-            "Петроградка", 5, "03.05.2023 13:00",
-            "13:00", "13:30", "10 км/ч", "15 км",
-            "Описание какое-нибудь", 0.0,true)
-        eventList += Event(
-            6, "Покатушка на роликах","Васька",
-            "Петроградка", 6, "03.05.2023 13:00",
-            "13:00", "13:30", "10 км/ч", "15 км",
-            "Описание какое-нибудь", 0.0,true)
     }
 
     override fun onDestroyView() {
