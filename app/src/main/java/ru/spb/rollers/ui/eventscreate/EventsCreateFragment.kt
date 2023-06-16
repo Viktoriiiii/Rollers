@@ -16,7 +16,6 @@ import androidx.appcompat.view.menu.MenuPopupHelper
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.button.MaterialButton
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ServerValue
@@ -30,7 +29,6 @@ import ru.spb.rollers.models.Event
 import ru.spb.rollers.models.Point
 import ru.spb.rollers.models.Route
 import java.util.*
-
 
 class EventsCreateFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
 
@@ -60,57 +58,10 @@ class EventsCreateFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
 
         binding.txvTitle.text = titleEvents
 
-        val btnAddRoute: MaterialButton = view.findViewById(R.id.btnAddRoute)
-        btnAddRoute.setOnClickListener{ addRoute() }
+        binding.btnAddRoute.setOnClickListener{ addRoute() }
 
-        val btnSaveRoute: MaterialButton = view.findViewById(R.id.btnSaveRoute)
-        btnSaveRoute.setOnClickListener{
-
-            if (binding.etEventName.text.isNullOrEmpty() || binding.etEventDate.text.isNullOrEmpty()||
-                    binding.etEventTime.text.isNullOrEmpty() || binding.etEventDescription.text.isNullOrEmpty()||
-                    binding.etEventCost.text.isNullOrEmpty() || binding.etEventStartLocation.text.isNullOrEmpty()||
-                    binding.etEventEndLocation.text.isNullOrEmpty() || binding.etEventSpeed.text.isNullOrEmpty()||
-                    binding.etEventDistance.text.isNullOrEmpty()) {
-                Toast.makeText(activity, "Заполнены не все поля",
-                    Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            if (MAIN.appViewModel.event.id == ""){
-                val eventKey = REF_DATABASE_EVENT.push().key
-                MAIN.appViewModel.event.id = eventKey.toString()
-            }
-
-            MAIN.appViewModel.event.managerId = MAIN.appViewModel.user.id
-            MAIN.appViewModel.event.name = binding.etEventName.text.toString()
-            MAIN.appViewModel.event.date = binding.etEventDate.text.toString()
-            MAIN.appViewModel.event.time = binding.etEventTime.text.toString()
-            MAIN.appViewModel.event.description = binding.etEventDescription.text.toString()
-            MAIN.appViewModel.event.cost = binding.etEventCost.text.toString().toDouble()
-            MAIN.appViewModel.event.speed = binding.etEventSpeed.text.toString()
-            MAIN.appViewModel.event.dateTime = ServerValue.TIMESTAMP
-
-            REF_DATABASE_EVENT.child(MAIN.appViewModel.event.id).setValue(MAIN.appViewModel.event)
-
-            REF_DATABASE_EVENT.child(MAIN.appViewModel.event.id).child("route")
-                .setValue(MAIN.appViewModel.route)
-
-            for (p in MAIN.appViewModel.points){
-                REF_DATABASE_EVENT.child(MAIN.appViewModel.event.id)
-                    .child("route")
-                    .child("Points")
-                    .child(p.id).setValue(p)
-            }
-
-            REF_DATABASE_EVENT_USER.child(MAIN.appViewModel.user.id).child(MAIN.appViewModel.event.id)
-                .child("id").setValue(MAIN.appViewModel.event.id)
-
-            MAIN.appViewModel.route = Route()
-            MAIN.appViewModel.points.clear()
-            MAIN.appViewModel.event = Event()
-            Toast.makeText(activity, "Мероприятие сохранено",
-                Toast.LENGTH_SHORT).show()
-            MAIN.onSupportNavigateUp()
+        binding.btnSaveRoute.setOnClickListener{
+            saveEvent()
         }
 
         binding.imageButtonDeleteEvent.setOnClickListener{
@@ -146,7 +97,75 @@ class EventsCreateFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
             changeVisibilityRoute()
         }
 
+        if (MAIN.appViewModel.event.id != "") {
+            setEventInfo()
+        }
+
         initRouteList()
+    }
+
+    private fun saveEvent(){
+        if (binding.etEventName.text.isNullOrEmpty() || binding.etEventDate.text.isNullOrEmpty()||
+            binding.etEventTime.text.isNullOrEmpty() || binding.etEventDescription.text.isNullOrEmpty()||
+            binding.etEventCost.text.isNullOrEmpty() || binding.etEventStartLocation.text.isNullOrEmpty()||
+            binding.etEventEndLocation.text.isNullOrEmpty() || binding.etEventSpeed.text.isNullOrEmpty()||
+            binding.etEventDistance.text.isNullOrEmpty()) {
+            Toast.makeText(activity, "Заполнены не все поля",
+                Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (MAIN.appViewModel.event.id == ""){
+            val eventKey = REF_DATABASE_EVENT.push().key
+            MAIN.appViewModel.event.id = eventKey.toString()
+        }
+
+        MAIN.appViewModel.event.managerId = MAIN.appViewModel.user.id
+        MAIN.appViewModel.event.name = binding.etEventName.text.toString()
+        MAIN.appViewModel.event.date = binding.etEventDate.text.toString()
+        MAIN.appViewModel.event.time = binding.etEventTime.text.toString()
+        MAIN.appViewModel.event.description = binding.etEventDescription.text.toString()
+        MAIN.appViewModel.event.cost = binding.etEventCost.text.toString().toDouble()
+        MAIN.appViewModel.event.speed = binding.etEventSpeed.text.toString()
+        MAIN.appViewModel.event.dateTime = ServerValue.TIMESTAMP
+
+        REF_DATABASE_EVENT.child(MAIN.appViewModel.event.id).setValue(MAIN.appViewModel.event)
+
+        REF_DATABASE_EVENT.child(MAIN.appViewModel.event.id).child("route")
+            .setValue(MAIN.appViewModel.route)
+
+        for (p in MAIN.appViewModel.points){
+            REF_DATABASE_EVENT.child(MAIN.appViewModel.event.id)
+                .child("route")
+                .child("Points")
+                .child(p.id).setValue(p)
+        }
+
+        REF_DATABASE_EVENT_USER.child(MAIN.appViewModel.user.id).child(MAIN.appViewModel.event.id)
+            .child("id").setValue(MAIN.appViewModel.event.id)
+
+        MAIN.appViewModel.route = Route()
+        MAIN.appViewModel.points.clear()
+        MAIN.appViewModel.event = Event()
+        Toast.makeText(activity, "Мероприятие сохранено",
+            Toast.LENGTH_SHORT).show()
+        MAIN.onSupportNavigateUp()
+    }
+
+    private fun setEventInfo() {
+        binding.etEventName.setText(MAIN.appViewModel.event.name)
+        binding.etEventDate.setText(MAIN.appViewModel.event.date)
+        binding.etEventTime.setText(MAIN.appViewModel.event.time)
+        binding.etEventDescription.setText(MAIN.appViewModel.event.description)
+        binding.etEventCost.setText(MAIN.appViewModel.event.cost.toString())
+        binding.etEventSpeed.setText(MAIN.appViewModel.event.speed)
+
+        if (MAIN.appViewModel.event.photo.isNotEmpty()) {
+            Picasso.get()
+                .load(MAIN.appViewModel.event.photo)
+                .placeholder(R.drawable.rollers)
+                .into(binding.ivEventPhoto)
+        }
     }
 
     private fun changeImage(){
@@ -267,6 +286,7 @@ class EventsCreateFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
         builder.show()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setRouteAndPoints(route: Route){
         val refMessages = REF_DATABASE_ROUTE
             .child(MAIN.appViewModel.user.id)

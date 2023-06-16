@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import ru.spb.rollers.*
 import ru.spb.rollers.models.Event
+import ru.spb.rollers.models.Point
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -125,14 +126,38 @@ class EventAdapter(private var itemListEvent: MutableList<Event>):
                 R.id.toAddEvent -> {
                     REF_DATABASE_EVENT_USER.child(MAIN.appViewModel.user.id).child(event.id)
                         .child("id").setValue(event.id)
-
                     REF_DATABASE_EVENT_PARTICIPANT.child(event.id).child(MAIN.appViewModel.user.id)
                         .child("id").setValue(MAIN.appViewModel.user.id)
-
                     Toast.makeText(MAIN, "Мероприятие добавлено", Toast.LENGTH_SHORT).show()
                     true
                 }
                 R.id.toChangeEvent ->{
+                    MAIN.appViewModel.event = event
+
+                    REF_DATABASE_EVENT.child(event.id).child("route")
+                        .addValueEventListener(object : ValueEventListener{
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                if (snapshot.exists())
+                                {
+                                    val route = snapshot.getRouteModel()
+                                    MAIN.appViewModel.route = route
+                                }
+                            }
+                            override fun onCancelled(error: DatabaseError) {}
+                        })
+
+                    REF_DATABASE_EVENT.child(event.id).child("route").child("Points")
+                        .addValueEventListener(object : ValueEventListener{
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                if (snapshot.exists())
+                                {
+                                    val points = snapshot.children.map { it.getPointModel() }
+                                    MAIN.appViewModel.points = points as MutableList<Point>
+                                }
+                            }
+                            override fun onCancelled(error: DatabaseError) {}
+                        })
+
                     MAIN.navController.navigate(R.id.action_events_to_eventsCreateFragment)
                     titleEvents = "Изменение события"
                     true
