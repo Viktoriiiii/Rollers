@@ -140,6 +140,9 @@
         <action
             android:id="@+id/action_eventsCreateFragment_to_events"
             app:destination="@id/events" />
+        <action
+            android:id="@+id/action_eventsCreateFragment_to_eventsMyFragment"
+            app:destination="@id/eventsMyFragment" />
     </fragment>
     <fragment
         android:id="@+id/eventParticipantFragment"
@@ -220,6 +223,9 @@
         <action
             android:id="@+id/action_eventsMyFragment_to_eventsViewFragment"
             app:destination="@id/eventsViewFragment" />
+        <action
+            android:id="@+id/action_eventsMyFragment_to_eventsCreateFragment"
+            app:destination="@id/eventsCreateFragment" />
     </fragment>
 
 </navigation>

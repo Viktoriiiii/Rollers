@@ -116,6 +116,7 @@ class EventAdapter(private var itemListEvent: MutableList<Event>):
         popupMenu.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.toViewEvent -> {
+                    MAIN.appViewModel.event = event
                     try {
                         MAIN.navController.navigate(R.id.action_events_to_eventsViewFragment)
                     }catch (ex: Exception){
@@ -158,7 +159,12 @@ class EventAdapter(private var itemListEvent: MutableList<Event>):
                             override fun onCancelled(error: DatabaseError) {}
                         })
 
-                    MAIN.navController.navigate(R.id.action_events_to_eventsCreateFragment)
+                    try {
+                        MAIN.navController.navigate(R.id.action_events_to_eventsCreateFragment)
+                    }
+                    catch (ex: Exception){
+                        MAIN.navController.navigate(R.id.action_eventsMyFragment_to_eventsCreateFragment)
+                    }
                     titleEvents = "Изменение события"
                     true
                 }

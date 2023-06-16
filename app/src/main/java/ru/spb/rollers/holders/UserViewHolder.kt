@@ -21,7 +21,6 @@ import com.google.firebase.database.ValueEventListener
 import ru.spb.rollers.*
 import ru.spb.rollers.models.Contact
 import ru.spb.rollers.models.User
-import ru.spb.rollers.ui.messages.MessagesFragment
 
 class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val contactContainer: MaterialCardView = itemView.findViewById(R.id.contactContainer)
@@ -55,6 +54,7 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun showInfoAboutUser(user: User){
 
         Glide.with(itemView.context)
@@ -132,6 +132,7 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         menuHelper.show()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun viewProfile(view: View, contact: User){
         val builderViewProfile: AlertDialog.Builder = AlertDialog.Builder(MAIN)
         val profileView: View? = if (contact.role == "Организатор"){
