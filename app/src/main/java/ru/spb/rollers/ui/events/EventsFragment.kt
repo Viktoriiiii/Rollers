@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.appcompat.widget.SearchView
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGParseException
 import com.google.firebase.database.DataSnapshot
@@ -20,6 +21,7 @@ import ru.spb.rollers.*
 import ru.spb.rollers.adapters.EventAdapter
 import ru.spb.rollers.databinding.EventsFragmentBinding
 import ru.spb.rollers.models.Event
+import java.util.*
 
 class EventsFragment : Fragment()
 {
@@ -83,12 +85,25 @@ class EventsFragment : Fragment()
         binding.fabMyEvents.setOnClickListener {
             MAIN.navController.navigate(R.id.action_events_to_eventsMyFragment)
         }
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null && eventList.isNotEmpty()) {
+                    searchList(newText)
+                }
+                return true
+            }
+        })
     }
 
     private fun initEvents() {
         REF_DATABASE_EVENT.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 val events = snapshot.children.map { it.getEventModel() } as MutableList<Event>
+                eventList = events
                 eventAdapter.setList(events)
             }
             override fun onCancelled(error: DatabaseError) {}
@@ -183,6 +198,18 @@ class EventsFragment : Fragment()
                 }
             }
         })
+    }
+
+    fun searchList(text: String) {
+        val searchList: MutableList<Event> = mutableListOf()
+        for (event in eventList) {
+            if (event.name.lowercase(Locale.getDefault())
+                .contains(text.lowercase(Locale.getDefault()))
+            ) {
+                searchList.add(event)
+            }
+        }
+        eventAdapter.setList(searchList)
     }
 
     override fun onDestroyView() {

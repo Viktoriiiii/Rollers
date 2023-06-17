@@ -27,17 +27,13 @@ class UsersFragment : Fragment() {
     private var listUsers: List<User> = ArrayList()
     private lateinit var adapter: UserAdapter
 
-    companion object {
-        fun newInstance() = UsersFragment()
-    }
-
     private lateinit var viewModel: UsersViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel = ViewModelProvider(this).get(UsersViewModel::class.java)
+        viewModel = ViewModelProvider(this)[UsersViewModel::class.java]
         _binding = UsersFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
