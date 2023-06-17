@@ -50,6 +50,9 @@ class EventsFragment : Fragment()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         eventList.clear()
+        MAIN.appViewModel.route = ru.spb.rollers.models.Route()
+        MAIN.appViewModel.points.clear()
+        MAIN.appViewModel.event = Event()
 
         MAIN.setBottomNavigationVisible(true)
 

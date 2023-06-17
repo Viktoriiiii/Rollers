@@ -35,7 +35,9 @@ class EventsMyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        MAIN.appViewModel.route = ru.spb.rollers.models.Route()
+        MAIN.appViewModel.points.clear()
+        MAIN.appViewModel.event = Event()
         binding.imageViewBack.setOnClickListener {
             MAIN.onSupportNavigateUp()
         }
@@ -52,19 +54,23 @@ class EventsMyFragment : Fragment() {
         REF_DATABASE_EVENT_USER.child(MAIN.appViewModel.user.id)
             .addValueEventListener(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    eventList.clear()
-                    eventAdapter.setList(eventList)
+                    if (snapshot.exists()){
+                        eventList.clear()
+                        eventAdapter.setList(eventList)
                         val events = snapshot.children.map { it.getEventUserModel() } as MutableList<EventUser>
                         for (e in events){
                             REF_DATABASE_EVENT.child(e.id).addValueEventListener(object :ValueEventListener{
                                 override fun onDataChange(snapshotChild: DataSnapshot) {
+                                    if (snapshotChild.exists()){
                                         val event = snapshotChild.getEventModel()
                                         eventList.add(event)
                                         eventAdapter.setList(eventList)
+                                    }
                                 }
                                 override fun onCancelled(error: DatabaseError) {}
                             })
                         }
+                    }
                 }
                 override fun onCancelled(error: DatabaseError) {}
             })

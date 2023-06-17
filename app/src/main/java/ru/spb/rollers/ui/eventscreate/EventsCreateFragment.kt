@@ -26,6 +26,7 @@ import com.theartofdev.edmodo.cropper.CropImageView
 import ru.spb.rollers.*
 import ru.spb.rollers.databinding.EventsCreateFragmentBinding
 import ru.spb.rollers.models.Event
+import ru.spb.rollers.models.EventUser
 import ru.spb.rollers.models.Point
 import ru.spb.rollers.models.Route
 import java.util.*
@@ -37,6 +38,8 @@ class EventsCreateFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
 
     private lateinit var viewModel: EventsCreateViewModel
     private var routeList: MutableList<Route> = mutableListOf()
+    var listParticipants: MutableList<EventUser> = mutableListOf()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,6 +66,8 @@ class EventsCreateFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
         binding.btnSaveRoute.setOnClickListener{
             saveEvent()
         }
+        if (MAIN.appViewModel.event.id != "")
+            getParticipants()
 
         binding.imageButtonDeleteEvent.setOnClickListener{
             val builderDeleteDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
@@ -70,11 +75,21 @@ class EventsCreateFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
                 .setTitle("Вы уверены, что хотите удалить мероприятие?")
                 .setCancelable(false)
                 .setPositiveButton("Да") { _, _ ->
+                    if (MAIN.appViewModel.event.id != "") {
+                        if (listParticipants.isNotEmpty()){
+                            for (p in listParticipants){
+                                REF_DATABASE_EVENT_USER.child(p.id).child(MAIN.appViewModel.event.id)
+                                    .child("id").removeValue()
+                            }
+                        }
+                        REF_DATABASE_EVENT_USER.child(MAIN.appViewModel.user.id).child(MAIN.appViewModel.event.id)
+                            .child("id").removeValue()
+                        REF_DATABASE_EVENT.child(MAIN.appViewModel.event.id)
+                            .removeValue()
+                        REF_DATABASE_EVENT_PARTICIPANT.child(MAIN.appViewModel.event.id).removeValue()
+                        Toast.makeText(MAIN, "Мероприятие удалено", Toast.LENGTH_SHORT).show()
+                    }
                     MAIN.onSupportNavigateUp()
-                    MAIN.appViewModel.route = Route()
-                    MAIN.appViewModel.points.clear()
-                    MAIN.appViewModel.event = Event()
-                    Toast.makeText(MAIN, "Мероприятие удалено", Toast.LENGTH_SHORT).show()
                 }
                 .setNegativeButton("Отмена"){dialog, _ ->
                     dialog.cancel()
@@ -102,6 +117,16 @@ class EventsCreateFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
         }
 
         initRouteList()
+    }
+
+    private fun getParticipants(){
+        REF_DATABASE_EVENT_PARTICIPANT.child(MAIN.appViewModel.event.id).addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val users = snapshot.children.map { it.getEventUserModel() }
+                listParticipants = users as MutableList<EventUser>
+            }
+            override fun onCancelled(error: DatabaseError) {}
+        })
     }
 
     private fun saveEvent(){
