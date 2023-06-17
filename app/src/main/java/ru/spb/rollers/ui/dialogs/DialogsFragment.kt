@@ -83,7 +83,7 @@ class DialogsFragment : Fragment() {
         ref.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 val dialogList = snapshot.children.map { it.getDialogModel() }
-                dialogAdapter.setList(dialogList)
+                dialogAdapter.setList(dialogList.sortedByDescending {it.pinned  })
                 listDialogs = dialogList.toMutableList()
             }
             override fun onCancelled(error: DatabaseError) {
@@ -92,18 +92,18 @@ class DialogsFragment : Fragment() {
     }
 
     fun searchList(text: String) {
-        var searchList: List<Dialog> = mutableListOf()
+        val searchList: MutableList<Dialog> = mutableListOf()
         val idList = listDialogs.map { it.id }
 
         val userQuery = REF_DATABASE_USER.orderByKey().startAt(idList.first()).endAt(idList.last())
 
         userQuery.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                var userList: List<User> = mutableListOf()
+                val userList: MutableList<User> = mutableListOf()
                 for (userSnapshot in snapshot.children) {
                     val user = userSnapshot.getValue<User>()!!
                     if (idList.contains(user.id))
-                        userList += user
+                        userList.add(user)
                 }
 
                 for (user in userList){
@@ -115,10 +115,10 @@ class DialogsFragment : Fragment() {
                             ?.contains(text.lowercase(Locale.getDefault())) == true){
                         val foundElement = listDialogs.firstOrNull { it.id in user.id }
                         if (foundElement != null)
-                            searchList += foundElement
+                            searchList.add(foundElement)
                     }
                 }
-                dialogAdapter.setList(searchList)
+                dialogAdapter.setList(searchList.sortedByDescending {it.pinned  })
             }
             override fun onCancelled(error: DatabaseError) {}
         })

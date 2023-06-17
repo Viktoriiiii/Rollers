@@ -51,7 +51,16 @@
             android:layout_below="@+id/mtvName"
             android:padding="5dp"
             />
-
+        <ImageView
+            android:id="@+id/ivPin"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@color/for_toolbar"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_pin_foreground"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:contentDescription="@string/new_event" />
         <androidx.cardview.widget.CardView
             android:id="@+id/cvCountMessages"
             android:layout_width="25dp"

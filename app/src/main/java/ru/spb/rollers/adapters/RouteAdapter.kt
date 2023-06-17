@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -18,7 +19,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import ru.spb.rollers.*
 import ru.spb.rollers.models.Route
-
 
 class RouteAdapter(
     private var itemListRoute: MutableList<Route>,
@@ -35,6 +35,11 @@ class RouteAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RouteAdapter.RouteViewHolder, position: Int) {
         val item = itemListRoute[position]
+
+        if (item.pinned)
+            holder.ivPin.setImageResource(R.drawable.ic_pin_foreground)
+        else
+            holder.ivPin.setImageResource(R.color.transparent)
 
         val refMessages = REF_DATABASE_ROUTE
             .child(MAIN.appViewModel.user.id)
@@ -75,11 +80,26 @@ class RouteAdapter(
     @SuppressLint("RestrictedApi", "MissingInflatedId", "NotifyDataSetChanged")
     private fun showPopupMenu(view: View, route: Route) {
         val popupMenu = PopupMenu(view.context, view)
-        popupMenu.inflate(R.menu.route_popup_menu)
+
+        if (route.pinned)
+            popupMenu.inflate(R.menu.route_pm_unpin)
+        else
+            popupMenu.inflate(R.menu.route_pm_pin)
+
         popupMenu.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.toPinRoute -> {
+                    route.pinned = true
+                    REF_DATABASE_ROUTE.child(MAIN.appViewModel.user.id).child(route.id!!)
+                        .child("pinned").setValue(true)
                     Toast.makeText(MAIN, "Маршрут закреплен", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.toUnPinRoute -> {
+                    route.pinned = false
+                    REF_DATABASE_ROUTE.child(MAIN.appViewModel.user.id).child(route.id!!)
+                        .child("pinned").setValue(false)
+                    Toast.makeText(MAIN, "Маршрут откреплен", Toast.LENGTH_SHORT).show()
                     true
                 }
                 R.id.toViewRoute -> {
@@ -161,6 +181,6 @@ class RouteAdapter(
         val tvRouteDistance: TextView = itemView.findViewById(R.id.tvRouteDistance)
         val tvRouteStartLocation: TextView = itemView.findViewById(R.id.tvRouteStartLocation)
         val tvRouteEndLocation: TextView = itemView.findViewById(R.id.tvRouteEndLocation)
-
+        val ivPin: ImageView = itemView.findViewById(R.id.ivPin)
     }
 }

@@ -121,4 +121,6 @@
     <string name="_location_end">ст.м. Крестовский остров</string>
     <string name="_date_time">06:30</string>
     <string name="my_events">Мои события</string>
+    <string name="unpin_dialog">Открепить диалог</string>
+    <string name="route_unpin">Открепить маршрут</string>
 </resources>

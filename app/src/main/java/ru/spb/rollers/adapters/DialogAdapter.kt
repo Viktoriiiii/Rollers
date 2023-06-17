@@ -37,6 +37,11 @@ class DialogAdapter(
     override fun onBindViewHolder(holder: DialogViewHolder, position: Int) {
         val item = itemListDialog[position]
 
+        if (item.pinned)
+            holder.ivPin.setImageResource(R.drawable.ic_pin_foreground)
+        else
+            holder.ivPin.setImageResource(R.color.transparent)
+
         REF_DATABASE_USER.child(item.id).addValueEventListener(object : ValueEventListener {
             @SuppressLint("SetTextI18n")
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -102,11 +107,28 @@ class DialogAdapter(
     @SuppressLint("RestrictedApi")
     private fun showPopupMenu(view: View, dialog: Dialog) {
         val popupMenu = PopupMenu(view.context, view)
-        popupMenu.inflate(R.menu.dialog_popup_menu)
+
+        if (dialog.pinned)
+            popupMenu.inflate(R.menu.dialog_pm_unpin)
+        else
+            popupMenu.inflate(R.menu.dialog_pm_pin)
+
         popupMenu.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.pinDialog -> {
+                    dialog.pinned = true
+                    REF_DATABASE_DIALOG.child(MAIN.appViewModel.user.id)
+                        .child(dialog.id).child("pinned")
+                        .setValue(true)
                     Toast.makeText(MAIN, "Диалог закреплен", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.unpinDialog -> {
+                    dialog.pinned = false
+                    REF_DATABASE_DIALOG.child(MAIN.appViewModel.user.id)
+                        .child(dialog.id).child("pinned")
+                        .setValue(false)
+                    Toast.makeText(MAIN, "Диалог откреплен", Toast.LENGTH_SHORT).show()
                     true
                 }
                 R.id.deleteMessages -> {
@@ -155,6 +177,7 @@ class DialogAdapter(
         var mtvMessage: MaterialTextView = itemView.findViewById(R.id.mtvMessage)
         val txvContMessage: MaterialTextView = itemView.findViewById(R.id.txvContMessage)
         val ivPhoto: ImageView = itemView.findViewById(R.id.ivPhoto)
+        val ivPin: ImageView = itemView.findViewById(R.id.ivPin)
         val cvCountMessages: CardView = itemView.findViewById(R.id.cvCountMessages)
     }
 }

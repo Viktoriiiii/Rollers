@@ -136,7 +136,7 @@ class RoutesFragment : Fragment() {
         ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val listRoute = snapshot.children.map { it.getRouteModel() }
-                routeAdapter.setList(listRoute as MutableList<Route>)
+                routeAdapter.setList(listRoute.sortedByDescending { it.pinned } as MutableList<Route>)
                 routeList = listRoute.toMutableList()
             }
             override fun onCancelled(error: DatabaseError) {}
@@ -200,7 +200,7 @@ class RoutesFragment : Fragment() {
                 searchList.add(route)
             }
         }
-        routeAdapter.setList(searchList)
+        routeAdapter.setList(searchList.sortedByDescending { it.pinned } as MutableList<Route>)
     }
 
     override fun onDestroyView() {

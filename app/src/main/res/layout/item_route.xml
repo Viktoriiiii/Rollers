@@ -49,6 +49,14 @@
                 android:padding="3dp"
                 android:gravity="end"
                 />
+            <ImageView
+                android:id="@+id/ivPin"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@color/for_toolbar"
+                android:src="@drawable/ic_pin_foreground"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:contentDescription="@string/new_event" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
