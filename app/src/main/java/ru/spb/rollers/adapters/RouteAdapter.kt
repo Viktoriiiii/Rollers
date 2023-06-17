@@ -83,6 +83,22 @@ class RouteAdapter(
                     true
                 }
                 R.id.toViewRoute -> {
+                    titleRoutes = "Просмотр маршрута"
+                    MAIN.appViewModel.viewRoute = true
+                    MAIN.appViewModel.buildRoute = true
+                    // достать точки маршрута и положить их в listPoint
+                    REF_DATABASE_ROUTE.child(MAIN.appViewModel.user.id)
+                        .child(route.id!!).child("Points")
+                        .addListenerForSingleValueEvent(object : ValueEventListener{
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                if (snapshot.exists()){
+                                    MAIN.appViewModel.listPoint = snapshot.children.map { it.getPointModel() }
+                                            as MutableList<ru.spb.rollers.models.Point>
+                                }
+                            }
+                            override fun onCancelled(error: DatabaseError) {}
+                        })
+                    MAIN.navController.navigate(R.id.action_routes_to_mapsFragment)
                     true
                 }
                 R.id.toChangeRouteName -> {

@@ -13,6 +13,7 @@ class AppViewModel : ViewModel() {
     var addingPoint = false
     var buildRoute = false
     var clearList = false
+    var viewRoute = false
 
     var listPoint: MutableList<Point> = mutableListOf()
 

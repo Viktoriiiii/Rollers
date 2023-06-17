@@ -85,61 +85,68 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
 
         binding.imageButtonBack.setOnClickListener{
             if (MAIN.appViewModel.buildRoute && MAIN.appViewModel.listPoint.size > 1){
-                // сохранить маршрут?
-                val builderSaveRouteDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
-                builderSaveRouteDialog
-                    .setTitle("Сохранение маршрута")
-                    .setMessage("Сохранить маршрут?")
-                    .setCancelable(false)
-                    .setPositiveButton("Да") { _, _ ->
+                if (MAIN.appViewModel.viewRoute){
+                    MAIN.onSupportNavigateUp()
+                    MAIN.appViewModel.viewRoute = false
+                    MAIN.appViewModel.buildRoute = false
+                }
+                else {
+                    // сохранить маршрут?
+                    val builderSaveRouteDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
+                    builderSaveRouteDialog
+                        .setTitle("Сохранение маршрута")
+                        .setMessage("Сохранить маршрут?")
+                        .setCancelable(false)
+                        .setPositiveButton("Да") { _, _ ->
 
-                        // Здесть еще один alert с edittext, для ввода имени и в нем при ок сохранение
-                        val builder: AlertDialog.Builder = AlertDialog.Builder(MAIN)
-                        val profileView: View? =
-                            MAIN.layoutInflater.inflate(R.layout.alert_dialog_change_name, null)
-                        val etNameRoute: EditText = profileView!!.findViewById(R.id.input_text)
-                        builder.setView(profileView)
+                            // Здесть еще один alert с edittext, для ввода имени и в нем при ок сохранение
+                            val builder: AlertDialog.Builder = AlertDialog.Builder(MAIN)
+                            val profileView: View? =
+                                MAIN.layoutInflater.inflate(R.layout.alert_dialog_change_name, null)
+                            val etNameRoute: EditText = profileView!!.findViewById(R.id.input_text)
+                            builder.setView(profileView)
 
-                        builder.setTitle("Название маршрута")
+                            builder.setTitle("Название маршрута")
 
-                        builder.setPositiveButton("OK") { _, _ ->
-                            var name = etNameRoute.text.toString()
-                            if (name.isEmpty()){
-                                name = "Маршрут №"
+                            builder.setPositiveButton("OK") { _, _ ->
+                                var name = etNameRoute.text.toString()
+                                if (name.isEmpty()){
+                                    name = "Маршрут №"
+                                }
+                                val distance = getDistance()
+                                val curUser = MAIN.appViewModel.user.id
+                                val routeKey = REF_DATABASE_ROUTE.child(curUser).push().key
+                                val refRoute = "Route/$curUser/$routeKey"
+
+                                val route = ru.spb.rollers.models.Route(routeKey, name, distance.toString())
+                                REF_DATABASE_ROOT.child(refRoute).setValue(route)
+
+                                for (p in MAIN.appViewModel.listPoint){
+                                    val pointKey = REF_DATABASE_ROOT.child(refRoute).child("Points").push().key
+                                    p.id = pointKey.toString()
+                                    REF_DATABASE_ROOT.child(refRoute).child("Points")
+                                        .child(pointKey.toString())
+                                        .setValue(p)
+                                }
+                                Toast.makeText(MAIN, "Маршрут сохранен", Toast.LENGTH_SHORT).show()
+                                MAIN.appViewModel.clearList = true
+                                MAIN.onSupportNavigateUp()
                             }
-                            val distance = getDistance()
-                            val curUser = MAIN.appViewModel.user.id
-                            val routeKey = REF_DATABASE_ROUTE.child(curUser).push().key
-                            val refRoute = "Route/$curUser/$routeKey"
 
-                            val route = ru.spb.rollers.models.Route(routeKey, name, distance.toString())
-                            REF_DATABASE_ROOT.child(refRoute).setValue(route)
-
-                            for (p in MAIN.appViewModel.listPoint){
-                                val pointKey = REF_DATABASE_ROOT.child(refRoute).child("Points").push().key
-                                p.id = pointKey.toString()
-                                REF_DATABASE_ROOT.child(refRoute).child("Points")
-                                    .child(pointKey.toString())
-                                    .setValue(p)
+                            builder.setNegativeButton("Отмена") { dialog, _ ->
+                                dialog.cancel()
                             }
-                            Toast.makeText(MAIN, "Маршрут сохранен", Toast.LENGTH_SHORT).show()
-                            MAIN.appViewModel.clearList = true
+                            val dialog = builder.create()
+                            dialog.show()
+
+                        }
+                        .setNegativeButton("Отмена"){dialog, _ ->
+                            dialog.cancel()
                             MAIN.onSupportNavigateUp()
                         }
-
-                        builder.setNegativeButton("Отмена") { dialog, _ ->
-                            dialog.cancel()
-                        }
-                        val dialog = builder.create()
-                        dialog.show()
-
-                    }
-                    .setNegativeButton("Отмена"){dialog, _ ->
-                        dialog.cancel()
-                        MAIN.onSupportNavigateUp()
-                    }
-                val alertDialogSaveRoute: AlertDialog = builderSaveRouteDialog.create()
-                alertDialogSaveRoute.show()
+                    val alertDialogSaveRoute: AlertDialog = builderSaveRouteDialog.create()
+                    alertDialogSaveRoute.show()
+                }
             }
             else
                 MAIN.onSupportNavigateUp()

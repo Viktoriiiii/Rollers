@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.widget.SearchView
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -23,6 +24,7 @@ import ru.spb.rollers.*
 import ru.spb.rollers.adapters.RouteAdapter
 import ru.spb.rollers.databinding.RoutesFragmentBinding
 import ru.spb.rollers.models.Route
+import java.util.*
 
 class RoutesFragment : Fragment() {
     private var _binding: RoutesFragmentBinding? = null
@@ -93,11 +95,13 @@ class RoutesFragment : Fragment() {
             MAIN.navController.navigate(R.id.action_routes_to_mapsFragment)
             MAIN.appViewModel.buildRoute = false
             MAIN.appViewModel.addingPoint = true
+            titleRoutes = ""
         }
         binding.etLocation2.setOnClickListener {
             MAIN.navController.navigate(R.id.action_routes_to_mapsFragment)
             MAIN.appViewModel.buildRoute = false
             MAIN.appViewModel.addingPoint = true
+            titleRoutes = ""
         }
 
         if (MAIN.appViewModel.clearList){
@@ -107,6 +111,18 @@ class RoutesFragment : Fragment() {
             binding.etLocation2.text.clear()
         }
         setPoints()
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null && routeList.isNotEmpty()) {
+                    searchList(newText)
+                }
+                return true
+            }
+        })
     }
 
     private fun initRoutesRecyclerView() {
@@ -165,6 +181,7 @@ class RoutesFragment : Fragment() {
             MAIN.navController.navigate(R.id.action_routes_to_mapsFragment)
             MAIN.appViewModel.buildRoute = false
             MAIN.appViewModel.addingPoint = true
+            titleRoutes = ""
         }
         val delete: ImageView = cardView.findViewById(R.id.imageViewDelete)
         delete.setOnClickListener{
@@ -172,6 +189,18 @@ class RoutesFragment : Fragment() {
 
             binding.llContainer.removeView(cardView)
         }
+    }
+
+    fun searchList(text: String) {
+        val searchList: MutableList<Route> = mutableListOf()
+        for (route in routeList) {
+            if (route.name!!.lowercase(Locale.getDefault())
+                    .contains(text.lowercase(Locale.getDefault()))
+            ) {
+                searchList.add(route)
+            }
+        }
+        routeAdapter.setList(searchList)
     }
 
     override fun onDestroyView() {
