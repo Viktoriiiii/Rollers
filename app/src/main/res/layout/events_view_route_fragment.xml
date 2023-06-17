@@ -11,7 +11,7 @@
         android:background="@color/for_toolbar"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar" >
         <ImageView
-            android:id="@+id/imageViewBack"
+            android:id="@+id/ivBack"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@color/for_toolbar"
@@ -20,7 +20,7 @@
             tools:ignore="UnusedAttribute"
             android:contentDescription="@string/back" />
         <TextView
-            android:id="@+id/txvTitle"
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/view_route"
