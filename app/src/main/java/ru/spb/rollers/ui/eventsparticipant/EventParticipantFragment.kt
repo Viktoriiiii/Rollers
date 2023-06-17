@@ -6,25 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import com.firebase.ui.database.FirebaseRecyclerOptions
 import ru.spb.rollers.MAIN
-import ru.spb.rollers.R
-import ru.spb.rollers.oldadapters.ContactAdapter
+import ru.spb.rollers.REF_DATABASE_EVENT_PARTICIPANT
+import ru.spb.rollers.adapters.ContactAdapter
 import ru.spb.rollers.databinding.EventParticipantFragmentBinding
-import ru.spb.rollers.oldmodel.Contact
+import ru.spb.rollers.models.User
 
 class EventParticipantFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = EventParticipantFragment()
-    }
 
     private var _binding: EventParticipantFragmentBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var viewModel: EventParticipantViewModel
-    private var contactList: List<Contact> = mutableListOf()
-    private lateinit var recyclerView: RecyclerView
     private lateinit var contactAdapter: ContactAdapter
 
     override fun onCreateView(
@@ -43,22 +37,26 @@ class EventParticipantFragment : Fragment() {
             MAIN.onSupportNavigateUp()
         }
 
-        setInitialData()
-        recyclerView = view.findViewById(R.id.peopleList)
-        contactAdapter = ContactAdapter(contactList)
-        recyclerView.adapter = contactAdapter
+        showMyContacts()
     }
 
-    private fun setInitialData() {
-        contactList += Contact(1,
-            1, "Иван","Иванов",true,
-            "Московский","38 лет", contactGender = true, isContact = true, false)
-        contactList += Contact(2,
-            2, "Варя", "Федорова",true,
-            "Васька","18 лет", contactGender = false, isContact = true, false)
-        contactList += Contact(
-            3, 1, "Ярик", "Сидоров",
-            true, "Мурино","68 лет", contactGender = true, isContact = true, false)
+    private fun showMyContacts(){
+        val options =
+            FirebaseRecyclerOptions.Builder<User>()
+                .setQuery(REF_DATABASE_EVENT_PARTICIPANT.child(MAIN.appViewModel.event.id), User::class.java)
+                .build()
+        contactAdapter = ContactAdapter(options)
+        binding.peopleList.adapter = contactAdapter
+    }
+
+    override fun onStart() {
+        super.onStart()
+        contactAdapter.startListening()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        contactAdapter.stopListening()
     }
 
     override fun onDestroyView() {

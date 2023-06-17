@@ -93,7 +93,7 @@ class EventsViewFragment : Fragment() {
             MAIN.navController.navigate(R.id.action_eventsViewFragment_to_eventsViewRouteFragment)
         }
 
-        binding.imageButtonViewParticipants.setOnClickListener{
+        binding.ibViewParticipants.setOnClickListener{
             MAIN.navController.navigate(R.id.action_eventsViewFragment_to_eventParticipantFragment)
         }
 

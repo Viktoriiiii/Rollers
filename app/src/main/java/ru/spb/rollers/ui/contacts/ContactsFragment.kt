@@ -20,11 +20,6 @@ class ContactsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var adapterContacts: FirebaseRecyclerAdapter<User, UserViewHolder>
-
-    companion object {
-        fun newInstance() = ContactsFragment()
-    }
-
     private lateinit var viewModel: ContactsViewModel
 
     override fun onCreateView(

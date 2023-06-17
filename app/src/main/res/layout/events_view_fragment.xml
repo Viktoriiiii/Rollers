@@ -227,7 +227,7 @@
                         android:layout_gravity="center"
                         />
                     <ImageButton
-                        android:id="@+id/imageButtonViewParticipants"
+                        android:id="@+id/ibViewParticipants"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:background="@drawable/ic_view_event_foreground"
