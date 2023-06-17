@@ -34,7 +34,6 @@ class EventsFragment : Fragment()
     private val WEATHER_API_KEY = "43cf8001-588a-477e-b84f-0a140208c3de"
     var temp: Int = 0
     var condition: String = ""
-    var imageUrl: String = "https://yastatic.net/weather/i/icons/funky/dark/"
 
     private lateinit var viewModel: EventsViewModel
 
@@ -125,9 +124,8 @@ class EventsFragment : Fragment()
                         .child(dialogId!!).child("Messages")
                     messagesRef.addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onDataChange(messagesSnapshot: DataSnapshot) {
-                            var count = 0
                             val messages = messagesSnapshot.children.map { it.getMessageModel() }
-                            count = messages.count{ !it.read  && it.from != MAIN.appViewModel.user.id}
+                            val count = messages.count{ !it.read  && it.from != MAIN.appViewModel.user.id}
 
                             if (count > 0)
                                 unreadDialogsCount++
@@ -149,6 +147,7 @@ class EventsFragment : Fragment()
 
     private fun getWeather() {
         val url = "https://api.weather.yandex.ru/v2/forecast?lat=59.939427&lon=30.309217&extra=true"
+        var imageUrl = "https://yastatic.net/weather/i/icons/funky/dark/"
 
         val request: Request = Request.Builder()
             .url(url)
@@ -173,6 +172,7 @@ class EventsFragment : Fragment()
                     binding.txvWeatherTemp.text = if (temp > 0) "+${temp} ℃" else "-${temp} ℃"
                     loadSvgImage(imageUrl, binding.ivWeather)
                 }
+                response.body!!.close()
             }
         })
     }
@@ -199,6 +199,7 @@ class EventsFragment : Fragment()
                         e.printStackTrace()
                     }
                 }
+                response.body?.close()
             }
         })
     }
