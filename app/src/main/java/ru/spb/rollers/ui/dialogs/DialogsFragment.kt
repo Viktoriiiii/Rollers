@@ -38,6 +38,7 @@ class DialogsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        MAIN.appViewModel.setPhoto(binding.ivPhoto)
 
         binding.searchView.setOnSearchClickListener{
             binding.txvTitle.visibility = View.GONE

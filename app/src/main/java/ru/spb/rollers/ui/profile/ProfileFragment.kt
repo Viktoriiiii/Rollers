@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -29,7 +30,11 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
 
     private var _binding: ProfileFragmentBinding? = null
     private val binding get() = _binding!!
-
+    private val genders: Array<String> = arrayOf("Женский", "Мужской")
+    private val districts: Array<String> = arrayOf("Адмиралтейский", "Василеостровский", "Выборгский",
+        "Калининский", "Кировский", "Колпинский", "Красногвардейский", "Красносельский",
+        "Кронштадтский", "Курортный", "Московский", "Невский", "Петроградский", "Петродворцовый",
+        "Приморский", "Пушкинский", "Фрунзенский", "Центральный")
 //    val weatherConditions = mapOf(
 //        "clear" to "Ясно",
 //        "partly-cloudy" to "Малооблачно",
@@ -52,23 +57,21 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
 //        "thunderstorm-with-hail" to "Гроза с градом"
 //    )
 
-    companion object {
-        fun newInstance() = ProfileFragment()
-    }
-
     private lateinit var viewModel: ProfileViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
         _binding = ProfileFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
+        MAIN.appViewModel.setPhoto(binding.ivPhotoToolbar)
+
         showInfoInProfile()
 
         val switchStatus: SwitchCompat = view.findViewById(R.id.switchStatus)
@@ -91,6 +94,30 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
             startActivity(Intent(MAIN, AppActivity::class.java)  )
             delayMillis = 0
         }
+
+        binding.etGender.setOnClickListener {
+            setText(genders, binding.etGender, "Выберите пол")
+        }
+
+        binding.etDistrict.setOnClickListener {
+            setText(districts, binding.etDistrict, "Выберите район")
+        }
+    }
+
+    private fun setText(arrays: Array<String>, et: EditText, title: String){
+        val builder = AlertDialog.Builder(MAIN)
+        builder.setTitle(title)
+            .setSingleChoiceItems(arrays, -1
+            ) { _, _ -> }
+            .setPositiveButton("OK"
+            ) { dialog, _ ->
+                val selectedPosition = (dialog as AlertDialog).listView.checkedItemPosition
+                if (selectedPosition != -1) {
+                    et.setText(arrays[selectedPosition])
+                }
+            }
+        builder.create()
+        builder.show()
     }
 
     private fun showInfoInProfile(){

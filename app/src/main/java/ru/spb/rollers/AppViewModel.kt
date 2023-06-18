@@ -1,7 +1,9 @@
 package ru.spb.rollers
 
+import android.widget.ImageView
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.squareup.picasso.Picasso
 import ru.spb.rollers.models.*
 
 class AppViewModel : ViewModel() {
@@ -23,5 +25,14 @@ class AppViewModel : ViewModel() {
 
     init {
         liveData.value = false
+    }
+
+    fun setPhoto(ivPhoto: ImageView){
+        if (MAIN.appViewModel.user.photo != ""){
+            Picasso.get()
+                .load(MAIN.appViewModel.user.photo)
+                .placeholder(R.drawable.avatar)
+                .into(ivPhoto)
+        }
     }
 }

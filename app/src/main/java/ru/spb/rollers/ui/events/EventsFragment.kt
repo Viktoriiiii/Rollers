@@ -48,6 +48,9 @@ class EventsFragment : Fragment()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        MAIN.appViewModel.setPhoto(binding.ivPhoto)
+
         eventList.clear()
         MAIN.appViewModel.route = ru.spb.rollers.models.Route()
         MAIN.appViewModel.points.clear()

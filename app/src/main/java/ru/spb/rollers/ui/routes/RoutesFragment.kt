@@ -49,6 +49,8 @@ class RoutesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        MAIN.appViewModel.setPhoto(binding.ivPhoto)
+
         binding.ivMyLocation.setOnClickListener{
             MAIN.navController.navigate(R.id.action_routes_to_mapsFragment)
             MAIN.appViewModel.buildRoute = false
@@ -135,9 +137,11 @@ class RoutesFragment : Fragment() {
 
         ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val listRoute = snapshot.children.map { it.getRouteModel() }
-                routeAdapter.setList(listRoute.sortedByDescending { it.pinned } as MutableList<Route>)
-                routeList = listRoute.toMutableList()
+                if (snapshot.exists()) {
+                    val listRoute = snapshot.children.map { it.getRouteModel() }
+                    routeAdapter.setList(listRoute.sortedByDescending { it.pinned } as MutableList<Route>)
+                    routeList = listRoute.toMutableList()
+                }
             }
             override fun onCancelled(error: DatabaseError) {}
         })

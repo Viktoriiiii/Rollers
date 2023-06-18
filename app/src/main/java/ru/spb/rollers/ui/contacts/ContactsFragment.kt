@@ -33,6 +33,9 @@ class ContactsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        MAIN.appViewModel.setPhoto(binding.ivPhoto)
+
         binding.ivSearch.setOnClickListener{
             MAIN.navController.navigate(R.id.action_contacts_to_contactsSearchFragment)
         }
