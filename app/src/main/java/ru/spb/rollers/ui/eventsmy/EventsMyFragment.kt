@@ -1,6 +1,5 @@
 package ru.spb.rollers.ui.eventsmy
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -19,7 +18,6 @@ class EventsMyFragment : Fragment() {
 
     private var _binding: EventsMyFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: EventsMyViewModel
 
     private var eventList: MutableList<Event> = mutableListOf()
     private lateinit var eventAdapter: EventAdapter
@@ -28,7 +26,6 @@ class EventsMyFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel = ViewModelProvider(this)[EventsMyViewModel::class.java]
         _binding = EventsMyFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }

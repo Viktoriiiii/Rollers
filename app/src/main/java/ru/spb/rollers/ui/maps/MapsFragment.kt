@@ -14,7 +14,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.yandex.mapkit.*
 import com.yandex.mapkit.directions.DirectionsFactory
@@ -52,7 +51,6 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
 
     private var _binding: MapsFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: MapsViewModel
     private val PERMISSIONS_REQUEST_FINE_LOCATION = 1
     private var mapKit: MapKit? = null
     private var userLocationLayer: UserLocationLayer? = null
@@ -74,8 +72,6 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
     ): View {
         DirectionsFactory.initialize(MAIN)
         TransportFactory.initialize(MAIN)
-
-        viewModel = ViewModelProvider(this)[MapsViewModel::class.java]
         _binding = MapsFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }

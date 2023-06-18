@@ -2,7 +2,6 @@ package ru.spb.rollers.ui.routes
 
 import android.annotation.SuppressLint
 import android.os.Build
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -31,8 +30,6 @@ class RoutesFragment : Fragment() {
     private val binding get() = _binding!!
     var currentIndex = 0 // Текущий индекс в списке значений
 
-    private lateinit var viewModel: RoutesViewModel
-
     private var routeList: MutableList<Route> = mutableListOf()
     private lateinit var routeAdapter: RouteAdapter
 
@@ -40,7 +37,6 @@ class RoutesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel = ViewModelProvider(this)[RoutesViewModel::class.java]
         _binding = RoutesFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }

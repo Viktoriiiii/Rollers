@@ -1,6 +1,5 @@
 package ru.spb.rollers.ui.eventsparticipant
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,14 +17,12 @@ class EventParticipantFragment : Fragment() {
     private var _binding: EventParticipantFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: EventParticipantViewModel
     private lateinit var contactAdapter: ContactAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel = ViewModelProvider(this)[EventParticipantViewModel::class.java]
         _binding = EventParticipantFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }

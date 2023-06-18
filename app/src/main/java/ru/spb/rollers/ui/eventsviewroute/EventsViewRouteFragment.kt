@@ -1,6 +1,5 @@
 package ru.spb.rollers.ui.eventsviewroute
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -36,8 +35,6 @@ class EventsViewRouteFragment : Fragment(), Session.RouteListener {
     private var _binding: EventsViewRouteFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: EventsViewRouteViewModel
-
     private var mapKit: MapKit? = null
 
     private lateinit var mapObjects: MapObjectCollection
@@ -50,7 +47,6 @@ class EventsViewRouteFragment : Fragment(), Session.RouteListener {
     ): View {
         DirectionsFactory.initialize(MAIN)
         TransportFactory.initialize(MAIN)
-        viewModel = ViewModelProvider(this)[EventsViewRouteViewModel::class.java]
         _binding = EventsViewRouteFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }

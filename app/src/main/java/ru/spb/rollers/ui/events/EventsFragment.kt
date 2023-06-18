@@ -1,7 +1,6 @@
 package ru.spb.rollers.ui.events
 
 import android.graphics.drawable.PictureDrawable
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -35,13 +34,10 @@ class EventsFragment : Fragment()
     var temp: Int = 0
     var condition: String = ""
 
-    private lateinit var viewModel: EventsViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel = ViewModelProvider(this)[EventsViewModel::class.java]
         _binding = EventsFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }

@@ -15,7 +15,6 @@ import androidx.appcompat.view.menu.MenuBuilder
 import androidx.appcompat.view.menu.MenuPopupHelper
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ServerValue
@@ -36,16 +35,13 @@ class EventsCreateFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
     private var _binding: EventsCreateFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: EventsCreateViewModel
     private var routeList: MutableList<Route> = mutableListOf()
     var listParticipants: MutableList<EventUser> = mutableListOf()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel = ViewModelProvider(this)[EventsCreateViewModel::class.java]
         _binding = EventsCreateFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }

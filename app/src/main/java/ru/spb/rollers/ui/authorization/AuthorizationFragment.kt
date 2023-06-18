@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
 import ru.spb.rollers.*
@@ -19,12 +18,6 @@ class AuthorizationFragment : Fragment() {
     private var _binding: AuthorizationFragmentBinding? = null
     private val binding get() = _binding!!
 
-    companion object {
-        fun newInstance() = AuthorizationFragment()
-    }
-
-    private lateinit var viewModel: AuthorizationViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,7 +28,6 @@ class AuthorizationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[AuthorizationViewModel::class.java]
 
         binding.etEmail.setText(R.string.user_mail_ru)
         binding.etPassword.setText(R.string.input_pass)

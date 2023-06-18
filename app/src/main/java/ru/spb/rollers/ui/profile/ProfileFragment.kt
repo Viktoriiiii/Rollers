@@ -17,7 +17,6 @@ import androidx.appcompat.view.menu.MenuPopupHelper
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.EmailAuthProvider
 import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
@@ -35,35 +34,11 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
         "Калининский", "Кировский", "Колпинский", "Красногвардейский", "Красносельский",
         "Кронштадтский", "Курортный", "Московский", "Невский", "Петроградский", "Петродворцовый",
         "Приморский", "Пушкинский", "Фрунзенский", "Центральный")
-//    val weatherConditions = mapOf(
-//        "clear" to "Ясно",
-//        "partly-cloudy" to "Малооблачно",
-//        "cloudy" to "Облачно с прояснениями",
-//        "overcast" to "Пасмурно",
-//        "drizzle" to "Морось",
-//        "light-rain" to "Небольшой дождь",
-//        "rain" to "Дождь",
-//        "moderate-rain" to "Умеренно сильный дождь",
-//        "heavy-rain" to "Сильный дождь",
-//        "continuous-heavy-rain" to "Длительный сильный дождь",
-//        "showers" to "Ливень",
-//        "wet-snow" to "Дождь со снегом",
-//        "light-snow" to "Небольшой снег",
-//        "snow" to "Снег",
-//        "snow-showers" to "Снегопад",
-//        "hail" to "Град",
-//        "thunderstorm" to "Гроза",
-//        "thunderstorm-with-rain" to "Дождь с грозой",
-//        "thunderstorm-with-hail" to "Гроза с градом"
-//    )
-
-    private lateinit var viewModel: ProfileViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
         _binding = ProfileFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }

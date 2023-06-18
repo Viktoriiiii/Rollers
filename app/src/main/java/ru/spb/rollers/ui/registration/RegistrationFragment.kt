@@ -1,6 +1,5 @@
 package ru.spb.rollers.ui.registration
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,12 +16,6 @@ class RegistrationFragment : Fragment() {
     private var _binding: RegistrationFragmentBinding? = null
     private val binding get() = _binding!!
 
-    companion object {
-        fun newInstance() = RegistrationFragment()
-    }
-
-    private lateinit var viewModel: RegistrationViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,7 +26,6 @@ class RegistrationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[RegistrationViewModel::class.java]
 
         binding.etEmail.setText(R.string.user_mail_ru)
         binding.etPassword.setText(R.string.input_pass)

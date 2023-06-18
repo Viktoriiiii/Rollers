@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -20,7 +19,6 @@ import ru.spb.rollers.databinding.ContactsSearchFragmentBinding
 import ru.spb.rollers.models.User
 import java.util.*
 
-
 class ContactsSearchFragment : Fragment() {
 
     private lateinit var binding: ContactsSearchFragmentBinding
@@ -28,17 +26,10 @@ class ContactsSearchFragment : Fragment() {
     private var listUsers: MutableList<User> = mutableListOf()
     private lateinit var adapter: UserAdapter
 
-    companion object {
-        fun newInstance() = ContactsSearchFragment()
-    }
-
-    private lateinit var viewModel: ContactsSearchViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel = ViewModelProvider(this)[ContactsSearchViewModel::class.java]
         binding = ContactsSearchFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }

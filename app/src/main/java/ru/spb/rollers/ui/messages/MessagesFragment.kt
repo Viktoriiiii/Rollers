@@ -1,8 +1,6 @@
 package ru.spb.rollers.ui.messages
 
 import android.annotation.SuppressLint
-import android.content.Context
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -26,29 +24,19 @@ class MessagesFragment : Fragment() {
     private var  _binding: MessagesFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: MessagesViewModel
     private var messageList = emptyList<Message>()
     private lateinit var messageAdapter: MessageAdapter
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel = ViewModelProvider(this)[MessagesViewModel::class.java]
-
-        println(object : Any() {}.javaClass.enclosingMethod?.name+ "Fragment")
-        println(MAIN.appViewModel.liveData.value)
-
         _binding = MessagesFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        println(object : Any() {}.javaClass.enclosingMethod?.name+ "Fragment")
-        println(MAIN.appViewModel.liveData.value)
 
         MAIN.setBottomNavigationVisible(false)
 
@@ -125,58 +113,16 @@ class MessagesFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        println(object : Any() {}.javaClass.enclosingMethod?.name+ "Fragment")
-        println(MAIN.appViewModel.liveData.value)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        println(object : Any() {}.javaClass.enclosingMethod?.name+ "Fragment")
-        println(MAIN.appViewModel.liveData.value)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        println(object : Any() {}.javaClass.enclosingMethod?.name+ "Fragment")
-        println(MAIN.appViewModel.liveData.value)
     }
 
     override fun onStop() {
         super.onStop()
         REF_DATABASE_USER.child(MAIN.appViewModel.user.id).child("viewedDialog")
             .setValue("non")
-        println(object : Any() {}.javaClass.enclosingMethod?.name+ "Fragment")
-        println(MAIN.appViewModel.liveData.value)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        println(object : Any() {}.javaClass.enclosingMethod?.name+ "Fragment")
-        println(MAIN.appViewModel.liveData.value)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        println(object : Any() {}.javaClass.enclosingMethod?.name+ "Fragment")
-        println(MAIN.appViewModel.liveData.value)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        println(object : Any() {}.javaClass.enclosingMethod?.name+ "Fragment")
-        println(MAIN.appViewModel.liveData.value)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        println(object : Any() {}.javaClass.enclosingMethod?.name+ "Fragment")
-        println(MAIN.appViewModel.liveData.value)
     }
 
     override fun onResume() {
         super.onResume()
-        println(object : Any() {}.javaClass.enclosingMethod?.name + "Fragment")
-        println(MAIN.appViewModel.liveData.value)
         MAIN.setBottomNavigationVisible(false)
         initRecyclerView()
 

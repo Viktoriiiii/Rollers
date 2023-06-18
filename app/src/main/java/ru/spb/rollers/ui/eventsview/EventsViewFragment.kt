@@ -3,7 +3,6 @@ package ru.spb.rollers.ui.eventsview
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -27,14 +26,12 @@ class EventsViewFragment : Fragment() {
     private var _binding: EventsViewFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: EventsViewViewModel
     private var manager = User()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel = ViewModelProvider(this)[EventsViewViewModel::class.java]
         _binding = EventsViewFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
