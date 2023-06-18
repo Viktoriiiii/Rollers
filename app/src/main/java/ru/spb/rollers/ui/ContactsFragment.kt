@@ -1,4 +1,4 @@
-package ru.spb.rollers.ui.contacts
+package ru.spb.rollers.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package ru.spb.rollers.ui.eventsviewroute
+package ru.spb.rollers.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

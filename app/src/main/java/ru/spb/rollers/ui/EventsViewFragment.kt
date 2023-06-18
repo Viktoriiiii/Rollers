@@ -1,4 +1,4 @@
-package ru.spb.rollers.ui.eventsview
+package ru.spb.rollers.ui
 
 import android.annotation.SuppressLint
 import android.graphics.Color

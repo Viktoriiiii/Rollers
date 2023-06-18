@@ -1,4 +1,4 @@
-package ru.spb.rollers.ui.eventscreate
+package ru.spb.rollers.ui
 
 import android.annotation.SuppressLint
 import android.app.Activity

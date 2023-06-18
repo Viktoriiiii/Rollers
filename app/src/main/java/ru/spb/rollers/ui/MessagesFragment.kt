@@ -1,4 +1,4 @@
-package ru.spb.rollers.ui.messages
+package ru.spb.rollers.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle

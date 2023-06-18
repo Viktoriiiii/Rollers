@@ -1,4 +1,4 @@
-package ru.spb.rollers.ui.dialogs
+package ru.spb.rollers.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

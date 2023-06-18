@@ -1,4 +1,4 @@
-package ru.spb.rollers.ui.maps
+package ru.spb.rollers.ui
 
 import android.content.pm.PackageManager
 import android.graphics.Color

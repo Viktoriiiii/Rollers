@@ -1,4 +1,4 @@
-package ru.spb.rollers.ui.routes
+package ru.spb.rollers.ui
 
 import android.annotation.SuppressLint
 import android.os.Build

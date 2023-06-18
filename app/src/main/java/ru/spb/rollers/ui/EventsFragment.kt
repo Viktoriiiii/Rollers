@@ -1,4 +1,4 @@
-package ru.spb.rollers.ui.events
+package ru.spb.rollers.ui
 
 import android.graphics.drawable.PictureDrawable
 import android.os.Bundle
