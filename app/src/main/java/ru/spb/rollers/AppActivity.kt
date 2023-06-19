@@ -2,7 +2,6 @@ package ru.spb.rollers
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -48,11 +47,11 @@ class AppActivity : AppCompatActivity() {
             NavigationUI.onNavDestinationSelected(item, navController)
         }
 
-        setBottomNavigationVisible(false)
-
-        println(object : Any() {}.javaClass.enclosingMethod?.name)
-        println(appViewModel.liveData.value)
-
+        if (appViewModel.liveData.value == true)
+            setBottomNavigationVisible(true)
+        else {
+            setBottomNavigationVisible(false)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -67,52 +66,5 @@ class AppActivity : AppCompatActivity() {
         } else {
             bottomNavigationView.visibility = View.GONE
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        println(object : Any() {}.javaClass.enclosingMethod?.name)
-        println(appViewModel.liveData.value)
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        println(object : Any() {}.javaClass.enclosingMethod?.name)
-        println(appViewModel.liveData.value)
-        setBottomNavigationVisible(true)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        println(object : Any() {}.javaClass.enclosingMethod?.name)
-        println(appViewModel.liveData.value)
-
-    }
-
-    override fun onPause() {
-        super.onPause()
-        println(object : Any() {}.javaClass.enclosingMethod?.name)
-        println(appViewModel.liveData.value)
-
-    }
-
-    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
-        super.onSaveInstanceState(outState, outPersistentState)
-        println(object : Any() {}.javaClass.enclosingMethod?.name)
-        println(appViewModel.liveData.value)
-
-    }
-
-    override fun onStop() {
-        super.onStop()
-        println(object : Any() {}.javaClass.enclosingMethod?.name)
-        println(appViewModel.liveData.value)
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        println(object : Any() {}.javaClass.enclosingMethod?.name)
-        println(appViewModel.liveData.value)
     }
 }
