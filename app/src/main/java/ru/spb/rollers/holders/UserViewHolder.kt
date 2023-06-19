@@ -36,18 +36,23 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         showInfoAboutUser(user)
 
         // проверка на то, есть ли указанный пользователь в контактах
-            REF_DATABASE_CONTACT.child(MAIN.appViewModel.user.id).child(user.id).addListenerForSingleValueEvent(object :
-                ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        ivToContact.setImageResource(R.drawable.ic_done_foreground)
-                    } else {
-                        ivToContact.setImageResource(R.drawable.ic_add_contact_foreground)
-                    }
+        REF_DATABASE_CONTACT.child(MAIN.appViewModel.user.id).child(user.id).addListenerForSingleValueEvent(object :
+            ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    ivToContact.setImageResource(R.drawable.ic_done_foreground)
+                } else {
+                    ivToContact.setImageResource(R.drawable.ic_add_contact_foreground)
                 }
-                override fun onCancelled(error: DatabaseError) {
-                }
-            })
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+
+        if (user.id == MAIN.appViewModel.user.id || MAIN.appViewModel.user.role == "Администратор")
+            ivToContact.visibility = View.GONE
+        else
+            ivToContact.visibility = View.VISIBLE
 
         contactContainer.setOnClickListener{
             showPopupMenu(it, user)
@@ -98,6 +103,9 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private fun showPopupMenu(view: View, contact: User) {
         val popupMenu = PopupMenu(view.context, view)
         if (MAIN.appViewModel.user.role == "Администратор"){
+            popupMenu.inflate(R.menu.contact_for_admin)
+        }
+        else if (contact.id == MAIN.appViewModel.user.id){
             popupMenu.inflate(R.menu.contact_for_admin)
         }
         else {

@@ -67,8 +67,9 @@ class ContactsSearchFragment : Fragment() {
         REF_DATABASE_USER.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    val listUser = snapshot.children.map { it.getUserModel() }
-                    adapter.setList(listUser as MutableList<User>)
+                    val listUser = snapshot.children.map { it.getUserModel() } as MutableList<User>
+                    listUser.removeAll { it.id == MAIN.appViewModel.user.id || it.role == "Администратор"}
+                    adapter.setList(listUser)
                     listUsers = listUser
                 }
             }
