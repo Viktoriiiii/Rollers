@@ -125,13 +125,10 @@ class RoutesFragment : Fragment() {
 
     private fun initRoutesRecyclerView() {
         routeAdapter = RouteAdapter(routeList)
-
-        val ref = REF_DATABASE_ROUTE
-            .child(MAIN.appViewModel.user.id)
-
         binding.routesList.adapter = routeAdapter
 
-        ref.addValueEventListener(object : ValueEventListener {
+        REF_DATABASE_ROUTE.child(MAIN.appViewModel.user.id)
+            .addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     val listRoute = snapshot.children.map { it.getRouteModel() }

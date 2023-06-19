@@ -8,7 +8,7 @@ import ru.spb.rollers.*
 import ru.spb.rollers.holders.UserViewHolder
 import ru.spb.rollers.models.User
 
-class UserAdapter(private var listUsers: List<User>
+class UserAdapter(private var listUsers: MutableList<User>
 ): RecyclerView.Adapter<UserViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup,viewType: Int): UserViewHolder {
@@ -26,7 +26,7 @@ class UserAdapter(private var listUsers: List<User>
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun searchDataList(searchList: ArrayList<User>) {
+    fun setList(searchList: MutableList<User>) {
         listUsers = searchList
         notifyDataSetChanged()
     }

@@ -5,10 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.getValue
 import ru.spb.rollers.MAIN
 import ru.spb.rollers.REF_DATABASE_EVENT_PARTICIPANT
-import ru.spb.rollers.adapters.ContactAdapter
+import ru.spb.rollers.REF_DATABASE_USER
+import ru.spb.rollers.adapters.UserAdapter
 import ru.spb.rollers.databinding.EventParticipantFragmentBinding
 import ru.spb.rollers.models.User
 
@@ -17,7 +21,7 @@ class EventParticipantFragment : Fragment() {
     private var _binding: EventParticipantFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var contactAdapter: ContactAdapter
+    private lateinit var adapter: UserAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,26 +38,33 @@ class EventParticipantFragment : Fragment() {
             MAIN.onSupportNavigateUp()
         }
 
-        showMyContacts()
+        showMyParticipants()
     }
 
-    private fun showMyContacts(){
-        val options =
-            FirebaseRecyclerOptions.Builder<User>()
-                .setQuery(REF_DATABASE_EVENT_PARTICIPANT.child(MAIN.appViewModel.event.id), User::class.java)
-                .build()
-        contactAdapter = ContactAdapter(options)
-        binding.peopleList.adapter = contactAdapter
-    }
-
-    override fun onStart() {
-        super.onStart()
-        contactAdapter.startListening()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        contactAdapter.stopListening()
+    private fun showMyParticipants(){
+        // добыть список id контактов и по ним добавить в список участников
+        REF_DATABASE_EVENT_PARTICIPANT.child(MAIN.appViewModel.event.id).addListenerForSingleValueEvent(object :
+            ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val listUsers: MutableList<User> = mutableListOf()
+                for (e in snapshot.children){
+                    val user = e.key.toString()
+                    REF_DATABASE_USER.child(user).addListenerForSingleValueEvent(object :
+                        ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            if (snapshot.exists()){
+                                val contact = snapshot.getValue<User>()!!
+                                listUsers.add(contact)
+                            }
+                            adapter = UserAdapter(listUsers)
+                            binding.peopleList.adapter = adapter
+                        }
+                        override fun onCancelled(error: DatabaseError) {}
+                    })
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {}
+        })
     }
 
     override fun onDestroyView() {

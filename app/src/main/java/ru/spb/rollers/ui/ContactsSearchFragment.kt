@@ -6,14 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.getValue
-import ru.spb.rollers.MAIN
-import ru.spb.rollers.R
-import ru.spb.rollers.REF_DATABASE_USER
+import ru.spb.rollers.*
 import ru.spb.rollers.adapters.UserAdapter
 import ru.spb.rollers.databinding.ContactsSearchFragmentBinding
 import ru.spb.rollers.models.User
@@ -22,7 +18,6 @@ import java.util.*
 class ContactsSearchFragment : Fragment() {
 
     private lateinit var binding: ContactsSearchFragmentBinding
-    private var eventListener: ValueEventListener? = null
     private var listUsers: MutableList<User> = mutableListOf()
     private lateinit var adapter: UserAdapter
 
@@ -36,6 +31,9 @@ class ContactsSearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        showAllUsers()
+
         binding.searchView.setOnSearchClickListener {
             binding.txvTitle.visibility = View.GONE
         }
@@ -61,24 +59,20 @@ class ContactsSearchFragment : Fragment() {
                 return true
             }
         })
+    }
 
-        binding.contactsList.layoutManager = LinearLayoutManager(MAIN)
+    private fun showAllUsers(){
         adapter = UserAdapter(listUsers)
         binding.contactsList.adapter = adapter
-        eventListener = REF_DATABASE_USER.addValueEventListener(object : ValueEventListener {
+        REF_DATABASE_USER.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                listUsers.clear()
-                for (itemSnapshot in snapshot.children) {
-                    val user: User = itemSnapshot.getValue<User>()!!
-                    listUsers += user
-                }
-                binding.contactsList.post {
-                    adapter = UserAdapter(listUsers)
-                    binding.contactsList.adapter = adapter
+                if (snapshot.exists()) {
+                    val listUser = snapshot.children.map { it.getUserModel() }
+                    adapter.setList(listUser as MutableList<User>)
+                    listUsers = listUser
                 }
             }
-            override fun onCancelled(error: DatabaseError) {
-            }
+            override fun onCancelled(error: DatabaseError) {}
         })
     }
 
@@ -100,6 +94,6 @@ class ContactsSearchFragment : Fragment() {
                 searchList.add(user)
             }
         }
-        adapter.searchDataList(searchList)
+        adapter.setList(searchList)
     }
 }

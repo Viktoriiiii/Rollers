@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.firebase.ui.database.FirebaseRecyclerAdapter
-import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.getValue
 import ru.spb.rollers.*
-import ru.spb.rollers.adapters.ContactAdapter
+import ru.spb.rollers.adapters.UserAdapter
 import ru.spb.rollers.databinding.ContactsFragmentBinding
-import ru.spb.rollers.holders.UserViewHolder
 import ru.spb.rollers.models.User
 
 class ContactsFragment : Fragment() {
@@ -18,7 +19,7 @@ class ContactsFragment : Fragment() {
     private var _binding: ContactsFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var adapterContacts: FirebaseRecyclerAdapter<User, UserViewHolder>
+    private lateinit var adapter: UserAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,22 +42,27 @@ class ContactsFragment : Fragment() {
     }
 
     private fun showMyContacts(){
-        val options =
-            FirebaseRecyclerOptions.Builder<User>()
-                .setQuery(REF_DATABASE_CONTACT.child(MAIN.appViewModel.user.id), User::class.java)
-                .build()
-        adapterContacts = ContactAdapter(options)
-        binding.contactsList.adapter = adapterContacts
-    }
-
-    override fun onStart() {
-        super.onStart()
-        adapterContacts.startListening()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        adapterContacts.stopListening()
+        // добыть список id контактов и по ним добавить в список юзеров
+        REF_DATABASE_CONTACT.child(MAIN.appViewModel.user.id).addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val listUsers: MutableList<User> = mutableListOf()
+                for (e in snapshot.children){
+                    val user = e.key.toString()
+                    REF_DATABASE_USER.child(user).addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            if (snapshot.exists()){
+                                val contact = snapshot.getValue<User>()!!
+                                listUsers.add(contact)
+                            }
+                            adapter = UserAdapter(listUsers)
+                            binding.contactsList.adapter = adapter
+                        }
+                        override fun onCancelled(error: DatabaseError) {}
+                    })
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {}
+        })
     }
 }
 
