@@ -14,7 +14,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import com.yandex.mapkit.*
 import com.yandex.mapkit.directions.DirectionsFactory
 import com.yandex.mapkit.geometry.BoundingBox
@@ -59,7 +58,6 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
 
     private var point = ru.spb.rollers.models.Point()
 
-    private lateinit var recyclerView: RecyclerView
     private lateinit var searchAdapter: SearchAdapter
 
     private lateinit var mapObjects: MapObjectCollection
@@ -80,76 +78,68 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
         super.onViewCreated(view, savedInstanceState)
 
         binding.imageButtonBack.setOnClickListener{
-            if (MAIN.appViewModel.buildRoute && MAIN.appViewModel.listPoint.size > 1){
-                if (MAIN.appViewModel.viewRoute){
-                    MAIN.onSupportNavigateUp()
-                    MAIN.appViewModel.viewRoute = false
-                    MAIN.appViewModel.buildRoute = false
-                }
-                else {
-                    // сохранить маршрут?
-                    val builderSaveRouteDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
-                    builderSaveRouteDialog
-                        .setTitle("Сохранение маршрута")
-                        .setMessage("Сохранить маршрут?")
-                        .setCancelable(false)
-                        .setPositiveButton("Да") { _, _ ->
+            if (MAIN.appViewModel.maps == 3){
+                // сохранить маршрут?
+                val builderSaveRouteDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
+                builderSaveRouteDialog
+                    .setTitle("Сохранение маршрута")
+                    .setMessage("Сохранить маршрут?")
+                    .setCancelable(false)
+                    .setPositiveButton("Да") { _, _ ->
 
-                            // Здесть еще один alert с edittext, для ввода имени и в нем при ок сохранение
-                            val builder: AlertDialog.Builder = AlertDialog.Builder(MAIN)
-                            val profileView: View? =
-                                MAIN.layoutInflater.inflate(R.layout.alert_dialog_change_name, null)
-                            val etNameRoute: EditText = profileView!!.findViewById(R.id.input_text)
-                            builder.setView(profileView)
+                        // Здесть еще один alert с edittext, для ввода имени и в нем при ок сохранение
+                        val builder: AlertDialog.Builder = AlertDialog.Builder(MAIN)
+                        val profileView: View? =
+                            MAIN.layoutInflater.inflate(R.layout.alert_dialog_change_name, null)
+                        val etNameRoute: EditText = profileView!!.findViewById(R.id.input_text)
+                        builder.setView(profileView)
 
-                            builder.setTitle("Название маршрута")
+                        builder.setTitle("Название маршрута")
 
-                            builder.setPositiveButton("OK") { _, _ ->
-                                var name = etNameRoute.text.toString()
-                                if (name.isEmpty()){
-                                    name = "Маршрут №"
-                                }
-                                val distance = getDistance()
-                                val curUser = MAIN.appViewModel.user.id
-                                val routeKey = REF_DATABASE_ROUTE.child(curUser).push().key
-                                val refRoute = "Route/$curUser/$routeKey"
-
-                                val route = ru.spb.rollers.models.Route(routeKey, name, distance.toString())
-                                REF_DATABASE_ROOT.child(refRoute).setValue(route)
-
-                                for (p in MAIN.appViewModel.listPoint){
-                                    val pointKey = REF_DATABASE_ROOT.child(refRoute).child("Points").push().key
-                                    p.id = pointKey.toString()
-                                    REF_DATABASE_ROOT.child(refRoute).child("Points")
-                                        .child(pointKey.toString())
-                                        .setValue(p)
-                                }
-                                Toast.makeText(MAIN, "Маршрут сохранен", Toast.LENGTH_SHORT).show()
-                                MAIN.appViewModel.clearList = true
-                                MAIN.onSupportNavigateUp()
+                        builder.setPositiveButton("OK") { _, _ ->
+                            var name = etNameRoute.text.toString()
+                            if (name.isEmpty()){
+                                name = "Маршрут №"
                             }
+                            val distance = getDistance()
+                            val curUser = MAIN.appViewModel.user.id
+                            val routeKey = REF_DATABASE_ROUTE.child(curUser).push().key
+                            val refRoute = "Route/$curUser/$routeKey"
 
-                            builder.setNegativeButton("Отмена") { dialog, _ ->
-                                dialog.cancel()
+                            val route = ru.spb.rollers.models.Route(routeKey, name, distance.toString())
+                            REF_DATABASE_ROOT.child(refRoute).setValue(route)
+
+                            for (p in MAIN.appViewModel.listPoint){
+                                val pointKey = REF_DATABASE_ROOT.child(refRoute).child("Points").push().key
+                                p.id = pointKey.toString()
+                                REF_DATABASE_ROOT.child(refRoute).child("Points")
+                                    .child(pointKey.toString())
+                                    .setValue(p)
                             }
-                            val dialog = builder.create()
-                            dialog.show()
-
-                        }
-                        .setNegativeButton("Отмена"){dialog, _ ->
-                            dialog.cancel()
+                            Toast.makeText(MAIN, "Маршрут сохранен", Toast.LENGTH_SHORT).show()
+                            MAIN.appViewModel.listPoint.clear()
                             MAIN.onSupportNavigateUp()
                         }
-                    val alertDialogSaveRoute: AlertDialog = builderSaveRouteDialog.create()
-                    alertDialogSaveRoute.show()
-                }
+
+                        builder.setNegativeButton("Отмена") { dialog, _ ->
+                            dialog.cancel()
+                        }
+                        val dialog = builder.create()
+                        dialog.show()
+                    }
+                    .setNegativeButton("Отмена"){dialog, _ ->
+                        dialog.cancel()
+                        MAIN.onSupportNavigateUp()
+                    }
+                val alertDialogSaveRoute: AlertDialog = builderSaveRouteDialog.create()
+                alertDialogSaveRoute.show()
             }
             else
                 MAIN.onSupportNavigateUp()
         }
         binding.txvTitle.text = titleRoutes
 
-        if (MAIN.appViewModel.addingPoint){
+        if (MAIN.appViewModel.maps == 2){
             binding.cardViewDecrease.visibility = View.GONE
             binding.floatingActionButton.visibility = View.VISIBLE
             binding.searchView.isIconified = false
@@ -157,8 +147,6 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
             binding.searchView.requestFocus()
             titleRoutes = ""
         }
-
-        recyclerView = view.findViewById(R.id.suggestList)
 
         mapKit = MapKitFactory.getInstance()
         binding.mapView.map.move(
@@ -181,7 +169,6 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
                 binding.suggestList.visibility = View.GONE
                 return true
             }
-
             override fun onQueryTextChange(query: String): Boolean {
                 binding.suggestList.visibility = View.VISIBLE
                 val southWest = Point(59.681658, 29.369953) // Юго-западная граница города Санкт-Петербург
@@ -190,7 +177,7 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
                 suggestSession.suggest(query, boundingBox, suggestOptions, object : SuggestSession.SuggestListener {
                     override fun onResponse(suggestItems: List<SuggestItem>) {
                         searchAdapter = SearchAdapter(suggestItems)
-                        recyclerView.adapter = searchAdapter
+                        binding.suggestList.adapter = searchAdapter
                         searchAdapter.setOnItemClickListener(object : OnItemClickListener {
                             override fun onItemClick(item: SuggestItem) {
                                 binding.searchView.setQuery(item.title.text, false)
@@ -203,16 +190,13 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
                             }
                         })
                     }
-                    override fun onError(error: Error) {
-                        Toast.makeText(MAIN, "Диалог закреплен", Toast.LENGTH_SHORT).show()
-                    }
+                    override fun onError(error: Error) {}
                 })
                 return true
             }
         })
 
         binding.searchView.setOnCloseListener {
-            val mapObjects = binding.mapView.map.mapObjects
             mapObjects.clear()
             true
         }
@@ -242,7 +226,8 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
 
         drivingRouter = TransportFactory.getInstance().createPedestrianRouter()
         mapObjects = binding.mapView.map.mapObjects.addCollection()
-        if (MAIN.appViewModel.buildRoute && MAIN.appViewModel.listPoint.size > 1){
+
+        if (MAIN.appViewModel.maps == 3 || MAIN.appViewModel.maps == 4){
             binding.cardViewDecrease.visibility = View.GONE
             buildRoute()
         }
@@ -324,7 +309,6 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
     override fun onObjectUpdated(view: UserLocationView, event: ObjectEvent) {}
 
     override fun onSearchResponse(response: Response) {
-        val mapObjects = binding.mapView.map.mapObjects
         mapObjects.clear()
 
         if (!binding.searchView.query.isNullOrEmpty()) {
@@ -374,8 +358,13 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
     }
 
     private fun submitRequest() {
+        val list = if (MAIN.appViewModel.maps == 4)
+            MAIN.appViewModel.points
+        else
+            MAIN.appViewModel.listPoint
+
         val requestPoints: ArrayList<RequestPoint> = ArrayList()
-        for (item in MAIN.appViewModel.listPoint){
+        for (item in list){
             val latitude = item.latitude!!.toDouble()
             val longitude = item.longitude!!.toDouble()
             val p = Point(latitude, longitude)

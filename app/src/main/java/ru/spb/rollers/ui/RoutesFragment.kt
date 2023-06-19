@@ -49,9 +49,8 @@ class RoutesFragment : Fragment() {
 
         binding.ivMyLocation.setOnClickListener{
             MAIN.navController.navigate(R.id.action_routes_to_mapsFragment)
-            MAIN.appViewModel.buildRoute = false
-            MAIN.appViewModel.addingPoint = false
             titleRoutes = "Поиск местоположения"
+            MAIN.appViewModel.maps = 1
         }
 
         binding.btnAddPoint.setOnClickListener{
@@ -67,10 +66,10 @@ class RoutesFragment : Fragment() {
             true
         }
         binding.btnBuildRoute.setOnClickListener{
+            MAIN.appViewModel.maps = 3
+
             if (MAIN.appViewModel.listPoint.size > 1){
                 MAIN.navController.navigate(R.id.action_routes_to_mapsFragment)
-                MAIN.appViewModel.addingPoint = false
-                MAIN.appViewModel.buildRoute = true
                 titleRoutes = "Просмотр маршрута"
             }
             else {
@@ -91,23 +90,15 @@ class RoutesFragment : Fragment() {
 
         binding.etLocation1.setOnClickListener {
             MAIN.navController.navigate(R.id.action_routes_to_mapsFragment)
-            MAIN.appViewModel.buildRoute = false
-            MAIN.appViewModel.addingPoint = true
+            MAIN.appViewModel.maps = 2
             titleRoutes = ""
         }
         binding.etLocation2.setOnClickListener {
             MAIN.navController.navigate(R.id.action_routes_to_mapsFragment)
-            MAIN.appViewModel.buildRoute = false
-            MAIN.appViewModel.addingPoint = true
+            MAIN.appViewModel.maps = 2
             titleRoutes = ""
         }
 
-        if (MAIN.appViewModel.clearList){
-            !MAIN.appViewModel.clearList
-            MAIN.appViewModel.listPoint.clear()
-            binding.etLocation1.text.clear()
-            binding.etLocation2.text.clear()
-        }
         setPoints()
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -176,8 +167,7 @@ class RoutesFragment : Fragment() {
         val etLocation: EditText = cardView.findViewById(R.id.editTextLocation)
         etLocation.setOnClickListener {
             MAIN.navController.navigate(R.id.action_routes_to_mapsFragment)
-            MAIN.appViewModel.buildRoute = false
-            MAIN.appViewModel.addingPoint = true
+            MAIN.appViewModel.maps = 2
             titleRoutes = ""
         }
         val delete: ImageView = cardView.findViewById(R.id.imageViewDelete)

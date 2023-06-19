@@ -12,10 +12,7 @@ class AppViewModel : ViewModel() {
     var contact: Contact = Contact()
     var contactForMessages = User()
 
-    var addingPoint = false
-    var buildRoute = false
-    var clearList = false
-    var viewRoute = false
+    var maps = 0
 
     var listPoint: MutableList<Point> = mutableListOf()
 
