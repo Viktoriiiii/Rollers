@@ -77,6 +77,8 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 txvStatus.text = "Адрес не известен"
             else
                 txvStatus.text = user.address
+
+            txvDistrict.visibility = View.GONE
         }
         else {
             if (!user.lastName.isNullOrEmpty() || !user.firstName.isNullOrEmpty())
