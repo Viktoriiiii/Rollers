@@ -40,6 +40,16 @@ class AuthorizationFragment : Fragment() {
             val email  = binding.etEmail.text.toString()
             val password  = binding.etPassword.text.toString()
 
+            if (email.isEmpty()){
+                Toast.makeText(MAIN,"Поле с электронной почтой не заполнено", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (password.isEmpty()){
+                Toast.makeText(MAIN,"Поле с паролем не заполнено", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             AUTH.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener{
                     if (it.isSuccessful) {

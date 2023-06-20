@@ -2,6 +2,7 @@ package ru.spb.rollers.ui
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -24,6 +25,7 @@ import com.theartofdev.edmodo.cropper.CropImageView
 import okhttp3.*
 import ru.spb.rollers.*
 import ru.spb.rollers.databinding.ProfileFragmentBinding
+import java.util.*
 
 class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
 
@@ -77,6 +79,28 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
         binding.etDistrict.setOnClickListener {
             setText(districts, binding.etDistrict, "Выберите район")
         }
+
+        binding.etBirthday.setOnClickListener {
+            setDate()
+        }
+    }
+
+    private fun setDate() {
+        val calendar: Calendar = Calendar.getInstance()
+        val mYear = calendar.get(Calendar.YEAR)
+        val mMonth = calendar.get(Calendar.MONTH)
+        val mDay = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(
+            MAIN,
+            { _, year, monthOfYear, dayOfMonth ->
+                val formattedDate = String.format("%02d.%02d.%04d", dayOfMonth, monthOfYear + 1, year)
+                binding.etBirthday.setText(formattedDate) },
+            mYear,
+            mMonth,
+            mDay
+        )
+        datePickerDialog.show()
     }
 
     private fun setText(arrays: Array<String>, et: EditText, title: String){

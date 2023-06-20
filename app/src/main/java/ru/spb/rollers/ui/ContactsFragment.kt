@@ -19,6 +19,7 @@ class ContactsFragment : Fragment() {
     private var _binding: ContactsFragmentBinding? = null
     private val binding get() = _binding!!
 
+    private var listContacts: MutableList<User> = mutableListOf()
     private lateinit var adapter: UserAdapter
 
     override fun onCreateView(
@@ -42,20 +43,23 @@ class ContactsFragment : Fragment() {
     }
 
     private fun showMyContacts(){
+        adapter = UserAdapter(listContacts)
+        binding.contactsList.adapter = adapter
+
         // добыть список id контактов и по ним добавить в список юзеров
-        REF_DATABASE_CONTACT.child(MAIN.appViewModel.user.id).addListenerForSingleValueEvent(object : ValueEventListener{
+        REF_DATABASE_CONTACT.child(MAIN.appViewModel.user.id).addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 val listUsers: MutableList<User> = mutableListOf()
                 for (e in snapshot.children){
                     val user = e.key.toString()
-                    REF_DATABASE_USER.child(user).addListenerForSingleValueEvent(object : ValueEventListener {
+                    REF_DATABASE_USER.child(user).addValueEventListener(object : ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
                             if (snapshot.exists()){
                                 val contact = snapshot.getValue<User>()!!
                                 listUsers.add(contact)
+                                adapter.setList(listUsers)
+                                listContacts = listUsers
                             }
-                            adapter = UserAdapter(listUsers)
-                            binding.contactsList.adapter = adapter
                         }
                         override fun onCancelled(error: DatabaseError) {}
                     })

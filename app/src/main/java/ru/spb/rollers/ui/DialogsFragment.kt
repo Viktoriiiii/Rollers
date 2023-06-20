@@ -72,13 +72,10 @@ class DialogsFragment : Fragment() {
 
     private fun initRecyclerView() {
         dialogAdapter = DialogAdapter(listDialogs)
-
-        val ref = REF_DATABASE_DIALOG
-            .child(MAIN.appViewModel.user.id)
-
         binding.dialogList.adapter = dialogAdapter
 
-        ref.addValueEventListener(object : ValueEventListener{
+        REF_DATABASE_DIALOG
+            .child(MAIN.appViewModel.user.id).addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 val dialogList = snapshot.children.map { it.getDialogModel() }
                 dialogAdapter.setList(dialogList.sortedByDescending {it.pinned  })

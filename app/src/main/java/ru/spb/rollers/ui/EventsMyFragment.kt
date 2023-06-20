@@ -12,7 +12,6 @@ import ru.spb.rollers.*
 import ru.spb.rollers.adapters.EventAdapter
 import ru.spb.rollers.databinding.EventsMyFragmentBinding
 import ru.spb.rollers.models.Event
-import ru.spb.rollers.models.EventUser
 
 class EventsMyFragment : Fragment() {
 
@@ -38,30 +37,31 @@ class EventsMyFragment : Fragment() {
         binding.imageViewBack.setOnClickListener {
             MAIN.onSupportNavigateUp()
         }
+    }
 
-        eventList.clear()
-
-        eventAdapter = EventAdapter(eventList)
-        binding.eventsList.adapter = eventAdapter
-
+    override fun onResume() {
+        super.onResume()
         initEvents()
     }
 
     private fun initEvents(){
+        eventAdapter = EventAdapter(eventList)
+        binding.eventsList.adapter = eventAdapter
+
         REF_DATABASE_EVENT_USER.child(MAIN.appViewModel.user.id)
             .addValueEventListener(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()){
-                        eventList.clear()
-                        eventAdapter.setList(eventList)
-                        val events = snapshot.children.map { it.getEventUserModel() } as MutableList<EventUser>
-                        for (e in events){
-                            REF_DATABASE_EVENT.child(e.id).addValueEventListener(object :ValueEventListener{
+                        val events: MutableList<Event> = mutableListOf()
+                        for (e in snapshot.children){
+                            val ev = e.key.toString()
+                            REF_DATABASE_EVENT.child(ev).addValueEventListener(object :ValueEventListener{
                                 override fun onDataChange(snapshotChild: DataSnapshot) {
                                     if (snapshotChild.exists()){
                                         val event = snapshotChild.getEventModel()
-                                        eventList.add(event)
-                                        eventAdapter.setList(eventList)
+                                        events.add(event)
+                                        eventAdapter.setList(events)
+                                        eventList = events
                                     }
                                 }
                                 override fun onCancelled(error: DatabaseError) {}

@@ -270,6 +270,7 @@
                     android:textSize="14sp"
                     android:hint="@string/_birthday"
                     android:inputType="date"
+                    android:focusable="false"
                     android:backgroundTint="@color/for_contacts"
                     android:autofillHints="birthday" />
                 <View
