@@ -98,6 +98,8 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 txvDistrict.text = "Район прогулок не известен"
             else
                 txvDistrict.text = user.district
+
+            txvDistrict.visibility = View.VISIBLE
         }
     }
 

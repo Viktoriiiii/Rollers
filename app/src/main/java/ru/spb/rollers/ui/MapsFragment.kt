@@ -311,19 +311,25 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
     override fun onSearchResponse(response: Response) {
         mapObjects.clear()
 
-        if (!binding.searchView.query.isNullOrEmpty()) {
-            for (searchResult in response.collection.children) {
-                val resultLocation = searchResult.obj!!.geometry[0].point
-                if (resultLocation != null) {
-                    point.latitude = resultLocation.latitude.toString()
-                    point.longitude = resultLocation.longitude.toString()
-                    mapObjects.addPlacemark(
-                        resultLocation,
-                        ImageProvider.fromResource(MAIN, R.drawable.search_result)
-                    )
+        try {
+            if (!binding.searchView.query.isNullOrEmpty()) {
+                for (searchResult in response.collection.children) {
+                    val resultLocation = searchResult.obj!!.geometry[0].point
+                    if (resultLocation != null) {
+                        point.latitude = resultLocation.latitude.toString()
+                        point.longitude = resultLocation.longitude.toString()
+                        mapObjects.addPlacemark(
+                            resultLocation,
+                            ImageProvider.fromResource(MAIN, R.drawable.search_result)
+                        )
+                    }
                 }
             }
         }
+        catch (e: Exception){
+            println(e.message)
+        }
+
     }
 
     override fun onSearchError(error: Error) {
@@ -363,27 +369,29 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
         else
             MAIN.appViewModel.listPoint
 
-        val requestPoints: ArrayList<RequestPoint> = ArrayList()
-        for (item in list){
-            val latitude = item.latitude!!.toDouble()
-            val longitude = item.longitude!!.toDouble()
-            val p = Point(latitude, longitude)
-            requestPoints.add(RequestPoint(
-                p,
-                RequestPointType.WAYPOINT,
-                null
-            ))
-        }
-        val center =  Point(
-            (requestPoints.first().point.latitude + requestPoints.last().point.latitude) / 2,
-            (requestPoints.first().point.longitude + requestPoints.last().point.longitude) / 2)
-        drivingSession =
-            drivingRouter.requestRoutes(requestPoints, TimeOptions(), this)
-        binding.mapView.map.move(
-            CameraPosition(
-                center, 13F, 0F, 0F
+        if (list.isNotEmpty()){
+            val requestPoints: ArrayList<RequestPoint> = ArrayList()
+            for (item in list){
+                val latitude = item.latitude!!.toDouble()
+                val longitude = item.longitude!!.toDouble()
+                val p = Point(latitude, longitude)
+                requestPoints.add(RequestPoint(
+                    p,
+                    RequestPointType.WAYPOINT,
+                    null
+                ))
+            }
+            val center =  Point(
+                (requestPoints.first().point.latitude + requestPoints.last().point.latitude) / 2,
+                (requestPoints.first().point.longitude + requestPoints.last().point.longitude) / 2)
+            drivingSession =
+                drivingRouter.requestRoutes(requestPoints, TimeOptions(), this)
+            binding.mapView.map.move(
+                CameraPosition(
+                    center, 13F, 0F, 0F
+                )
             )
-        )
+        }
     }
 
     private fun calculateDistance(p1: ru.spb.rollers.models.Point, p2: ru.spb.rollers.models.Point): Double {
