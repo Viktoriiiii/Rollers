@@ -16,7 +16,7 @@ class AppActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAppBinding
     lateinit var navController: NavController
-    private val MAPKIT_API_KEY = "630ce119-481d-42ab-83de-c4d18d7533d5"
+    private val MAPKIT_API_KEY = "YOUR_API_KEY"
     lateinit var bottomNavigationView: BottomNavigationView
 
     lateinit var appViewModel: AppViewModel
