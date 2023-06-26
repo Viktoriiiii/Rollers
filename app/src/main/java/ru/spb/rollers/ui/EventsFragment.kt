@@ -30,7 +30,7 @@ class EventsFragment : Fragment()
     private var eventList: MutableList<Event> = mutableListOf()
     private lateinit var eventAdapter: EventAdapter
 
-    private val WEATHER_API_KEY = "43cf8001-588a-477e-b84f-0a140208c3de"
+    private val WEATHER_API_KEY = "YOUR_WEATHER_API_KEY"
     var temp: Int = 0
     var condition: String = ""
 
