@@ -30,7 +30,6 @@ class EventsFragment : Fragment()
     private var eventList: MutableList<Event> = mutableListOf()
     private lateinit var eventAdapter: EventAdapter
 
-    private val WEATHER_API_KEY = "YOUR_WEATHER_API_KEY"
     var temp: Int = 0
     var condition: String = ""
 
@@ -145,12 +144,12 @@ class EventsFragment : Fragment()
 
 
     private fun getWeather() {
-        val url = "https://api.weather.yandex.ru/v2/forecast?lat=59.939427&lon=30.309217&extra=true"
+        val url = "https://api.weather.yandex.ru/v2/informers?lat=59.939427&lon=30.309217&extra=true"
         var imageUrl = "https://yastatic.net/weather/i/icons/funky/dark/"
 
         val request: Request = Request.Builder()
             .url(url)
-            .addHeader("X-Yandex-API-Key", WEATHER_API_KEY)
+            .addHeader("X-Yandex-API-Key", BuildConfig.WEATHER_API_KEY)
             .build()
 
         val client = OkHttpClient()

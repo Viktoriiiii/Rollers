@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import ru.spb.rollers.*
 import ru.spb.rollers.databinding.RegistrationFragmentBinding
 import ru.spb.rollers.models.User
@@ -27,35 +26,8 @@ class RegistrationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.etEmail.setText(R.string.user_mail_ru)
-        binding.etPassword.setText(R.string.input_pass)
-        binding.etPasswordAdmit.setText(R.string.input_pass)
-
         binding.mbBack.setOnClickListener{
             MAIN.onSupportNavigateUp()
-        }
-
-        binding.checkBoxManager.setOnCheckedChangeListener{ checkBoxView, isChecked ->
-            if (isChecked){
-                val builderChangeRouteNameDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
-                builderChangeRouteNameDialog
-                    .setTitle("Отправка письма")
-                    .setCancelable(false)
-                    .setPositiveButton("Отправить") { dialog, _ ->
-                        dialog.dismiss()
-                        Toast.makeText(MAIN, "Письмо отправлено", Toast.LENGTH_SHORT).show()
-                    }
-                    .setMessage("На ваш почтовый адрес будет отправлено письмо с информацией об оплате." +
-                            "Вы можете начать пользоваться приложением уже сейчас. " +
-                            "Полный функционал для роли оганизатора будет доступ после оплаты. ")
-                    .setNegativeButton("Отмена"){dialog, _ ->
-                        dialog.cancel()
-                        checkBoxView.isChecked = false
-                    }
-
-                val alertDialogChangeRouteName: AlertDialog = builderChangeRouteNameDialog.create()
-                alertDialogChangeRouteName.show()
-            }
         }
 
         binding.mbRegister.setOnClickListener {
@@ -67,6 +39,16 @@ class RegistrationFragment : Fragment() {
         val email  = binding.etEmail.text.toString()
         val password  = binding.etPassword.text.toString()
         val admitPass = binding.etPasswordAdmit.text.toString()
+
+        if (email.isEmpty()){
+            Toast.makeText(MAIN,"Поле с электронной почтой не заполнено", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (password.isEmpty()){
+            Toast.makeText(MAIN,"Поле с паролем не заполнено", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         if (password != admitPass) {
             Toast.makeText(MAIN, "Пароли не совпадают", Toast.LENGTH_SHORT).show()

@@ -16,7 +16,6 @@ class AppActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAppBinding
     lateinit var navController: NavController
-    private val MAPKIT_API_KEY = "YOUR_API_KEY"
     lateinit var bottomNavigationView: BottomNavigationView
 
     lateinit var appViewModel: AppViewModel
@@ -36,7 +35,7 @@ class AppActivity : AppCompatActivity() {
         MAIN = this
 
         if (!isMapKitInitialized){
-            MapKitFactory.setApiKey(MAPKIT_API_KEY)
+            MapKitFactory.setApiKey(BuildConfig.MAPKIT_API_KEY)
             MapKitFactory.initialize(MAIN)
             isMapKitInitialized = true
         }

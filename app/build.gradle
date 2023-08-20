@@ -26,6 +26,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    buildTypes.each{
+        it.buildConfigField 'String', 'WEATHER_API_KEY', WEATHER_API_KEY
+        it.buildConfigField 'String', 'MAPKIT_API_KEY', MAPKIT_API_KEY
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -68,5 +74,4 @@ dependencies {
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
 
     implementation 'com.firebaseui:firebase-ui-database:6.2.1'
-
 }
