@@ -5,32 +5,34 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.yandex.mapkit.MapKitFactory
 import ru.spb.rollers.databinding.ActivityAppBinding
 
 class AppActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityAppBinding
+    lateinit var binding: ActivityAppBinding
     lateinit var navController: NavController
-    lateinit var bottomNavigationView: BottomNavigationView
 
     lateinit var appViewModel: AppViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_Rollers)
-
         super.onCreate(savedInstanceState)
+
         initFirebase()
         binding = ActivityAppBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-
         navController = Navigation.findNavController(this,
             R.id.fragmentContainer)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            handleBottomNavVisibility(destination)
+        }
 
         appViewModel = ViewModelProvider(this)[AppViewModel::class.java]
 
@@ -42,16 +44,9 @@ class AppActivity : AppCompatActivity() {
             isMapKitInitialized = true
         }
 
-        bottomNavigationView = findViewById(R.id.nav_view)
-        bottomNavigationView.setupWithNavController(navController)
-        bottomNavigationView.setOnItemSelectedListener { item ->
+        binding.navView.setupWithNavController(navController)
+        binding.navView.setOnItemSelectedListener { item ->
             NavigationUI.onNavDestinationSelected(item, navController)
-        }
-
-        if (appViewModel.liveData.value == true)
-            setBottomNavigationVisible(true)
-        else {
-            setBottomNavigationVisible(false)
         }
     }
 
@@ -60,12 +55,16 @@ class AppActivity : AppCompatActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    fun setBottomNavigationVisible(visible: Boolean) {
-        appViewModel.liveData.value = visible
-        if (appViewModel.liveData.value == true) {
-            bottomNavigationView.visibility = View.VISIBLE
-        } else {
-            bottomNavigationView.visibility = View.GONE
-        }
+    private fun handleBottomNavVisibility(destination: NavDestination) {
+        // Определите, на каких фрагментах не нужно показывать BottomNavigationView
+        val hideBottomNav = destination.id == R.id.authorizationFragment ||
+                destination.id == R.id.messagesFragment ||
+                destination.id == R.id.registrationFragment
+
+        binding.navView.visibility =
+            if (hideBottomNav)
+                View.GONE
+            else
+                View.VISIBLE
     }
 }

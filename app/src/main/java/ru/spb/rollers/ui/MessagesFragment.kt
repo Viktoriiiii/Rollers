@@ -38,11 +38,8 @@ class MessagesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        MAIN.setBottomNavigationVisible(false)
-
         binding.imageViewBack.setOnClickListener{
             MAIN.onSupportNavigateUp()
-            MAIN.setBottomNavigationVisible(true)
 
             // установить viewedDialog в "non"
             // записать в поле бд viewedDialog какой чат открывается
@@ -123,7 +120,6 @@ class MessagesFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        MAIN.setBottomNavigationVisible(false)
         initRecyclerView()
 
         // Загрузка инфо получателя в toolbar

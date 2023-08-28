@@ -51,8 +51,6 @@ class EventsFragment : Fragment()
         MAIN.appViewModel.points.clear()
         MAIN.appViewModel.event = Event()
 
-        MAIN.setBottomNavigationVisible(true)
-
         binding.imageButtonAddEvent.setOnClickListener{
             MAIN.navController.navigate(R.id.action_events_to_eventsCreateFragment)
             titleEvents = "Создание события"
@@ -78,7 +76,7 @@ class EventsFragment : Fragment()
         if (!MAIN.appViewModel.user.isManager)
             binding.rlAddEvent.visibility = View.GONE
 
-        getWeather()
+    //    getWeather()
         getCountUnreadMessageDialogs()
         initEvents()
 
@@ -129,10 +127,10 @@ class EventsFragment : Fragment()
                                 unreadDialogsCount++
 
                             if (unreadDialogsCount == 0){
-                                MAIN.bottomNavigationView.removeBadge(R.id.dialogs)
+                                MAIN.binding.navView.removeBadge(R.id.dialogs)
                             }
                             else
-                                MAIN.bottomNavigationView.getOrCreateBadge(R.id.dialogs).number = unreadDialogsCount
+                                MAIN.binding.navView.getOrCreateBadge(R.id.dialogs).number = unreadDialogsCount
                         }
                         override fun onCancelled(error: DatabaseError) {}
                     })

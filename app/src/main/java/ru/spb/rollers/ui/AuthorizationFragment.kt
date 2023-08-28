@@ -63,14 +63,7 @@ class AuthorizationFragment : Fragment() {
                                     REF_DATABASE_USER.child(uid).removeEventListener(this)
 
                                     Toast.makeText(MAIN,"Добро пожаловать!", Toast.LENGTH_SHORT).show()
-                                    when (MAIN.appViewModel.user.role) {
-                                        "Администратор" -> {
-                                            MAIN.navController.navigate(R.id.action_authorizationFragment_to_usersFragment)
-                                        }
-                                        "Организатор", "Участник" -> {
-                                            MAIN.navController.navigate(R.id.action_authorizationFragment_to_events)
-                                        }
-                                    }
+                                    MAIN.navController.navigate(R.id.action_authorizationFragment_to_events)
                                 }
                                 override fun onCancelled(error: DatabaseError) {
                                     Toast.makeText( MAIN, error.toException().message, Toast.LENGTH_SHORT).show()

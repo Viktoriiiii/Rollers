@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/events"
+        android:id="@+id/events_navigation"
         android:icon="@drawable/ic_rollers_foreground"
         android:title="@string/events" />
     <item
@@ -9,15 +9,15 @@
         android:icon="@drawable/ic_profile_foreground"
         android:title="@string/profile" />
     <item
-        android:id="@+id/contacts"
+        android:id="@+id/contacts_navigation"
         android:icon="@drawable/ic_contacts_foreground"
         android:title="@string/contacts" />
     <item
-        android:id="@+id/dialogs"
+        android:id="@+id/dialogs_navigation"
         android:icon="@drawable/ic_message_foreground"
         android:title="@string/messages" />
     <item
-        android:id="@+id/routes"
+        android:id="@+id/route_navigation"
         android:icon="@drawable/ic_route_foreground"
         android:title="@string/routes" />
 </menu>

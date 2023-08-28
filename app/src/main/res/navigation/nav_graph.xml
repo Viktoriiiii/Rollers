@@ -15,10 +15,7 @@
             app:destination="@id/registrationFragment" />
         <action
             android:id="@+id/action_authorizationFragment_to_events"
-            app:destination="@id/events" />
-        <action
-            android:id="@+id/action_authorizationFragment_to_usersFragment"
-            app:destination="@id/usersFragment" />
+            app:destination="@id/events_navigation" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -30,46 +27,8 @@
             app:destination="@id/authorizationFragment" />
         <action
             android:id="@+id/action_registrationFragment_to_events"
-            app:destination="@id/events" />
+            app:destination="@id/events_navigation" />
 
-    </fragment>
-    <fragment
-        android:id="@+id/events"
-        android:name="ru.spb.rollers.ui.EventsFragment"
-        android:label="events_fragment"
-        tools:layout="@layout/events_fragment" >
-        <action
-            android:id="@+id/action_events_to_eventsViewFragment"
-            app:destination="@id/eventsViewFragment" />
-        <action
-            android:id="@+id/action_events_to_eventsCreateFragment"
-            app:destination="@id/eventsCreateFragment" />
-        <action
-            android:id="@+id/action_events_to_eventsMyFragment"
-            app:destination="@id/eventsMyFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/contacts"
-        android:name="ru.spb.rollers.ui.ContactsFragment"
-        android:label="ContactsFragment"
-        tools:layout="@layout/contacts_fragment"
-        >
-        <action
-            android:id="@+id/action_contacts_to_messagesFragment"
-            app:destination="@id/messagesFragment" />
-        <action
-            android:id="@+id/action_contacts_to_contactsSearchFragment"
-            app:destination="@id/contactsSearchFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/dialogs"
-        android:name="ru.spb.rollers.ui.DialogsFragment"
-        android:label="DialogsFragment"
-        tools:layout="@layout/dialogs_fragment"
-        >
-        <action
-            android:id="@+id/action_dialogs_to_messagesFragment"
-            app:destination="@id/messagesFragment" />
     </fragment>
     <fragment
         android:id="@+id/profile"
@@ -81,141 +40,170 @@
             android:id="@+id/action_profile_to_authorizationFragment"
             app:destination="@id/authorizationFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/routes"
-        android:name="ru.spb.rollers.ui.RoutesFragment"
-        android:label="RoutesFragment"
-        tools:layout="@layout/routes_fragment"
-        >
-        <argument
-            android:name="name"
-            app:argType="string"
-            />
-        <argument
-            android:name="latitude"
-            app:argType="string"
-            />
-        <argument
-            android:name="longitude"
-            app:argType="string"
-            />
-        <action
-            android:id="@+id/action_routes_to_mapsFragment"
-            app:destination="@id/mapsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/eventsViewFragment"
-        android:name="ru.spb.rollers.ui.EventsViewFragment"
-        android:label="events_view_fragment"
-        tools:layout="@layout/events_view_fragment" >
-        <action
-            android:id="@+id/action_eventsViewFragment_to_events"
-            app:destination="@id/events" />
-        <action
-            android:id="@+id/action_eventsViewFragment_to_eventParticipantFragment"
-            app:destination="@id/eventParticipantFragment" />
-        <action
-            android:id="@+id/action_eventsViewFragment_to_eventsViewRouteFragment"
-            app:destination="@id/eventsViewRouteFragment" />
-        <action
-            android:id="@+id/action_eventsViewFragment_to_eventsMyFragment"
-            app:destination="@id/eventsMyFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/eventsCreateFragment"
-        android:name="ru.spb.rollers.ui.EventsCreateFragment"
-        android:label="EventsCreateFragment"
-        tools:layout="@layout/events_create_fragment"
-        >
-        <action
-            android:id="@+id/action_eventsCreateFragment_to_events"
-            app:destination="@id/events" />
-        <action
-            android:id="@+id/action_eventsCreateFragment_to_eventsMyFragment"
-            app:destination="@id/eventsMyFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/eventParticipantFragment"
-        android:name="ru.spb.rollers.ui.EventParticipantFragment"
-        android:label="EventParticipantFragment"
-        tools:layout="@layout/event_participant_fragment"
-        >
-        <action
-            android:id="@+id/action_eventParticipantFragment_to_eventsViewFragment"
-            app:destination="@id/eventsViewFragment" />
-        <action
-            android:id="@+id/action_eventParticipantFragment_to_messagesFragment"
-            app:destination="@id/messagesFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/eventsViewRouteFragment"
-        android:name="ru.spb.rollers.ui.EventsViewRouteFragment"
-        android:label="events_view_route_fragment"
-        tools:layout="@layout/events_view_route_fragment" >
-        <action
-            android:id="@+id/action_eventsViewRouteFragment_to_eventsViewFragment"
-            app:destination="@id/eventsViewFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/messagesFragment"
-        android:name="ru.spb.rollers.ui.MessagesFragment"
-        android:label="MessagesFragment"
-        tools:layout="@layout/messages_fragment"
-        >
-        <action
-            android:id="@+id/action_messagesFragment_to_dialogs"
-            app:destination="@id/dialogs" />
-        <action
-            android:id="@+id/action_messagesFragment_to_contacts"
-            app:destination="@id/contacts" />
-    </fragment>
-    <fragment
-        android:id="@+id/mapsFragment"
-        android:name="ru.spb.rollers.ui.MapsFragment"
-        android:label="MapsFragment"
-        tools:layout="@layout/maps_fragment"
-        >
-        <action
-            android:id="@+id/action_mapsFragment_to_routes"
-            app:destination="@id/routes" />
-    </fragment>
-    <fragment
-        android:id="@+id/usersFragment"
-        android:name="ru.spb.rollers.ui.UsersFragment"
-        android:label="UsersFragment"
-        tools:layout="@layout/users_fragment"
-        >
-        <action
-            android:id="@+id/action_usersFragment_to_authorizationFragment"
-            app:destination="@id/authorizationFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/contactsSearchFragment"
-        android:name="ru.spb.rollers.ui.ContactsSearchFragment"
-        android:label="ContactsSearchFragment"
-        tools:layout="@layout/contacts_search_fragment"
-        >
-        <action
-            android:id="@+id/action_contactsSearchFragment_to_contacts"
-            app:destination="@id/contacts" />
-        <action
-            android:id="@+id/action_contactsSearchFragment_to_messagesFragment"
-            app:destination="@id/messagesFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/eventsMyFragment"
-        android:name="ru.spb.rollers.ui.EventsMyFragment"
-        android:label="events_my_fragment"
-        tools:layout="@layout/events_my_fragment" >
-        <action
-            android:id="@+id/action_eventsMyFragment_to_events"
-            app:destination="@id/events" />
-        <action
-            android:id="@+id/action_eventsMyFragment_to_eventsViewFragment"
-            app:destination="@id/eventsViewFragment" />
-        <action
-            android:id="@+id/action_eventsMyFragment_to_eventsCreateFragment"
-            app:destination="@id/eventsCreateFragment" />
-    </fragment>
+    <navigation android:id="@+id/route_navigation"
+        app:startDestination="@id/routes">
+        <fragment
+            android:id="@+id/routes"
+            android:name="ru.spb.rollers.ui.RoutesFragment"
+            android:label="RoutesFragment"
+            tools:layout="@layout/routes_fragment">
+            <argument
+                android:name="name"
+                app:argType="string" />
+            <argument
+                android:name="latitude"
+                app:argType="string" />
+            <argument
+                android:name="longitude"
+                app:argType="string" />
+            <action
+                android:id="@+id/action_routes_to_mapsFragment"
+                app:destination="@id/mapsFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/mapsFragment"
+            android:name="ru.spb.rollers.ui.MapsFragment"
+            android:label="MapsFragment"
+            tools:layout="@layout/maps_fragment">
+            <action
+                android:id="@+id/action_mapsFragment_to_routes"
+                app:destination="@id/routes" />
+        </fragment>
+    </navigation>
+    <navigation android:id="@+id/contacts_navigation"
+        app:startDestination="@id/contacts">
+        <fragment
+            android:id="@+id/contacts"
+            android:name="ru.spb.rollers.ui.ContactsFragment"
+            android:label="ContactsFragment"
+            tools:layout="@layout/contacts_fragment">
+            <action
+                android:id="@+id/action_contacts_to_messagesFragment"
+                app:destination="@id/dialogs_navigation" />
+            <action
+                android:id="@+id/action_contacts_to_contactsSearchFragment"
+                app:destination="@id/contactsSearchFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/contactsSearchFragment"
+            android:name="ru.spb.rollers.ui.ContactsSearchFragment"
+            android:label="ContactsSearchFragment"
+            tools:layout="@layout/contacts_search_fragment">
+            <action
+                android:id="@+id/action_contactsSearchFragment_to_contacts"
+                app:destination="@id/contacts" />
+            <action
+                android:id="@+id/action_contactsSearchFragment_to_messagesFragment"
+                app:destination="@id/dialogs_navigation" />
+        </fragment>
+    </navigation>
+    <navigation android:id="@+id/dialogs_navigation"
+        app:startDestination="@id/dialogs">
+        <fragment
+            android:id="@+id/dialogs"
+            android:name="ru.spb.rollers.ui.DialogsFragment"
+            android:label="DialogsFragment"
+            tools:layout="@layout/dialogs_fragment">
+            <action
+                android:id="@+id/action_dialogs_to_messagesFragment"
+                app:destination="@id/messagesFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/messagesFragment"
+            android:name="ru.spb.rollers.ui.MessagesFragment"
+            android:label="MessagesFragment"
+            tools:layout="@layout/messages_fragment">
+            <action
+                android:id="@+id/action_messagesFragment_to_dialogs"
+                app:destination="@id/dialogs" />
+            <action
+                android:id="@+id/action_messagesFragment_to_contacts"
+                app:destination="@id/contacts_navigation" />
+        </fragment>
+    </navigation>
+    <navigation android:id="@+id/events_navigation"
+        app:startDestination="@id/events">
+        <fragment
+            android:id="@+id/events"
+            android:name="ru.spb.rollers.ui.EventsFragment"
+            android:label="events_fragment"
+            tools:layout="@layout/events_fragment">
+            <action
+                android:id="@+id/action_events_to_eventsViewFragment"
+                app:destination="@id/eventsViewFragment" />
+            <action
+                android:id="@+id/action_events_to_eventsCreateFragment"
+                app:destination="@id/eventsCreateFragment" />
+            <action
+                android:id="@+id/action_events_to_eventsMyFragment"
+                app:destination="@id/eventsMyFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/eventsMyFragment"
+            android:name="ru.spb.rollers.ui.EventsMyFragment"
+            android:label="events_my_fragment"
+            tools:layout="@layout/events_my_fragment">
+            <action
+                android:id="@+id/action_eventsMyFragment_to_events"
+                app:destination="@id/events" />
+            <action
+                android:id="@+id/action_eventsMyFragment_to_eventsViewFragment"
+                app:destination="@id/eventsViewFragment" />
+            <action
+                android:id="@+id/action_eventsMyFragment_to_eventsCreateFragment"
+                app:destination="@id/eventsCreateFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/eventsCreateFragment"
+            android:name="ru.spb.rollers.ui.EventsCreateFragment"
+            android:label="EventsCreateFragment"
+            tools:layout="@layout/events_create_fragment">
+            <action
+                android:id="@+id/action_eventsCreateFragment_to_events"
+                app:destination="@id/events" />
+            <action
+                android:id="@+id/action_eventsCreateFragment_to_eventsMyFragment"
+                app:destination="@id/eventsMyFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/eventsViewFragment"
+            android:name="ru.spb.rollers.ui.EventsViewFragment"
+            android:label="events_view_fragment"
+            tools:layout="@layout/events_view_fragment">
+            <action
+                android:id="@+id/action_eventsViewFragment_to_events"
+                app:destination="@id/events" />
+            <action
+                android:id="@+id/action_eventsViewFragment_to_eventParticipantFragment"
+                app:destination="@id/eventParticipantFragment" />
+            <action
+                android:id="@+id/action_eventsViewFragment_to_eventsViewRouteFragment"
+                app:destination="@id/eventsViewRouteFragment" />
+            <action
+                android:id="@+id/action_eventsViewFragment_to_eventsMyFragment"
+                app:destination="@id/eventsMyFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/eventParticipantFragment"
+            android:name="ru.spb.rollers.ui.EventParticipantFragment"
+            android:label="EventParticipantFragment"
+            tools:layout="@layout/event_participant_fragment">
+            <action
+                android:id="@+id/action_eventParticipantFragment_to_eventsViewFragment"
+                app:destination="@id/eventsViewFragment" />
+            <action
+                android:id="@+id/action_eventParticipantFragment_to_messagesFragment"
+                app:destination="@id/dialogs_navigation" />
+        </fragment>
+        <fragment
+            android:id="@+id/eventsViewRouteFragment"
+            android:name="ru.spb.rollers.ui.EventsViewRouteFragment"
+            android:label="events_view_route_fragment"
+            tools:layout="@layout/events_view_route_fragment">
+            <action
+                android:id="@+id/action_eventsViewRouteFragment_to_eventsViewFragment"
+                app:destination="@id/eventsViewFragment" />
+        </fragment>
+    </navigation>
 
 </navigation>
