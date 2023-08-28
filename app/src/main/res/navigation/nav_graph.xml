@@ -3,17 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/launch">
-    <fragment
-        android:id="@+id/launch"
-        android:name="ru.spb.rollers.ui.Launch"
-        android:label="Launch"
-        tools:layout="@layout/launch_fragment"
-        >
-        <action
-            android:id="@+id/action_launch_to_authorizationFragment"
-            app:destination="@id/authorizationFragment" />
-    </fragment>
+    app:startDestination="@id/authorizationFragment">
     <fragment
         android:id="@+id/authorizationFragment"
         android:name="ru.spb.rollers.ui.AuthorizationFragment"

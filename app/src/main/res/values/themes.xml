@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.Rollers" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
@@ -22,5 +22,8 @@
     <style name="SwitchGender">
         <item name="colorControlActivated">@color/for_button</item>
         <item name="colorSwitchThumbNormal">@color/for_toolbar</item>
+    </style>
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash</item>
     </style>
 </resources>

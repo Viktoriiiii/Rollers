@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
@@ -26,8 +25,9 @@
              />
         <activity
             android:name=".AppActivity"
-            android:exported="true">
-            <intent-filter>
+            android:exported="true"
+            android:theme="@style/SplashTheme">
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -37,8 +37,5 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
-
     </application>
-
 </manifest>

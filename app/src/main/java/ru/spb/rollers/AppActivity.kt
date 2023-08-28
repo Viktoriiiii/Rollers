@@ -21,6 +21,8 @@ class AppActivity : AppCompatActivity() {
     lateinit var appViewModel: AppViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_Rollers)
+
         super.onCreate(savedInstanceState)
         initFirebase()
         binding = ActivityAppBinding.inflate(layoutInflater)
