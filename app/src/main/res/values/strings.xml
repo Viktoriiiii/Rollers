@@ -12,13 +12,13 @@
     <string name="onward">Продолжить</string>
     <string name="back">Назад</string>
     <string name="saveChanges">Сохранить изменения</string>
-    <string name="user_mail_ru">string0@yandex.ru</string>
-    <string name="input_pass">123456</string>
-    <string name="_phone">+7 911 999 99 99</string>
+    <string name="user_mail_ru" translatable="false">string0@yandex.ru</string>
+    <string name="input_pass" translatable="false">123456</string>
+    <string name="_phone" translatable="false">+7 911 999 99 99</string>
     <string name="phone">Телефон</string>
     <string name="gender_female">Женский</string>
     <string name="gender">Пол</string>
-    <string name="_birthday">28/05/2023</string>
+    <string name="_birthday" translatable="false">28/05/2023</string>
     <string name="birthday">Дата рождения</string>
     <string name="district">Район</string>
     <string name="_district">Московский</string>
@@ -34,30 +34,30 @@
     <string name="_description">Обучение катанию на роликах.</string>
     <string name="name_school">Название школы</string>
     <string name="_name_school">Роллер-школа Фантаст</string>
-    <string name="public_name">Public name</string>
-    <string name="logo">logo</string>
+    <string name="public_name" translatable="false">Public name</string>
+    <string name="logo" translatable="false">logo</string>
     <string name="profile">Профиль</string>
-    <string name="exit">exit</string>
-    <string name="user_photo">user_photo</string>
+    <string name="exit" translatable="false">exit</string>
+    <string name="user_photo" translatable="false">user_photo</string>
     <string name="russian_name_app">Роллеры СПб</string>
     <string name="full_name">Иван Иванов</string>
     <string name="_status">На роликах</string>
-    <string name="is_contact">isContact</string>
+    <string name="is_contact" translatable="false">isContact</string>
     <string name="contacts">Контакты</string>
     <string name="search_contacts">Поиск контактов</string>
     <string name="users">Пользователи</string>
-    <string name="last_first_name">%d %d</string>
+    <string name="last_first_name" translatable="false">%d %d</string>
     <string name="view_profile">Просмотр профиля</string>
     <string name="to_dialog">Перейти к диалогу</string>
     <string name="delete">Удалить</string>
     <string name="add">Добавить</string>
     <string name="input_message">Введите сообщение</string>
-    <string name="location">location</string>
+    <string name="location" translatable="false">location</string>
     <string name="dialogs">Диалоги</string>
     <string name="add_point">Добавить точку</string>
     <string name="build">Построить</string>
     <string name="routes">Маршруты</string>
-    <string name="to_map">toMap</string>
+    <string name="to_map" translatable="false">toMap</string>
     <string name="view_routes_maps">Просмотр карты/маршрута</string>
     <string name="where">Куда</string>
     <string name="from">Откуда</string>
@@ -67,36 +67,36 @@
     <string name="_name_event">Прогулка на роликах</string>
     <string name="date">Дата</string>
     <string name="time">Время</string>
-    <string name="_date">13.06.2023</string>
-    <string name="_time">18:00</string>
+    <string name="_date" translatable="false">13.06.2023</string>
+    <string name="_time" translatable="false">18:00</string>
     <string name="manager">Организатор</string>
     <string name="adding_event">Добавление события</string>
     <string name="save_event">Сохранить мероприятие</string>
     <string name="add_route">Добавить маршрут</string>
-    <string name="event_photo">event_photo</string>
-    <string name="change_photo">change_photo</string>
+    <string name="event_photo" translatable="false">event_photo</string>
+    <string name="change_photo" translatable="false">change_photo</string>
     <string name="funny">Будет весело!</string>
-    <string name="_0_0">0.0</string>
+    <string name="_0_0" translatable="false">0.0</string>
     <string name="start">Старт</string>
     <string name="_start">Начальная точка маршрута</string>
     <string name="_end">Конечная точка маршрута</string>
     <string name="cost">Стоимость</string>
     <string name="finish">Финиш</string>
     <string name="speed">Скорость (км/ч)</string>
-    <string name="_speed">15</string>
+    <string name="_speed" translatable="false">15</string>
     <string name="_distance">25 км</string>
     <string name="distance">Дистанция</string>
     <string name="event_photo_">Изображение</string>
     <string name="view_participants">Просмотр участников</string>
     <string name="events">События</string>
-    <string name="weather">weather</string>
-    <string name="new_event">new_event</string>
+    <string name="weather" translatable="false">weather</string>
+    <string name="new_event" translatable="false">new_event</string>
     <string name="view_route">Просмотр маршрута</string>
     <string name="view_event">Просмотр события</string>
     <string name="_event">Прогулка на роликах</string>
     <string name="_date_ant_time">Дата и время: 03.05.2023 15:30</string>
     <string name="_manager">Организатор: Клуб роллеров</string>
-    <string name="view">view</string>
+    <string name="view" translatable="false">view</string>
     <string name="free">Стоимость: Бесплатно</string>
     <string name="_speed_">Скорость: 15 км/ч</string>
     <string name="_distance_">Дистанция: 25 км</string>
@@ -115,11 +115,11 @@
     <string name="change_name">Изменить название</string>
     <string name="delete_route">Удалить маршрут</string>
     <string name="_free">Бесплатно</string>
-    <string name="_date_day">29</string>
+    <string name="_date_day" translatable="false">29</string>
     <string name="_day_month">апреля</string>
     <string name="_location_start">Дворцовая площадь</string>
     <string name="_location_end">ст.м. Крестовский остров</string>
-    <string name="_date_time">06:30</string>
+    <string name="_date_time" translatable="false">06:30</string>
     <string name="my_events">Мои события</string>
     <string name="unpin_dialog">Открепить диалог</string>
     <string name="route_unpin">Открепить маршрут</string>
