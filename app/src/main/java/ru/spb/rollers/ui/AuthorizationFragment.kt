@@ -10,19 +10,19 @@ import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
 import ru.spb.rollers.*
 import ru.spb.rollers.R
-import ru.spb.rollers.databinding.AuthorizationFragmentBinding
+import ru.spb.rollers.databinding.FragmentAuthorizationBinding
 import ru.spb.rollers.models.User
 
 class AuthorizationFragment : Fragment() {
 
-    private var _binding: AuthorizationFragmentBinding? = null
+    private var _binding: FragmentAuthorizationBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = AuthorizationFragmentBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentAuthorizationBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 

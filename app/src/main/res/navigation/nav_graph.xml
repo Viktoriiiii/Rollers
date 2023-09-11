@@ -8,7 +8,7 @@
         android:id="@+id/authorizationFragment"
         android:name="ru.spb.rollers.ui.AuthorizationFragment"
         android:label="AuthorizationFragment"
-        tools:layout="@layout/authorization_fragment"
+        tools:layout="@layout/fragment_authorization"
         >
         <action
             android:id="@+id/action_authorizationFragment_to_registrationFragment"
