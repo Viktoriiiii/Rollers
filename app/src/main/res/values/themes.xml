@@ -14,6 +14,9 @@
         <item name="android:textColor">@color/for_text</item>
         <item name="android:textSize">16sp</item>
         <item name="popupMenuStyle">@style/PopupMenu</item>
+
+        <item name="android:windowBackground">@color/main_background</item>
+
     </style>
     <style name="PopupMenu" parent="ThemeOverlay.AppCompat.Dark">
         <item name="android:popupBackground">@drawable/rounded_corners_popup_menu</item>
@@ -33,6 +36,7 @@
         <item name="android:padding">16dp</item>
         <item name="textAllCaps">false</item>
         <item name="cornerRadius">8dp</item>
+        <item name="android:outlineProvider">none</item>
     </style>
 
     <style name="ButtonAccent" parent="AllButtons">
@@ -43,6 +47,7 @@
     <style name="ButtonNoAccent" parent="AllButtons">
         <item name="android:backgroundTint">@color/white</item>
         <item name="android:textColor">@color/for_button</item>
+        <item name="rippleColor">@color/for_popup_menu</item>
     </style>
     
 </resources>
