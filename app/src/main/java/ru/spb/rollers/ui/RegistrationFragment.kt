@@ -7,19 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import ru.spb.rollers.*
-import ru.spb.rollers.databinding.RegistrationFragmentBinding
+import ru.spb.rollers.databinding.FragmentRegistrationBinding
 import ru.spb.rollers.models.User
 
 class RegistrationFragment : Fragment() {
 
-    private var _binding: RegistrationFragmentBinding? = null
+    private var _binding: FragmentRegistrationBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = RegistrationFragmentBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentRegistrationBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -56,7 +56,7 @@ class RegistrationFragment : Fragment() {
             return
         }
 
-        val role = if (binding.checkBoxManager.isChecked) "Организатор" else "Участник"
+        val role = if (binding.chbManager.isChecked) "Организатор" else "Участник"
         val user = User(role = role, email = email, password= password, isManager = false)
         user.status = "Не активен"
 

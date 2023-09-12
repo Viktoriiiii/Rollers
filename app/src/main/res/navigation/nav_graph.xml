@@ -21,7 +21,7 @@
         android:id="@+id/registrationFragment"
         android:name="ru.spb.rollers.ui.RegistrationFragment"
         android:label="registration_fragment"
-        tools:layout="@layout/registration_fragment" >
+        tools:layout="@layout/fragment_registration" >
         <action
             android:id="@+id/action_registrationFragment_to_authorizationFragment"
             app:destination="@id/authorizationFragment" />
