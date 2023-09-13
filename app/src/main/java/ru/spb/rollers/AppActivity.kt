@@ -28,7 +28,7 @@ class AppActivity : AppCompatActivity() {
 
         setContentView(binding.root)
         navController = Navigation.findNavController(this,
-            R.id.fragmentContainer)
+            R.id.fragment_container)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             handleBottomNavVisibility(destination)

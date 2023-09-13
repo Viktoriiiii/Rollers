@@ -208,15 +208,15 @@ class EventAdapter(private var itemListEvent: MutableList<Event>):
 
     inner class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val eventsContainer: MaterialCardView = itemView.findViewById(R.id.eventsContainer)
-        val txvEventName: TextView = itemView.findViewById(R.id.txvEventName)
-        val txvEventStartLocation: TextView = itemView.findViewById(R.id.txvEventStartLocation)
-        val txvEventEndLocation: TextView = itemView.findViewById(R.id.txvEventEndLocation)
-        val txvEventCost: TextView = itemView.findViewById(R.id.txvEventCost)
-        val txvEventDateDay: TextView = itemView.findViewById(R.id.txvEventDateDay)
-        val txvEventDateMonth: TextView = itemView.findViewById(R.id.txvEventDateMonth)
-        val txvEventDateTime: TextView = itemView.findViewById(R.id.txvEventDateTime)
-        val ivEventStatus: ImageView = itemView.findViewById(R.id.ivEventStatus)
-        val ivManager: ImageView = itemView.findViewById(R.id.ivManager)
-        val ivEventPhoto: ImageView = itemView.findViewById(R.id.ivEventPhoto)
+        val txvEventName: TextView = itemView.findViewById(R.id.tv_event_name)
+        val txvEventStartLocation: TextView = itemView.findViewById(R.id.tv_event_start_location)
+        val txvEventEndLocation: TextView = itemView.findViewById(R.id.tv_event_end_location)
+        val txvEventCost: TextView = itemView.findViewById(R.id.tv_event_cost)
+        val txvEventDateDay: TextView = itemView.findViewById(R.id.tv_event_date_day)
+        val txvEventDateMonth: TextView = itemView.findViewById(R.id.tv_event_date_month)
+        val txvEventDateTime: TextView = itemView.findViewById(R.id.tv_event_date_time)
+        val ivEventStatus: ImageView = itemView.findViewById(R.id.iv_event_status)
+        val ivManager: ImageView = itemView.findViewById(R.id.iv_manager)
+        val ivEventPhoto: ImageView = itemView.findViewById(R.id.iv_event_photo)
     }
 }

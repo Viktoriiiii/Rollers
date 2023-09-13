@@ -74,7 +74,7 @@ class EventsFragment : Fragment()
         }
 
         if (!MAIN.appViewModel.user.isManager)
-            binding.rlAddEvent.visibility = View.GONE
+            binding.imageButtonAddEvent.visibility = View.GONE
 
     //    getWeather()
         getCountUnreadMessageDialogs()
