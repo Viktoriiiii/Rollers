@@ -34,8 +34,7 @@
             android:textColor="@color/for_icon"
             android:textSize="20sp"
             android:paddingHorizontal="10dp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
         <ImageView
             android:id="@+id/ivWeather"
             android:layout_width="40dp"
@@ -58,8 +57,7 @@
             android:textColor="@color/for_icon"
             android:textStyle="bold"
             android:layout_gravity="center"
-            android:padding="5dp"
-            />
+            android:padding="5dp" />
         <ImageView
             android:id="@+id/imageButtonAddEvent"
             android:layout_width="50dp"
@@ -87,8 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:spanCount="2"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            />
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager" />
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabMyEvents"
             android:layout_width="wrap_content"
