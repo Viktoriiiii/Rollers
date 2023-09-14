@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.card.MaterialCardView
 import ru.spb.rollers.MAIN
 import ru.spb.rollers.R
 import ru.spb.rollers.asTime
@@ -62,7 +62,7 @@ RecyclerView.Adapter<MessageAdapter.MessageViewHolder>(){
     }
 
     inner class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val messageContainer: MaterialCardView = itemView.findViewById(R.id.messagesContainer)
+        val messageContainer: CardView = itemView.findViewById(R.id.messagesContainer)
         val textViewSender: TextView = itemView.findViewById(R.id.textViewSender)
         val textViewMessage: TextView = itemView.findViewById(R.id.textViewMessage)
         val textViewDate: TextView = itemView.findViewById(R.id.textViewDate)

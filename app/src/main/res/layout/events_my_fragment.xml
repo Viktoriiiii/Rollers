@@ -9,8 +9,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/for_toolbar"
-        android:elevation="0dp">
+        android:background="@color/for_toolbar">
         <ImageView
             android:id="@+id/imageViewBack"
             android:layout_width="50dp"

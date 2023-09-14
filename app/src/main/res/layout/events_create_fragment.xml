@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/for_contacts"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/for_toolbar"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar" >
-        <ImageButton
+        android:background="@color/for_toolbar">
+        <ImageView
             android:id="@+id/imageButtonBack"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -51,22 +46,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp"
-            >
+            android:padding="10dp">
             <TextView
                 android:id="@+id/tvEventName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:hint="@string/name_event"
-                android:textColor="@color/for_text"
-                android:paddingHorizontal="4dp"
-                />
+                android:paddingHorizontal="4dp" />
             <EditText
                 android:id="@+id/etEventName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/for_text"
                 android:hint="@string/_name_event"
                 android:textSize="14sp"
                 android:backgroundTint="@color/for_contacts"
@@ -82,22 +73,18 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/date"
                 android:textSize="16sp"
-                android:textColor="@color/for_text"
                 android:paddingTop="15dp"
-                android:paddingHorizontal="4dp"
-                />
+                android:paddingHorizontal="4dp" />
             <EditText
                 android:id="@+id/etEventDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/for_text"
                 android:textSize="14sp"
                 android:hint="@string/_date"
                 android:backgroundTint="@color/for_contacts"
                 android:autofillHints="date"
                 android:inputType="date"
-                android:focusable="false"
-                />
+                android:focusable="false" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -108,22 +95,18 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/time"
                 android:textSize="16sp"
-                android:textColor="@color/for_text"
                 android:paddingTop="15dp"
-                android:paddingHorizontal="4dp"
-                />
+                android:paddingHorizontal="4dp" />
             <EditText
                 android:id="@+id/etEventTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/for_text"
                 android:textSize="14sp"
                 android:hint="@string/_time"
                 android:backgroundTint="@color/for_contacts"
                 android:autofillHints="date"
                 android:inputType="time"
-                android:focusable="false"
-                />
+                android:focusable="false" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -134,15 +117,12 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/manager"
                 android:textSize="16sp"
-                android:textColor="@color/for_text"
                 android:paddingTop="15dp"
-                android:paddingHorizontal="4dp"
-                />
+                android:paddingHorizontal="4dp" />
             <EditText
                 android:id="@+id/etEventOrganizer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/for_text"
                 android:textSize="14sp"
                 android:focusable="false"
                 android:hint="@string/_name_school"
@@ -159,15 +139,12 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/description"
                 android:textSize="16sp"
-                android:textColor="@color/for_text"
                 android:paddingTop="15dp"
-                android:paddingHorizontal="4dp"
-                />
+                android:paddingHorizontal="4dp" />
             <EditText
                 android:id="@+id/etEventDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/for_text"
                 android:textSize="14sp"
                 android:hint="@string/funny"
                 android:backgroundTint="@color/for_contacts"
@@ -183,15 +160,12 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/cost"
                 android:textSize="16sp"
-                android:textColor="@color/for_text"
                 android:paddingTop="15dp"
-                android:paddingHorizontal="4dp"
-                />
+                android:paddingHorizontal="4dp" />
             <EditText
                 android:id="@+id/etEventCost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/for_text"
                 android:textSize="14sp"
                 android:hint="@string/_0_0"
                 android:inputType="numberDecimal"
@@ -207,7 +181,6 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/start"
                 android:textSize="16sp"
-                android:textColor="@color/for_text"
                 android:paddingTop="15dp"
                 android:paddingHorizontal="4dp"
                 android:visibility="gone"/>
@@ -215,7 +188,6 @@
                 android:id="@+id/etEventStartLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/for_text"
                 android:textSize="14sp"
                 android:hint="@string/_start"
                 android:clickable="false"
@@ -239,7 +211,6 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/finish"
                 android:textSize="16sp"
-                android:textColor="@color/for_text"
                 android:paddingTop="15dp"
                 android:paddingHorizontal="4dp"
                 android:visibility="gone"/>
@@ -247,7 +218,6 @@
                 android:id="@+id/etEventEndLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/for_text"
                 android:textSize="14sp"
                 android:hint="@string/_end"
                 android:backgroundTint="@color/for_contacts"
@@ -263,23 +233,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/for_icon"
-                android:visibility="gone"
-                />
+                android:visibility="gone" />
             <TextView
                 android:id="@+id/tvEventSpeed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/speed"
                 android:textSize="16sp"
-                android:textColor="@color/for_text"
                 android:paddingTop="15dp"
-                android:paddingHorizontal="4dp"
-                />
+                android:paddingHorizontal="4dp" />
             <EditText
                 android:id="@+id/etEventSpeed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/for_text"
                 android:textSize="14sp"
                 android:hint="@string/_speed"
                 android:backgroundTint="@color/for_contacts"
@@ -295,7 +261,6 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/distance"
                 android:textSize="16sp"
-                android:textColor="@color/for_text"
                 android:paddingTop="15dp"
                 android:paddingHorizontal="4dp"
                 android:visibility="gone"/>
@@ -303,7 +268,6 @@
                 android:id="@+id/etEventDistance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/for_text"
                 android:textSize="14sp"
                 android:hint="@string/_distance"
                 android:clickable="false"
@@ -319,8 +283,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/for_icon"
-                android:visibility="gone"
-                />
+                android:visibility="gone" />
             <TextView
                 android:id="@+id/tvEventPhoto"
                 android:layout_width="wrap_content"
@@ -328,9 +291,7 @@
                 android:textSize="16sp"
                 android:hint="@string/event_photo_"
                 android:paddingTop="15dp"
-                android:textColor="@color/for_text"
-                android:paddingHorizontal="4dp"
-                />
+                android:paddingHorizontal="4dp" />
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -352,41 +313,21 @@
                     tools:ignore="UnusedAttribute"
                     android:contentDescription="@string/change_photo" />
             </FrameLayout>
-            <LinearLayout
-                android:id="@+id/llRoute"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddRoute"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_marginBottom="60dp"
-                >
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnAddRoute"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/add_route"
-                    android:backgroundTint="@color/white"
-                    app:cornerRadius="10dp"
-                    android:padding="16dp"
-                    android:textAllCaps="false"
-                    android:textSize="14sp"
-                    android:textColor="@color/for_button"
-                    android:layout_marginTop="25dp"
-                    />
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSaveRoute"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/save_event"
-                    app:cornerRadius="10dp"
-                    android:textAllCaps="false"
-                    android:backgroundTint="@color/for_button"
-                    android:padding="16dp"
-                    android:textSize="14sp"
-                    android:layout_marginTop="5dp"
-                    android:visibility="gone"
-                    />
-            </LinearLayout>
+                android:text="@string/add_route"
+                style="@style/ButtonNoAccent"
+                android:layout_marginTop="20dp" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSaveRoute"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/save_event"
+                style="@style/ButtonAccent"
+                android:layout_marginTop="8dp"
+                android:visibility="gone" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

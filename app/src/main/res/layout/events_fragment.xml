@@ -9,9 +9,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/for_toolbar"
-        app:elevation="0dp"
-        app:titleTextColor="@color/for_icon">
+        android:background="@color/for_toolbar">
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewPhoto"
             android:layout_width="40dp"

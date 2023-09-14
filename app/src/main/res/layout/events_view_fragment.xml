@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/for_toolbar"
-        android:elevation="0dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar" >
         <ImageView
             android:id="@+id/imageButtonBack"
