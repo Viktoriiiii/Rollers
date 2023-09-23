@@ -13,7 +13,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
-import com.google.android.material.card.MaterialCardView
+import androidx.cardview.widget.CardView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -28,7 +28,7 @@ import java.util.*
 class RoutesFragment : Fragment() {
     private var _binding: RoutesFragmentBinding? = null
     private val binding get() = _binding!!
-    var currentIndex = 0 // Текущий индекс в списке значений
+    private var currentIndex = 0 // Текущий индекс в списке значений
 
     private var routeList: MutableList<Route> = mutableListOf()
     private lateinit var routeAdapter: RouteAdapter
@@ -162,15 +162,15 @@ class RoutesFragment : Fragment() {
     @SuppressLint("InflateParams")
     private fun addPoint(){
         val inflater = LayoutInflater.from(MAIN)
-        val cardView = inflater.inflate(R.layout.item_point, null) as MaterialCardView
+        val cardView = inflater.inflate(R.layout.item_point, null) as CardView
         binding.llContainer.addView(cardView)
-        val etLocation: EditText = cardView.findViewById(R.id.editTextLocation)
+        val etLocation: EditText = cardView.findViewById(R.id.et_location)
         etLocation.setOnClickListener {
             MAIN.navController.navigate(R.id.action_routes_to_mapsFragment)
             MAIN.appViewModel.maps = 2
             titleRoutes = ""
         }
-        val delete: ImageView = cardView.findViewById(R.id.imageViewDelete)
+        val delete: ImageView = cardView.findViewById(R.id.iv_delete)
         delete.setOnClickListener{
             MAIN.appViewModel.listPoint.removeIf { it.displayName == etLocation.text.toString() }
 

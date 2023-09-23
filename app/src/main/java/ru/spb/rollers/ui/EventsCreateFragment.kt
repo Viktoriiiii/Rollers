@@ -65,7 +65,7 @@ class EventsCreateFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
         if (MAIN.appViewModel.event.id != "")
             getParticipants()
 
-        binding.imageButtonDeleteEvent.setOnClickListener{
+        binding.ivDeleteEvent.setOnClickListener{
             val builderDeleteDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
             builderDeleteDialog
                 .setTitle("Вы уверены, что хотите удалить мероприятие?")
@@ -333,15 +333,12 @@ class EventsCreateFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
     private fun changeVisibilityRoute(){
         binding.tvEventStartLocation.visibility = View.VISIBLE
         binding.etEventStartLocation.visibility = View.VISIBLE
-        binding.vDividerEventStartLocation.visibility = View.VISIBLE
 
         binding.tvEventEndLocation.visibility = View.VISIBLE
         binding.etEventEndLocation.visibility = View.VISIBLE
-        binding.vDividerEventEndLocation.visibility = View.VISIBLE
 
         binding.tvEventDistance.visibility = View.VISIBLE
         binding.etEventDistance.visibility = View.VISIBLE
-        binding.vDividerEventDistance.visibility = View.VISIBLE
 
         binding.btnAddRoute.text = "Изменить маршрут"
         binding.btnSaveRoute.visibility = View.VISIBLE

@@ -45,7 +45,7 @@ class EventsViewFragment : Fragment() {
             MAIN.onSupportNavigateUp()
         }
 
-        binding.imageButtonViewManager.setOnClickListener {
+        binding.tvManager.setOnClickListener {
             val builderViewProfile: AlertDialog.Builder = AlertDialog.Builder(MAIN)
             val profileView: View = MAIN.layoutInflater.inflate(R.layout.view_profile_school, null)
             val imageViewClose: ImageView = profileView.findViewById(R.id.imageViewClose)
@@ -86,11 +86,11 @@ class EventsViewFragment : Fragment() {
             alertViewProfile.show()
         }
 
-        binding.imageButtonViewRoute.setOnClickListener{
+        binding.tvEventNameRoute.setOnClickListener{
             MAIN.navController.navigate(R.id.action_eventsViewFragment_to_eventsViewRouteFragment)
         }
 
-        binding.ibViewParticipants.setOnClickListener{
+        binding.txvEventParticipants.setOnClickListener{
             MAIN.navController.navigate(R.id.action_eventsViewFragment_to_eventParticipantFragment)
         }
 

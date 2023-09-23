@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,7 +14,7 @@
             android:id="@+id/imageButtonBack"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/ic_back2_foreground"
+            android:src="@drawable/ic_back2_foreground"
             android:foreground="?android:attr/selectableItemBackground"
             tools:ignore="UnusedAttribute"
             android:contentDescription="@string/back" />
@@ -22,18 +23,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/adding_event"
-            android:textColor="@color/for_icon"
             android:textSize="20sp"
             android:paddingHorizontal="10dp"
-            android:textStyle="bold"
-            />
-        <ImageButton
-            android:id="@+id/imageButtonDeleteEvent"
+            android:textStyle="bold" />
+        <ImageView
+            android:id="@+id/iv_delete_event"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="end"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/ic_delete_foreground"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_delete_foreground"
             android:foreground="?android:attr/selectableItemBackground"
             tools:ignore="UnusedAttribute"
             android:contentDescription="@string/delete" />
@@ -49,9 +48,8 @@
             android:padding="10dp">
             <TextView
                 android:id="@+id/tvEventName"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
                 android:hint="@string/name_event"
                 android:paddingHorizontal="4dp" />
             <EditText
@@ -59,134 +57,98 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/_name_event"
-                android:textSize="14sp"
-                android:backgroundTint="@color/for_contacts"
+                android:backgroundTint="@color/for_icon"
                 android:autofillHints="event"
                 android:inputType="text" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/for_icon"/>
             <TextView
                 android:id="@+id/tvEventDate"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/date"
-                android:textSize="16sp"
-                android:paddingTop="15dp"
+                android:paddingTop="12dp"
                 android:paddingHorizontal="4dp" />
             <EditText
                 android:id="@+id/etEventDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
                 android:hint="@string/_date"
-                android:backgroundTint="@color/for_contacts"
+                android:backgroundTint="@color/for_icon"
                 android:autofillHints="date"
                 android:inputType="date"
                 android:focusable="false" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/for_icon"/>
             <TextView
                 android:id="@+id/tvEventTime"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/time"
-                android:textSize="16sp"
-                android:paddingTop="15dp"
+                android:paddingTop="12dp"
                 android:paddingHorizontal="4dp" />
             <EditText
                 android:id="@+id/etEventTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
                 android:hint="@string/_time"
-                android:backgroundTint="@color/for_contacts"
+                android:backgroundTint="@color/for_icon"
                 android:autofillHints="date"
                 android:inputType="time"
                 android:focusable="false" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/for_icon"/>
             <TextView
                 android:id="@+id/tvEventOrganizer"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/manager"
-                android:textSize="16sp"
-                android:paddingTop="15dp"
+                android:paddingTop="12dp"
                 android:paddingHorizontal="4dp" />
             <EditText
                 android:id="@+id/etEventOrganizer"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
                 android:focusable="false"
                 android:hint="@string/_name_school"
-                android:backgroundTint="@color/for_contacts"
+                android:backgroundTint="@color/for_icon"
                 android:autofillHints="manager"
                 android:inputType="none" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/for_icon"/>
             <TextView
                 android:id="@+id/tvEventDescription"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/description"
-                android:textSize="16sp"
-                android:paddingTop="15dp"
+                android:paddingTop="12dp"
                 android:paddingHorizontal="4dp" />
             <EditText
                 android:id="@+id/etEventDescription"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
                 android:hint="@string/funny"
-                android:backgroundTint="@color/for_contacts"
+                android:backgroundTint="@color/for_icon"
                 android:autofillHints="description"
                 android:inputType="text" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/for_icon"/>
             <TextView
                 android:id="@+id/tvEventCost"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/cost"
-                android:textSize="16sp"
-                android:paddingTop="15dp"
+                android:paddingTop="12dp"
                 android:paddingHorizontal="4dp" />
             <EditText
                 android:id="@+id/etEventCost"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
                 android:hint="@string/_0_0"
                 android:inputType="numberDecimal"
-                android:backgroundTint="@color/for_contacts"
+                android:backgroundTint="@color/for_icon"
                 android:autofillHints="cost" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/for_icon"/>
             <TextView
                 android:id="@+id/tvEventStartLocation"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/start"
-                android:textSize="16sp"
-                android:paddingTop="15dp"
+                android:paddingTop="12dp"
                 android:paddingHorizontal="4dp"
                 android:visibility="gone"/>
             <EditText
                 android:id="@+id/etEventStartLocation"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:hint="@string/_start"
@@ -194,33 +156,24 @@
                 android:cursorVisible="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:backgroundTint="@color/for_contacts"
+                android:backgroundTint="@color/for_icon"
                 android:visibility="gone"
                 android:autofillHints="start"
                 android:inputType="text" />
-            <View
-                android:id="@+id/vDividerEventStartLocation"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/for_icon"
-                android:visibility="gone"
-                />
             <TextView
                 android:id="@+id/tvEventEndLocation"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/finish"
-                android:textSize="16sp"
-                android:paddingTop="15dp"
+                android:paddingTop="12dp"
                 android:paddingHorizontal="4dp"
                 android:visibility="gone"/>
             <EditText
                 android:id="@+id/etEventEndLocation"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
                 android:hint="@string/_end"
-                android:backgroundTint="@color/for_contacts"
+                android:backgroundTint="@color/for_icon"
                 android:clickable="false"
                 android:cursorVisible="false"
                 android:focusable="false"
@@ -228,69 +181,48 @@
                 android:visibility="gone"
                 android:autofillHints="end"
                 android:inputType="text" />
-            <View
-                android:id="@+id/vDividerEventEndLocation"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/for_icon"
-                android:visibility="gone" />
             <TextView
                 android:id="@+id/tvEventSpeed"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/speed"
-                android:textSize="16sp"
-                android:paddingTop="15dp"
+                android:paddingTop="12dp"
                 android:paddingHorizontal="4dp" />
             <EditText
                 android:id="@+id/etEventSpeed"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
                 android:hint="@string/_speed"
-                android:backgroundTint="@color/for_contacts"
+                android:backgroundTint="@color/for_icon"
                 android:autofillHints="speed"
                 android:inputType="number" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/for_icon"/>
             <TextView
                 android:id="@+id/tvEventDistance"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/distance"
-                android:textSize="16sp"
-                android:paddingTop="15dp"
+                android:paddingTop="12dp"
                 android:paddingHorizontal="4dp"
                 android:visibility="gone"/>
             <EditText
                 android:id="@+id/etEventDistance"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
                 android:hint="@string/_distance"
                 android:clickable="false"
                 android:cursorVisible="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:backgroundTint="@color/for_contacts"
+                android:backgroundTint="@color/for_icon"
                 android:visibility="gone"
                 android:autofillHints="distance"
                 android:inputType="text" />
-            <View
-                android:id="@+id/vDividerEventDistance"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/for_icon"
-                android:visibility="gone" />
             <TextView
                 android:id="@+id/tvEventPhoto"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
                 android:hint="@string/event_photo_"
-                android:paddingTop="15dp"
+                android:paddingVertical="12dp"
                 android:paddingHorizontal="4dp" />
             <FrameLayout
                 android:layout_width="match_parent"
@@ -308,7 +240,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="start"
-                    android:background="@drawable/ic_photo_foreground"
+                    android:src="@drawable/ic_photo_foreground"
                     android:foreground="?android:attr/selectableItemBackground"
                     tools:ignore="UnusedAttribute"
                     android:contentDescription="@string/change_photo" />
