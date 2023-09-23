@@ -24,12 +24,12 @@ import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import okhttp3.*
 import ru.spb.rollers.*
-import ru.spb.rollers.databinding.ProfileFragmentBinding
+import ru.spb.rollers.databinding.FragmentProfileBinding
 import java.util.*
 
 class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
 
-    private var _binding: ProfileFragmentBinding? = null
+    private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     private val genders: Array<String> = arrayOf("Женский", "Мужской")
     private val districts: Array<String> = arrayOf("Адмиралтейский", "Василеостровский", "Выборгский",
@@ -41,7 +41,7 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = ProfileFragmentBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 

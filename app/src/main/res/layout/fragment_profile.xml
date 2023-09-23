@@ -71,26 +71,20 @@
                 android:id="@+id/llSchool"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
                 <TextView
                     android:id="@+id/txvSchoolName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/name_school"
-                    android:textColor="@color/for_text"
-                    android:textSize="16sp"
                     android:paddingHorizontal="4dp"
-                    android:paddingTop="10dp"
-                    />
+                    android:paddingTop="10dp" />
                 <EditText
                     android:id="@+id/etSchoolName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/_name_school"
-                    android:textColor="@color/for_text"
-                    android:textSize="14sp"
-                    android:backgroundTint="@color/for_contacts"
+                    android:backgroundTint="@color/for_icon"
                     android:autofillHints="name school"
                     android:inputType="textMultiLine" />
                 <TextView
@@ -98,19 +92,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/description"
-                    android:textColor="@color/for_text"
-                    android:textSize="16sp"
                     android:paddingHorizontal="4dp"
-                    android:paddingTop="10dp"
-                    />
+                    android:paddingTop="10dp" />
                 <EditText
                     android:id="@+id/etSchoolDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/_description"
-                    android:textColor="@color/for_text"
-                    android:textSize="14sp"
-                    android:backgroundTint="@color/for_contacts"
+                    android:backgroundTint="@color/for_icon"
                     android:autofillHints="school description"
                     android:inputType="textMultiLine" />
                 <TextView
@@ -118,19 +107,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/address"
-                    android:textColor="@color/for_text"
-                    android:textSize="16sp"
                     android:paddingHorizontal="4dp"
-                    android:paddingTop="10dp"
-                    />
+                    android:paddingTop="10dp" />
                 <EditText
                     android:id="@+id/etSchoolAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/_address"
-                    android:textColor="@color/for_text"
-                    android:textSize="14sp"
-                    android:backgroundTint="@color/for_contacts"
+                    android:backgroundTint="@color/for_icon"
                     android:autofillHints="school address"
                     android:inputType="textMultiLine" />
             </LinearLayout>
@@ -138,26 +122,20 @@
                 android:id="@+id/llUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
                 <TextView
                     android:id="@+id/txvFirstName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/name"
-                    android:textColor="@color/for_text"
-                    android:textSize="16sp"
                     android:paddingHorizontal="4dp"
-                    android:paddingTop="10dp"
-                    />
+                    android:paddingTop="10dp" />
                 <EditText
                     android:id="@+id/etFirstName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/_name"
-                    android:textColor="@color/for_text"
-                    android:textSize="14sp"
-                    android:backgroundTint="@color/for_contacts"
+                    android:backgroundTint="@color/for_icon"
                     android:autofillHints="first name"
                     android:inputType="textPersonName" />
                 <TextView
@@ -165,19 +143,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/last_name"
-                    android:textColor="@color/for_text"
-                    android:textSize="16sp"
                     android:paddingHorizontal="4dp"
-                    android:paddingTop="10dp"
-                    />
+                    android:paddingTop="10dp" />
                 <EditText
                     android:id="@+id/etLastName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/_last_name"
-                    android:textColor="@color/for_text"
-                    android:textSize="14sp"
-                    android:backgroundTint="@color/for_contacts"
+                    android:backgroundTint="@color/for_icon"
                     android:autofillHints="last name"
                     android:inputType="textPersonName" />
                 <TextView
@@ -185,39 +158,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/status"
-                    android:textColor="@color/for_text"
-                    android:textSize="16sp"
                     android:paddingHorizontal="4dp"
-                    android:paddingTop="10dp"
-                    />
+                    android:paddingTop="10dp" />
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/switchStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="@color/for_text"
                     android:theme="@style/SwitchStatus"
                     android:hint="@string/inactive"
-                    android:paddingHorizontal="4dp"
-                    />
+                    android:paddingHorizontal="4dp" />
                 <TextView
                     android:id="@+id/txvDistrict"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/district"
-                    android:textColor="@color/for_text"
-                    android:textSize="16sp"
                     android:paddingHorizontal="4dp"
-                    android:paddingTop="10dp"
-                    />
+                    android:paddingTop="10dp" />
                 <EditText
                     android:id="@+id/etDistrict"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/for_text"
-                    android:textSize="14sp"
                     android:hint="@string/_district"
-                    android:backgroundTint="@color/for_contacts"
+                    android:backgroundTint="@color/for_icon"
                     android:autofillHints="district"
                     android:focusable="false"
                     android:inputType="textMultiLine" />
@@ -226,111 +188,85 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/birthday"
-                    android:textColor="@color/for_text"
-                    android:textSize="16sp"
                     android:paddingHorizontal="4dp"
-                    android:paddingTop="10dp"
-                    />
+                    android:paddingTop="10dp" />
                 <EditText
                     android:id="@+id/etBirthday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/for_text"
-                    android:textSize="14sp"
                     android:hint="@string/_birthday"
                     android:inputType="date"
                     android:focusable="false"
-                    android:backgroundTint="@color/for_contacts"
+                    android:backgroundTint="@color/for_icon"
                     android:autofillHints="birthday" />
                 <TextView
                     android:id="@+id/txvGender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/gender"
-                    android:textColor="@color/for_text"
-                    android:textSize="16sp"
                     android:paddingHorizontal="4dp"
-                    android:paddingTop="10dp"
-                    />
+                    android:paddingTop="10dp" />
                 <EditText
                     android:id="@+id/etGender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/for_text"
-                    android:textSize="14sp"
                     android:hint="@string/gender_female"
-                    android:inputType="textMultiLine"
                     android:focusable="false"
-                    android:backgroundTint="@color/for_contacts"
-                    android:autofillHints="birthday" />
+                    android:backgroundTint="@color/for_icon"
+                    android:autofillHints="birthday"
+                    android:inputType="text" />
             </LinearLayout>
             <TextView
                 android:id="@+id/txvPhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/phone"
-                android:textColor="@color/for_text"
-                android:textSize="16sp"
                 android:paddingHorizontal="4dp"
-                android:paddingTop="10dp"
-                />
+                android:paddingTop="10dp" />
             <EditText
                 android:id="@+id/etPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/for_text"
-                android:textSize="14sp"
                 android:hint="@string/_phone"
                 android:inputType="phone"
-                android:backgroundTint="@color/for_contacts"
+                android:backgroundTint="@color/for_icon"
                 android:autofillHints="phone" />
             <TextView
                 android:id="@+id/txvEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
-                android:textColor="@color/for_text"
-                android:textSize="16sp"
                 android:paddingHorizontal="4dp"
-                android:paddingTop="10dp"
-                />
+                android:paddingTop="10dp" />
             <EditText
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/user_mail_ru"
-                android:textColor="@color/for_text"
-                android:textSize="14sp"
                 android:inputType="textEmailAddress"
-                android:backgroundTint="@color/for_contacts"
+                android:backgroundTint="@color/for_icon"
                 android:autofillHints="emailAddress" />
             <TextView
                 android:id="@+id/txvPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/pass"
-                android:textSize="16sp"
-                android:textColor="@color/for_text"
                 android:paddingHorizontal="4dp"
-                android:paddingTop="10dp"
-                />
+                android:paddingTop="10dp" />
             <EditText
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/for_text"
                 android:hint="@string/input_pass"
                 android:inputType="textPassword"
-                android:backgroundTint="@color/for_contacts"
+                android:backgroundTint="@color/for_icon"
                 android:autofillHints="password" />
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSaveChanges"
-                app:cornerRadius="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/saveChanges"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 style="@style/ButtonAccent" />
         </LinearLayout>
     </ScrollView>

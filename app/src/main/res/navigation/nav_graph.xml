@@ -34,7 +34,7 @@
         android:id="@+id/profile"
         android:name="ru.spb.rollers.ui.ProfileFragment"
         android:label="ProfileFragment"
-        tools:layout="@layout/profile_fragment"
+        tools:layout="@layout/fragment_profile"
         >
         <action
             android:id="@+id/action_profile_to_authorizationFragment"
