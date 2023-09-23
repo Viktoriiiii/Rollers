@@ -21,7 +21,7 @@ class EventParticipantFragment : Fragment() {
     private var _binding: EventParticipantFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var adapter: UserAdapter
+    private val adapter: UserAdapter = UserAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,8 +56,8 @@ class EventParticipantFragment : Fragment() {
                                 val contact = snapshot.getValue<User>()!!
                                 listUsers.add(contact)
                             }
-                            adapter = UserAdapter(listUsers)
                             binding.peopleList.adapter = adapter
+                            adapter.itemsUser = listUsers
                         }
                         override fun onCancelled(error: DatabaseError) {}
                     })

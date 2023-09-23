@@ -19,7 +19,7 @@ class ContactsSearchFragment : Fragment() {
 
     private lateinit var binding: ContactsSearchFragmentBinding
     private var listUsers: MutableList<User> = mutableListOf()
-    private lateinit var adapter: UserAdapter
+    private val adapter: UserAdapter = UserAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,14 +62,13 @@ class ContactsSearchFragment : Fragment() {
     }
 
     private fun showAllUsers(){
-        adapter = UserAdapter(listUsers)
         binding.contactsList.adapter = adapter
         REF_DATABASE_USER.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     val listUser = snapshot.children.map { it.getUserModel() } as MutableList<User>
                     listUser.removeAll { it.id == MAIN.appViewModel.user.id || it.role == "Администратор"}
-                    adapter.setList(listUser)
+                    adapter.itemsUser = listUser
                     listUsers = listUser
                 }
             }
@@ -95,6 +94,6 @@ class ContactsSearchFragment : Fragment() {
                 searchList.add(user)
             }
         }
-        adapter.setList(searchList)
+        adapter.itemsUser = searchList
     }
 }

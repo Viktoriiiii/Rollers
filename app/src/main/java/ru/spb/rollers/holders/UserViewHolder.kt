@@ -11,9 +11,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.appcompat.view.menu.MenuPopupHelper
 import androidx.appcompat.widget.PopupMenu
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textview.MaterialTextView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -23,7 +23,7 @@ import ru.spb.rollers.models.Contact
 import ru.spb.rollers.models.User
 
 class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val contactContainer: MaterialCardView = itemView.findViewById(R.id.contactContainer)
+    val contactContainer: CardView = itemView.findViewById(R.id.contactContainer)
     val ivPhoto: ImageView = itemView.findViewById(R.id.ivPhoto)
     val txvName: TextView = itemView.findViewById(R.id.txvName)
     val txvDistrict: MaterialTextView = itemView.findViewById(R.id.txvDistrict)

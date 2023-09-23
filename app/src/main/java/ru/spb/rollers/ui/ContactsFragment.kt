@@ -20,7 +20,7 @@ class ContactsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var listContacts: MutableList<User> = mutableListOf()
-    private lateinit var adapter: UserAdapter
+    private val adapter: UserAdapter = UserAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,8 +43,10 @@ class ContactsFragment : Fragment() {
     }
 
     private fun showMyContacts(){
-        adapter = UserAdapter(listContacts)
         binding.contactsList.adapter = adapter
+//        binding.contactsList.addItemDecoration(
+//            CustomItemDecoration(MAIN, R.drawable.profile_divider)
+//        )
 
         // добыть список id контактов и по ним добавить в список юзеров
         REF_DATABASE_CONTACT.child(MAIN.appViewModel.user.id).addValueEventListener(object : ValueEventListener{
@@ -57,7 +59,7 @@ class ContactsFragment : Fragment() {
                             if (snapshot.exists()){
                                 val contact = snapshot.getValue<User>()!!
                                 listUsers.add(contact)
-                                adapter.setList(listUsers)
+                                adapter.itemsUser = listUsers
                                 listContacts = listUsers
                             }
                         }

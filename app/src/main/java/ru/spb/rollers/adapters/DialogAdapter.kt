@@ -12,6 +12,7 @@ import androidx.appcompat.view.menu.MenuBuilder
 import androidx.appcompat.view.menu.MenuPopupHelper
 import androidx.appcompat.widget.PopupMenu
 import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.card.MaterialCardView
@@ -25,9 +26,19 @@ import ru.spb.rollers.models.Dialog
 import ru.spb.rollers.models.User
 import java.util.*
 
-class DialogAdapter(
-    private var itemListDialog: List<Dialog>,
-): RecyclerView.Adapter<DialogAdapter.DialogViewHolder>() {
+class DialogAdapter: RecyclerView.Adapter<DialogAdapter.DialogViewHolder>() {
+
+    var itemsDialog = listOf <Dialog>()
+        set(value) {
+            val callback = CommonCallbackImpl(
+                oldItems = field,
+                newItems = value,
+                { oldItem: Dialog, newItem: Dialog ->  oldItem.id == newItem.id})
+            field = value
+            val diffResult = DiffUtil.calculateDiff(callback)
+            diffResult.dispatchUpdatesTo(this)
+        }
+
 
     override fun onCreateViewHolder (parent: ViewGroup, viewType: Int): DialogViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_dialog, parent, false)
@@ -35,7 +46,7 @@ class DialogAdapter(
     }
 
     override fun onBindViewHolder(holder: DialogViewHolder, position: Int) {
-        val item = itemListDialog[position]
+        val item = itemsDialog[position]
 
         if (item.pinned)
             holder.ivPin.setImageResource(R.drawable.ic_pin_foreground)
@@ -161,15 +172,7 @@ class DialogAdapter(
         menuHelper.show()
     }
 
-    override fun getItemCount(): Int {
-        return itemListDialog.size
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun setList(list: List<Dialog>) {
-        itemListDialog = list
-        notifyDataSetChanged()
-    }
+    override fun getItemCount() = itemsDialog.size
 
     inner class DialogViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val dialogContainer: MaterialCardView = itemView.findViewById(R.id.dialogContainer)

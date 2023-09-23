@@ -3,34 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/for_contacts"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginBottom="60dp"
     android:orientation="vertical">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/for_toolbar"
-        android:elevation="4dp"
-        app:titleTextColor="@color/for_icon"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar" >
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/imageButtonBack"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@color/for_toolbar"
             android:gravity="start"
-            >
-            <ImageButton
-                android:id="@+id/imageButtonBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_back2_foreground"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:contentDescription="@string/back"
-                tools:ignore="UnusedAttribute" />
-        </RelativeLayout>
-
+            android:src="@drawable/ic_back2_foreground"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:contentDescription="@string/back"
+            tools:ignore="UnusedAttribute" />
         <TextView
             android:id="@+id/txvTitle"
             android:layout_width="wrap_content"
@@ -39,26 +28,19 @@
             android:textColor="@color/for_icon"
             android:textSize="20sp"
             android:paddingHorizontal="10dp"
-            android:textStyle="bold"
-            />
-        <RelativeLayout
+            android:textStyle="bold" />
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:iconifiedByDefault="false"
             android:layout_gravity="end"
-            >
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/search_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:iconifiedByDefault="false"
-                android:queryHint="Поиск..."/>
-        </RelativeLayout>
+            android:queryHint="Поиск..."/>
     </androidx.appcompat.widget.Toolbar>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/contactsList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/item_contact"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 </LinearLayout>
