@@ -14,7 +14,6 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.android.material.textview.MaterialTextView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -23,51 +22,53 @@ import ru.spb.rollers.models.Contact
 import ru.spb.rollers.models.User
 
 class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val contactContainer: CardView = itemView.findViewById(R.id.contactContainer)
-    val ivPhoto: ImageView = itemView.findViewById(R.id.ivPhoto)
-    val txvName: TextView = itemView.findViewById(R.id.txvName)
-    val txvDistrict: MaterialTextView = itemView.findViewById(R.id.txvDistrict)
-    val txvStatus: TextView = itemView.findViewById(R.id.txvStatus)
-    val ivStatus: ImageView = itemView.findViewById(R.id.ivStatus)
-    val ivToContact: ImageView = itemView.findViewById(R.id.ivToContact)
+    private val contactContainer: CardView = itemView.findViewById(R.id.contact_container)
+    private val ivPhoto: ImageView = itemView.findViewById(R.id.iv_photo)
+    private val txvName: TextView = itemView.findViewById(R.id.tv_name)
+    private val txvDistrict: TextView = itemView.findViewById(R.id.tv_district)
+    private val txvStatus: TextView = itemView.findViewById(R.id.tv_status)
+    private val ivStatus: ImageView = itemView.findViewById(R.id.iv_status)
+    private val ivToContact: ImageView = itemView.findViewById(R.id.iv_to_contact)
 
     @SuppressLint("SetTextI18n")
     fun bind(user: User) {
         showInfoAboutUser(user)
 
         // проверка на то, есть ли указанный пользователь в контактах
-        REF_DATABASE_CONTACT.child(MAIN.appViewModel.user.id).child(user.id).addListenerForSingleValueEvent(object :
-            ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    ivToContact.setImageResource(R.drawable.ic_done_foreground)
-                } else {
-                    ivToContact.setImageResource(R.drawable.ic_add_contact_foreground)
+        REF_DATABASE_CONTACT.child(MAIN.appViewModel.user.id).child(user.id)
+            .addListenerForSingleValueEvent(object :
+                ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        ivToContact.setImageResource(R.drawable.ic_done_foreground)
+                    } else {
+                        ivToContact.setImageResource(R.drawable.ic_add_contact_foreground)
+                    }
                 }
-            }
-            override fun onCancelled(error: DatabaseError) {
-            }
-        })
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })
 
         if (user.id == MAIN.appViewModel.user.id || MAIN.appViewModel.user.role == "Администратор")
             ivToContact.visibility = View.GONE
         else
             ivToContact.visibility = View.VISIBLE
 
-        contactContainer.setOnClickListener{
+        contactContainer.setOnClickListener {
             showPopupMenu(it, user)
         }
     }
 
     @SuppressLint("SetTextI18n")
-    private fun showInfoAboutUser(user: User){
+    private fun showInfoAboutUser(user: User) {
 
         Glide.with(itemView.context)
             .load(user.photo)
             .placeholder(R.drawable.avatar)
             .into(ivPhoto)
 
-        if (user.role == "Организатор"){
+        if (user.role == "Организатор") {
             if (user.schoolName.isNullOrEmpty())
                 txvName.text = "Неизвестный организатор"
             else
@@ -79,8 +80,7 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 txvStatus.text = user.address
 
             txvDistrict.visibility = View.GONE
-        }
-        else {
+        } else {
             if (!user.lastName.isNullOrEmpty() || !user.firstName.isNullOrEmpty())
                 txvName.text = "${user.lastName} ${user.firstName}"
             else
@@ -88,7 +88,7 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             ivStatus.setImageResource(R.drawable.ic_rollers_foreground)
 
             txvStatus.text = user.status
-            if (user.status == "На роликах"){
+            if (user.status == "На роликах") {
                 ivStatus.setImageResource(R.drawable.ic_rollers_foreground)
             } else {
                 ivStatus.setImageResource(R.drawable.ic_inactive_foreground)
@@ -106,13 +106,11 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     @SuppressLint("RestrictedApi", "SetTextI18n")
     private fun showPopupMenu(view: View, contact: User) {
         val popupMenu = PopupMenu(view.context, view)
-        if (MAIN.appViewModel.user.role == "Администратор"){
+        if (MAIN.appViewModel.user.role == "Администратор") {
             popupMenu.inflate(R.menu.contact_for_admin)
-        }
-        else if (contact.id == MAIN.appViewModel.user.id){
+        } else if (contact.id == MAIN.appViewModel.user.id) {
             popupMenu.inflate(R.menu.contact_for_admin)
-        }
-        else {
+        } else {
             popupMenu.inflate(R.menu.contact_common_popup_menu)
             checkIcon(contact, popupMenu)
         }
@@ -138,16 +136,18 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 else -> false
             }
         }
-        val menuHelper = MenuPopupHelper(view.context,
-            popupMenu.menu as MenuBuilder, view)
+        val menuHelper = MenuPopupHelper(
+            view.context,
+            popupMenu.menu as MenuBuilder, view
+        )
         menuHelper.setForceShowIcon(true)
         menuHelper.show()
     }
 
     @SuppressLint("SetTextI18n")
-    private fun viewProfile(view: View, contact: User){
+    private fun viewProfile(view: View, contact: User) {
         val builderViewProfile: AlertDialog.Builder = AlertDialog.Builder(MAIN)
-        val profileView: View? = if (contact.role == "Организатор"){
+        val profileView: View? = if (contact.role == "Организатор") {
             MAIN.layoutInflater.inflate(R.layout.view_profile_school, null)
         } else {
             MAIN.layoutInflater.inflate(R.layout.view_profile, null)
@@ -164,16 +164,16 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val txvDistrict: TextView?
         val ivStatus: ImageView?
 
-        if (contact.role == "Организатор"){
+        if (contact.role == "Организатор") {
             txvSchoolName = profileView?.findViewById(R.id.txvSchoolName)
             txvDescription = profileView?.findViewById(R.id.txvDescription)
             txvSchoolAddress = profileView?.findViewById(R.id.txvSchoolAddress)
             txvSchoolPhone = profileView?.findViewById(R.id.txvSchoolPhone)
 
             txvSchoolName?.text = if (contact.schoolName.isNullOrEmpty()) "Неизвестный организатор"
-                else contact.schoolName
+            else contact.schoolName
             txvDescription?.text = if (contact.description.isNullOrEmpty()) "Описание не добалено"
-                else contact.description
+            else contact.description
 
             if (contact.address.isNullOrEmpty())
                 txvSchoolAddress?.text = "Адрес не известен"
@@ -184,13 +184,12 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 txvSchoolPhone?.text = "Телефон не известен"
             else
                 txvSchoolPhone?.text = contact.phone
-        }
-        else {
-            txvName = profileView?.findViewById(R.id.txvName)
-            textViewStatus = profileView?.findViewById(R.id.textViewStatus)
-            txvBirthday = profileView?.findViewById(R.id.txvBirthday)
-            txvDistrict = profileView?.findViewById(R.id.txvDistrict)
-            ivStatus = profileView?.findViewById(R.id.ivStatus)
+        } else {
+            txvName = profileView?.findViewById(R.id.tv_name)
+            textViewStatus = profileView?.findViewById(R.id.tv_status)
+            txvBirthday = profileView?.findViewById(R.id.tv_birthday)
+            txvDistrict = profileView?.findViewById(R.id.tv_district)
+            ivStatus = profileView?.findViewById(R.id.iv_status)
 
             if (!contact.lastName.isNullOrEmpty() || !contact.firstName.isNullOrEmpty())
                 txvName?.text = "${contact.lastName} ${contact.firstName}"
@@ -198,7 +197,7 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 txvName?.text = "Неизвестный пользователь"
             ivStatus?.setImageResource(R.drawable.ic_rollers_foreground)
             textViewStatus?.text = "Статус:  ${contact.status}"
-            if (contact.status == "На роликах"){
+            if (contact.status == "На роликах") {
                 ivStatus?.setImageResource(R.drawable.ic_rollers_foreground)
             } else {
                 ivStatus?.setImageResource(R.drawable.ic_inactive_foreground)
@@ -214,7 +213,7 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             else
                 txvBirthday?.text = "Дата рождения: ${contact.birthday}"
         }
-        val ivPhoto: ImageView? = profileView?.findViewById(R.id.ivPhoto)
+        val ivPhoto: ImageView? = profileView?.findViewById(R.id.iv_photo)
         if (ivPhoto != null) {
             Glide.with(view.context)
                 .load(contact.photo)
@@ -222,73 +221,38 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 .into(ivPhoto)
         }
 
-        val imageViewClose: ImageView = profileView!!.findViewById(R.id.imageViewClose)
-        val imageViewToAdmin: ImageView = profileView.findViewById(R.id.imageViewToAdmin)
-        imageViewToAdmin.setImageResource(R.drawable.ic_manage_account_foreground)
+        val imageViewClose: ImageView = profileView!!.findViewById(R.id.iv_close)
         builderViewProfile.setView(profileView)
         val alertViewProfile: AlertDialog = builderViewProfile.create()
         alertViewProfile.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         alertViewProfile.setOnShowListener {
-            if (contact.isManager)
-                imageViewToAdmin.setImageResource(R.drawable.ic_manage_account_foreground)
-            else
-                imageViewToAdmin.setImageResource(R.drawable.ic_person_foreground)
             imageViewClose.setOnClickListener { alertViewProfile.cancel() }
-            imageViewToAdmin.setOnClickListener{
-                val title = "Смена роли"
-                val message: String = if (contact.isManager)
-                    "Изменить пользователю роль с организатора на участника?" else
-                    "Изменить пользователю роль с участника на организатора?"
-                if (MAIN.appViewModel.user.role == "Администратор") {
-                    val builderToAdminDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
-                    builderToAdminDialog
-                        .setTitle(title)
-                        .setMessage(message)
-                        .setCancelable(false)
-                        .setPositiveButton("Да") { _, _ ->
-                            contact.isManager = !contact.isManager
-                            if (contact.isManager)
-                                imageViewToAdmin.setImageResource(R.drawable.ic_manage_account_foreground)
-                            else
-                                imageViewToAdmin.setImageResource(R.drawable.ic_person_foreground)
-                            REF_DATABASE_ROOT.child("User").child(contact.id).setValue(contact)
-                            Toast.makeText(MAIN, "Выполнено", Toast.LENGTH_SHORT).show()
-                        }
-                        .setNegativeButton("Отмена"){dialog, _ ->
-                            dialog.cancel()
-                        }
-                    val alertDialogToAdmin: AlertDialog = builderToAdminDialog.create()
-                    alertDialogToAdmin.show()
-                }
-            }
         }
         alertViewProfile.show()
     }
 
-    private fun toDialog(user: User){
+    private fun toDialog(user: User) {
         MAIN.appViewModel.contactForMessages = user
         try {
             MAIN.navController.navigate(R.id.action_contacts_to_messagesFragment)
-        }
-        catch (ex: Exception){
+        } catch (ex: Exception) {
             try {
                 MAIN.navController.navigate(R.id.action_contactsSearchFragment_to_messagesFragment)
-            }
-            catch (ex: Exception){
+            } catch (ex: Exception) {
                 MAIN.navController.navigate(R.id.action_eventParticipantFragment_to_messagesFragment)
             }
         }
     }
 
-    private fun addContact(view: View, contact: User){
+    private fun addContact(view: View, contact: User) {
         val c = Contact()
         c.id = contact.id
         REF_DATABASE_ROOT.child("Contact").child(MAIN.appViewModel.user.id)
             .child(contact.id)
             .setValue(c)
             .addOnSuccessListener {
-                val v = view.findViewById<ImageView>(R.id.ivToContact)
+                val v = view.findViewById<ImageView>(R.id.iv_to_contact)
                 v.setImageResource(R.drawable.ic_done_foreground)
                 Toast.makeText(MAIN, "Контакт добавлен", Toast.LENGTH_SHORT).show()
             }
@@ -297,15 +261,16 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             }
     }
 
-    private fun deleteContact(view:View, contact: User){
+    private fun deleteContact(view: View, contact: User) {
         val builderDeleteDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
         builderDeleteDialog
             .setTitle("Вы уверены, что хотите удалить контакт?")
             .setCancelable(false)
             .setPositiveButton("Да") { _, _ ->
-                REF_DATABASE_CONTACT.child(MAIN.appViewModel.user.id).child(contact.id).removeValue()
+                REF_DATABASE_CONTACT.child(MAIN.appViewModel.user.id).child(contact.id)
+                    .removeValue()
                     .addOnSuccessListener {
-                        val v = view.findViewById<ImageView>(R.id.ivToContact)
+                        val v = view.findViewById<ImageView>(R.id.iv_to_contact)
                         v.setImageResource(R.drawable.ic_add_contact_foreground)
                         Toast.makeText(MAIN, "Контакт удален", Toast.LENGTH_SHORT).show()
                     }
@@ -313,14 +278,14 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                         // Произошла ошибка при удалении контакта
                     }
             }
-            .setNegativeButton("Отмена"){dialog, _ ->
+            .setNegativeButton("Отмена") { dialog, _ ->
                 dialog.cancel()
             }
         val alertDialogDeletePhoto: AlertDialog = builderDeleteDialog.create()
         alertDialogDeletePhoto.show()
     }
 
-    private fun checkIcon(contact: User, popupMenu: PopupMenu){
+    private fun checkIcon(contact: User, popupMenu: PopupMenu) {
         REF_DATABASE_CONTACT.child(MAIN.appViewModel.user.id).child(contact.id)
             .addListenerForSingleValueEvent(object :
                 ValueEventListener {
@@ -330,6 +295,7 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                     else
                         popupMenu.inflate(R.menu.contact_add_popup_menu)
                 }
+
                 override fun onCancelled(error: DatabaseError) {
                 }
             })

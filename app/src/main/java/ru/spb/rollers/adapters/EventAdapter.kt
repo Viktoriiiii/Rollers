@@ -23,7 +23,7 @@ import ru.spb.rollers.models.Point
 import java.text.SimpleDateFormat
 import java.util.*
 
-class EventAdapter(private var itemListEvent: MutableList<Event>):
+class EventAdapter(private var itemListEvent: MutableList<Event>) :
     RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
@@ -48,10 +48,9 @@ class EventAdapter(private var itemListEvent: MutableList<Event>):
         holder.txvEventDateTime.text = item.time
 
         REF_DATABASE_EVENT.child(item.id).child("route").child("Points")
-            .addValueEventListener(object : ValueEventListener{
+            .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists())
-                    {
+                    if (snapshot.exists()) {
                         val points = snapshot.children.map { it.getPointModel() }
                         val firstPoint = points.first()
                         val lastPoint = points.last()
@@ -59,29 +58,30 @@ class EventAdapter(private var itemListEvent: MutableList<Event>):
                         holder.txvEventEndLocation.text = lastPoint.displayName
                     }
                 }
+
                 override fun onCancelled(error: DatabaseError) {}
             })
 
-        holder.txvEventCost.text = if (item.cost == 0.0) "Бесплатно" else item.cost.toString() + "р."
+        holder.txvEventCost.text =
+            if (item.cost == 0.0) "Бесплатно" else item.cost.toString() + "р."
 
         if (item.photo != "") {
             Picasso.get()
                 .load(item.photo)
                 .placeholder(R.drawable.rollers)
                 .into(holder.ivEventPhoto)
-        }
-        else
+        } else
             holder.ivEventPhoto.setImageResource(R.drawable.rollers)
 
         REF_DATABASE_EVENT_USER.child(MAIN.appViewModel.user.id).child(item.id).child("id")
-            .addValueEventListener(object : ValueEventListener{
+            .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()){
+                    if (snapshot.exists()) {
                         holder.ivEventStatus.setImageResource(R.drawable.ic_done_foreground)
-                    }
-                    else
+                    } else
                         holder.ivEventStatus.setImageResource(R.drawable.ic_add_event_foreground)
                 }
+
                 override fun onCancelled(error: DatabaseError) {}
             })
 
@@ -90,7 +90,7 @@ class EventAdapter(private var itemListEvent: MutableList<Event>):
         else
             holder.ivManager.setImageResource(R.drawable.ic_person_foreground)
 
-        holder.eventsContainer.setOnClickListener{
+        holder.eventsContainer.setOnClickListener {
             showPopupMenu(it, item)
         }
     }
@@ -100,16 +100,16 @@ class EventAdapter(private var itemListEvent: MutableList<Event>):
         val popupMenu = PopupMenu(view.context, view)
         popupMenu.inflate(R.menu.event_pm_common)
         REF_DATABASE_EVENT_USER.child(MAIN.appViewModel.user.id).child(event.id).child("id")
-            .addValueEventListener(object : ValueEventListener{
+            .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (MAIN.appViewModel.user.id == event.managerId)
                         popupMenu.inflate(R.menu.event_pm_for_manager)
-                    else if (snapshot.exists()){
+                    else if (snapshot.exists()) {
                         popupMenu.inflate(R.menu.event_pm_for_participant)
-                    }
-                    else
+                    } else
                         popupMenu.inflate(R.menu.event_pm_for_everybody)
                 }
+
                 override fun onCancelled(error: DatabaseError) {}
             })
 
@@ -119,7 +119,7 @@ class EventAdapter(private var itemListEvent: MutableList<Event>):
                     MAIN.appViewModel.event = event
                     try {
                         MAIN.navController.navigate(R.id.action_events_to_eventsViewFragment)
-                    }catch (ex: Exception){
+                    } catch (ex: Exception) {
                         MAIN.navController.navigate(R.id.action_eventsMyFragment_to_eventsViewFragment)
                     }
                     true
@@ -132,37 +132,36 @@ class EventAdapter(private var itemListEvent: MutableList<Event>):
                     Toast.makeText(MAIN, "Мероприятие добавлено", Toast.LENGTH_SHORT).show()
                     true
                 }
-                R.id.toChangeEvent ->{
+                R.id.toChangeEvent -> {
                     MAIN.appViewModel.event = event
 
                     REF_DATABASE_EVENT.child(event.id).child("route")
-                        .addValueEventListener(object : ValueEventListener{
+                        .addValueEventListener(object : ValueEventListener {
                             override fun onDataChange(snapshot: DataSnapshot) {
-                                if (snapshot.exists())
-                                {
+                                if (snapshot.exists()) {
                                     val route = snapshot.getRouteModel()
                                     MAIN.appViewModel.route = route
                                 }
                             }
+
                             override fun onCancelled(error: DatabaseError) {}
                         })
 
                     REF_DATABASE_EVENT.child(event.id).child("route").child("Points")
-                        .addValueEventListener(object : ValueEventListener{
+                        .addValueEventListener(object : ValueEventListener {
                             override fun onDataChange(snapshot: DataSnapshot) {
-                                if (snapshot.exists())
-                                {
+                                if (snapshot.exists()) {
                                     val points = snapshot.children.map { it.getPointModel() }
                                     MAIN.appViewModel.points = points as MutableList<Point>
                                 }
                             }
+
                             override fun onCancelled(error: DatabaseError) {}
                         })
 
                     try {
                         MAIN.navController.navigate(R.id.action_events_to_eventsCreateFragment)
-                    }
-                    catch (ex: Exception){
+                    } catch (ex: Exception) {
                         MAIN.navController.navigate(R.id.action_eventsMyFragment_to_eventsCreateFragment)
                     }
                     titleEvents = "Изменение события"
@@ -176,11 +175,12 @@ class EventAdapter(private var itemListEvent: MutableList<Event>):
                         .setPositiveButton("Да") { _, _ ->
                             REF_DATABASE_EVENT_USER.child(MAIN.appViewModel.user.id).child(event.id)
                                 .child("id").removeValue()
-                            REF_DATABASE_EVENT_PARTICIPANT.child(event.id).child(MAIN.appViewModel.user.id)
+                            REF_DATABASE_EVENT_PARTICIPANT.child(event.id)
+                                .child(MAIN.appViewModel.user.id)
                                 .child("id").removeValue()
                             Toast.makeText(MAIN, "Мероприятие удалено", Toast.LENGTH_SHORT).show()
                         }
-                        .setNegativeButton("Отмена"){dialog, _ ->
+                        .setNegativeButton("Отмена") { dialog, _ ->
                             dialog.cancel()
                         }
                     val alertDialogDeletePhoto: AlertDialog = builderDeleteDialog.create()
@@ -190,8 +190,10 @@ class EventAdapter(private var itemListEvent: MutableList<Event>):
                 else -> false
             }
         }
-        val menuHelper = MenuPopupHelper(view.context,
-            popupMenu.menu as MenuBuilder, view)
+        val menuHelper = MenuPopupHelper(
+            view.context,
+            popupMenu.menu as MenuBuilder, view
+        )
         menuHelper.setForceShowIcon(true)
         menuHelper.show()
     }
@@ -206,7 +208,7 @@ class EventAdapter(private var itemListEvent: MutableList<Event>):
         return itemListEvent.size
     }
 
-    inner class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    inner class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val eventsContainer: MaterialCardView = itemView.findViewById(R.id.eventsContainer)
         val txvEventName: TextView = itemView.findViewById(R.id.tv_event_name)
         val txvEventStartLocation: TextView = itemView.findViewById(R.id.tv_event_start_location)

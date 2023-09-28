@@ -2,80 +2,82 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/contactContainer"
+    android:id="@+id/contact_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="8dp"
     android:layout_margin="1dp"
     app:cardElevation="0dp">
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp">
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewPhoto"
+            android:id="@+id/cv_photo"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_name"
+            android:layout_marginEnd="16dp"
             app:cardCornerRadius="40dp"
             app:cardElevation="0dp">
             <ImageView
-                android:id="@+id/ivPhoto"
+                android:id="@+id/iv_photo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/logo"
                 android:contentDescription="@string/user_photo" />
         </androidx.cardview.widget.CardView>
         <TextView
-            android:id="@+id/txvName"
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
+            app:layout_constraintStart_toEndOf="@+id/cv_photo"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="12dp"
             android:textStyle="bold"
             android:text="@string/full_name"
-            android:layout_toEndOf="@+id/cardViewPhoto"
-            android:padding="2dp"
-            android:paddingStart="20dp"
-            tools:ignore="RtlSymmetry" />
+            android:padding="4dp"
+            android:paddingHorizontal="12dp" />
         <TextView
-            android:id="@+id/txvDistrict"
-            android:layout_width="match_parent"
+            android:id="@+id/tv_district"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name"
+            app:layout_constraintStart_toEndOf="@+id/cv_photo"
+            app:layout_constraintBottom_toTopOf="@+id/tv_status"
+            android:layout_marginStart="12dp"
             android:text="@string/_district"
-            android:layout_below="@+id/txvName"
-            android:layout_toEndOf="@id/cardViewPhoto"
-            android:textSize="14sp"
-            android:padding="2dp"
-            android:paddingStart="20dp"
-            tools:ignore="RtlSymmetry" />
+            android:padding="4dp" />
         <TextView
-            android:id="@+id/txvStatus"
+            android:id="@+id/tv_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/_status"
-            android:textSize="14sp"
-            android:textStyle="normal|italic"
-            android:layout_below="@+id/txvDistrict"
-            android:layout_toEndOf="@id/cardViewPhoto"
-            android:padding="2dp"
-            android:paddingStart="20dp"
-            tools:ignore="RtlSymmetry" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_district"
+            app:layout_constraintStart_toEndOf="@+id/cv_photo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="12dp"
+            android:padding="4dp" />
         <ImageView
-            android:id="@+id/ivStatus"
+            android:id="@+id/iv_status"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/ic_rollers_foreground"
-            android:layout_below="@+id/txvDistrict"
-            android:layout_toEndOf="@+id/txvStatus"
+            app:layout_constraintStart_toEndOf="@+id/tv_status"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_district"
             android:contentDescription="@string/status" />
         <ImageView
-            android:id="@+id/ivToContact"
+            android:id="@+id/iv_to_contact"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_below="@+id/txvName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:src="@drawable/ic_done_foreground"
-            android:layout_alignParentEnd="true"
             android:contentDescription="@string/is_contact" />
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

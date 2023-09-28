@@ -8,20 +8,20 @@ import ru.spb.rollers.*
 import ru.spb.rollers.holders.UserViewHolder
 import ru.spb.rollers.models.User
 
-class UserAdapter: RecyclerView.Adapter<UserViewHolder>() {
+class UserAdapter : RecyclerView.Adapter<UserViewHolder>() {
 
-    var itemsUser = listOf <User>()
+    var itemsUser = listOf<User>()
         set(value) {
             val callback = CommonCallbackImpl(
                 oldItems = field,
                 newItems = value,
-                { oldItem: User, newItem: User ->  oldItem.id == newItem.id})
+                { oldItem: User, newItem: User -> oldItem.id == newItem.id })
             field = value
             val diffResult = DiffUtil.calculateDiff(callback)
             diffResult.dispatchUpdatesTo(this)
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup,viewType: Int): UserViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_contact, parent, false)
         return UserViewHolder(view)
     }
