@@ -11,7 +11,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 import ru.spb.rollers.*
-import ru.spb.rollers.adapters.CustomItemDecoration
 import ru.spb.rollers.adapters.DialogAdapter
 import ru.spb.rollers.databinding.DialogsFragmentBinding
 import ru.spb.rollers.models.Dialog
@@ -73,9 +72,6 @@ class DialogsFragment : Fragment() {
 
     private fun initRecyclerView() {
         binding.dialogList.adapter = dialogAdapter
-        binding.dialogList.addItemDecoration(
-            CustomItemDecoration(MAIN, R.drawable.profile_divider)
-        )
 
         REF_DATABASE_DIALOG
             .child(MAIN.appViewModel.user.id).addValueEventListener(object : ValueEventListener{

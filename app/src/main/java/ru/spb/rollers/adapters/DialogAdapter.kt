@@ -39,7 +39,6 @@ class DialogAdapter: RecyclerView.Adapter<DialogAdapter.DialogViewHolder>() {
             diffResult.dispatchUpdatesTo(this)
         }
 
-
     override fun onCreateViewHolder (parent: ViewGroup, viewType: Int): DialogViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_dialog, parent, false)
         return DialogViewHolder(view)
@@ -175,12 +174,12 @@ class DialogAdapter: RecyclerView.Adapter<DialogAdapter.DialogViewHolder>() {
     override fun getItemCount() = itemsDialog.size
 
     inner class DialogViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val dialogContainer: MaterialCardView = itemView.findViewById(R.id.dialogContainer)
-        val mtvName: MaterialTextView = itemView.findViewById(R.id.mtvName)
-        var mtvMessage: MaterialTextView = itemView.findViewById(R.id.mtvMessage)
-        val txvContMessage: MaterialTextView = itemView.findViewById(R.id.txvContMessage)
-        val ivPhoto: ImageView = itemView.findViewById(R.id.ivPhoto)
-        val ivPin: ImageView = itemView.findViewById(R.id.ivPin)
-        val cvCountMessages: CardView = itemView.findViewById(R.id.cvCountMessages)
+        val dialogContainer: MaterialCardView = itemView.findViewById(R.id.dialog_container)
+        val mtvName: MaterialTextView = itemView.findViewById(R.id.tv_name)
+        var mtvMessage: MaterialTextView = itemView.findViewById(R.id.tv_message)
+        val txvContMessage: MaterialTextView = itemView.findViewById(R.id.tv_count_message)
+        val ivPhoto: ImageView = itemView.findViewById(R.id.iv_photo)
+        val ivPin: ImageView = itemView.findViewById(R.id.iv_pin)
+        val cvCountMessages: CardView = itemView.findViewById(R.id.cv_count_messages)
     }
 }
