@@ -3,10 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/pointsContainer"
+    android:id="@+id/points_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="8dp"
+    app:cardElevation="0dp"
     android:layout_margin="2dp">
     <EditText
         android:id="@+id/et_location"

@@ -1,42 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/searchContainer"
+    android:id="@+id/search_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="5dp"
+    app:cardCornerRadius="8dp"
     android:layout_margin="1dp"
-    app:strokeWidth="1dp"
-    app:cardElevation="5dp">
+    app:cardElevation="0dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="3dp"
-        >
+        android:padding="4dp">
         <TextView
-            android:id="@+id/txvSearchTitle"
+            android:id="@+id/tv_search_title"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:textColor="@color/for_text"
-            android:textSize="16sp"
+            android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:layout_weight="1"
             android:text="@string/saint_petersburg"
-            android:paddingHorizontal="10dp"
-            />
+            android:padding="4dp" />
         <TextView
-            android:id="@+id/txvSearchText"
+            android:id="@+id/tv_search_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/cathedral"
-            android:textColor="@color/for_text"
             android:textSize="14sp"
-            android:paddingHorizontal="10dp"
-            />
+            android:padding="4dp" />
     </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
+</androidx.cardview.widget.CardView>

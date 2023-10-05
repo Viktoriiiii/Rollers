@@ -24,6 +24,7 @@
             android:id="@+id/cardViewPhoto"
             android:layout_width="45dp"
             android:layout_height="45dp"
+            app:cardElevation="0dp"
             app:cardCornerRadius="22dp">
             <ImageView
                 android:id="@+id/ivPhoto"
@@ -56,6 +57,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:layout_alignParentBottom="true">
             <EditText
                 android:id="@+id/etMessage"

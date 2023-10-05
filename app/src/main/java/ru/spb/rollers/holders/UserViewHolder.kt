@@ -165,10 +165,10 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val ivStatus: ImageView?
 
         if (contact.role == "Организатор") {
-            txvSchoolName = profileView?.findViewById(R.id.txvSchoolName)
-            txvDescription = profileView?.findViewById(R.id.txvDescription)
-            txvSchoolAddress = profileView?.findViewById(R.id.txvSchoolAddress)
-            txvSchoolPhone = profileView?.findViewById(R.id.txvSchoolPhone)
+            txvSchoolName = profileView?.findViewById(R.id.tv_school_name)
+            txvDescription = profileView?.findViewById(R.id.tv_description)
+            txvSchoolAddress = profileView?.findViewById(R.id.tv_school_address)
+            txvSchoolPhone = profileView?.findViewById(R.id.tv_school_phone)
 
             txvSchoolName?.text = if (contact.schoolName.isNullOrEmpty()) "Неизвестный организатор"
             else contact.schoolName

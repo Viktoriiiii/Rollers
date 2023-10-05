@@ -15,9 +15,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:padding="10dp">
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_photo"
                 android:layout_width="260dp"
@@ -69,7 +67,7 @@
                 android:text="@string/_status"
                 android:padding="16dp"
                 app:drawableEndCompat="@drawable/ic_roller_skating"
-                android:drawablePadding="14dp" />
+                android:drawablePadding="12dp" />
             <View
                 android:id="@+id/v_1"
                 android:layout_width="match_parent"

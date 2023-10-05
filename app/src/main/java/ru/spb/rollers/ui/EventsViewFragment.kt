@@ -48,12 +48,12 @@ class EventsViewFragment : Fragment() {
         binding.tvManager.setOnClickListener {
             val builderViewProfile: AlertDialog.Builder = AlertDialog.Builder(MAIN)
             val profileView: View = MAIN.layoutInflater.inflate(R.layout.view_profile_school, null)
-            val imageViewClose: ImageView = profileView.findViewById(R.id.imageViewClose)
+            val imageViewClose: ImageView = profileView.findViewById(R.id.iv_close)
 
-            val txvSchoolName: TextView? = profileView.findViewById(R.id.txvSchoolName)
-            val txvDescription: TextView? = profileView.findViewById(R.id.txvDescription)
-            val txvSchoolAddress: TextView? = profileView.findViewById(R.id.txvSchoolAddress)
-            val txvSchoolPhone: TextView? = profileView.findViewById(R.id.txvSchoolPhone)
+            val txvSchoolName: TextView? = profileView.findViewById(R.id.tv_school_name)
+            val txvDescription: TextView? = profileView.findViewById(R.id.tv_description)
+            val txvSchoolAddress: TextView? = profileView.findViewById(R.id.tv_school_address)
+            val txvSchoolPhone: TextView? = profileView.findViewById(R.id.tv_school_phone)
 
             txvSchoolName?.text = if (manager.schoolName.isNullOrEmpty()) "Неизвестный организатор"
             else manager.schoolName
@@ -70,7 +70,7 @@ class EventsViewFragment : Fragment() {
             else
                 txvSchoolPhone?.text = manager.phone
 
-            val ivPhoto: ImageView? = profileView.findViewById(R.id.ivPhoto)
+            val ivPhoto: ImageView? = profileView.findViewById(R.id.iv_photo)
             if (ivPhoto != null) {
                 Glide.with(view.context)
                     .load(manager.photo)

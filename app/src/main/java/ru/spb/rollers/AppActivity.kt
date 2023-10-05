@@ -59,7 +59,8 @@ class AppActivity : AppCompatActivity() {
         // Определите, на каких фрагментах не нужно показывать BottomNavigationView
         val hideBottomNav = destination.id == R.id.authorizationFragment ||
                 destination.id == R.id.messagesFragment ||
-                destination.id == R.id.registrationFragment
+                destination.id == R.id.registrationFragment ||
+                destination.id == R.id.mapsFragment
 
         binding.navView.visibility =
             if (hideBottomNav)

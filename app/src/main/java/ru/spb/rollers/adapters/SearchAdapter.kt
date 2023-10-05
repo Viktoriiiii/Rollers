@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.card.MaterialCardView
 import com.yandex.mapkit.search.SuggestItem
 import ru.spb.rollers.R
 
@@ -43,8 +43,8 @@ class SearchAdapter(
     }
 
     inner class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val searchContainer: MaterialCardView = itemView.findViewById(R.id.searchContainer)
-        val txvSearchTitle: TextView = itemView.findViewById(R.id.txvSearchTitle)
-        val txvSearchText: TextView = itemView.findViewById(R.id.txvSearchText)
+        val searchContainer: CardView = itemView.findViewById(R.id.search_container)
+        val txvSearchTitle: TextView = itemView.findViewById(R.id.tv_search_title)
+        val txvSearchText: TextView = itemView.findViewById(R.id.tv_search_text)
     }
 }

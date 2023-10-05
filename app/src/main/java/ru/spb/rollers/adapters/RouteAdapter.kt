@@ -12,8 +12,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.appcompat.view.menu.MenuPopupHelper
 import androidx.appcompat.widget.PopupMenu
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.card.MaterialCardView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -52,8 +52,7 @@ class RouteAdapter(
                     val points = snapshot.children.map { it.getPointModel() }
                     val firstPoint = points.first()
                     val lastPoint = points.last()
-                    holder.tvRouteStartLocation.text = firstPoint.displayName
-                    holder.tvRouteEndLocation.text = lastPoint.displayName
+                    holder.tvRouteStartEnd.text = "${firstPoint.displayName} - ${lastPoint.displayName}"
                 }
             }
             override fun onCancelled(error: DatabaseError) {}
@@ -176,11 +175,10 @@ class RouteAdapter(
     }
 
     inner class RouteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val routesContainer: MaterialCardView = itemView.findViewById(R.id.routesContainer)
-        val tvRouteName: TextView = itemView.findViewById(R.id.tvRouteName)
-        val tvRouteDistance: TextView = itemView.findViewById(R.id.tvRouteDistance)
-        val tvRouteStartLocation: TextView = itemView.findViewById(R.id.tvRouteStartLocation)
-        val tvRouteEndLocation: TextView = itemView.findViewById(R.id.tvRouteEndLocation)
-        val ivPin: ImageView = itemView.findViewById(R.id.ivPin)
+        val routesContainer: CardView = itemView.findViewById(R.id.routes_container)
+        val tvRouteName: TextView = itemView.findViewById(R.id.tv_route_name)
+        val tvRouteDistance: TextView = itemView.findViewById(R.id.tv_route_distance)
+        val tvRouteStartEnd: TextView = itemView.findViewById(R.id.tv_route_start_end)
+        val ivPin: ImageView = itemView.findViewById(R.id.iv_pin)
     }
 }
