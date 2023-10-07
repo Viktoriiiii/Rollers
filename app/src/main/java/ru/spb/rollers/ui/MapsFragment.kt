@@ -77,7 +77,7 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.imageButtonBack.setOnClickListener{
+        binding.ivBack.setOnClickListener{
             if (MAIN.appViewModel.maps == 3){
                 // сохранить маршрут?
                 val builderSaveRouteDialog: AlertDialog.Builder = AlertDialog.Builder(MAIN)
@@ -137,11 +137,11 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
             else
                 MAIN.onSupportNavigateUp()
         }
-        binding.txvTitle.text = titleRoutes
+        binding.tvTitle.text = titleRoutes
 
         if (MAIN.appViewModel.maps == 2){
-            binding.cardViewDecrease.visibility = View.GONE
-            binding.floatingActionButton.visibility = View.VISIBLE
+            binding.cvMyLocation.visibility = View.GONE
+            binding.fabAddPoint.visibility = View.VISIBLE
             binding.searchView.isIconified = false
             binding.searchView.isFocusable = true
             binding.searchView.requestFocus()
@@ -155,7 +155,7 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
             null
         )
 
-        binding.searchMyLocation.setOnClickListener{
+        binding.ivMyLocation.setOnClickListener{
             getMyLocation()
         }
         searchManager = SearchFactory.getInstance().createSearchManager(SearchManagerType.COMBINED)
@@ -202,16 +202,16 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
         }
 
         binding.searchView.setOnSearchClickListener{
-            binding.txvTitle.visibility = View.GONE
+            binding.tvTitle.visibility = View.GONE
         }
 
         binding.searchView.setOnCloseListener {
-            binding.txvTitle.visibility = View.VISIBLE
+            binding.tvTitle.visibility = View.VISIBLE
             binding.searchView.onActionViewCollapsed()
             true
         }
 
-        binding.floatingActionButton.setOnClickListener{
+        binding.fabAddPoint.setOnClickListener{
             val query = binding.searchView.query.toString()
             if (query.isNotEmpty()){
                 point.displayName = binding.searchView.query.toString()
@@ -228,7 +228,7 @@ class MapsFragment : Fragment(), UserLocationObjectListener, Session.SearchListe
         mapObjects = binding.mapView.map.mapObjects.addCollection()
 
         if (MAIN.appViewModel.maps == 3 || MAIN.appViewModel.maps == 4){
-            binding.cardViewDecrease.visibility = View.GONE
+            binding.cvMyLocation.visibility = View.GONE
             buildRoute()
         }
         else {

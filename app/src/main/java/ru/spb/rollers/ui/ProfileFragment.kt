@@ -16,7 +16,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.appcompat.view.menu.MenuPopupHelper
 import androidx.appcompat.widget.PopupMenu
-import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.EmailAuthProvider
 import com.squareup.picasso.Picasso
@@ -47,12 +46,11 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        MAIN.appViewModel.setPhoto(binding.ivPhotoToolbar)
+        MAIN.appViewModel.setPhoto(binding.ivMyPhoto)
 
         showInfoInProfile()
 
-        val switchStatus: SwitchCompat = view.findViewById(R.id.switchStatus)
-        switchStatus.setOnCheckedChangeListener {  buttonView, isChecked ->
+        binding.swStatus.setOnCheckedChangeListener {  buttonView, isChecked ->
             buttonView.text = if (isChecked) "На роликах" else "Не активен"
         }
 
@@ -60,12 +58,11 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
             saveChangesInProfile()
         }
 
-        val imagePhoto: ImageView = view.findViewById(R.id.ivPhoto)
-        imagePhoto.setOnClickListener{
-            showPopup(imagePhoto)
+        binding.ivMyPhoto.setOnClickListener{
+            showPopup(binding.ivMyPhoto)
         }
 
-        binding.imageViewExit.setOnClickListener{
+        binding.ivExit.setOnClickListener{
             MAIN.navController.navigate(R.id.action_profile_to_authorizationFragment)
             MAIN.finish()
             startActivity(Intent(MAIN, AppActivity::class.java)  )
@@ -130,8 +127,8 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
             binding.llSchool.visibility = View.GONE
             binding.etFirstName.setText(MAIN.appViewModel.user.firstName)
             binding.etLastName.setText(MAIN.appViewModel.user.lastName)
-            binding.switchStatus.isChecked = MAIN.appViewModel.user.status != "Не активен"
-            binding.switchStatus.text = MAIN.appViewModel.user.status
+            binding.swStatus.isChecked = MAIN.appViewModel.user.status != "Не активен"
+            binding.swStatus.text = MAIN.appViewModel.user.status
             binding.etDistrict.setText(MAIN.appViewModel.user.district)
             binding.etBirthday.setText(MAIN.appViewModel.user.birthday)
             binding.etGender.setText(MAIN.appViewModel.user.gender)
@@ -160,7 +157,7 @@ class ProfileFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
         MAIN.appViewModel.user.id = AUTH.currentUser!!.uid
         MAIN.appViewModel.user.firstName = binding.etFirstName.text.toString()
         MAIN.appViewModel.user.lastName = binding.etLastName.text.toString()
-        MAIN.appViewModel.user.status = binding.switchStatus.text.toString()
+        MAIN.appViewModel.user.status = binding.swStatus.text.toString()
         MAIN.appViewModel.user.district = binding.etDistrict.text.toString()
         MAIN.appViewModel.user.birthday = binding.etBirthday.text.toString()
         MAIN.appViewModel.user.gender = binding.etGender.text.toString()

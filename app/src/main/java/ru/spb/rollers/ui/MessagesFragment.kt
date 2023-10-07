@@ -38,7 +38,7 @@ class MessagesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.imageViewBack.setOnClickListener{
+        binding.ivBack.setOnClickListener{
             MAIN.onSupportNavigateUp()
 
             // установить viewedDialog в "non"
@@ -136,11 +136,11 @@ class MessagesFragment : Fragment() {
                         .placeholder(R.drawable.avatar)
                         .into(binding.ivPhoto)
                     if (user.role == "Организатор") {
-                        binding.txvName.text = if (user.schoolName.isNullOrEmpty()) "Неизвестный организатор"
+                        binding.tvName.text = if (user.schoolName.isNullOrEmpty()) "Неизвестный организатор"
                         else user.schoolName
                     }
                     else {
-                        binding.txvName.text = if (user.lastName.isNullOrEmpty() &&
+                        binding.tvName.text = if (user.lastName.isNullOrEmpty() &&
                             user.firstName.isNullOrEmpty()) "Неизвестный пользователь" else user.lastName + " " + user.firstName
                     }
                 }
@@ -182,14 +182,14 @@ class MessagesFragment : Fragment() {
             .child(MAIN.appViewModel.contactForMessages.id)
             .child("Messages")
 
-        binding.contactsList.adapter = messageAdapter
+        binding.contactList.adapter = messageAdapter
 
         ref.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 messageList = snapshot.children.map { it.getMessageModel() }
                 messageAdapter.setList(messageList)
                 try {
-                    binding.contactsList.smoothScrollToPosition(messageAdapter.itemCount)
+                    binding.contactList.smoothScrollToPosition(messageAdapter.itemCount)
                 }
                 catch (_:Exception){}
             }

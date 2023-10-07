@@ -38,11 +38,11 @@ class DialogsFragment : Fragment() {
         MAIN.appViewModel.setPhoto(binding.ivPhoto)
 
         binding.searchView.setOnSearchClickListener{
-            binding.txvTitle.visibility = View.GONE
+            binding.tvTitle.visibility = View.GONE
         }
 
         binding.searchView.setOnCloseListener {
-            binding.txvTitle.visibility = View.VISIBLE
+            binding.tvTitle.visibility = View.VISIBLE
             binding.searchView.onActionViewCollapsed()
             true
         }

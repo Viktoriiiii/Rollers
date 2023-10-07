@@ -48,14 +48,14 @@ class EventsCreateFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.imageButtonBack.setOnClickListener{
+        binding.ivBack.setOnClickListener{
             MAIN.appViewModel.route = Route()
             MAIN.appViewModel.points.clear()
             MAIN.appViewModel.event = Event()
             MAIN.onSupportNavigateUp()
         }
 
-        binding.txvTitle.text = titleEvents
+        binding.tvTitle.text = titleEvents
 
         binding.btnAddRoute.setOnClickListener{ addRoute() }
 

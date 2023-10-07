@@ -34,7 +34,7 @@ class EventsMyFragment : Fragment() {
         MAIN.appViewModel.route = ru.spb.rollers.models.Route()
         MAIN.appViewModel.points.clear()
         MAIN.appViewModel.event = Event()
-        binding.imageViewBack.setOnClickListener {
+        binding.ivBack.setOnClickListener {
             MAIN.onSupportNavigateUp()
         }
     }
@@ -46,7 +46,7 @@ class EventsMyFragment : Fragment() {
 
     private fun initEvents(){
         eventAdapter = EventAdapter(eventList)
-        binding.eventsList.adapter = eventAdapter
+        binding.eventList.adapter = eventAdapter
 
         REF_DATABASE_EVENT_USER.child(MAIN.appViewModel.user.id)
             .addValueEventListener(object : ValueEventListener{

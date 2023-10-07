@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/points_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="2dp"
     app:cardCornerRadius="8dp"
-    app:cardElevation="0dp"
-    android:layout_margin="2dp">
+    app:cardElevation="0dp">
+
     <EditText
         android:id="@+id/et_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:autofillHints="where"
+        android:backgroundTint="@color/transparent"
         android:drawableStart="@drawable/ic_location_on"
         android:drawablePadding="4dp"
-        android:backgroundTint="@color/transparent"
-        android:layout_gravity="start"
+        android:focusable="false"
         android:hint="@string/where"
-        android:autofillHints="where"
-        android:inputType="text"
-        android:focusable="false" />
+        android:inputType="text" />
+
     <ImageView
         android:id="@+id/iv_delete"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="end"
-        android:src="@drawable/ic_close_foreground"
+        android:contentDescription="@string/close"
         android:foreground="?android:attr/selectableItemBackground"
-        tools:ignore="UnusedAttribute"
-        android:contentDescription="@string/close" />
+        android:src="@drawable/ic_close_foreground"
+        tools:ignore="UnusedAttribute" />
 </androidx.cardview.widget.CardView>

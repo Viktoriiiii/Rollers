@@ -1,75 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:padding="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
+
         <TextView
             android:id="@+id/tv_authorization"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/authorization"
             android:textSize="34sp" />
+
         <ImageView
             android:id="@+id/iv_logo"
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:layout_marginVertical="40dp"
-            app:srcCompat="@drawable/logo"
-            android:contentDescription="@string/logo" />
+            android:contentDescription="@string/logo"
+            app:srcCompat="@drawable/logo" />
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/light_background"
             app:cardCornerRadius="8dp"
-            app:cardElevation="0dp"
-            app:cardBackgroundColor="@color/light_background">
+            app:cardElevation="0dp">
+
             <EditText
                 android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/email"
-                android:padding="16dp"
+                android:autofillHints="emailAddress"
                 android:background="@color/transparent"
+                android:hint="@string/email"
                 android:inputType="textEmailAddress"
-                android:autofillHints="emailAddress" />
+                android:padding="16dp" />
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
             android:layout_marginBottom="10dp"
-            app:cardElevation="0dp"
-            app:cardBackgroundColor="@color/light_background">
+            app:cardBackgroundColor="@color/light_background"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp">
+
             <EditText
                 android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autofillHints="password"
                 android:background="@color/transparent"
-                android:inputType="textPassword"
                 android:hint="@string/pass"
-                android:padding="16dp"
-                android:autofillHints="password" />
+                android:inputType="textPassword"
+                android:padding="16dp" />
         </androidx.cardview.widget.CardView>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/mb_login"
+            style="@style/ButtonAccent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/signIn"
-            style="@style/ButtonAccent" />
+            android:text="@string/signIn" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/mb_register"
+            style="@style/ButtonNoAccent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/register"
-            style="@style/ButtonNoAccent" />
+            android:text="@string/register" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

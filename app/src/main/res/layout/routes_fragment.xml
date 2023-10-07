@@ -5,139 +5,157 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/for_toolbar">
+
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewPhoto"
+            android:id="@+id/cv_photo"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:cardElevation="0dp"
-            app:cardCornerRadius="20dp">
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp">
+
             <ImageView
-                android:id="@+id/ivPhoto"
+                android:id="@+id/iv_photo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/logo"
-                android:contentDescription="@string/user_photo" />
+                android:contentDescription="@string/user_photo"
+                android:src="@drawable/logo" />
         </androidx.cardview.widget.CardView>
+
         <TextView
-            android:id="@+id/txvTitle"
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="12dp"
             android:text="@string/routes"
             android:textSize="20sp"
-            android:paddingHorizontal="10dp"
             android:textStyle="bold" />
+
         <ImageView
-            android:id="@+id/ivMyLocation"
+            android:id="@+id/iv_my_location"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="end"
-            android:src="@drawable/ic_my_location_foreground"
+            android:contentDescription="@string/to_map"
             android:foreground="?android:attr/selectableItemBackground"
-            tools:ignore="UnusedAttribute"
-            android:contentDescription="@string/to_map" />
+            android:src="@drawable/ic_my_location_foreground"
+            tools:ignore="UnusedAttribute" />
+
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:iconifiedByDefault="false"
-            android:queryHint="Поиск..."/>
+            android:queryHint="Поиск..." />
     </androidx.appcompat.widget.Toolbar>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="4dp">
+
             <LinearLayout
-                android:id="@+id/llContainer"
+                android:id="@+id/ll_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/pointsContainer1"
+                    android:id="@+id/points_container_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="8dp"
                     android:layout_marginBottom="2dp"
+                    app:cardCornerRadius="8dp"
                     app:cardElevation="0dp">
+
                     <EditText
-                        android:id="@+id/etLocation1"
+                        android:id="@+id/et_location_1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:autofillHints="where"
+                        android:backgroundTint="@color/transparent"
                         android:drawableStart="@drawable/ic_location_on"
                         android:drawablePadding="4dp"
-                        android:backgroundTint="@color/transparent"
-                        android:layout_gravity="start"
+                        android:focusable="false"
                         android:hint="@string/from"
-                        android:autofillHints="where"
-                        android:inputType="text"
-                        android:focusable="false" />
+                        android:inputType="text" />
+
                     <ImageView
-                        android:id="@+id/ivDelete1"
+                        android:id="@+id/iv_delete_1"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="end"
-                        android:src="@drawable/ic_close_foreground"
+                        android:contentDescription="@string/close"
                         android:foreground="?android:attr/selectableItemBackground"
-                        tools:ignore="UnusedAttribute"
-                        android:contentDescription="@string/close" />
+                        android:src="@drawable/ic_close_foreground"
+                        tools:ignore="UnusedAttribute" />
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/pointsContainer2"
+                    android:id="@+id/points_container_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
                     app:cardCornerRadius="8dp"
-                    app:cardElevation="0dp"
-                    android:layout_marginBottom="2dp">
+                    app:cardElevation="0dp">
+
                     <EditText
-                        android:id="@+id/etLocation2"
+                        android:id="@+id/et_location_2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:autofillHints="from"
+                        android:backgroundTint="@color/transparent"
                         android:drawableStart="@drawable/ic_location_on"
                         android:drawablePadding="4dp"
-                        android:backgroundTint="@color/transparent"
-                        android:layout_gravity="start"
+                        android:focusable="false"
                         android:hint="@string/where"
-                        android:inputType="textNoSuggestions"
-                        android:autofillHints="from"
-                        android:focusable="false" />
+                        android:inputType="textNoSuggestions" />
+
                     <ImageView
-                        android:id="@+id/ivDelete2"
+                        android:id="@+id/iv_delete_2"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="end"
-                        android:src="@drawable/ic_close_foreground"
+                        android:contentDescription="@string/close"
                         android:foreground="?android:attr/selectableItemBackground"
-                        tools:ignore="UnusedAttribute"
-                        android:contentDescription="@string/close" />
+                        android:src="@drawable/ic_close_foreground"
+                        tools:ignore="UnusedAttribute" />
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
+
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnAddPoint"
+                android:id="@+id/btn_add_point"
+                style="@style/ButtonNoAccent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/add_point"
-                style="@style/ButtonNoAccent" />
+                android:text="@string/add_point" />
+
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnBuildRoute"
+                android:id="@+id/btn_build_route"
+                style="@style/ButtonAccent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/build"
-                style="@style/ButtonAccent" />
+                android:text="@string/build" />
+
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/routesList"
+                android:id="@+id/routes_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/item_route"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_route" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

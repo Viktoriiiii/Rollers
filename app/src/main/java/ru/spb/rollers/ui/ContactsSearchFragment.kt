@@ -35,16 +35,16 @@ class ContactsSearchFragment : Fragment() {
         showAllUsers()
 
         binding.searchView.setOnSearchClickListener {
-            binding.txvTitle.visibility = View.GONE
+            binding.tvTitle.visibility = View.GONE
         }
 
         binding.searchView.setOnCloseListener {
-            binding.txvTitle.visibility = View.VISIBLE
+            binding.tvTitle.visibility = View.VISIBLE
             binding.searchView.onActionViewCollapsed()
             true
         }
 
-        binding.imageButtonBack.setOnClickListener{
+        binding.ivBack.setOnClickListener{
             MAIN.navController.navigate(R.id.action_contactsSearchFragment_to_contacts)
         }
 
@@ -62,7 +62,7 @@ class ContactsSearchFragment : Fragment() {
     }
 
     private fun showAllUsers(){
-        binding.contactsList.adapter = adapter
+        binding.contactList.adapter = adapter
         REF_DATABASE_USER.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {

@@ -51,30 +51,30 @@ class EventsFragment : Fragment()
         MAIN.appViewModel.points.clear()
         MAIN.appViewModel.event = Event()
 
-        binding.imageButtonAddEvent.setOnClickListener{
+        binding.ivAddEvent.setOnClickListener{
             MAIN.navController.navigate(R.id.action_events_to_eventsCreateFragment)
             titleEvents = "Создание события"
         }
 
         eventAdapter = EventAdapter(eventList)
-        binding.eventsList.adapter = eventAdapter
+        binding.eventList.adapter = eventAdapter
 
         binding.searchView.setOnSearchClickListener{
-            binding.txvTitle.visibility = View.GONE
-            binding.txvWeatherTemp.visibility = View.GONE
+            binding.tvTitle.visibility = View.GONE
+            binding.tvWeatherTemp.visibility = View.GONE
             binding.ivWeather.visibility = View.GONE
         }
 
         binding.searchView.setOnCloseListener {
-            binding.txvTitle.visibility = View.VISIBLE
-            binding.txvWeatherTemp.visibility = View.VISIBLE
+            binding.tvTitle.visibility = View.VISIBLE
+            binding.tvWeatherTemp.visibility = View.VISIBLE
             binding.ivWeather.visibility = View.VISIBLE
             binding.searchView.onActionViewCollapsed()
             true
         }
 
         if (!MAIN.appViewModel.user.isManager)
-            binding.imageButtonAddEvent.visibility = View.GONE
+            binding.ivAddEvent.visibility = View.GONE
 
     //    getWeather()
         getCountUnreadMessageDialogs()
@@ -165,7 +165,7 @@ class EventsFragment : Fragment()
                 imageUrl = "$imageUrl${fact.optString("icon")}.svg"
 
                 activity?.runOnUiThread {
-                    binding.txvWeatherTemp.text = if (temp > 0) "+${temp} ℃" else "-${temp} ℃"
+                    binding.tvWeatherTemp.text = if (temp > 0) "+${temp} ℃" else "-${temp} ℃"
                     loadSvgImage(imageUrl, binding.ivWeather)
                 }
                 response.body!!.close()

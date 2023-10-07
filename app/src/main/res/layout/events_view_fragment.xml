@@ -1,137 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/for_toolbar"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar" >
+        android:background="@color/for_toolbar">
+
         <ImageView
-            android:id="@+id/imageButtonBack"
+            android:id="@+id/iv_back"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/ic_back2_foreground"
-            android:foreground="?android:attr/selectableItemBackground"
             android:contentDescription="@string/back"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:src="@drawable/ic_back2_foreground"
             tools:ignore="UnusedAttribute" />
+
         <TextView
-            android:id="@+id/txvTitle"
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="12dp"
             android:text="@string/view_event"
             android:textSize="20sp"
-            android:paddingHorizontal="10dp"
             android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
+
     <androidx.cardview.widget.CardView
-        android:id="@+id/friendsContainer"
+        android:id="@+id/friend_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp"
         android:layout_margin="3dp"
+        app:cardCornerRadius="8dp"
         app:cardElevation="0dp">
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="12dp"
+                android:focusable="false"
                 android:orientation="vertical"
-                android:focusable="false">
+                android:padding="12dp">
+
                 <TextView
-                    android:id="@+id/tvEventName"
+                    android:id="@+id/tv_event_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
+                    android:padding="10dp"
                     android:text="@string/_event"
-                    android:padding="10dp" />
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
                 <TextView
-                    android:id="@+id/tvEventDate"
+                    android:id="@+id/tv_event_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/_date_ant_time"
-                    android:paddingVertical="12dp" />
+                    android:paddingVertical="12dp"
+                    android:text="@string/_date_ant_time" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/for_icon" />
+
                 <TextView
-                    android:id="@+id/tvManager"
+                    android:id="@+id/tv_manager"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingVertical="12dp"
                     android:text="@string/_manager"
-                    android:paddingVertical="12dp"
                     app:drawableRightCompat="@drawable/ic_preview" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/for_icon" />
+
                 <TextView
-                    android:id="@+id/tvEventDescription"
+                    android:id="@+id/tv_event_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/_description"
-                    android:paddingVertical="12dp" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/for_icon" />
-                <TextView
-                    android:id="@+id/tvEventCost"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/free"
-                    android:paddingVertical="12dp" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/for_icon" />
-                <TextView
-                    android:id="@+id/tvEventNameRoute"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/_route"
-                    android:paddingVertical="12dp"                    app:drawableRightCompat="@drawable/ic_preview"
-                    android:layout_gravity="center" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/for_icon" />
-                <TextView
-                    android:id="@+id/tvSpeed"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/_speed_"
-                    android:paddingVertical="12dp" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/for_icon" />
-                <TextView
-                    android:id="@+id/tvEventDistance"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/_distance_"
-                    android:paddingVertical="12dp" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/for_icon" />
-                <TextView
-                    android:id="@+id/txvEventParticipants"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/participants"
                     android:paddingVertical="12dp"
+                    android:text="@string/_description" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/for_icon" />
+
+                <TextView
+                    android:id="@+id/tv_event_cost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="12dp"
+                    android:text="@string/free" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/for_icon" />
+
+                <TextView
+                    android:id="@+id/tv_event_name_route"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingVertical="12dp"
+                    android:text="@string/_route"
+                    app:drawableRightCompat="@drawable/ic_preview" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/for_icon" />
+
+                <TextView
+                    android:id="@+id/tv_speed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="12dp"
+                    android:text="@string/_speed_" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/for_icon" />
+
+                <TextView
+                    android:id="@+id/tv_event_distance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="12dp"
+                    android:text="@string/_distance_" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/for_icon" />
+
+                <TextView
+                    android:id="@+id/tv_event_participants"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="12dp"
+                    android:text="@string/participants"
                     app:drawableRightCompat="@drawable/ic_preview" />
             </LinearLayout>
         </ScrollView>

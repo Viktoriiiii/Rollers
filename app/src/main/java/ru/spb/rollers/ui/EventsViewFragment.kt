@@ -39,7 +39,7 @@ class EventsViewFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.imageButtonBack.setOnClickListener{
+        binding.ivBack.setOnClickListener{
             MAIN.appViewModel.event = Event()
             MAIN.appViewModel.route = Route()
             MAIN.onSupportNavigateUp()
@@ -90,7 +90,7 @@ class EventsViewFragment : Fragment() {
             MAIN.navController.navigate(R.id.action_eventsViewFragment_to_eventsViewRouteFragment)
         }
 
-        binding.txvEventParticipants.setOnClickListener{
+        binding.tvEventParticipants.setOnClickListener{
             MAIN.navController.navigate(R.id.action_eventsViewFragment_to_eventParticipantFragment)
         }
 

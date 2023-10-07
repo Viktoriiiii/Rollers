@@ -43,7 +43,7 @@ class ContactsFragment : Fragment() {
     }
 
     private fun showMyContacts(){
-        binding.contactsList.adapter = adapter
+        binding.rvContactList.adapter = adapter
 //        binding.contactsList.addItemDecoration(
 //            CustomItemDecoration(MAIN, R.drawable.profile_divider)
 //        )

@@ -12,8 +12,8 @@ import ru.spb.rollers.R
 import ru.spb.rollers.asTime
 import ru.spb.rollers.models.Message
 
-class MessageAdapter (private var itemListMessage: List<Message>):
-RecyclerView.Adapter<MessageAdapter.MessageViewHolder>(){
+class MessageAdapter(private var itemListMessage: List<Message>) :
+    RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
 
     private val self: Int = 786
 
@@ -30,7 +30,8 @@ RecyclerView.Adapter<MessageAdapter.MessageViewHolder>(){
             LayoutInflater.from(parent.context).inflate(R.layout.chat_my_message, parent, false)
         else
             LayoutInflater.from(parent.context).inflate(R.layout.chat_others_message, parent, false)
-        return MessageViewHolder(itemView)    }
+        return MessageViewHolder(itemView)
+    }
 
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
         val item = itemListMessage[position]
@@ -41,8 +42,10 @@ RecyclerView.Adapter<MessageAdapter.MessageViewHolder>(){
         else {
             val contact = MAIN.appViewModel.contactForMessages
             if (!contact.lastName.isNullOrEmpty() || !contact.firstName.isNullOrEmpty() ||
-                    !contact.schoolName.isNullOrEmpty())
-                holder.textViewSender.text = "${contact.schoolName}${contact.lastName} ${contact.firstName}"
+                !contact.schoolName.isNullOrEmpty()
+            )
+                holder.textViewSender.text =
+                    "${contact.schoolName}${contact.lastName} ${contact.firstName}"
             else
                 holder.textViewSender.text = "Неизвестный пользователь"
         }
@@ -62,9 +65,9 @@ RecyclerView.Adapter<MessageAdapter.MessageViewHolder>(){
     }
 
     inner class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val messageContainer: CardView = itemView.findViewById(R.id.messagesContainer)
-        val textViewSender: TextView = itemView.findViewById(R.id.textViewSender)
-        val textViewMessage: TextView = itemView.findViewById(R.id.textViewMessage)
-        val textViewDate: TextView = itemView.findViewById(R.id.textViewDate)
+        val messageContainer: CardView = itemView.findViewById(R.id.message_container)
+        val textViewSender: TextView = itemView.findViewById(R.id.tv_sender)
+        val textViewMessage: TextView = itemView.findViewById(R.id.tv_message)
+        val textViewDate: TextView = itemView.findViewById(R.id.tv_date)
     }
 }

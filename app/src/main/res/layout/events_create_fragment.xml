@@ -1,264 +1,294 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/for_toolbar">
+
         <ImageView
-            android:id="@+id/imageButtonBack"
+            android:id="@+id/iv_back"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/ic_back2_foreground"
+            android:contentDescription="@string/back"
             android:foreground="?android:attr/selectableItemBackground"
-            tools:ignore="UnusedAttribute"
-            android:contentDescription="@string/back" />
+            android:src="@drawable/ic_back2_foreground"
+            tools:ignore="UnusedAttribute" />
+
         <TextView
-            android:id="@+id/txvTitle"
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="12dp"
             android:text="@string/adding_event"
             android:textSize="20sp"
-            android:paddingHorizontal="10dp"
             android:textStyle="bold" />
+
         <ImageView
             android:id="@+id/iv_delete_event"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="end"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_delete_foreground"
+            android:contentDescription="@string/delete"
             android:foreground="?android:attr/selectableItemBackground"
-            tools:ignore="UnusedAttribute"
-            android:contentDescription="@string/delete" />
+            android:src="@drawable/ic_delete_foreground"
+            tools:ignore="UnusedAttribute" />
     </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dp">
+
             <TextView
-                android:id="@+id/tvEventName"
+                android:id="@+id/tv_event_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/name_event"
                 android:paddingHorizontal="4dp" />
+
             <EditText
-                android:id="@+id/etEventName"
+                android:id="@+id/et_event_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/_name_event"
-                android:backgroundTint="@color/for_icon"
                 android:autofillHints="event"
+                android:backgroundTint="@color/for_icon"
+                android:hint="@string/_name_event"
                 android:inputType="text" />
+
             <TextView
-                android:id="@+id/tvEventDate"
+                android:id="@+id/tv_event_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/date"
-                android:paddingTop="12dp"
-                android:paddingHorizontal="4dp" />
+                android:paddingHorizontal="4dp"
+                android:paddingTop="12dp" />
+
             <EditText
-                android:id="@+id/etEventDate"
+                android:id="@+id/et_event_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/_date"
-                android:backgroundTint="@color/for_icon"
                 android:autofillHints="date"
-                android:inputType="date"
-                android:focusable="false" />
+                android:backgroundTint="@color/for_icon"
+                android:focusable="false"
+                android:hint="@string/_date"
+                android:inputType="date" />
+
             <TextView
-                android:id="@+id/tvEventTime"
+                android:id="@+id/tv_event_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/time"
-                android:paddingTop="12dp"
-                android:paddingHorizontal="4dp" />
+                android:paddingHorizontal="4dp"
+                android:paddingTop="12dp" />
+
             <EditText
-                android:id="@+id/etEventTime"
+                android:id="@+id/et_event_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/_time"
-                android:backgroundTint="@color/for_icon"
                 android:autofillHints="date"
-                android:inputType="time"
-                android:focusable="false" />
+                android:backgroundTint="@color/for_icon"
+                android:focusable="false"
+                android:hint="@string/_time"
+                android:inputType="time" />
+
             <TextView
-                android:id="@+id/tvEventOrganizer"
+                android:id="@+id/tv_event_organizer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/manager"
-                android:paddingTop="12dp"
-                android:paddingHorizontal="4dp" />
+                android:paddingHorizontal="4dp"
+                android:paddingTop="12dp" />
+
             <EditText
-                android:id="@+id/etEventOrganizer"
+                android:id="@+id/et_event_organizer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autofillHints="manager"
+                android:backgroundTint="@color/for_icon"
                 android:focusable="false"
                 android:hint="@string/_name_school"
-                android:backgroundTint="@color/for_icon"
-                android:autofillHints="manager"
                 android:inputType="none" />
+
             <TextView
-                android:id="@+id/tvEventDescription"
+                android:id="@+id/tv_event_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/description"
-                android:paddingTop="12dp"
-                android:paddingHorizontal="4dp" />
+                android:paddingHorizontal="4dp"
+                android:paddingTop="12dp" />
+
             <EditText
-                android:id="@+id/etEventDescription"
+                android:id="@+id/et_event_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/funny"
-                android:backgroundTint="@color/for_icon"
                 android:autofillHints="description"
+                android:backgroundTint="@color/for_icon"
+                android:hint="@string/funny"
                 android:inputType="text" />
+
             <TextView
-                android:id="@+id/tvEventCost"
+                android:id="@+id/tv_event_cost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/cost"
-                android:paddingTop="12dp"
-                android:paddingHorizontal="4dp" />
+                android:paddingHorizontal="4dp"
+                android:paddingTop="12dp" />
+
             <EditText
-                android:id="@+id/etEventCost"
+                android:id="@+id/et_event_cost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/_0_0"
-                android:inputType="numberDecimal"
+                android:autofillHints="cost"
                 android:backgroundTint="@color/for_icon"
-                android:autofillHints="cost" />
+                android:hint="@string/_0_0"
+                android:inputType="numberDecimal" />
+
             <TextView
-                android:id="@+id/tvEventStartLocation"
+                android:id="@+id/tv_event_start_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/start"
-                android:paddingTop="12dp"
                 android:paddingHorizontal="4dp"
-                android:visibility="gone"/>
+                android:paddingTop="12dp"
+                android:visibility="gone" />
+
             <EditText
-                android:id="@+id/etEventStartLocation"
+                android:id="@+id/et_event_start_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:hint="@string/_start"
+                android:autofillHints="start"
+                android:backgroundTint="@color/for_icon"
                 android:clickable="false"
                 android:cursorVisible="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:backgroundTint="@color/for_icon"
-                android:visibility="gone"
-                android:autofillHints="start"
-                android:inputType="text" />
+                android:hint="@string/_start"
+                android:inputType="text"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
             <TextView
-                android:id="@+id/tvEventEndLocation"
+                android:id="@+id/tv_event_end_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/finish"
-                android:paddingTop="12dp"
                 android:paddingHorizontal="4dp"
-                android:visibility="gone"/>
+                android:paddingTop="12dp"
+                android:visibility="gone" />
+
             <EditText
-                android:id="@+id/etEventEndLocation"
+                android:id="@+id/et_event_end_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/_end"
+                android:autofillHints="end"
                 android:backgroundTint="@color/for_icon"
                 android:clickable="false"
                 android:cursorVisible="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:visibility="gone"
-                android:autofillHints="end"
-                android:inputType="text" />
+                android:hint="@string/_end"
+                android:inputType="text"
+                android:visibility="gone" />
+
             <TextView
-                android:id="@+id/tvEventSpeed"
+                android:id="@+id/tv_event_speed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/speed"
-                android:paddingTop="12dp"
-                android:paddingHorizontal="4dp" />
+                android:paddingHorizontal="4dp"
+                android:paddingTop="12dp" />
+
             <EditText
-                android:id="@+id/etEventSpeed"
+                android:id="@+id/et_event_speed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/_speed"
-                android:backgroundTint="@color/for_icon"
                 android:autofillHints="speed"
+                android:backgroundTint="@color/for_icon"
+                android:hint="@string/_speed"
                 android:inputType="number" />
+
             <TextView
-                android:id="@+id/tvEventDistance"
+                android:id="@+id/tv_event_distance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/distance"
-                android:paddingTop="12dp"
                 android:paddingHorizontal="4dp"
-                android:visibility="gone"/>
+                android:paddingTop="12dp"
+                android:visibility="gone" />
+
             <EditText
-                android:id="@+id/etEventDistance"
+                android:id="@+id/et_event_distance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/_distance"
+                android:autofillHints="distance"
+                android:backgroundTint="@color/for_icon"
                 android:clickable="false"
                 android:cursorVisible="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:backgroundTint="@color/for_icon"
-                android:visibility="gone"
-                android:autofillHints="distance"
-                android:inputType="text" />
+                android:hint="@string/_distance"
+                android:inputType="text"
+                android:visibility="gone" />
+
             <TextView
-                android:id="@+id/tvEventPhoto"
+                android:id="@+id/tv_event_photo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/event_photo_"
-                android:paddingVertical="12dp"
-                android:paddingHorizontal="4dp" />
+                android:paddingHorizontal="4dp"
+                android:paddingVertical="12dp" />
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
-                    android:id="@+id/ivEventPhoto"
+                    android:id="@+id/iv_event_photo"
                     android:layout_width="wrap_content"
                     android:layout_height="200dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/rollers"
                     android:layout_marginVertical="5dp"
-                    android:contentDescription="@string/event_photo" />
+                    android:contentDescription="@string/event_photo"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/rollers" />
+
                 <ImageView
-                    android:id="@+id/ivChangePhoto"
+                    android:id="@+id/iv_change_photo"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="start"
-                    android:src="@drawable/ic_photo_foreground"
+                    android:contentDescription="@string/change_photo"
                     android:foreground="?android:attr/selectableItemBackground"
-                    tools:ignore="UnusedAttribute"
-                    android:contentDescription="@string/change_photo" />
+                    android:src="@drawable/ic_photo_foreground"
+                    tools:ignore="UnusedAttribute" />
             </FrameLayout>
+
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnAddRoute"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/add_route"
+                android:id="@+id/btn_add_route"
                 style="@style/ButtonNoAccent"
-                android:layout_marginTop="20dp" />
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSaveRoute"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/save_event"
+                android:layout_marginTop="20dp"
+                android:text="@string/add_route" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_save_route"
                 style="@style/ButtonAccent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:text="@string/save_event"
                 android:visibility="gone" />
         </LinearLayout>
     </ScrollView>
